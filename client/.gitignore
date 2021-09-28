@@ -11,6 +11,8 @@
 # misc
 .DS_Store
 *.pem
+public/img/album
+public/img/live
 
 # debug
 npm-debug.log*
