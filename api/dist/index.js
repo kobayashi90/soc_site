@@ -8,6 +8,8 @@ var _loadFiles = require("@graphql-tools/load-files");
 
 var _merge = require("@graphql-tools/merge");
 
+var _path = _interopRequireDefault(require("path"));
+
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
 var _glob = _interopRequireDefault(require("glob"));
@@ -27,9 +29,13 @@ _dotenv["default"].config({
 });
 
 var db = new _sequelize["default"](require('./config/sequelize.json')[process.env.NODE_ENV]);
+
+var _path$parse = _path["default"].parse(__dirname),
+    base = _path$parse.base;
+
 var server = new _apolloServer.ApolloServer({
-  typeDefs: (0, _merge.mergeTypeDefs)((0, _loadFiles.loadFilesSync)('src/graphql/schemas')),
-  resolvers: (0, _merge.mergeResolvers)((0, _loadFiles.loadFilesSync)('src/graphql/resolvers')),
+  typeDefs: (0, _merge.mergeTypeDefs)((0, _loadFiles.loadFilesSync)("".concat(base, "/graphql/schemas"))),
+  resolvers: (0, _merge.mergeResolvers)((0, _loadFiles.loadFilesSync)("".concat(base, "/graphql/resolvers"))),
   context: function context() {
     return {
       db: db
@@ -39,8 +45,8 @@ var server = new _apolloServer.ApolloServer({
 
 _sequelize["default"].useCLS(_clsHooked["default"].createNamespace('trans-namespace'));
 
-_glob["default"].sync('src/sequelize/models/*').forEach(function (e) {
-  return require(e.replace('src', '.'))(db);
+_glob["default"].sync("".concat(base, "/sequelize/models/*")).forEach(function (e) {
+  return require(e.replace(base, '.'))(db);
 });
 
 (0, _relations["default"])(db);
