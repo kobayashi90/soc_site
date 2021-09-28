@@ -7,5 +7,8 @@ module.exports = {
       new webpack.EnvironmentPlugin(process.env)
     )
     return config
+  },
+  images: {
+    domains: ['beta.sittingonclouds.net']
   }
 }
