@@ -1,13 +1,15 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
 
-var _sequelize = require("sequelize");
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _sequelize = require("sequelize");
 
 var searchPage = function searchPage(args, options, db) {
   var limit = args.limit,
@@ -55,19 +57,19 @@ var _default = {
         page: page,
         model: 'ost'
       }, {
-        where: (_where = {}, _defineProperty(_where, _sequelize.Op.or, [_defineProperty({}, _sequelize.Op.and, titleWords.map(function (t) {
+        where: (_where = {}, (0, _defineProperty2["default"])(_where, _sequelize.Op.or, [(0, _defineProperty2["default"])({}, _sequelize.Op.and, titleWords.map(function (t) {
           return {
-            title: _defineProperty({}, _sequelize.Op.like, "%".concat(t, "%"))
+            title: (0, _defineProperty2["default"])({}, _sequelize.Op.like, "%".concat(t, "%"))
           };
-        })), _defineProperty({}, _sequelize.Op.and, titleWords.map(function (t) {
+        })), (0, _defineProperty2["default"])({}, _sequelize.Op.and, titleWords.map(function (t) {
           return {
-            subTitle: _defineProperty({}, _sequelize.Op.like, "%".concat(t, "%"))
+            subTitle: (0, _defineProperty2["default"])({}, _sequelize.Op.like, "%".concat(t, "%"))
           };
-        }))]), _defineProperty(_where, "status", _defineProperty({}, _sequelize.Op["in"], status)), _where),
+        }))]), (0, _defineProperty2["default"])(_where, "status", (0, _defineProperty2["default"])({}, _sequelize.Op["in"], status)), _where),
         include: [{
           model: db.models["class"],
           where: {
-            name: _defineProperty({}, _sequelize.Op["in"], classes)
+            name: (0, _defineProperty2["default"])({}, _sequelize.Op["in"], classes)
           }
         }],
         order: order.map(function (o) {
