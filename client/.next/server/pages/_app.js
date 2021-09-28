@@ -51,6 +51,9 @@ function Header() {
   return /*#__PURE__*/(0,jsx_runtime_.jsxs)("header", {
     children: [/*#__PURE__*/jsx_runtime_.jsx("div", {
       id: (Header_module_default()).bannerBg,
+      style: {
+        backgroundImage: "url('https://beta.sittingonclouds.net/live/banner.png')"
+      },
       children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_.Container, {
         children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_.Row, {
           className: "h-100",

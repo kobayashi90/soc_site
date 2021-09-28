@@ -76,7 +76,7 @@ function AlbumBoxList({
     children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx(AlbumBox, _objectSpread({}, props))
   }, props.id));
 }
-const getImageUrl = (id, type = 'album') =>  false ? 0 : `/img/${type}/${id}.png`;
+const getImageUrl = (id, type = 'album') =>  false ? 0 : `https://beta.sittingonclouds.net/live/${type}/${id}.png`;
 
 /***/ }),
 
