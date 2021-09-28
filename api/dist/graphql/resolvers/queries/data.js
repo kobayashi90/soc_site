@@ -1,0 +1,80 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _sequelize = require("sequelize");
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var searchPage = function searchPage(args, options, db) {
+  var limit = args.limit,
+      page = args.page,
+      model = args.model;
+
+  if (limit !== undefined) {
+    options.limit = limit;
+    options.offset = limit * page;
+  }
+
+  return db.models[model].findAndCountAll(options);
+};
+
+var info = {
+  classes: ['Game', 'Animation']
+};
+var _default = {
+  Query: {
+    Album: function Album(parent, _ref, _ref2) {
+      var id = _ref.id;
+      var db = _ref2.db;
+      return db.models.ost.findByPk(id);
+    },
+    searchAlbums: function searchAlbums(parent, args, _ref3) {
+      var _where;
+
+      var db = _ref3.db;
+      var _args$title = args.title,
+          title = _args$title === void 0 ? '' : _args$title,
+          _args$classes = args.classes,
+          classes = _args$classes === void 0 ? info.classes : _args$classes,
+          limit = args.limit,
+          _args$page = args.page,
+          page = _args$page === void 0 ? 0 : _args$page,
+          _args$order = args.order,
+          order = _args$order === void 0 ? ['createdAt'] : _args$order,
+          _args$mode = args.mode,
+          mode = _args$mode === void 0 ? 'DESC' : _args$mode,
+          _args$status = args.status,
+          status = _args$status === void 0 ? ['show'] : _args$status;
+      var titleWords = title.split(' ');
+      return searchPage({
+        limit: limit,
+        page: page,
+        model: 'ost'
+      }, {
+        where: (_where = {}, _defineProperty(_where, _sequelize.Op.or, [_defineProperty({}, _sequelize.Op.and, titleWords.map(function (t) {
+          return {
+            title: _defineProperty({}, _sequelize.Op.like, "%".concat(t, "%"))
+          };
+        })), _defineProperty({}, _sequelize.Op.and, titleWords.map(function (t) {
+          return {
+            subTitle: _defineProperty({}, _sequelize.Op.like, "%".concat(t, "%"))
+          };
+        }))]), _defineProperty(_where, "status", _defineProperty({}, _sequelize.Op["in"], status)), _where),
+        include: [{
+          model: db.models["class"],
+          where: {
+            name: _defineProperty({}, _sequelize.Op["in"], classes)
+          }
+        }],
+        order: order.map(function (o) {
+          return [o, mode];
+        })
+      }, db);
+    }
+  }
+};
+exports["default"] = _default;
