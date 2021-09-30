@@ -11,7 +11,7 @@ import logo from '../public/img/assets/logo.png'
 export default function Header () {
   return (
     <header>
-      <div id={styles.bannerBg} style={{ backgroundImage: "url('https://beta.sittingonclouds.net/live/banner.png')" }}>
+      <div id={styles.bannerBg} style={{ backgroundImage: "url('/_next/image?url=https://beta.sittingonclouds.net/live/banner.png&w=3840&q=100')" }}>
         <Container>
           <Row className='h-100'>
             <Col className='my-auto'>
