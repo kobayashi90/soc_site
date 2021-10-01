@@ -8,7 +8,8 @@ import Head from 'next/head'
 import url from 'url'
 
 import styles from '../../styles/Album.module.scss'
-import { AlbumBoxList, getImageUrl } from '../../components/AlbumBoxes'
+import { AlbumBoxList } from '../../components/AlbumBoxes'
+import { getImageUrl } from '../../components/utils'
 
 export async function getServerSideProps (context) {
   const client = initializeApollo()

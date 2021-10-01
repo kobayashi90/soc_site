@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Row, Col, Container, Button, Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 
 import logo from '../public/img/assets/logo.png'
 
@@ -83,15 +84,13 @@ function NavLink ({ href, name }) {
 function SearchBar () {
   const ref = useRef(null)
   const [open, setOpen] = useState(false)
-
-  /* const path = usePath()
-  const [, setParams] = useQueryParams() */
+  const router = useRouter()
 
   const onKeyDownHandler = e => {
-    /* if (e.keyCode === 13 && ref.current && ref.current.value) {
-      if (path === '/search') setParams({ s: ref.current.value })
-      else navigate('/search', false, { s: ref.current.value })
-    } */
+    if (e.keyCode === 13 && ref.current && ref.current.value) {
+      router.push({ pathname: '/search', query: { q: ref.current.value } })
+      setOpen(false)
+    }
   }
 
   useEffect(() => { if (open) ref.current.focus() }, [open])

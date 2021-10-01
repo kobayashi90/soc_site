@@ -1,13 +1,14 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { useMemo } from 'react'
 
+const isSSR = typeof window === 'undefined'
 let apolloClient
 
 function createApolloClient () {
   return new ApolloClient({
     uri: 'http://localhost:4000',
     cache: new InMemoryCache(),
-    ssrMode: typeof window === 'undefined'
+    ssrMode: isSSR
   })
 }
 
@@ -26,7 +27,7 @@ export function initializeApollo (initialState = null) {
   }
 
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === 'undefined') return _apolloClient
+  if (isSSR) return _apolloClient
 
   // Create the Apollo Client once in the client
   if (!apolloClient) apolloClient = _apolloClient

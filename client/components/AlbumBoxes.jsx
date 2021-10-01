@@ -2,6 +2,7 @@ import { Col } from 'react-bootstrap'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getImageUrl } from './utils'
 
 import styles from '../styles/AlbumBoxes.module.scss'
 
@@ -29,5 +30,3 @@ export function AlbumBoxList ({ xs, md, items }) {
     </Col>
   ))
 }
-
-export const getImageUrl = (id, type = 'album') => process.env.NODE_ENV === 'development' ? `/img/${type}/default.png` : `https://beta.sittingonclouds.net/live/${type}/${id}.png`

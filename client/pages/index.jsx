@@ -14,8 +14,8 @@ export async function getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
-      query searchAlbums($limit: Int){
-        released: searchAlbums(
+      query searchAlbum($limit: Int){
+        released: searchAlbum(
           limit: $limit,
           status: ["show","coming"],
           order: ["releaseDate", "createdAt"]
@@ -27,7 +27,7 @@ export async function getServerSideProps () {
           }
         },
 
-        added: searchAlbums(limit: $limit){
+        added: searchAlbum(limit: $limit){
           rows{
             id,
             title
