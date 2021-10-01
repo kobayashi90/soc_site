@@ -56,7 +56,8 @@ function AlbumBox(props) {
           src: (0,_utils__WEBPACK_IMPORTED_MODULE_6__/* .getImageUrl */ .J)(id, type),
           layout: "responsive",
           width: 300,
-          height: 300
+          height: 300,
+          priority: true
         })
       }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx("div", {
         className: "text-wrap text-center px-1 py-2",

@@ -27,7 +27,7 @@ let apolloClient;
 
 function createApolloClient() {
   return new _apollo_client__WEBPACK_IMPORTED_MODULE_0__.ApolloClient({
-    uri: 'http://localhost:4000',
+    uri: isSSR ? 'http://localhost:4000' : 'https://beta.sittingonclouds.net/api',
     cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_0__.InMemoryCache(),
     ssrMode: isSSR
   });
