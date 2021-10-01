@@ -7,8 +7,7 @@ exports.modules = {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Xe": () => (/* binding */ AlbumBoxList),
-/* harmony export */   "Jn": () => (/* binding */ getImageUrl)
+/* harmony export */   "X": () => (/* binding */ AlbumBoxList)
 /* harmony export */ });
 /* unused harmony export default */
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9226);
@@ -17,6 +16,7 @@ exports.modules = {
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5675);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1664);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2598);
 /* harmony import */ var _styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(3080);
 /* harmony import */ var _styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5282);
@@ -26,6 +26,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -52,7 +53,7 @@ function AlbumBox(props) {
         className: (_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_5___default().img),
         children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx(next_image__WEBPACK_IMPORTED_MODULE_2__.default, {
           alt: title,
-          src: getImageUrl(id, type),
+          src: (0,_utils__WEBPACK_IMPORTED_MODULE_6__/* .getImageUrl */ .J)(id, type),
           layout: "responsive",
           width: 300,
           height: 300
@@ -76,6 +77,16 @@ function AlbumBoxList({
     children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx(AlbumBox, _objectSpread({}, props))
   }, props.id));
 }
+
+/***/ }),
+
+/***/ 2598:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "J": () => (/* binding */ getImageUrl)
+/* harmony export */ });
 const getImageUrl = (id, type = 'album') =>  false ? 0 : `https://beta.sittingonclouds.net/live/${type}/${id}.png`;
 
 /***/ }),

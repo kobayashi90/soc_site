@@ -41,6 +41,8 @@ var Album_module = __webpack_require__(8044);
 var Album_module_default = /*#__PURE__*/__webpack_require__.n(Album_module);
 // EXTERNAL MODULE: ./components/AlbumBoxes.jsx
 var AlbumBoxes = __webpack_require__(6184);
+// EXTERNAL MODULE: ./components/utils.js
+var utils = __webpack_require__(2598);
 // EXTERNAL MODULE: external "react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(5282);
 ;// CONCATENATED MODULE: ./pages/album/[id].jsx
@@ -49,6 +51,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -138,7 +141,7 @@ async function getServerSideProps(context) {
 }
 
 const fullImage = (id, quality = 75, req) => {
-  const base = `/_next/image?url=${(0,AlbumBoxes/* getImageUrl */.Jn)(id)}&w=3840&q=${quality}`;
+  const base = `/_next/image?url=${(0,utils/* getImageUrl */.J)(id)}&w=3840&q=${quality}`;
   return req ? external_url_default().format({
     protocol: req.protocol || 'http',
     host: req.headers.host,
@@ -180,7 +183,7 @@ function Page({
             width: 300,
             height: 300,
             alt: Album.title,
-            src: (0,AlbumBoxes/* getImageUrl */.Jn)(Album.id)
+            src: (0,utils/* getImageUrl */.J)(Album.id)
           })
         }), /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_.Col, {
           lg: 7,
@@ -409,7 +412,7 @@ function Page({
           })
         }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_.Row, {
           className: "links-list justify-content-center",
-          children: /*#__PURE__*/jsx_runtime_.jsx(AlbumBoxes/* AlbumBoxList */.Xe, {
+          children: /*#__PURE__*/jsx_runtime_.jsx(AlbumBoxes/* AlbumBoxList */.X, {
             md: 3,
             xs: 6,
             items: Album.related

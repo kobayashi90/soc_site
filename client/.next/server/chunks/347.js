@@ -22,13 +22,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+const isSSR = true;
 let apolloClient;
 
 function createApolloClient() {
   return new _apollo_client__WEBPACK_IMPORTED_MODULE_0__.ApolloClient({
     uri: 'http://localhost:4000',
     cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_0__.InMemoryCache(),
-    ssrMode: true
+    ssrMode: isSSR
   });
 }
 
@@ -49,7 +50,7 @@ function initializeApollo(initialState = null) {
   } // For SSG and SSR always create a new Apollo Client
 
 
-  if (true) return _apolloClient; // Create the Apollo Client once in the client
+  if (isSSR) return _apolloClient; // Create the Apollo Client once in the client
 
   if (!apolloClient) apolloClient = _apolloClient;
   return _apolloClient;

@@ -33,6 +33,8 @@ var next_image = __webpack_require__(5675);
 // EXTERNAL MODULE: external "classnames"
 var external_classnames_ = __webpack_require__(4058);
 var external_classnames_default = /*#__PURE__*/__webpack_require__.n(external_classnames_);
+// EXTERNAL MODULE: external "next/router"
+var router_ = __webpack_require__(6731);
 ;// CONCATENATED MODULE: ./public/img/assets/logo.png
 /* harmony default export */ const logo = ({"src":"/_next/static/image/public/img/assets/logo.31f29beaa4dcd70e23aa834409c4aacc.png","height":584,"width":1024,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAMAAABPT11nAAAAV1BMVEUE1v+PsNeCwvCYvuWT1/9c0P1gvvJsyP7hwaOUsdud6P/MmHmCzPemxNuEud6xuL6ezuTPo4+Mp87KysSL2f+0zd3bpJTVvq7blILdzLjMsqnak3+B0v9qJrSHAAAAFnRSTlMEn2ra9yVQsv6Pe/eDV7TVoOyF7Tm5ZOwpnAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAADVJREFUCJljYGVnZ2NgYGVgYJdhYeHi5+ZhEBHm4JAUF+RlEBUTE5OQlhJgYOJkZOYU4mMDACZUAfGWwn+sAAAAAElFTkSuQmCC"});
 // EXTERNAL MODULE: external "react/jsx-runtime"
@@ -47,12 +49,13 @@ var jsx_runtime_ = __webpack_require__(5282);
 
 
 
+
 function Header() {
   return /*#__PURE__*/(0,jsx_runtime_.jsxs)("header", {
     children: [/*#__PURE__*/jsx_runtime_.jsx("div", {
       id: (Header_module_default()).bannerBg,
       style: {
-        backgroundImage: "url('https://beta.sittingonclouds.net/live/banner.png')"
+        backgroundImage: "url('/_next/image?url=https://beta.sittingonclouds.net/live/live/banner.png&w=3840&q=100')"
       },
       children: /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_.Container, {
         children: /*#__PURE__*/(0,jsx_runtime_.jsxs)(external_react_bootstrap_.Row, {
@@ -187,14 +190,18 @@ function SearchBar() {
     0: open,
     1: setOpen
   } = (0,external_react_.useState)(false);
-  /* const path = usePath()
-  const [, setParams] = useQueryParams() */
+  const router = (0,router_.useRouter)();
 
   const onKeyDownHandler = e => {
-    /* if (e.keyCode === 13 && ref.current && ref.current.value) {
-      if (path === '/search') setParams({ s: ref.current.value })
-      else navigate('/search', false, { s: ref.current.value })
-    } */
+    if (e.keyCode === 13 && ref.current && ref.current.value) {
+      router.push({
+        pathname: '/search',
+        query: {
+          q: ref.current.value
+        }
+      });
+      setOpen(false);
+    }
   };
 
   (0,external_react_.useEffect)(() => {
@@ -225,12 +232,15 @@ function SearchBar() {
 var ApolloClient = __webpack_require__(8685);
 // EXTERNAL MODULE: external "@apollo/client"
 var client_ = __webpack_require__(8074);
+// EXTERNAL MODULE: external "react-toastify"
+var external_react_toastify_ = __webpack_require__(2034);
 ;// CONCATENATED MODULE: ./pages/_app.js
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -269,6 +279,8 @@ function MyApp({
         property: "og:image",
         content: "/img/assets/clouds_thumb.png"
       }, 'image')]
+    }), /*#__PURE__*/jsx_runtime_.jsx(external_react_toastify_.ToastContainer, {
+      newestOnTop: true
     }), /*#__PURE__*/jsx_runtime_.jsx(Header, {}), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_.Container, {
       fluid: true,
       className: "flex-grow-1",
@@ -431,6 +443,14 @@ module.exports = require("next/head");
 
 /***/ }),
 
+/***/ 6731:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/router");
+
+/***/ }),
+
 /***/ 9297:
 /***/ ((module) => {
 
@@ -444,6 +464,14 @@ module.exports = require("react");
 
 "use strict";
 module.exports = require("react-bootstrap");
+
+/***/ }),
+
+/***/ 2034:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("react-toastify");
 
 /***/ }),
 

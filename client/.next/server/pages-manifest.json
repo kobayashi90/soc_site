@@ -3,8 +3,8 @@
   "/500": "pages/500.html",
   "/_app": "pages/_app.js",
   "/album/[id]": "pages/album/[id].js",
-  "/api/hello": "pages/api/hello.js",
   "/": "pages/index.js",
+  "/search": "pages/search.html",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js"
 }

@@ -71,8 +71,8 @@ async function getServerSideProps() {
     data
   } = await client.query({
     query: client_.gql`
-      query searchAlbums($limit: Int){
-        released: searchAlbums(
+      query searchAlbum($limit: Int){
+        released: searchAlbum(
           limit: $limit,
           status: ["show","coming"],
           order: ["releaseDate", "createdAt"]
@@ -84,7 +84,7 @@ async function getServerSideProps() {
           }
         },
 
-        added: searchAlbums(limit: $limit){
+        added: searchAlbum(limit: $limit){
           rows{
             id,
             title
@@ -117,7 +117,7 @@ function Home({
         })
       }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_.Row, {
         className: "justify-content-center",
-        children: /*#__PURE__*/jsx_runtime_.jsx(AlbumBoxes/* AlbumBoxList */.Xe, {
+        children: /*#__PURE__*/jsx_runtime_.jsx(AlbumBoxes/* AlbumBoxList */.X, {
           xs: xs,
           md: md,
           items: released.rows
@@ -155,7 +155,7 @@ function Home({
         })
       }), /*#__PURE__*/jsx_runtime_.jsx(external_react_bootstrap_.Row, {
         className: "justify-content-center",
-        children: /*#__PURE__*/jsx_runtime_.jsx(AlbumBoxes/* AlbumBoxList */.Xe, {
+        children: /*#__PURE__*/jsx_runtime_.jsx(AlbumBoxes/* AlbumBoxList */.X, {
           xs: xs,
           md: md,
           items: added.rows
