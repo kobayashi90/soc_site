@@ -6,7 +6,7 @@ let apolloClient
 
 function createApolloClient () {
   return new ApolloClient({
-    uri: 'http://localhost:4000',
+    uri: isSSR ? 'http://localhost:4000' : 'https://beta.sittingonclouds.net/api',
     cache: new InMemoryCache(),
     ssrMode: isSSR
   })
