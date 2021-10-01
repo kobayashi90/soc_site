@@ -15,6 +15,7 @@ yarn-error.log*
 # config files
 */config/*.json
 !*/config/*.example.json
+!*/config/info.json
 
 # local env files
 .env.local
