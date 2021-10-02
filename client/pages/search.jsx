@@ -57,6 +57,7 @@ Object.keys(categories).forEach(name => { initialState[name] = false })
 
 export default function Search () {
   const router = useRouter()
+  console.log(router.query)
   const search = router.query.q
 
   const query = gql`
@@ -172,7 +173,7 @@ function SearchSection (props) {
               </Col>
             </Link>
           )}
-        </Row> {/* This is a test */}
+        </Row>
       </>
     )
     : null

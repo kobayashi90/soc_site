@@ -87,8 +87,9 @@ function SearchBar () {
   const router = useRouter()
 
   const onKeyDownHandler = e => {
-    if (e.keyCode === 13 && ref.current && ref.current.value) {
-      router.push({ pathname: '/search', query: { q: ref.current.value } })
+    const query = ref.current.value.trim()
+    if (e.keyCode === 13 && ref.current && query.length > 0) {
+      router.push({ pathname: '/search', query: { q: query } })
       setOpen(false)
     }
   }
