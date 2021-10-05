@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "babel-node -r dotenv/config index.js dotenv_config_path=../.env",
+    "dev": "nodemon --exec babel-node -r dotenv/config index.js dotenv_config_path=../.env",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel . --out-dir ../server"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "@graphql-tools/load-files": "^6.5.0",
+    "@graphql-tools/merge": "^8.1.2",
+    "apollo-server": "^3.3.0",
+    "cls-hooked": "^4.2.2",
+    "dotenv": "^10.0.0",
+    "graphql": "^15.6.0",
+    "sequelize": "^6.6.5"
+  }
+}

@@ -1,5 +1,5 @@
-import { Op } from 'sequelize'
-import info from '../../../config/info.json'
+const { Op } = require('sequelize')
+const info = require('../../../config/info.json')
 
 const searchPage = (args, options, db) => {
   const { limit, page, model } = args
@@ -12,7 +12,7 @@ const searchPage = (args, options, db) => {
   return db.models[model].findAndCountAll(options)
 }
 
-export default {
+module.exports = {
   Query: {
     searchAlbum: (parent, args, { db }) => {
       const { title = '', classes = info.classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] } = args

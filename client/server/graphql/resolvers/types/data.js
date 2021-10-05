@@ -1,5 +1,5 @@
 
-export default {
+module.exports = {
   Album: {
     artists: (parent, args, context, info) => parent.getArtists(),
     classes: (parent, args, context, info) => parent.getClasses(),

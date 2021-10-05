@@ -9,15 +9,13 @@ import '../styles/globals.scss'
 import Head from 'next/head'
 import { Container } from 'react-bootstrap'
 import Header from '../components/Header'
-import { useApollo } from '../components/ApolloClient'
+import client from '../components/ApolloClient'
 import { ApolloProvider } from '@apollo/client'
 import { ToastContainer } from 'react-toastify'
 
 function MyApp ({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps.initialApolloState)
-
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <Head>
         <title>Sitting on Clouds</title>
         <meta key='url' property='og:url' content='/' />

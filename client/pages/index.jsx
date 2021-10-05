@@ -4,14 +4,13 @@ import Link from 'next/link'
 
 import Sidebar from '../components/Sidebar'
 import { AlbumBoxList } from '../components/AlbumBoxes'
-import { initializeApollo } from '../components/ApolloClient'
+import client from '../components/ApolloClient'
 
 const md = 3
 const xs = 6
 const limit = 12
 
 export async function getServerSideProps () {
-  const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
       query searchAlbum($limit: Int){

@@ -57,7 +57,6 @@ Object.keys(categories).forEach(name => { initialState[name] = false })
 
 export default function Search () {
   const router = useRouter()
-  console.log(router.query)
   const search = router.query.q
 
   const query = gql`
@@ -80,6 +79,8 @@ export default function Search () {
   useEffect(() => {
     if (search) getInitial()
   }, [search])
+
+  if (!search) return null
 
   return (
     <Row className='h-100 bg-dark'>

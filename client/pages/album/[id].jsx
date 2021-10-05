@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 import { Col, Row, Button /* OverlayTrigger, Tooltip */ } from 'react-bootstrap'
-import { initializeApollo } from '../../components/ApolloClient'
+import client from '../../components/ApolloClient'
 import { Fragment, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
@@ -12,7 +12,6 @@ import { AlbumBoxList } from '../../components/AlbumBoxes'
 import { getImageUrl } from '../../components/utils'
 
 export async function getServerSideProps (context) {
-  const client = initializeApollo()
   const { id } = context.params
 
   const { data } = await client.query({
