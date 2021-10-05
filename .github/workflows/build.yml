@@ -11,17 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: dist
       - uses: fregante/setup-git-user@v1
 
-      - name: Build API Step 
-        run: |
-          cd api
-          yarn install
-          yarn build
+      # - name: Build API Step 
+      #   run: |
+      #     cd api
+      #     yarn install
+      #     yarn build 
 
       - name: Build NextJS Step 
         run: |
-          cd client
+          git merge master
           yarn install
           yarn build
 
