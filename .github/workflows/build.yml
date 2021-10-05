@@ -23,7 +23,7 @@ jobs:
 
       - name: Build NextJS Step 
         run: |
-          git fetch --all
+          git fetch origin
           git checkout dist        
           git merge master
           yarn install
