@@ -23,7 +23,7 @@ jobs:
         run: |
           git fetch origin
           git checkout dist        
-          git merge master
+          git merge origin/master
           yarn install
           yarn build
 
