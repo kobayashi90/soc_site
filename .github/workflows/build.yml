@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: dist
+          fetch-depth: 0
       - uses: fregante/setup-git-user@v1
 
       # - name: Build API Step 
@@ -23,6 +23,8 @@ jobs:
 
       - name: Build NextJS Step 
         run: |
+          git fetch --all
+          git checkout dist        
           git merge master
           yarn install
           yarn build
