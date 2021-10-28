@@ -11,8 +11,30 @@ import styles from '../../styles/Album.module.scss'
 import { AlbumBoxList } from '../../components/AlbumBoxes'
 import { getImageUrl } from '../../components/utils'
 
-export async function getServerSideProps (context) {
-  const { id } = context.params
+export async function getStaticPaths () {
+  const { data } = await client.query({
+    query: gql`
+      query searchAlbum($limit: Int, $page: Int ){
+        searchAlbum(
+          limit: $limit
+          page: $page
+        ){
+          rows { id }
+        }
+      }
+    `,
+    variables: { limit: 100 }
+  })
+
+  const paths = data.searchAlbum.rows.map(({ id }) => ({
+    params: { id }
+  }))
+
+  return { paths, fallback: 'blocking' }
+}
+
+export async function getStaticProps ({ params, req }) {
+  const { id } = params
 
   const { data } = await client.query({
     query: gql`
@@ -74,7 +96,7 @@ export async function getServerSideProps (context) {
     variables: { id }
   })
 
-  return { props: { ...data, imageUrl: fullImage(data.Album.id, 75, context.req) } }
+  return { props: { ...data, imageUrl: fullImage(data.Album.id, 75, req) }, revalidate: 60 }
 }
 
 const fullImage = (id, quality = 75, req) => {
