@@ -20,7 +20,15 @@ jobs:
       #   run: |
       #     cd api
       #     yarn install
-      #     yarn build 
+      #     yarn build
+
+      - name: Add .env file
+        uses: DamianReeves/write-file-action
+        with:
+          path: ./.env
+          contents: |
+            NODE_ENV=GITHUB
+          write-mode: overwrite
 
       - name: Build NextJS Step 
         run: |

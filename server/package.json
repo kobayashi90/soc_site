@@ -6,8 +6,7 @@
   "scripts": {
     "start": "babel-node -r dotenv/config index.js dotenv_config_path=../.env",
     "dev": "nodemon --exec babel-node -r dotenv/config index.js dotenv_config_path=../.env",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel . --out-dir ../server"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
