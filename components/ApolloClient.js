@@ -1,10 +1,11 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 const isSSR = typeof window === 'undefined'
-console.log(process.env.NODE_ENV)
-const isGithub = process.env.NODE_ENV === 'GITHUB'
+const isGithub = process.env.GITHUB_JOB
+console.log(isGithub)
+const clientURL = 'https://beta.sittingonclouds.net/api'
 
 const client = new ApolloClient({
-  uri: isSSR ? (isGithub ? 'https://beta.sittingonclouds.net/api' : 'http://localhost:4000') : 'http://localhost:4000',
+  uri: isSSR ? (isGithub ? clientURL : 'http://localhost:4000') : clientURL,
   cache: new InMemoryCache(),
   ssrMode: isSSR
 })
