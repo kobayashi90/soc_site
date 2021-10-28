@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 const isSSR = typeof window === 'undefined'
+console.log(process.env.NODE_ENV)
 const isGithub = process.env.NODE_ENV === 'GITHUB'
 
 const client = new ApolloClient({
