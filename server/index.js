@@ -1,16 +1,7 @@
 import { ApolloServer } from 'apollo-server'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
-import Sequelize from 'sequelize'
-import glob from 'glob'
-import relations from './relations'
-// import cls from 'cls-hooked'
-
-const db = new Sequelize(require('./config/sequelize.json')[process.env.NODE_ENV])
-// Sequelize.useCLS(cls.createNamespace('trans-namespace'))
-
-glob.sync('./sequelize/models/*').forEach(e => require(e)(db))
-relations(db)
+import db from './startDB'
 
 const server = new ApolloServer({
   typeDefs: mergeTypeDefs(loadFilesSync('graphql/schemas')),

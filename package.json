@@ -11,16 +11,18 @@
     "@fortawesome/fontawesome-free": "^5.13.1",
     "bootstrap": "5.1.0",
     "classnames": "^2.3.1",
+    "form-serialize": "^0.7.2",
     "graphql": "^15.6.0",
-    "mysql2": "^2.3.0",
     "next": "latest",
+    "next-iron-session": "^4.2.0",
     "normalize.css": "^8.0.1",
     "react": "17.0.2",
     "react-bootstrap": "next",
     "react-dom": "17.0.2",
     "react-toastify": "^8.0.3",
     "sass": "^1.42.1",
-    "sharp": "^0.29.1"
+    "sharp": "^0.29.1",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

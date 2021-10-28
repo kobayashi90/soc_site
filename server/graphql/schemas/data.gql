@@ -75,6 +75,7 @@ type Artist {
 
 type Class {
     name: String!
+    count: Float!
     albums: [Album]!
 }
 
@@ -128,8 +129,17 @@ type Category {
     albums: [Album]!
 }
 
+type Config {
+    name: String!
+    value: String!
+}
+
 type Query {
     Album(id: ID!): Album
+    AlbumCount: Float!
+    Classes: [Class]!
+
+    Config(name: ID!): Config
 }
 
 type Mutation {

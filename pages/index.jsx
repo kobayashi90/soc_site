@@ -82,7 +82,7 @@ export default function Home ({ added, released }) {
           </Col>
         </Row>
       </Col>
-      <Sidebar></Sidebar>
+      <Sidebar index radio />
     </Row>
   )
 }

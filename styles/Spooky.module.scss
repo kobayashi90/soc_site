@@ -1,0 +1,24 @@
+.cover {
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+    pointer-events: none;
+
+    .ghost {
+        pointer-events: auto;
+        position: relative;
+        transition: top 1s linear, left 1s linear, opacity 1s;
+        padding: 50px;
+        width: min-content;
+
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: linear;
+
+        div {
+            background-image: url("/img/assets/ghost.png");
+            background-size: contain;           
+        }
+    }
+}
