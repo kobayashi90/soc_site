@@ -25,7 +25,7 @@ jobs:
       - name: Add .env file
         uses: DamianReeves/write-file-action@v1.0
         with:
-          path: ./.env
+          path: ${{ env.home }}/.env
           contents: |
             NODE_ENV=GITHUB
           write-mode: overwrite
