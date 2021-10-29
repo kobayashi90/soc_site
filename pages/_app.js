@@ -13,7 +13,9 @@ import Header from '../components/Header'
 import client from '../components/ApolloClient'
 import { ApolloProvider } from '@apollo/client'
 import { ToastContainer } from 'react-toastify'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import useUser from '../components/useUser'
+import { skipAds } from '../components/utils'
 // import SpookyGhosts from '../components/SpookyGhosts'
 
 function MyApp ({ Component, pageProps }) {
@@ -38,23 +40,32 @@ function MyApp ({ Component, pageProps }) {
 }
 
 function FooterAd () {
+  const { user } = useUser()
+  const iframeRef = useRef(null)
+
   useEffect(() => {
     window.tyche = { mode: 'tyche', config: '//config.playwire.com/1023181/v2/websites/71145/banner.json' }
+  }, [])
+
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe) return
+
     let t = ''
     t += window.location
     t = t.replace(/#.*$/g, '').replace(/^.*:\/*/i, '').replace(/\./g, '[dot]').replace(/\//g, '[obs]').replace(/-/g, '[dash]')
     t = encodeURIComponent(encodeURIComponent(t))
-    const iframe = document.getElementById('id01_62693')
     iframe.src = iframe.src.replace('iframe_banner', t)
-  }, [])
+  }, [iframeRef])
 
-  return (
+  return !skipAds(user) && (
     <div className='footer'>
       <iframe
+        ref={iframeRef}
         id='id01_62693'
         title='id01_62693'
         src='https://www.play-asia.com/38/190%2C000000%2Cnone%2C0%2C0%2C0%2C0%2CFFFFFF%2C000000%2Cleft%2C0%2C0-391-76a-707gw6-062-782i-29466-901vq93-33iframe_banner-401-4450'
-        style={{ borderStyle: 'none', borderWidth: 0, borderColor: '#FFFFFF', padding: 0, margin: '10px 0', height: '220px', width: '100%' }}
+        style={{ borderStyle: 'none', borderWidth: 0, borderColor: '#FFFFFF', padding: 0, height: '220px', width: '100%' }}
         scrolling='no'
       />
     </div>

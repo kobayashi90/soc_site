@@ -5,9 +5,11 @@ import Loader from './Loader'
 import AlbumBox from './AlbumBoxes'
 import classNames from 'classnames'
 import Image from 'next/image'
+import useUser from './useUser'
 
 import styles from '../styles/Sidebar.module.scss'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { skipAds } from './utils'
 
 export default function Sidebar ({ radio = false, index = false }) {
   const fetchCount = gql`query {
@@ -26,10 +28,6 @@ export default function Sidebar ({ radio = false, index = false }) {
 
   const { data: countData, loading: countLoading, error: countError } = useQuery(fetchCount)
   const { data: configData, error: configError } = useQuery(fetchConfig)
-
-  useEffect(() => {
-    let t = ''; t += window.location; t = t.replace(/#.*$/g, '').replace(/^.*:\/*/i, '').replace(/\./g, '[dot]').replace(/\//g, '[obs]').replace(/-/g, '[dash]'); t = encodeURIComponent(encodeURIComponent(t)); const iframe = document.getElementById('id01_909824'); iframe.src = iframe.src.replace('iframe_banner', t)
-  }, [])
 
   if (countError) console.log(countError)
   if (configError) console.log(configError)
@@ -98,14 +96,34 @@ export default function Sidebar ({ radio = false, index = false }) {
         </div>
       )}
 
-      {/* !loading && (!user || !user.me.permissions.includes('SKIP_ADS')) && ( */}
+      <Ad />
+    </Col>
+  )
+}
+
+function Ad () {
+  const { user } = useUser()
+  const iframeRef = useRef(null)
+
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe) return
+
+    let t = ''
+    t += window.location
+    t = t.replace(/#.*$/g, '').replace(/^.*:\/*/i, '').replace(/\./g, '[dot]').replace(/\//g, '[obs]').replace(/-/g, '[dash]')
+    t = encodeURIComponent(encodeURIComponent(t))
+    iframe.src = iframe.src.replace('iframe_banner', t)
+  }, [iframeRef])
+
+  return (
+    !skipAds(user) && (
       <Row className='flex-grow-1'>
         <Col>
-          <iframe title='play-asia' id='id01_909824' src='https://www.play-asia.com/38/190%2C000000%2Cnone%2C0%2C0%2C0%2C0%2CFFFFFF%2C000000%2Cleft%2C0%2C0-762s-70joq4-062-783c-29466-901vq93-33iframe_banner-44140px' style={{ height: '100%', width: '100%', borderStyle: 'none', borderWidth: '0px', borderColor: '#000000', padding: 0, margin: 0, scrolling: 'no', frameborder: 0 }} />
+          <iframe ref={iframeRef} title='play-asia' id='id01_909824' src='https://www.play-asia.com/38/190%2C000000%2Cnone%2C0%2C0%2C0%2C0%2CFFFFFF%2C000000%2Cleft%2C0%2C0-762s-70joq4-062-783c-29466-901vq93-33iframe_banner-44140px' style={{ height: '100%', width: '100%', borderStyle: 'none', borderWidth: '0px', borderColor: '#000000', padding: 0, margin: 0, scrolling: 'no', frameborder: 0 }} />
         </Col>
       </Row>
-      {/* })} */}
-    </Col>
+    )
   )
 }
 
