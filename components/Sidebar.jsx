@@ -110,7 +110,6 @@ export default function Sidebar ({ radio = false, index = false }) {
 }
 
 function Highlight ({ id }) {
-  console.log(id)
   const fetchHighlight = gql`
     query Album($id: ID!){
       Album(id: $id){
