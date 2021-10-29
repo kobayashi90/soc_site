@@ -2,7 +2,7 @@
   "name": "client",
   "scripts": {
     "dev": "next dev",
-    "build": "NODE_ENV=GITHUB next build",
+    "build": "next build",
     "start": "next start -p 58991",
     "lint": "next lint"
   },
