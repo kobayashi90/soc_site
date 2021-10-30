@@ -1,4 +1,4 @@
-import client from '../../../components/ApolloClient'
+import client from '../../../lib/ApolloClient'
 import gql from 'graphql-tag'
 
 const query = gql`query {

@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import styles from '../../styles/LastAdded.module.scss'
 
-import client from '../../components/ApolloClient'
+import client from '../../lib/ApolloClient'
 import { AlbumBoxList } from '../../components/AlbumBoxes'
 import React from 'react'
 import classNames from 'classnames'

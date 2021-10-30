@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import Sidebar from '../components/Sidebar'
 import { AlbumBoxList } from '../components/AlbumBoxes'
-import client from '../components/ApolloClient'
+import client from '../lib/ApolloClient'
 
 const md = 3
 const xs = 6

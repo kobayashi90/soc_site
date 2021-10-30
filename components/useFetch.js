@@ -12,7 +12,7 @@ export default function useFetch (url, options) {
     toast.error('Failed to fetch server info', { theme: 'dark' })
   }
 
-  useEffect(() => {
+  function handleRun () {
     fetch(url, options)
       .then(async res => {
         const data = await res.json()
@@ -22,7 +22,9 @@ export default function useFetch (url, options) {
       })
       .catch(handleError)
       .finally(() => setLoading(false))
-  }, [])
+  }
 
-  return { loading, data, error }
+  useEffect(handleRun, [options, url])
+
+  return { loading, data, error, refetch: handleRun }
 }

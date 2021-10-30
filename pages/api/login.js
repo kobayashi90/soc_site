@@ -1,26 +1,22 @@
-import withSession from '../../components/session'
-import client from '../../components/ApolloClient'
+import withSession from '../../lib/session'
+import client from '../../lib/ApolloClient'
 import { gql } from '@apollo/client'
 
 const query = gql`
   query Login($username: String!, $password: String!){
-    user: login(username: $username, password: $password){
-      roles {
-        name
-      }
-      permissions
-    }
+    username: login(username: $username, password: $password)
   }
 `
 
 export default withSession(async (req, res) => {
   try {
     const { data } = await client.query({ query, variables: req.body })
-    const { user } = data
+    const { username } = data
 
-    req.session.set('user', user)
+    req.session.set('user', username)
     await req.session.save()
-    res.json(user)
+
+    res.status(200).send()
   } catch (error) {
     console.log(error)
     const { response } = error

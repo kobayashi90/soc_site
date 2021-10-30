@@ -68,6 +68,9 @@ $download-blue: #2185f5;
   }
 
   $direct-color: #ffdb37;
+  .download.direct{
+      pointer-events: all !important;
+  }
  .download.direct:hover {
     color:$direct-color;
     background-color: rgba(255, 255, 255, 0);

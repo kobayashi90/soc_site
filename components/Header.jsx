@@ -15,7 +15,7 @@ export default function Header () {
   const [show, setShow] = useState(false)
   const { user, mutateUser } = useUser()
 
-  const loggedIn = user?.isLoggedIn
+  const loggedIn = user.isLoggedIn
 
   const handleLogin = async () => {
     if (loggedIn) {

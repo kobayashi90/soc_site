@@ -10,10 +10,10 @@ const Query = {
       const valid = await bcrypt.compare(password, user.password)
       if (!valid) throw new Error()
 
-      const roles = await user.getRoles()
-
-      return { roles, permissions: roles.map(r => r.permissions).flat() }
+      return user.username
     },
+    user: async (parent, { username }, { db, req }) => db.models.user.findByPk(username),
+
     permissions: () => permissions,
     roles: (parent, args, { db }) => db.models.role.findAll(),
     users: (parent, args, { db }) => db.models.user.findAll()

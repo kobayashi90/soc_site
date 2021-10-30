@@ -1,11 +1,13 @@
 import { gql } from '@apollo/client'
-import { Col, Row, Button /* OverlayTrigger, Tooltip */ } from 'react-bootstrap'
-import client from '../../components/ApolloClient'
-import { Fragment, useState } from 'react'
+import { Col, Row, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import client from '../../lib/ApolloClient'
+import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 import Head from 'next/head'
 import url from 'url'
+import useFetch from '../../components/useFetch'
+import useUser from '../../components/useUser'
 
 import styles from '../../styles/Album.module.scss'
 import { AlbumBoxList } from '../../components/AlbumBoxes'
@@ -76,8 +78,8 @@ export async function getStaticProps ({ params, req }) {
             title
             small
             links{
+              id
               url
-              directUrl
               provider
               custom
             }
@@ -105,6 +107,12 @@ const fullImage = (id, quality = 75, req) => {
 }
 
 export default function Page ({ Album, imageUrl }) {
+  const { user } = useUser()
+  const { data = [], refetch } = useFetch(`/api/query/albumDirect?id=${Album.id}`)
+  const directs = new Map(data.map(obj => [obj.id, obj.url]))
+
+  useEffect(refetch, [user.isLoggedIn])
+
   return (
     <Row>
       <Head>
@@ -237,8 +245,8 @@ export default function Page ({ Album, imageUrl }) {
                       <h2 className='text-center download-txt mb-0'>{title}</h2>
                     </Col>
                   </Row>
-                  {links.map(({ url, custom, directUrl, provider }, i) => (
-                    <Fragment key={i}>
+                  {links.map(({ id, url, custom, provider }) => (
+                    <Fragment key={id}>
                       <Row className='mt-2'>
                         <Col md={12}><h5 className='text-center'>{provider}</h5></Col>
                       </Row>
@@ -247,11 +255,11 @@ export default function Page ({ Album, imageUrl }) {
                           <Button variant="secondary" className={styles.download} href={url}>Download</Button>
                         </Col>
                         {/* <Col className='py-2'>
-                            <Button variant="secondary" className={styles.download, styles.custom} href={custom}>Mirror</Button>
-                        </Col> */}
-                        {/* <Col className='py-2'>
-                          <DirectButton directUrl={directUrl}></DirectButton>
-                      </Col> */}
+                          <Button variant="secondary" className={styles.download, styles.custom} href={custom}>Mirror</Button>
+                  </Col> */}
+                        <Col className='py-2'>
+                          <DirectButton directUrl={directs.get(id)}></DirectButton>
+                        </Col>
                       </Row>
                     </Fragment>
                   ))}
@@ -277,19 +285,20 @@ export default function Page ({ Album, imageUrl }) {
   )
 }
 
-/* function DirectButton ({ directUrl }) {
+function DirectButton ({ directUrl }) {
+  const disabled = directUrl === undefined
   const renderTooltip = (props) => (
-    <Tooltip {...props} id={styles.tooltip}>
-      Become a donator to access direct links!
-    </Tooltip>
+    disabled
+      ? <Tooltip {...props} id={styles.tooltip}>Become a donator to access direct links!</Tooltip>
+      : <div />
   )
 
   return (
     <OverlayTrigger placement='top' overlay={renderTooltip}>
-      <Button variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl} disabled>Direct</Button>
+      <Button variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl} disabled={disabled}>Direct</Button>
     </OverlayTrigger>
   )
-} */
+}
 
 function TrackList ({ discs }) {
   const [current, setCurrent] = useState(0)

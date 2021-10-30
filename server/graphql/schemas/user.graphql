@@ -30,13 +30,10 @@
         password: String!
     }
 
-    type TokenPayload {
-        roles: [Role]!
-        permissions: [String]!
-    }
-
     type Query {
-        login(username: String!, password: String!): TokenPayload
+        login(username: String!, password: String!): String!
+        user(username: String!): User!
+
         roles: [Role]!
         permissions: [String]!
         users: [User]!
