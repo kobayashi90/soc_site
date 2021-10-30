@@ -6,12 +6,11 @@ import '@fortawesome/fontawesome-free/css/brands.css'
 
 import '../styles/globals.scss'
 import '../styles/anim.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Head from 'next/head'
 import { Container } from 'react-bootstrap'
 import Header from '../components/Header'
-import client from '../components/ApolloClient'
-import { ApolloProvider } from '@apollo/client'
 import { ToastContainer } from 'react-toastify'
 import { useEffect, useRef } from 'react'
 import useUser from '../components/useUser'
@@ -20,8 +19,7 @@ import { skipAds } from '../components/utils'
 
 function MyApp ({ Component, pageProps }) {
   return (
-    <ApolloProvider client={client}>
-      {/* <SpookyGhosts /> */}
+    <>
       <Head>
         <title>Sitting on Clouds</title>
         <meta key='url' property='og:url' content='/' />
@@ -35,7 +33,7 @@ function MyApp ({ Component, pageProps }) {
         <Component {...pageProps} />
       </Container>
       <FooterAd />
-    </ApolloProvider>
+    </>
   )
 }
 

@@ -1,5 +1,3 @@
-// import { useContext } from 'react'
-import { gql, useQuery } from '@apollo/client'
 import { Col, Row } from 'react-bootstrap'
 import Loader from './Loader'
 import AlbumBox from './AlbumBoxes'
@@ -10,28 +8,9 @@ import useUser from './useUser'
 import styles from '../styles/Sidebar.module.scss'
 import { useEffect, useRef } from 'react'
 import { skipAds } from './utils'
+import useFetch from './useFetch'
 
 export default function Sidebar ({ radio = false, index = false }) {
-  const fetchCount = gql`query {
-          AlbumCount
-          Classes{
-            name
-            count
-          }
-        }`
-
-  const fetchConfig = gql`query{
-          Config(name:"highlight"){
-            value
-          }
-        }`
-
-  const { data: countData, loading: countLoading, error: countError } = useQuery(fetchCount)
-  const { data: configData, error: configError } = useQuery(fetchConfig)
-
-  if (countError) console.log(countError)
-  if (configError) console.log(configError)
-
   return (
     <Col md={3} className={classNames(styles.root, 'p-3 ml-md-auto d-flex flex-column')}>
       {index && (
@@ -76,21 +55,8 @@ export default function Sidebar ({ radio = false, index = false }) {
         </Col>
       </Row>
 
-      {!countError && (
-        <div className={classNames(styles.socials, 'mt-3')}>
-          {countLoading
-            ? <Loader className='mx-auto' size={100} />
-            : countData && (
-              <>
-                <h5 className='text-center home-side-box-txt'>Soundtrack Count: {countData.AlbumCount}</h5>
-                {countData.Classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{name} Soundtracks: {count}</h6>)}
-              </>
-            )
-          }
-        </div>
-      )}
-
-      {configData && <Highlight id={configData.Config.value} />}
+      <AlbumCount />
+      <Highlight/>
 
       {radio && (
         <div className={classNames(styles.socials, 'mt-3 p-2 mb-4')}>
@@ -100,6 +66,38 @@ export default function Sidebar ({ radio = false, index = false }) {
 
       <Ad />
     </Col>
+  )
+}
+
+function AlbumCount () {
+  const { data, loading } = useFetch('/api/query/albumCount', { method: 'GET' })
+
+  return (
+    <div className={classNames(styles.socials, 'mt-3')}>
+      {loading && <Loader className='mx-auto' size={100} />}
+      {data && (
+        <>
+          <h5 className='text-center home-side-box-txt'>Soundtrack Count: {data.AlbumCount}</h5>
+          {data.Classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{name} Soundtracks: {count}</h6>)}
+        </>
+      )}
+    </div>
+  )
+}
+
+function Highlight () {
+  const { data, loading } = useFetch('/api/query/highlight', { method: 'GET' })
+
+  return (
+    <div className={classNames(styles.socials, 'mt-3 p-1 mb-4')}>
+      {loading && <Loader className='mx-auto' size={100} />}
+      {data && (
+        <>
+          <h4 className='text-center home-side-box-txt'>HIGHLIGHT SOUNDTRACK</h4>
+          <AlbumBox id={data.id} title={data.title} xs={12} />
+        </>
+      )}
+    </div>
   )
 }
 
@@ -126,33 +124,5 @@ function Ad () {
         </Col>
       </Row>
     )
-  )
-}
-
-function Highlight ({ id }) {
-  const fetchHighlight = gql`
-    query Album($id: ID!){
-      Album(id: $id){
-        id
-        title
-      }
-    }`
-  const { data, loading, error } = useQuery(fetchHighlight, { variables: { id } })
-
-  if (error) {
-    console.log(error)
-    return null
-  }
-
-  return (
-    <div className={classNames(styles.socials, 'mt-3 p-1 mb-4')}>
-      {loading && <Loader />}
-      {!loading && data && (
-        <>
-          <h4 className='text-center home-side-box-txt'>HIGHLIGHT SOUNDTRACK</h4>
-          <AlbumBox id={data.Album.id} title={data.Album.title} xs={12} />
-        </>
-      )}
-    </div>
   )
 }
