@@ -17,6 +17,7 @@ body {
 }
 
 nav {
+    background-color: rgb(var(--bs-dark-rgb)) !important;
     .dropdown-menu {
         .dropdown-item {
             color: white;

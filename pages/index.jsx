@@ -46,7 +46,7 @@ export default function Home ({ added, released }) {
       <Col className='p-3'>
         <Row>
           <Col>
-            <h1 className='text-center homeTitle p-3'>LAST RELEASES</h1>
+            <h1 className='text-center homeTitle p-3' id='last-releases'>LAST RELEASES</h1>
           </Col>
         </Row>
         <Row className='justify-content-center'>
@@ -67,7 +67,7 @@ export default function Home ({ added, released }) {
         <hr />
         <Row>
           <Col>
-            <h1 className='text-center homeTitle p-3'>LAST ADDED</h1>
+            <h1 className='text-center homeTitle p-3' id='last-added'>LAST ADDED</h1>
           </Col>
         </Row>
 
