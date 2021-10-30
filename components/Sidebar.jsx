@@ -47,7 +47,7 @@ export default function Sidebar ({ radio = false, index = false }) {
           </Row>
         </>
       )}
-      <Row className='mt-3 p-3'>
+      <Row className='mt-3 px-3'>
         <Col md={12} className={styles.socials}>
           <Row>
             <Col className='d-flex pe-1'>
@@ -78,13 +78,15 @@ export default function Sidebar ({ radio = false, index = false }) {
 
       {!countError && (
         <div className={classNames(styles.socials, 'mt-3')}>
-          {countLoading && <Loader />}
-          {!countLoading && countData && (
-            <>
-              <h5 className='text-center home-side-box-txt'>Soundtrack Count: {countData.AlbumCount}</h5>
-              {countData.Classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{name} Soundtracks: {count}</h6>)}
-            </>
-          )}
+          {countLoading
+            ? <Loader className='mx-auto' size={100} />
+            : countData && (
+              <>
+                <h5 className='text-center home-side-box-txt'>Soundtrack Count: {countData.AlbumCount}</h5>
+                {countData.Classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{name} Soundtracks: {count}</h6>)}
+              </>
+            )
+          }
         </div>
       )}
 
