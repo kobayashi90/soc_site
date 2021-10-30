@@ -6,6 +6,7 @@ import db from './startDB'
 const server = new ApolloServer({
   typeDefs: mergeTypeDefs(loadFilesSync('graphql/schemas')),
   resolvers: mergeResolvers(loadFilesSync('graphql/resolvers')),
+  cors: { origin: '*' },
   context: () => ({ db })
 })
 
