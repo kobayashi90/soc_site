@@ -8,7 +8,7 @@ import Head from 'next/head'
 import url from 'url'
 
 import useUser from '../../components/useUser'
-import styles from '../../styles/album.module.scss'
+import styles from '../../styles/Album.module.scss'
 import { AlbumBoxList } from '../../components/AlbumBoxes'
 import { getImageUrl } from '../../components/utils'
 
