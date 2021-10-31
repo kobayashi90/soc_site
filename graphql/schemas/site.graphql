@@ -1,4 +1,4 @@
-    type Ost {
+    type Album {
         id: ID!
         title: String!
         subTitle: String
@@ -15,7 +15,7 @@
         platforms: [Platform]!
         games: [Game]!
         animations: [Animation]!
-        related: [Ost]!
+        related: [Album]!
         updatedAt: Float!
         createdAt: Float!
         createdBy: User
@@ -26,7 +26,7 @@
         id: ID!
         number: Int
         body: String
-        ost: Ost
+        album: Album
     }
 
     input DiscInput {
@@ -71,12 +71,12 @@
     type Artist {
         name: String!
         slug: String!
-        osts: [Ost]
+        albums: [Album]
     }
 
     type Class {
         name: String!
-        osts: [Ost]!
+        albums: [Album]!
     }
 
     type Game {
@@ -85,7 +85,7 @@
         releaseDate: String
         publishers: [Publisher]
         platforms: [Platform]
-        osts: [Ost]
+        albums: [Album]
         series: [Series]
     }
 
@@ -95,7 +95,7 @@
         subTitle: String
         releaseDate: String
         studios: [Studio]!
-        osts: [Ost]!
+        albums: [Album]!
     }
 
     type Studio {
@@ -108,7 +108,7 @@
         id: ID!
         name: String
         type: String!
-        osts: [Ost]
+        albums: [Album]
         games: [Game]!
     }
 
@@ -126,11 +126,11 @@
 
     type Category {
         name: String!
-        osts: [Ost]!
+        albums: [Album]!
     }
     
-    type SearchOstResult {
-        rows: [Ost]
+    type SearchAlbumResult {
+        rows: [Album]
         count: Int
     }
 
@@ -165,11 +165,11 @@
     }
 
     type Query {
-        osts: [Ost!]!
-        ostCount: Float!
+        albums: [Album!]!
+        albumCount: Float!
         categories: [Category]!
         classes: [Class]!
-        ost(id: ID): Ost!
+        album(id: ID): Album!
         artists: [Artist!]!     
         platforms: [Platform!]!
         platform(id: ID): Platform!
@@ -184,8 +184,8 @@
         studios: [Studio]!
         studio(slug: String!): Studio!
 
-        searchOst(title: String, classes:[String], limit: Int, page: Int, order: [String], mode: String, status: [String!]): SearchOstResult
-        searchOstByArtist(name: String!, classes:[String], limit: Int, page: Int, order: [String], mode: String, status: [String!]): SearchOstResult
+        searchAlbum(title: String, classes:[String], limit: Int, page: Int, order: [String], mode: String, status: [String!]): SearchAlbumResult
+        searchAlbumByArtist(name: String!, classes:[String], limit: Int, page: Int, order: [String], mode: String, status: [String!]): SearchAlbumResult
         searchAnimation(title: String, limit: Int, page: Int, order:String, mode: String): SearchAnimResult
         searchStudio(name: String, limit: Int, page: Int, order:String, mode: String): SearchStudioResult
         searchGame(name: String, limit: Int, page: Int, order:String, mode: String): SearchGameResult
@@ -226,7 +226,7 @@
         updateAnimation(id:ID!, title:String, subTitle:String, releaseDate:String, studios:[String], cover:Upload): Animation
         deleteAnimation(id:ID!): Int!
 
-        createOst(
+        createAlbum(
             title: String, 
             subTitle: String, 
             cover: Upload,
@@ -245,7 +245,7 @@
             discs: [DiscInput],
             related: [ID],
             status: String!
-        ): Ost!
-        updateOst(id: ID!, data: JSONObject!): Ost!
-        deleteOst(id: ID!): Int
+        ): Album!
+        updateAlbum(id: ID!, data: JSONObject!): Album!
+        deleteAlbum(id: ID!): Int
     }

@@ -11,15 +11,15 @@ module.exports = {
   categories: (parent, args, { db }, info) => db.models.category.findAll(),
   games: (parent, args, { db }, info) => db.models.game.findAll(),
   game: (parent, { slug }, { db }, info) => db.models.game.findByPk(slug),
-  ost: (parent, { id, title }, { db }, info) => db.models.ost.findByPk(id),
-  osts: (parent, args, { db }, info) => db.models.ost.findAll(),
+  album: (parent, { id, title }, { db }, info) => db.models.ost.findByPk(id),
+  albums: (parent, args, { db }, info) => db.models.ost.findAll(),
   platform: async (parent, { id }, { db }) => db.models.platform.findByPk(id),
   animation: (parent, { id }, { db }) => db.models.animation.findByPk(id),
   animations: (parent, args, { db }) => db.models.animation.findAll(),
   studio: (parent, { slug }, { db }) => db.models.studio.findByPk(slug),
   studios: (parent, { slug }, { db }) => db.models.studio.findAll(),
   seriesOne: (parent, { slug }, { db }, info) => db.models.series.findByPk(slug),
-  searchOst: (parent, { title = '', classes = info.classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
+  searchAlbum: (parent, { title = '', classes = info.classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
     const titleWords = title.split(' ')
 
     return searchPage({ limit, page, model: 'ost' }, {
@@ -34,7 +34,7 @@ module.exports = {
       order: order.map(o => [o, mode])
     }, db)
   },
-  searchOstByArtist: async (parent, { name, classes = info.classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
+  searchAlbumByArtist: async (parent, { name, classes = info.classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
     return searchPage({ limit, page, model: 'ost' }, {
       where: { status: { [Op.in]: status } },
       include: [
@@ -60,7 +60,7 @@ module.exports = {
     where: { name: { [Op.like]: `%${name}%` } },
     order: [[order, mode]]
   }, db),
-  ostCount: async (parent, params, { db }) => db.models.ost.count(),
+  albumCount: async (parent, params, { db }) => db.models.ost.count(),
   searchSeriesByName: (parent, { name }, { db }) => db.models.series.findAll({
     where: {
       name: {

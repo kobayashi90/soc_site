@@ -11,6 +11,7 @@ const xs = 6
 const limit = 12
 
 export async function getStaticProps () {
+
   const { data } = await client.query({
     query: gql`
       query searchAlbum($limit: Int){
@@ -36,7 +37,6 @@ export async function getStaticProps () {
     `,
     variables: { limit }
   })
-
   return { props: { ...data }, revalidate: 60 }
 }
 

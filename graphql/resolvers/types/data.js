@@ -2,7 +2,7 @@ const { GraphQLUpload } = require('graphql-upload')
 
 module.exports = {
   Upload: GraphQLUpload,
-  Ost: {
+  Album: {
     artists: (parent, args, context, info) => parent.getArtists(),
     classes: (parent, args, context, info) => parent.getClasses(),
     categories: (parent, args, context, info) => parent.getCategories(),
@@ -16,11 +16,11 @@ module.exports = {
   },
 
   Category: {
-    osts: parent => parent.getOsts()
+    albums: parent => parent.getOsts()
   },
 
   Class: {
-    osts: parent => parent.getOsts()
+    albums: parent => parent.getOsts()
   },
 
   Download: {
@@ -44,21 +44,24 @@ module.exports = {
   },
 
   Game: {
-    osts: (parent, args, context, info) => parent.getOsts(),
+    albums: (parent, args, context, info) => parent.getOsts(),
     series: (parent, args, context, info) => parent.getSeries(),
     publishers: (parent, args, context, info) => parent.getPublishers(),
     platforms: (parent, args, context, info) => parent.getPlatforms({ order: ['name'] })
   },
 
   Platform: {
-    osts: parent => parent.getOsts(),
+    albums: parent => parent.getOsts(),
     games: async (parent, args, { db }) => {
       const games = await db.models.game.findAll({ include: [db.models.platform] })
       return games.filter(g => g.platforms.filter(p => p.id === parent.id).length > 0)
     }
   },
 
-  Animation: { studios: parent => parent.getStudios(), osts: parent => parent.getOsts() },
+  Animation: {
+    studios: parent => parent.getStudios(),
+    albums: parent => parent.getOsts()
+  },
   Studio: {
     animations: async (parent, args, { db }) => {
       const animations = await db.models.animation.findAll({ include: [db.models.studio] })
@@ -75,6 +78,6 @@ module.exports = {
   },
 
   Disc: {
-    ost: (parent) => parent.getOst()
+    album: (parent) => parent.getOst()
   }
 }

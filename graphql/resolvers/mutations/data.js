@@ -158,7 +158,7 @@ module.exports = {
   },
   deleteAnimation: async (parent, { id }, { payload, user: currentUser, db }) => deleteRow(await db.models.animation.findByPk(id), payload, db),
 
-  createOst: async (parent, data, { payload, db, user }, info) => {
+  createAlbum: async (parent, data, { payload, db, user }, info) => {
     // if (!await jwtApi(payload, db, ['CREATE'])) throw new AuthenticationError()
 
     data.createdBy = payload.username
@@ -191,7 +191,7 @@ module.exports = {
       })
     })
   },
-  updateOst: async (parent, { data, id }, { payload, db, user }, info) => {
+  updateAlbum: async (parent, { data, id }, { payload, db, user }, info) => {
     // if (!await jwtApi(payload, db, ['UPDATE'])) throw new AuthenticationError()
 
     data.artists = data.artists ? data.artists.map(artist => { return { name: artist, slug: slugify(artist) } }) : []
@@ -223,7 +223,7 @@ module.exports = {
       return ost
     })
   },
-  deleteOst: async (parent, { id }, { payload, db, user }, info) => {
+  deleteAlbum: async (parent, { id }, { payload, db, user }, info) => {
     // if (!await jwtApi(payload, db, ['CREATE'])) throw new AuthenticationError()
 
     const ost = await db.models.ost.findByPk(id)
