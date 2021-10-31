@@ -13,13 +13,16 @@ import { Container } from 'react-bootstrap'
 import Header from '../components/Header'
 import { ToastContainer } from 'react-toastify'
 import { useEffect, useRef } from 'react'
+import { ApolloProvider } from '@apollo/client'
+
+import client from '../lib/ApolloClient'
 import useUser from '../components/useUser'
 import { skipAds } from '../components/utils'
 // import SpookyGhosts from '../components/SpookyGhosts'
 
 function MyApp ({ Component, pageProps }) {
   return (
-    <>
+    <ApolloProvider client={client}>
       <Head>
         <title>Sitting on Clouds</title>
         <meta key='url' property='og:url' content='/' />
@@ -33,7 +36,7 @@ function MyApp ({ Component, pageProps }) {
         <Component {...pageProps} />
       </Container>
       <FooterAd />
-    </>
+      </ApolloProvider>
   )
 }
 

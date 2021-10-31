@@ -77,6 +77,7 @@
     type Class {
         name: String!
         albums: [Album]!
+        count: Float!
     }
 
     type Game {
@@ -183,6 +184,8 @@
         animation(id: ID): Animation!
         studios: [Studio]!
         studio(slug: String!): Studio!
+
+        highlight: Album!
 
         searchAlbum(title: String, classes:[String], limit: Int, page: Int, order: [String], mode: String, status: [String!]): SearchAlbumResult
         searchAlbumByArtist(name: String!, classes:[String], limit: Int, page: Int, order: [String], mode: String, status: [String!]): SearchAlbumResult

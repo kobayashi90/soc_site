@@ -4,11 +4,12 @@ import AlbumBox from './AlbumBoxes'
 import classNames from 'classnames'
 import Image from 'next/image'
 import useUser from './useUser'
+import gql from 'graphql-tag'
 
 import styles from '../styles/Sidebar.module.scss'
 import { useEffect, useRef } from 'react'
 import { skipAds } from './utils'
-import useFetch from './useFetch'
+import { useQuery } from '@apollo/client'
 
 export default function Sidebar ({ radio = false, index = false }) {
   return (
@@ -70,15 +71,22 @@ export default function Sidebar ({ radio = false, index = false }) {
 }
 
 function AlbumCount () {
-  const { data, loading } = useFetch('/api/query/albumCount', { method: 'GET' })
+  const query = gql`query {
+    albumCount
+    classes{
+      name
+      count
+    }
+  }`
+  const { data, loading } = useQuery(query)
 
   return (
     <div className={classNames(styles.socials, 'mt-3')}>
       {loading && <Loader className='mx-auto' size={100} />}
       {data && (
         <>
-          <h5 className='text-center home-side-box-txt'>Soundtrack Count: {data.AlbumCount}</h5>
-          {data.Classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{name} Soundtracks: {count}</h6>)}
+          <h5 className='text-center home-side-box-txt'>Soundtrack Count: {data.albumCount}</h5>
+          {data.classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{name} Soundtracks: {count}</h6>)}
         </>
       )}
     </div>
@@ -86,15 +94,22 @@ function AlbumCount () {
 }
 
 function Highlight () {
-  const { data, loading } = useFetch('/api/query/highlight', { method: 'GET' })
+  const query = gql`query {
+    highlight{
+      id
+      title
+    }
+  }`
+  const { data = { highlight: {} }, loading } = useQuery(query)
+  const { id, title } = data.highlight
 
   return (
     <div className={classNames(styles.socials, 'mt-3 p-1 mb-4')}>
       {loading && <Loader className='mx-auto' size={100} />}
-      {data && (
+      {id && (
         <>
           <h4 className='text-center home-side-box-txt'>HIGHLIGHT SOUNDTRACK</h4>
-          <AlbumBox id={data.id} title={data.title} xs={12} />
+          <AlbumBox id={id} title={title} xs={12} />
         </>
       )}
     </div>

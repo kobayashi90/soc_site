@@ -20,7 +20,8 @@ module.exports = {
   },
 
   Class: {
-    albums: parent => parent.getOsts()
+    albums: parent => parent.getOsts(),
+    count: (parent, args, { db }) => db.models.ost.count({ include: [{ model: db.models.class, where: { name: parent.name } }] })
   },
 
   Download: {
