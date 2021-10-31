@@ -1,8 +1,19 @@
-import useSWR from 'swr'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/client'
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+const query = gql`
+  query {
+    me {
+      username
+      roles {
+        name
+      }
+      permissions
+    }
+  }
+`
 
 export default function useUser () {
-  const { data: user = { isLoggedIn: false }, mutate: mutateUser } = useSWR('/api/user', fetcher)
-  return { user, mutateUser }
+  const { data, refetch } = useQuery(query)
+  return { user: data?.me, refetch }
 }

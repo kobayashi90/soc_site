@@ -7,10 +7,10 @@
     }
 
     type UserPublic {
-        username: String!
-        roles: [Role]!
-        permissions: [String]! 
-        pages: [Page]!
+        username: String
+        roles: [Role]
+        permissions: [String]
+        pages: [Page]
     }
 
     type Page {
@@ -42,7 +42,9 @@
         permissions: [String]!
         users: [User]!
         authorizePage(path: String!): Int!
-        login(username: String!, password: String!): String!
+
+        login(username: String!, password: String!): Int!
+        logout: Int!
     }
 
     type Mutation {

@@ -21,9 +21,13 @@ const Query = { ...queryData, ...querySite, ...queryUser }
 const types = { ...typesData, ...typesUser }
 
 const apolloServer = new ApolloServer({
+  credentials: true,
   typeDefs: mergeTypeDefs(loadFilesSync(path.join(process.cwd(), 'graphql/schemas'))),
   resolvers: { Mutation, Query, ...types },
-  context: () => ({ db })
+  context: async ({ req, res }) => {
+    const username = req.session.get('username')
+    return { db, req, res, username, user: username && await db.models.user.findByPk(username) }
+  }
 })
 const startServer = apolloServer.start()
 
@@ -37,6 +41,7 @@ export default withSession(async (req, res) => {
     return false
   }
 
+  await db.sync()
   await startServer
   await apolloServer.createHandler({
     path: '/api/graphql'

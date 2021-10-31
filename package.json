@@ -36,8 +36,7 @@
     "sass": "^1.43.4",
     "sequelize": "^6.8.0",
     "sharp": "^0.29.2",
-    "slugify": "^1.6.1",
-    "swr": "^1.0.1"
+    "slugify": "^1.6.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

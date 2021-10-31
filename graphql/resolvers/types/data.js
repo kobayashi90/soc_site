@@ -25,18 +25,18 @@ module.exports = {
   },
 
   Download: {
-    links: async (parent, args, { req, db, payload }, info) => {
+    links: async (parent, args, { req, db, user }, info) => {
       let donator = false
-      if (payload) {
-        const user = await db.models.user.findByPk(payload.username)
+      const links = await parent.getLinks()
 
+      if (user) {
         const roles = await user.getRoles()
         const perms = roles.map(r => r.permissions).flat()
 
         donator = perms.includes('SKIP_ADS')
       }
 
-      return (await parent.getLinks()).map(l => {
+      return links.map(l => {
         const link = { ...l.dataValues }
         if (!donator) link.directUrl = '/unauthorized'
         return link

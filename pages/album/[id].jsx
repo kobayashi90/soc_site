@@ -1,15 +1,74 @@
-import { gql } from '@apollo/client'
+import { gql, useLazyQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import client from '../../lib/ApolloClient'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 import Head from 'next/head'
 import url from 'url'
 
+import useUser from '../../components/useUser'
 import styles from '../../styles/album.module.scss'
 import { AlbumBoxList } from '../../components/AlbumBoxes'
 import { getImageUrl } from '../../components/utils'
+
+const query = gql`
+query Album ($id: ID!) {
+  album(id: $id){
+    id
+    title
+    subTitle
+    releaseDate
+    vgmdb
+    description
+    platforms {
+      id
+      name
+    }
+    animations {
+      id
+      title
+    }
+    games {
+      slug
+      name
+    }
+    artists {
+      slug
+      name
+    }
+    classes {
+      name
+    }
+    categories {
+      name
+    }
+    stores {
+      url
+      provider
+    }
+    downloads{
+      title
+      small
+      links{
+        id
+        url
+        provider
+        custom
+        directUrl
+      }
+    }
+    discs {
+      number
+      body
+    }
+    related {
+      id
+      title
+    }
+  }
+}
+`
 
 export async function getStaticPaths () {
   const { data } = await client.query({
@@ -35,68 +94,9 @@ export async function getStaticPaths () {
 
 export async function getStaticProps ({ params, req }) {
   const { id } = params
-  const { data } = await client.query({
-    query: gql`
-      query Album ($id: ID!) {
-        album(id: $id){
-          id
-          title
-          subTitle
-          releaseDate
-          vgmdb
-          description
-          platforms {
-            id
-            name
-          }
-          animations {
-            id
-            title
-          }
-          games {
-            slug
-            name
-          }
-          artists {
-            slug
-            name
-          }
-          classes {
-            name
-          }
-          categories {
-            name
-          }
-          stores {
-            url
-            provider
-          }
-          downloads{
-            title
-            small
-            links{
-              id
-              url
-              provider
-              custom
-              directUrl
-            }
-          }
-          discs {
-            number
-            body
-          }
-          related {
-            id
-            title
-          }
-        }
-      }
-    `,
-    variables: { id }
-  })
+  const { data } = await client.query({ query, variables: { id } })
 
-  return { props: { ...data, imageUrl: fullImage(data.album.id, 75, req) }, revalidate: 60 }
+  return { props: { id, initialAlbum: data.album, imageUrl: fullImage(data.album.id, 75, req) }, revalidate: 60 }
 }
 
 const fullImage = (id, quality = 75, req) => {
@@ -104,7 +104,13 @@ const fullImage = (id, quality = 75, req) => {
   return req ? url.format({ protocol: req.protocol || 'http', host: req.headers.host, pathname: base }) : base
 }
 
-export default function Page ({ album, imageUrl }) {
+export default function Page ({ id, initialAlbum, imageUrl }) {
+  const { user } = useUser()
+  const [getAlbum, { data }] = useLazyQuery(query, { fetchPolicy: 'network-only' })
+  const album = data ? data.album : initialAlbum
+
+  useEffect(() => getAlbum({ variables: { id } }), [user, getAlbum, id])
+
   return (
     <Row>
       <Head>

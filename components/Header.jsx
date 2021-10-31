@@ -7,19 +7,36 @@ import { Row, Col, Container, Button, Navbar, Nav, NavDropdown, Modal, Form } fr
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import serialize from 'form-serialize'
-import useUser from './useUser'
+import { useApolloClient } from '@apollo/client'
+import gql from 'graphql-tag'
 
+import useUser from './useUser'
 import logo from '../public/img/assets/logo.png'
 
 export default function Header () {
-  const [show, setShow] = useState(false)
-  const { user, mutateUser } = useUser()
+  const { user, refetch } = useUser()
+  const client = useApolloClient()
+  const loginQuery = gql`
+  query Login($username: String!, $password: String!){
+    login(username: $username, password: $password)
+  }
+`
+  const logoutQuery = gql`
+  query {
+    logout
+  }
+`
 
-  const loggedIn = user.isLoggedIn
+  const [show, setShow] = useState(false)
 
   const handleLogin = async () => {
-    if (loggedIn) {
-      mutateUser(await fetch('/api/logout', { method: 'POST' }), false)
+    if (user) {
+      client.query({ query: logoutQuery })
+        .then(() => {
+          refetch()
+          setShow(false)
+        })
+        .catch(error => console.error('An unexpected error happened:', error))
     } else setShow(true)
   }
 
@@ -28,19 +45,12 @@ export default function Header () {
     e.preventDefault()
     const variables = serialize(e.target, { hash: true })
 
-    try {
-      await mutateUser(
-        await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(variables)
-        })
-      )
-
-      setShow(false)
-    } catch (error) {
-      console.error('An unexpected error happened:', error)
-    }
+    client.query({ query: loginQuery, variables })
+      .then(() => {
+        refetch()
+        setShow(false)
+      })
+      .catch(error => console.error('An unexpected error happened:', error))
   }
 
   return (
@@ -78,7 +88,7 @@ export default function Header () {
               </Col>
 
               <Col xs='auto' className={classNames(styles.login, 'ms-sm-auto mb-sm-5')}>
-                <Button onClick={handleLogin} variant="primary">{loggedIn ? 'Logout' : 'Login'}</Button>
+                <Button onClick={handleLogin} variant="primary">{user ? 'Logout' : 'Login'}</Button>
               </Col>
             </Row>
           </Container>
