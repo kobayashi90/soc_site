@@ -1,6 +1,8 @@
+const { GraphQLUpload } = require('graphql-upload')
 
 module.exports = {
-  Album: {
+  Upload: GraphQLUpload,
+  Ost: {
     artists: (parent, args, context, info) => parent.getArtists(),
     classes: (parent, args, context, info) => parent.getClasses(),
     categories: (parent, args, context, info) => parent.getCategories(),
@@ -14,33 +16,49 @@ module.exports = {
   },
 
   Category: {
-    albums: parent => parent.getOsts()
+    osts: parent => parent.getOsts()
   },
 
   Class: {
-    albums: parent => parent.getOsts(),
-    count: (parent, args, { db }) => db.models.ost.count({ include: [{ model: db.models.class, where: { name: parent.name } }] })
+    osts: parent => parent.getOsts()
   },
 
-  Download: { links: async parent => parent.getLinks() },
-  DirectLink: { url: parent => parent.directUrl },
+  Download: {
+    links: async (parent, args, { req, db, payload }, info) => {
+      let donator = false
+      if (payload) {
+        const user = await db.models.user.findByPk(payload.username)
+
+        const roles = await user.getRoles()
+        const perms = roles.map(r => r.permissions).flat()
+
+        donator = perms.includes('SKIP_ADS')
+      }
+
+      return (await parent.getLinks()).map(l => {
+        const link = { ...l.dataValues }
+        if (!donator) link.directUrl = '/unauthorized'
+        return link
+      })
+    }
+  },
 
   Game: {
-    albums: (parent, args, context, info) => parent.getOsts(),
+    osts: (parent, args, context, info) => parent.getOsts(),
     series: (parent, args, context, info) => parent.getSeries(),
     publishers: (parent, args, context, info) => parent.getPublishers(),
     platforms: (parent, args, context, info) => parent.getPlatforms({ order: ['name'] })
   },
 
   Platform: {
-    albums: parent => parent.getOsts(),
+    osts: parent => parent.getOsts(),
     games: async (parent, args, { db }) => {
       const games = await db.models.game.findAll({ include: [db.models.platform] })
       return games.filter(g => g.platforms.filter(p => p.id === parent.id).length > 0)
     }
   },
 
-  Animation: { studios: parent => parent.getStudios(), albums: parent => parent.getOsts() },
+  Animation: { studios: parent => parent.getStudios(), osts: parent => parent.getOsts() },
   Studio: {
     animations: async (parent, args, { db }) => {
       const animations = await db.models.animation.findAll({ include: [db.models.studio] })
@@ -57,13 +75,6 @@ module.exports = {
   },
 
   Disc: {
-    album: (parent) => parent.getOst()
-  },
-
-  Query: {
-
-  },
-  Mutation: {
-
+    ost: (parent) => parent.getOst()
   }
 }

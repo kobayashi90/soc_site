@@ -30,16 +30,22 @@
         password: String!
     }
 
-    type Query {
-        login(username: String!, password: String!): String!
-        user(username: String!): User!
+    type TokenPayload {
+        token: String!
+        roles: [Role]!
+        permissions: [String]!
+    }
 
+    type Query {
+        me: UserPublic
         roles: [Role]!
         permissions: [String]!
         users: [User]!
+        authorizePage(path: String!): Int!
+        login(username: String!, password: String!): String!
     }
 
-    type Mutation {      
+    type Mutation {
         createUser(email: String!, username: String!, roles: [String]!): UserPayload
         updateUser(key:String!, email: String!, username: String!, roles: [String]!): UserPayload
         deleteUser(username: String!): Int

@@ -1,12 +1,13 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
-    "extends": [   
-        "next/core-web-vitals",
-        "plugin:react/recommended",         
-        "standard"
+    "extends": [
+        "plugin:react/recommended",
+        "standard",
+        "next/core-web-vitals"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,10 +19,6 @@
     "plugins": [
         "react"
     ],
-    "parser": "@babel/eslint-parser",
     "rules": {
-        "react/react-in-jsx-scope": "off",
-        "react/prop-types": "off",
-        "indent": ["error", 2]
     }
 }

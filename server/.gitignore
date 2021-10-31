@@ -1,6 +1,0 @@
-node_modules
-
-# config files
-config/*.json
-!config/*.example.json
-!config/info.json
