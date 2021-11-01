@@ -32,7 +32,7 @@ const apolloServer = new ApolloServer({
 const startServer = apolloServer.start()
 
 export default withSession(async (req, res) => {
-  if (process.env.NODE_ENV === 'development') res.setHeader('Access-Control-Allow-Origin', 'https://studio.apollographql.com')
+  res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
