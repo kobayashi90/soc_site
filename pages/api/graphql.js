@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server-micro'
 import path from 'path'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs } from '@graphql-tools/merge'
-import getDB from '../../lib/startDB'
+import db from '../../lib/startDB'
 import withSession from '../../lib/session'
 
 import mutationUser from '../../graphql/resolvers/mutations/user'
@@ -19,7 +19,6 @@ import typesUser from '../../graphql/resolvers/types/user'
 const Mutation = { ...mutationUser, ...mutationData, ...mutationSite }
 const Query = { ...queryData, ...querySite, ...queryUser }
 const types = { ...typesData, ...typesUser }
-const db = getDB()
 
 const apolloServer = new ApolloServer({
   credentials: true,
