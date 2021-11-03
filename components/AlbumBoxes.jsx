@@ -10,16 +10,18 @@ export default function AlbumBox (props) {
   const { id, title, type = 'album', coming = false } = props
 
   return (
-    <Link href={`/${type}/${id}`} passHref>
-      <div className={classNames(styles.albumBox, { [styles.coming]: coming })}>
-        <div className={styles.img}>
-          <Image alt={title} src={getImageUrl(id, type)} layout='responsive' width={300} height={300} priority />
-        </div>
-        <div className='text-wrap text-center px-1 py-2'>
-          {coming ? 'Coming Soon' : title}
-        </div>
-      </div>
-    </Link>
+    <div className={classNames(styles.albumBox, { [styles.coming]: coming })}>
+      <Link href={`/${type}/${id}`} passHref>
+        <a>
+          <div className={styles.img}>
+            <Image alt={title} src={getImageUrl(id, type)} layout='responsive' width={300} height={300} priority />
+          </div>
+          <div className='text-wrap text-center px-1 py-2'>
+            {coming ? 'Coming Soon' : title}
+          </div>
+        </a>
+      </Link>
+    </div>
   )
 }
 
