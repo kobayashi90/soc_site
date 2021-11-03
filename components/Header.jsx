@@ -100,7 +100,7 @@ export default function Header () {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto d-flex align-items-center">
                 <NavLink href='/' name='Home' />
-                <NavLink href='/' name='Last Added' />
+                <NavLink href='/last-added' name='Last Added' />
                 <NavLink href='/' name='Album List' />
                 <Dropdown name='Games' items={[
                   { name: 'Game Releases', href: '/' },
