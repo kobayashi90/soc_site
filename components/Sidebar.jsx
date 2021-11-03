@@ -22,12 +22,12 @@ export default function Sidebar ({ radio = false, index = false }) {
           <Row className='side-menu'>
             <h1 className='mx-auto text-center my-2'><a href='#most-popular'>Most Popular</a></h1>
           </Row>
-          <Row className='side-menu'>
+          <Row className='side-menu mb-3'>
             <h1 className='mx-auto text-center my-2'><a href='#last-added'>Last Added</a></h1>
           </Row>
         </>
       )}
-      <Row className='mt-3 px-3'>
+      <Row className='px-3'>
         <Col md={12} className={styles.socials}>
           <Row>
             <Col className='d-flex pe-1'>

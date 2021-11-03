@@ -120,7 +120,7 @@ export default function Page ({ id, initialAlbum, imageUrl }) {
         <meta key='desc' property='og:description' content={album.subTitle || album.artists.map(a => a.name).join(' - ')} />
         <meta key='image' property='og:image' content={imageUrl} />
       </Head>
-        <Col className={classNames(styles.content, 'px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(album.id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
+      <Col className={classNames(styles.content, 'px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(album.id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
         <Row>
           <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} /></Col>
           <Col lg={7} className='blackblock'>

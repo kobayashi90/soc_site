@@ -16,6 +16,24 @@ body {
     background-color: #4b7667;
 }
 
+.blackbg {
+    background-color: rgb(var(--bs-dark-rgb)) !important;
+}
+
+.divider {
+    height: 0.8px;
+    width: 100%;
+    background-color: white;
+  }
+
+  a.link {
+    color: #00a7d1;
+    text-decoration: none;
+  }
+  a.link:hover {
+      text-decoration: underline;
+  }
+
 nav {
     background-color: rgb(var(--bs-dark-rgb)) !important;
     .dropdown-menu {
