@@ -11,7 +11,6 @@ const xs = 6
 const limit = 12
 
 export async function getStaticProps () {
-
   const { data } = await client.query({
     query: gql`
       query searchAlbum($limit: Int){
@@ -54,14 +53,14 @@ export default function Home ({ added, released }) {
         </Row>
         <Row>
           <Col md={6} className='mt-3 flex-grow-1'>
-            <Link href="/game" passHref>
-              <h4 className='text-center blackButton px-3 py-2'>More Games Releases</h4>
-            </Link>
+            <h4 className='text-center blackButton px-3 py-2'>
+              <Link href="/game"><a>More Games Releases</a></Link>
+            </h4>
           </Col>
           <Col md={6} className='mt-3  flex-grow-1'>
-            <Link href="/anim" passHref>
-              <h4 className='text-center blackButton px-3 py-2'>More Animation Releases</h4>
-            </Link>
+            <h4 className='text-center blackButton px-3 py-2'>
+              <Link href="/anim"><a>More Animation Releases</a></Link>
+            </h4>
           </Col>
         </Row>
         <hr />
@@ -76,9 +75,9 @@ export default function Home ({ added, released }) {
         </Row>
         <Row className='mt-3'>
           <Col md={12}>
-            <Link href="/last-added" passHref>
-              <h1 className='text-center blackButton'>More Last Added</h1>
-            </Link>
+            <h1 className='text-center blackButton'>
+              <Link href="/last-added"><a>More Last Added</a></Link>
+            </h1>
           </Col>
         </Row>
       </Col>

@@ -52,7 +52,7 @@ nav {
   }
 
 .blackButton {
-    background-color: #222222;
+  background-color: #222222;
   font-weight: 700;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -63,6 +63,11 @@ nav {
   margin-top: 2px;
   margin-bottom: 2px;
   border-radius: 8px;
+  
+  a {
+    color: unset;
+    text-decoration: unset;
+  }
 }
 
 .blackButton:hover {

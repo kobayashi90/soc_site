@@ -11,7 +11,7 @@ export default function AlbumBox (props) {
 
   return (
     <div className={classNames(styles.albumBox, { [styles.coming]: coming })}>
-      <Link href={`/${type}/${id}`} passHref>
+      <Link href={`/${type}/${id}`}>
         <a>
           <div className={styles.img}>
             <Image alt={title} src={getImageUrl(id, type)} layout='responsive' width={300} height={300} priority />
