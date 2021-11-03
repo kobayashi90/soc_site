@@ -9,6 +9,10 @@ const query = gql`
         name
       }
       permissions
+      pages {
+        url
+        name
+      }
     }
   }
 `

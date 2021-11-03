@@ -20,7 +20,7 @@ import useUser from '../components/useUser'
 import { skipAds } from '../components/utils'
 // import SpookyGhosts from '../components/SpookyGhosts'
 
-function MyApp ({ Component, pageProps }) {
+export default function MyApp ({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
       <Head>
@@ -36,7 +36,7 @@ function MyApp ({ Component, pageProps }) {
         <Component {...pageProps} />
       </Container>
       <FooterAd />
-      </ApolloProvider>
+    </ApolloProvider>
   )
 }
 
@@ -72,5 +72,3 @@ function FooterAd () {
     </div>
   )
 }
-
-export default MyApp
