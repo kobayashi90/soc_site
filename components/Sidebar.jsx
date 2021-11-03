@@ -13,7 +13,7 @@ import { useQuery } from '@apollo/client'
 
 export default function Sidebar ({ radio = false, index = false }) {
   return (
-    <Col md={3} className={classNames(styles.root, 'p-3 ml-md-auto d-flex flex-column')}>
+    <Col md={3} className={classNames(styles.root, 'p-3 ml-md-auto d-flex flex-column col-md-3')}>
       {index && (
         <>
           <Row className='side-menu'>
