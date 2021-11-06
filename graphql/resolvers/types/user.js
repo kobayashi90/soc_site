@@ -1,4 +1,4 @@
-const pagePerms = require('../../../config/pagePerms.json')
+const pages = require('../../../config/pages.json')
 
 const userResolvable = {
   roles: parent => parent.getRoles(),
@@ -10,7 +10,7 @@ const userResolvable = {
     const roles = await parent.getRoles()
     const permissions = roles.map(r => r.permissions).flat()
 
-    return pagePerms.filter(({ perms, name }) => name && perms.some(r => permissions.includes(r)))
+    return pages.filter(({ perms, name }) => name && perms.some(r => permissions.includes(r)))
   }
 }
 

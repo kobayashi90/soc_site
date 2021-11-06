@@ -1,13 +1,8 @@
 [
     {
-        "url": "/admin",
+        "url": "/admin/1",
         "name": "OST Admin",
         "perms": ["UPDATE"]
-    },
-    {
-        "url": "/admin/:page",
-        "perms": ["UPDATE"]
-
     },
     {
         "url": "/admin/user",

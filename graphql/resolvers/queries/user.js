@@ -1,7 +1,6 @@
 import { hasRole } from '../../../lib/util'
 
 const { permissions } = require('../../../config/info.json')
-// const pagePerms = require('../../../config/pagePerms.json')
 
 const { composeResolvers } = require('@graphql-tools/resolvers-composition')
 const bcrypt = require('bcrypt')

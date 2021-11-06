@@ -39,8 +39,8 @@ export function OstSelector (props) {
     <SelectorBase
       {...props}
       startQuery={`
-              query SearchOst($limit: Int){
-                  searchOst(limit: $limit) {
+              query searchAlbum($limit: Int){
+                  searchAlbum(limit: $limit) {
                     options: rows{
                       value: id
                       label: title
@@ -48,8 +48,8 @@ export function OstSelector (props) {
                   }
               }`}
       changeQuery={`
-              query SearchOst($title: String){
-                  searchOst(title: $title) {
+              query searchAlbum($title: String){
+                  searchAlbum(title: $title) {
                     options: rows{
                       value: id
                       label: title

@@ -10,6 +10,8 @@ import { AlbumBoxList } from '../../components/AlbumBoxes'
 import React from 'react'
 import classNames from 'classnames'
 
+import { getFullPageList, getPageList } from '../../components/utils'
+
 const limit = 80
 const limitMD = 15
 const limitSM = 10
@@ -55,18 +57,10 @@ export default function LastAdded (props) {
   const { params = ['1'] } = router.query
   const [page] = params
   const { rows, count } = props
-  const fullPageList = [...Array(Math.ceil(count / limit))].map((v, i) => i + 1)
+  const fullPageList = getFullPageList(count, limit)
 
   function PageList ({ className, currentLimit }) {
-    const pageList = [[]]
-
-    fullPageList.forEach(n => {
-      pageList[pageList.length - 1].push(n)
-      if (n % currentLimit === 0) pageList.push([])
-    })
-
-    const currentListIndex = pageList.findIndex(l => l.includes(parseInt(page)))
-    const currentList = pageList[currentListIndex]
+    const { pageList, currentList, currentListIndex } = getPageList(fullPageList, currentLimit, page)
 
     return (
       <ul className={classNames(className, 'pagination justify-content-center m-auto')}>

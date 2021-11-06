@@ -35,7 +35,7 @@ yarn-error.log*
 config/*.json
 !config/*.example.json
 !config/info.json
-!config/pagePerms.json
+!config/pages.json
 
 # vercel
 .vercel
