@@ -1,16 +1,22 @@
     type User {
-        email: String!
         username: String!
         roles: [Role]! 
         permissions: [String]!  
         pages: [Page]!
     }
 
-    type UserPublic {
-        username: String
-        roles: [Role]
-        permissions: [String]
-        pages: [Page]
+    type UserResponse {
+        email: String!
+        username: String!
+        password: String!
+    }
+
+    type UserMe {
+        email: String!
+        username: String!
+        roles: [Role]! 
+        permissions: [String]!  
+        pages: [Page]!
     }
 
     type Page {
@@ -24,32 +30,19 @@
         permissions: [String]!
     }
 
-    type UserPayload {
-        email: String!
-        username: String!
-        password: String!
-    }
-
-    type TokenPayload {
-        token: String!
-        roles: [Role]!
-        permissions: [String]!
-    }
-
     type Query {
-        me: UserPublic
+        me: UserMe
         roles: [Role]!
         permissions: [String]!
-        users: [User]!
-        authorizePage(path: String!): Int!
+        users(username: String): [User]!
 
         login(username: String!, password: String!): Int!
         logout: Int!
     }
 
     type Mutation {
-        createUser(email: String!, username: String!, roles: [String]!): UserPayload
-        updateUser(key:String!, email: String!, username: String!, roles: [String]!): UserPayload
+        createUser(email: String!, username: String!, roles: [String]!): UserResponse
+        updateUser(key:String!, email: String!, username: String!, roles: [String]!): UserResponse
         deleteUser(username: String!): Int
         passUser(username: String!): String!
 

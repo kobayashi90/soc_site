@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro'
 import path from 'path'
 import { loadFilesSync } from '@graphql-tools/load-files'
-import { mergeTypeDefs } from '@graphql-tools/merge'
+import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
 import db from '../../lib/startDB'
 import withSession from '../../lib/session'
 
@@ -16,14 +16,14 @@ import queryUser from '../../graphql/resolvers/queries/user'
 import typesData from '../../graphql/resolvers/types/data'
 import typesUser from '../../graphql/resolvers/types/user'
 
-const Mutation = { ...mutationUser, ...mutationData, ...mutationSite }
-const Query = { ...queryData, ...querySite, ...queryUser }
-const types = { ...typesData, ...typesUser }
+const Mutation = [mutationUser, mutationData, mutationSite]
+const Query = [queryData, querySite, queryUser]
+const types = [typesData, typesUser]
 
 const apolloServer = new ApolloServer({
   credentials: true,
   typeDefs: mergeTypeDefs(loadFilesSync(path.join(process.cwd(), 'graphql/schemas'))),
-  resolvers: { Mutation, Query, ...types },
+  resolvers: mergeResolvers([...Mutation, ...Query, ...types]),
   context: async ({ req, res }) => {
     const username = req.session.get('username')
     return { db, req, res, username, user: username && await db.models.user.findByPk(username) }

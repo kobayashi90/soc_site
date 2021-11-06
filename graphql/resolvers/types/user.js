@@ -16,6 +16,6 @@ const userResolvable = {
 
 module.exports = {
   User: userResolvable,
-  UserPublic: userResolvable,
+  UserMe: userResolvable,
   Role: { permissions: parent => typeof parent.permissions === 'string' || parent.permissions instanceof String ? JSON.parse(parent.permissions) : parent.permissions }
 }
