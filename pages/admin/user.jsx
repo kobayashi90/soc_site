@@ -4,21 +4,11 @@ import { Button, Col, Row, Container, Table, Form, Modal, ModalBody, InputGroup,
 import { toast } from 'react-toastify'
 import serialize from 'form-serialize'
 
-import withSession from '../../lib/session'
 import { SimpleSelector } from '../../components/Selectors'
 import Loader from '../../components/Loader'
-import db from '../../lib/startDB'
-import { getPerms } from '../../lib/user'
+import { hasRolePage } from '../../lib/util'
 
-export const getServerSideProps = withSession(async (context) => {
-  const { req } = context
-  const username = req.session.get('username')
-  const user = username ? await db.models.user.findByPk(username) : null
-  const perms = await getPerms(user)
-
-  if (!perms.includes('MANAGE_USER')) return { redirect: { destination: '/404', permanent: false } }
-  return { props: {} }
-})
+export const getServerSideProps = hasRolePage(['MANAGE_USER'])
 
 export default function AdminUser () {
   const { loading, data, refetch } = useQuery(gql`
