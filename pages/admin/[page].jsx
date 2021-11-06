@@ -182,7 +182,7 @@ function OstTable () {
 
   return (
     <Form className='site-form blackblock mt-5'>
-      <Row form className='my-3'>
+      <Row className='my-3'>
         <Col xs='auto'>
           <Form.Group>
             <Button color='primary'><a href='/admin/album/add'>Add OST</a></Button>
@@ -197,8 +197,8 @@ function OstTable () {
           </Form.Group>
         </Col>
       </Row>
-      <Row form className='my-3'>
-        <Col md='auto'><Form.Label for='status'>Status:</Form.Label></Col>
+      <Row className='my-3'>
+        <Col md='auto'><Form.Label htmlFor='status'>Status:</Form.Label></Col>
         <Col>
           <SimpleSelector
             onChange={e => setStatus(e.map(v => v.value))}
@@ -305,7 +305,7 @@ function Banner () {
   return (
     <Col md={12} className='mt-3 site-form blackblock p-3'>
       <Form.Group>
-        <Form.Label for='banner'>Upload Banner:</Form.Label>
+        <Form.Label htmlFor='banner'>Upload Banner:</Form.Label>
         {loading ? <Loader dev /> : <FormControl type='file' onChange={handleUpload} />}
       </Form.Group>
     </Col>
