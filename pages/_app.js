@@ -14,6 +14,7 @@ import Header from '../components/Header'
 import { ToastContainer } from 'react-toastify'
 import { useEffect, useRef } from 'react'
 import { ApolloProvider } from '@apollo/client'
+import SSRProvider from 'react-bootstrap/SSRProvider'
 
 import client from '../lib/ApolloClient'
 import useUser from '../components/useUser'
@@ -31,11 +32,13 @@ export default function MyApp ({ Component, pageProps }) {
         <meta key='image' property='og:image' content='/img/assets/clouds_thumb.png' />
       </Head>
       <ToastContainer newestOnTop />
-      <Header />
-      <Container fluid className='flex-grow-1'>
-        <Component {...pageProps} />
-      </Container>
-      <FooterAd />
+      <SSRProvider>
+        <Header />
+        <Container fluid className='flex-grow-1'>
+          <Component {...pageProps} />
+        </Container>
+        <FooterAd />
+      </SSRProvider>
     </ApolloProvider>
   )
 }
