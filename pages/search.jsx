@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { gql, useLazyQuery } from '@apollo/client'
-import { Row, Col, Nav } from 'react-bootstrap'
+import { Row, Col, Nav, Container } from 'react-bootstrap'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -78,29 +78,32 @@ export default function Search () {
 
   useEffect(() => {
     if (search) getInitial()
-  }, [search])
+  }, [search, getInitial])
 
   if (!search) return null
 
   return (
     <Row className='h-100 bg-dark'>
-      <Col className='mx-5'>
-        <Row>
-          <Col md={12} className='my-1 px-4 py-3' style={{ backgroundColor: '#33353e' }}>
-            <h2 className='searchTitle'>Search Results for: {router.query.q}</h2>
-          </Col>
-        </Row>
-        {loading && (
+      <Col>
+        <Container>
           <Row>
-            <Col>
-              <Loader className='mx-auto my-2' />
+            <Col md={12} className='my-1 px-4 py-3' style={{ backgroundColor: '#33353e' }}>
+              <h2 className='searchTitle'>Search Results for: {router.query.q}</h2>
             </Col>
           </Row>
-        )}
+          {loading && (
+            <Row>
+              <Col>
+                <Loader className='mx-auto my-2' />
+              </Col>
+            </Row>
+          )}
 
-        {data && Object.entries(categories).map(([name, value]) =>
-          categories[name] && <SearchSection key={name} search={search} category={name} {...value} {...data[name]} setLoading={setLoading} />
-        )}
+          {data && Object.entries(categories).map(([name, value]) =>
+            categories[name] && <SearchSection key={name} search={search} category={name} {...value} {...data[name]} setLoading={setLoading} />
+          )}
+
+        </Container>
       </Col>
     </Row>
   )

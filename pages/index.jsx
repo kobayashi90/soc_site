@@ -42,7 +42,7 @@ export async function getStaticProps () {
 export default function Home ({ added, released }) {
   return (
     <Row className='h-100'>
-      <Col className='p-3'>
+      <Col className='p-3 mx-3'>
         <Row>
           <Col>
             <h1 className='text-center homeTitle p-3' id='last-releases'>LAST RELEASES</h1>
