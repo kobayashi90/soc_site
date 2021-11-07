@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 import { OstSelector, SimpleSelector } from '../../components/Selectors'
-import Loader from '../../Components/Loader'
+import Loader from '../../components/Loader'
 import { hasRolePage } from '../../lib/util'
 import { getFullPageList, getPageList } from '../../components/utils'
 
