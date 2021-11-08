@@ -100,7 +100,7 @@ export async function getStaticProps ({ params, req }) {
 }
 
 const fullImage = (id, quality = 75, req) => {
-  const base = `/_next/image?url=${getImageUrl(id)}&w=3840&q=${quality}`
+  const base = `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
   return req ? url.format({ protocol: req.protocol || 'http', host: req.headers.host, pathname: base }) : base
 }
 
