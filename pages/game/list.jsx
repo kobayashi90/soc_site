@@ -35,7 +35,7 @@ export default function GameList ({ letters, games }) {
     <Col className='blackbg p-2 pb-5'>
       <Row className='mt-2'>
         <Col>
-          {letters.map(letter => <Button key={letter} md='auto' className={classname(style.letter, ' m-1 p-2')} href={`#${letter}`}><h2>{letter}</h2></Button>)}
+          {letters.map(letter => <Button key={letter} variant='secondary' md='auto' className={classname(style.letter, ' m-1 p-2')} href={`#${letter}`}><h2>{letter}</h2></Button>)}
         </Col>
       </Row>
       {letters.map(letter => (
