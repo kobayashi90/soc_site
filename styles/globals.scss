@@ -100,3 +100,10 @@ nav {
     background-color: rgb(var(--bs-dark-rgb)) !important;
     width: 100%;
 }
+
+.listItem {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #4e4e4e;
+    padding-left: 4px;
+}

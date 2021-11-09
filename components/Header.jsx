@@ -105,7 +105,7 @@ export default function Header () {
                 <Dropdown name='Games' items={[
                   { name: 'Game Releases', href: '/game' },
                   { name: 'Game Series', href: '/series/list' },
-                  { name: 'Game Publishers', href: '/' },
+                  { name: 'Game Publishers', href: '/publisher/list' },
                   { name: 'Game Platforms', href: '/' },
                   { name: 'Game List', href: '/' }
                 ]} />
