@@ -77,6 +77,7 @@ export default function Header () {
           </Form>
         </Modal.Body>
       </Modal>
+
       <header>
         <div id={styles.bannerBg} style={{ backgroundImage: "url('/_next/image?w=3840&q=100&url=/img/live/banner.png')" }}>
           <Container>
@@ -107,18 +108,17 @@ export default function Header () {
                   { name: 'Game Series', href: '/series/list' },
                   { name: 'Game Publishers', href: '/publisher/list' },
                   { name: 'Game Platforms', href: '/' },
-                  { name: 'Game List', href: '/' }
+                  { name: 'Game List', href: '/platform/list' }
                 ]} />
                 <Dropdown name='Animations' items={[
                   { name: 'Animation Releases', href: '/' },
                   { name: 'Animation List', href: '/' },
-                  { name: 'Studioss', href: '/' }
+                  { name: 'Studios', href: '/' }
                 ]} />
                 <NavLink href='/' name='Contact' />
                 {user && user.pages.map(p => <NavLink key={p.url} href={p.url} name={p.name} />)}
               </Nav>
             </Navbar.Collapse>
-
             <SearchBar />
           </Container>
         </Navbar>
