@@ -101,9 +101,9 @@ export default function Header () {
               <Nav className="me-auto d-flex align-items-center">
                 <NavLink href='/' name='Home' />
                 <NavLink href='/last-added' name='Last Added' />
-                <NavLink href='/' name='Album List' />
+                <NavLink href='/album/list' name='Album List' />
                 <Dropdown name='Games' items={[
-                  { name: 'Game Releases', href: '/' },
+                  { name: 'Game Releases', href: '/game' },
                   { name: 'Game Series', href: '/' },
                   { name: 'Game Publishers', href: '/' },
                   { name: 'Game Platforms', href: '/' },
