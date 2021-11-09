@@ -104,7 +104,7 @@ export default function Header () {
                 <NavLink href='/album/list' name='Album List' />
                 <Dropdown name='Games' items={[
                   { name: 'Game Releases', href: '/game' },
-                  { name: 'Game Series', href: '/' },
+                  { name: 'Game Series', href: '/series/list' },
                   { name: 'Game Publishers', href: '/' },
                   { name: 'Game Platforms', href: '/' },
                   { name: 'Game List', href: '/' }
