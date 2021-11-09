@@ -38,7 +38,6 @@ export async function getStaticProps () {
     variables: { limit }
   })
 
-  console.log(data.added.rows.map(r => r.title))
   return { props: { ...data }, revalidate: 60 }
 }
 
