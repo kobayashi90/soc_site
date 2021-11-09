@@ -8,19 +8,18 @@ import { AlbumBoxList } from '../../components/AlbumBoxes'
 export async function getStaticProps () {
   const { data } = await client.query({
     query: gql`
-        query {
-          result: searchAlbum(
+    query {
+        result: searchAlbum(
             limit: 40,
             order: ["releaseDate", "createdAt"],
-            classes: ["Game"]
-          ){
-            rows{
+            classes: ["Animation"]
+        ){
+            rows { 
                 id,
                 title
             }
-          },
         }
-      `,
+    }`,
     fetchPolicy: 'network-only'
   })
 
@@ -41,16 +40,14 @@ export default function GameHome ({ rows }) {
   return (
     <Container>
       <Row>
-        <Button name='List' href='/game/list'></Button>
-        <Button name='Platforms' href='/platform/list'></Button>
-        <Button name='Publishers' href='/publisher/list'></Button>
-        <Button name='Series' href='/series/list'></Button>
+        <Button name='List' href='/anim/list'></Button>
+        <Button name='Studios' href='/studio/list'></Button>
       </Row>
       <Row>
         <Col md={12}>
           <Row className='p-3'>
             <Col md={12}>
-              <h1 className='text-center homeTitle' id='last-releases'>LATEST GAME RELEASES</h1>
+              <h1 className='text-center homeTitle' id='last-releases'>LATEST ANIMATION RELEASES</h1>
             </Col>
           </Row>
 

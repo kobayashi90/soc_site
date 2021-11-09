@@ -111,9 +111,9 @@ export default function Header () {
                   { name: 'Game List', href: '/game/list' }
                 ]} />
                 <Dropdown name='Animations' items={[
-                  { name: 'Animation Releases', href: '/' },
-                  { name: 'Animation List', href: '/' },
-                  { name: 'Studios', href: '/' }
+                  { name: 'Animation Releases', href: '/anim' },
+                  { name: 'Animation List', href: '/anim/list' },
+                  { name: 'Studios', href: '/studio/list' }
                 ]} />
                 <NavLink href='/' name='Contact' />
                 {user && user.pages.map(p => <NavLink key={p.url} href={p.url} name={p.name} />)}
