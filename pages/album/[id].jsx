@@ -96,6 +96,7 @@ export async function getStaticProps ({ params, req }) {
   const { id } = params
   const { data } = await client.query({ query, variables: { id } })
 
+  if (data.album === null) return { redirect: { destination: '/404', permanent: false } }
   return { props: { id, initialAlbum: data.album, imageUrl: fullImage(data.album.id, 75, req) }, revalidate: 60 }
 }
 

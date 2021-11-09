@@ -170,7 +170,7 @@
         albumCount: Float!
         categories: [Category]!
         classes: [Class]!
-        album(id: ID): Album!
+        album(id: ID): Album
         artists: [Artist!]!     
         platforms: [Platform!]!
         platform(id: ID): Platform!
