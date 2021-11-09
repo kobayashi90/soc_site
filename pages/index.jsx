@@ -34,8 +34,11 @@ export async function getStaticProps () {
         }
       }
     `,
+    fetchPolicy: 'network-only',
     variables: { limit }
   })
+
+  console.log(data.added.rows.map(r => r.title))
   return { props: { ...data }, revalidate: 60 }
 }
 
