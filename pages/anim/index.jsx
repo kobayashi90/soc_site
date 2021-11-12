@@ -5,7 +5,7 @@ import Link from 'next/link'
 import client from '../../lib/ApolloClient'
 import { AlbumBoxList } from '../../components/AlbumBoxes'
 
-export async function getStaticProps () {
+export async function /* getStaticProps */ getServerSideProps () {
   const { data } = await client.query({
     query: gql`
     query {
@@ -23,7 +23,7 @@ export async function getStaticProps () {
     fetchPolicy: 'network-only'
   })
 
-  return { props: { ...data.result }, revalidate: 60 }
+  return { props: { ...data.result }/*, revalidate: 60 */ }
 }
 
 function Button ({ name, href }) {

@@ -8,7 +8,7 @@ import client from '../../lib/ApolloClient'
 import { getImageUrl } from '../../components/utils'
 import style from '../../styles/letter.module.scss'
 
-export async function getStaticProps () {
+export async function /* getStaticProps */ getServerSideProps () {
   const { data } = await client.query({
     query: gql`
         query {
@@ -30,7 +30,7 @@ export async function getStaticProps () {
 
   const letters = Object.keys(series).sort()
 
-  return { props: { letters, series, seriesList: data.series }, revalidate: 60 }
+  return { props: { letters, series, seriesList: data.series }/*, revalidate: 60 */ }
 }
 
 export default function SeriesList ({ series, letters, seriesList }) {

@@ -70,7 +70,7 @@ query Album ($id: ID!) {
 }
 `
 
-export async function getStaticPaths () {
+/* export async function getStaticPaths () {
   const { data } = await client.query({
     query: gql`
       query searchAlbum($limit: Int, $page: Int ){
@@ -90,14 +90,14 @@ export async function getStaticPaths () {
   }))
 
   return { paths, fallback: 'blocking' }
-}
+} */
 
-export async function getStaticProps ({ params, req }) {
+export async function /* getStaticProps */ getServerSideProps ({ params, req }) {
   const { id } = params
   const { data } = await client.query({ query, variables: { id } })
 
   if (data.album === null) return { redirect: { destination: '/404', permanent: false } }
-  return { props: { id, initialAlbum: data.album, imageUrl: fullImage(data.album.id, 75, req) }, revalidate: 60 }
+  return { props: { id, initialAlbum: data.album, imageUrl: fullImage(data.album.id, 75, req) }/*, revalidate: 60 */ }
 }
 
 const fullImage = (id, quality = 75, req) => {

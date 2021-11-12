@@ -6,7 +6,7 @@ import Link from 'next/link'
 import client from '../../lib/ApolloClient'
 import style from '../../styles/letter.module.scss'
 
-export async function getStaticProps () {
+export async function /* getStaticProps */ getServerSideProps () {
   const { data } = await client.query({
     query: gql`
     query {
@@ -27,7 +27,7 @@ export async function getStaticProps () {
 
   const letters = Object.keys(studios).sort()
 
-  return { props: { letters, studios }, revalidate: 60 }
+  return { props: { letters, studios }/*, revalidate: 60 */ }
 }
 
 export default function GameList ({ letters, studios }) {

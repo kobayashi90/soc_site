@@ -17,15 +17,15 @@ const limitMD = 15
 const limitSM = 10
 const limitXS = 5
 
-export async function getStaticPaths () {
+/* export async function getStaticPaths () {
   const paths = [
     { params: { params: [] } },
     { params: { params: ['1'] } }
   ]
   return { paths, fallback: 'blocking' }
-}
+} */
 
-export async function getStaticProps ({ params, req }) {
+export async function /* getStaticProps */ getServerSideProps ({ params, req }) {
   const paramList = params?.params || []
   const page = paramList[0] || '1'
 
@@ -49,7 +49,7 @@ export async function getStaticProps ({ params, req }) {
     `,
     variables: { limit, page: page - 1 }
   })
-  return { props: { ...data.searchAlbum, revalidate: 60 } }
+  return { props: { ...data.searchAlbum/*, revalidate: 60 */ } }
 }
 
 export default function LastAdded (props) {

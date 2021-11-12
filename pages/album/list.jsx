@@ -8,7 +8,7 @@ import client from '../../lib/ApolloClient'
 
 import style from '../../styles/letter.module.scss'
 
-export async function getStaticProps () {
+export async function /* getStaticProps */ getServerSideProps () {
   const albums = {}
   const { data } = await client.query({
     query: gql`
@@ -31,7 +31,9 @@ export async function getStaticProps () {
     else albums[letter].push(ost)
   })
 
-  return { props: { albums: albums, letters: Object.keys(albums).sort() }, revalidate: 60 }
+  console.log(data)
+
+  return { props: { albums: albums, letters: Object.keys(albums).sort() }/*, revalidate: 60 */ }
 }
 
 export default function AlbumList ({ albums, letters }) {
