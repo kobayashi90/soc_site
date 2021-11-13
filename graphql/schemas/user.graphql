@@ -5,12 +5,6 @@
         pages: [Page]!
     }
 
-    type UserResponse {
-        email: String!
-        username: String!
-        password: String!
-    }
-
     type UserMe {
         email: String!
         username: String!
@@ -41,10 +35,13 @@
     }
 
     type Mutation {
-        createUser(email: String!, username: String!, roles: [String]!): UserResponse
-        updateUser(key:String!, email: String!, username: String!, roles: [String]!): UserResponse
+        createUser(email: String!, username: String!, roles: [String]!): Boolean!
+        updateUserRoles(username: String!, roles: [String]!): Boolean!
         deleteUser(username: String!): Int
-        passUser(username: String!): String!
+
+        createForgor(key: String!): Boolean!
+        updatePass(key: String!, pass:String!): Boolean!
+        updateUser(username: String, password: String, email: String): Boolean!
 
         createRole(name: String!, permissions: [String]!): Role
         updateRole(key:String!, name: String!, permissions: [String]!): Role

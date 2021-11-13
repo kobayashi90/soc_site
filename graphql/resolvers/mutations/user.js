@@ -1,37 +1,37 @@
-import { hasRole } from '../../../lib/util'
-const bcrypt = require('bcrypt')
-const { UserInputError } = require('apollo-server-micro')
-const generator = require('generate-password')
-const { composeResolvers } = require('@graphql-tools/resolvers-composition')
+import bcrypt from 'bcrypt'
+import { UserInputError, ForbiddenError } from 'apollo-server-errors'
+import generator from 'generate-password'
+import { composeResolvers } from '@graphql-tools/resolvers-composition'
+import { DateTime } from 'luxon'
+import { Op } from 'sequelize'
 
-const resolversComposition = { 'Mutation.*': hasRole('MANAGE_USER') }
+import { createForgor } from '../../../lib/forgor'
+import { hasRole, isAuthed } from '../../../lib/util'
+
+const resolversComposition = {
+  'Mutation.*': hasRole('MANAGE_USER'),
+  'Mutation.updatePass': [],
+  'Mutation.createForgor': [],
+  'Mutation.updateUser': [isAuthed]
+}
 const resolvers = {
   Mutation: {
-    createUser: async (parent, { username, email, roles }, { db, payload }, info) => {
-      const password = generator.generate({
-        length: 10,
-        numbers: true,
-        upercase: false,
-        strict: true
+    createUser: async (_, { username, email, roles }, { db }) => {
+      return db.transaction(async () => {
+        const password = generator.generate({ length: 30, numbers: true, upercase: true, strict: true })
+        const user = await db.models.user.create({ username, email, password: await bcrypt.hash(password, 10) })
+        user.setRoles(roles)
+
+        await createForgor(user, db)
+
+        return true
       })
-
-      const user = await db.models.user.create({
-        username,
-        email,
-        password: await bcrypt.hash(password, 10)
-      })
-
-      user.setRoles(roles)
-
-      return { username: user.username, email: user.email, password }
     },
-    updateUser: async (parent, { key, username, email, roles }, { db, payload }, info) => {
-      const user = await db.models.user.findByPk(key)
-      if (!user.email !== email) user.email = email
+    updateUserRoles: async (parent, { username, roles }, { db, payload }, info) => {
+      const user = await db.models.user.findByPk(username)
       user.setRoles(roles)
-
       await user.save()
-      return user
+      return true
     },
     deleteUser: async (parent, { username }, { db, payload }, info) => {
       const user = await db.models.user.findByPk(username)
@@ -39,20 +39,40 @@ const resolvers = {
       user.destroy()
       return 1
     },
-    passUser: async (parent, { username }, { db, payload }, info) => {
-      const user = await db.models.user.findByPk(username)
+
+    createForgor: async (_, { key }, { db }) => {
+      const user = await db.models.user.findOne({ where: { [Op.or]: [{ username: key }, { email: key }] } })
       if (!user) throw new UserInputError('Not Found')
 
-      const password = generator.generate({
-        length: 10,
-        numbers: true,
-        upercase: false,
-        strict: true
-      })
+      await createForgor(user, db)
+      return true
+    },
+    updatePass: async (_, { key, pass }, { db }) => {
+      const row = await db.models.forgor.findByPk(key)
+      if (!row) throw new ForbiddenError()
 
-      user.password = await bcrypt.hash(password, 10)
-      await user.save()
-      return password
+      const now = DateTime.now()
+      const expires = DateTime.fromJSDate(row.expires)
+
+      if (now > expires) throw new ForbiddenError()
+
+      return db.transaction(async () => {
+        const user = await db.models.user.findByPk(row.username)
+        user.password = await bcrypt.hash(pass, 10)
+
+        await user.save()
+        await row.destroy()
+        return true
+      })
+    },
+    updateUser: async (_, { username, email, password }, { db, user }) => {
+      const values = {}
+      if (username) values.username = username
+      if (email) values.email = email
+      if (password) values.password = await bcrypt.hash(password, 10)
+
+      await db.models.user.update(values, { where: { username: user.username } })
+      return true
     },
 
     createRole: async (parent, args, { db, user, payload }) => db.models.role.create(args),

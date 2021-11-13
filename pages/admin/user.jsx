@@ -1,6 +1,6 @@
 import { useRef, createRef, useMemo, useState } from 'react'
 import { gql, useQuery, useMutation } from '@apollo/client'
-import { Button, Col, Row, Container, Table, Form, Modal, ModalBody, InputGroup, FormControl } from 'react-bootstrap'
+import { Button, Col, Row, Container, Table, Form, Modal, InputGroup, FormControl } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import serialize from 'form-serialize'
 
@@ -11,7 +11,7 @@ import { hasRolePage } from '../../lib/util'
 export const getServerSideProps = hasRolePage(['MANAGE_USER'])
 
 export default function AdminUser () {
-  const { loading, data, refetch } = useQuery(gql`
+  const { data, refetch } = useQuery(gql`
     query users($username: String!){
       users(username: $username){
         username
@@ -30,19 +30,10 @@ export default function AdminUser () {
   `, { variables: { username: '' } })
 
   const [create] = useMutation(gql`
-  mutation CreateUser($email: String!, $username: String!, $roles: [String]!){
-    createUser(email: $email, username: $username, roles: $roles){
-      email
-      username
-      password
-    }
+  mutation createUser($email: String!, $username: String!, $roles: [String]!){
+    createUser(email: $email, username: $username, roles: $roles)
   }
   `)
-  const [modal, setModal] = useState(false)
-  const [modalData, setModalData] = useState({})
-  const { email, username, pass } = modalData
-
-  if (loading) return <Loader />
 
   function handleSearch (e) {
     e.persist()
@@ -60,22 +51,13 @@ export default function AdminUser () {
     if (!variables.roles) variables.roles = []
 
     create({ variables }).then(results => {
-      const { email, username, password } = results.data.createUser
       e.target.reset()
-
-      setModalData({ email, username, pass: password })
-      setModal(!modal)
+      toast.success(`User "${variables.username}" created succesfully`)
     })
   }
 
   return (
     <Container>
-      <Modal centered isOpen={modal} toggle={() => setModal(!modal)}>
-        <ModalBody className='m-3' style={{ color: 'black' }}>
-          <Row><Col>{email} - {username} - {pass}\nSave the password before closing this window.</Col></Row>
-        </ModalBody>
-      </Modal>
-
       <Row className='site-form blackblock mt-3'>
         <Col>
           <Row>
@@ -99,8 +81,8 @@ export default function AdminUser () {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.users.map(props => (
-                    <UserRow key={props.username} {...props} roleList={data.roles} setModal={setModal} setModalData={setModalData} modal={modal} />
+                  {data && data.users.map(props => (
+                    <UserRow key={props.username} {...props} roleList={data.roles} />
                   ))}
                 </tbody>
               </Table>
@@ -115,12 +97,12 @@ export default function AdminUser () {
             <thead>
               <tr>
                 <th>Role</th>
-                {data.permissions.map((p, i) => <th key={i}>{p}</th>)}
+                {data && data.permissions.map((p, i) => <th key={i}>{p}</th>)}
                 <th />
               </tr>
             </thead>
             <tbody>
-              {data.roles.map(props => (
+              {data && data.roles.map(props => (
                 <RoleRow key={props.name} {...props} permissionList={data.permissions} />
               ))}
             </tbody>
@@ -131,31 +113,31 @@ export default function AdminUser () {
       <AddRole />
 
       <Form className='site-form blackblock mt-3' onSubmit={handleCreate}>
-        <Row form>
+        <Row>
           <Col>
             <Form.Group>
-              <Form.Label for='username'>Username:</Form.Label>
+              <Form.Label htmlFor='username'>Username:</Form.Label>
               <FormControl required type='text' name='username' />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label for='email'>Email:</Form.Label>
+              <Form.Label htmlFor='email'>Email:</Form.Label>
               <FormControl required type='text' name='email' />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label for='roles'>Roles:</Form.Label>
+              <Form.Label htmlFor='roles'>Roles:</Form.Label>
               <SimpleSelector
                 defaultValue={[]}
-                options={data.roles.map(({ name }) => ({ label: name, value: name }))}
+                options={data && data.roles.map(({ name }) => ({ label: name, value: name }))}
                 isMulti name='roles'
               />
             </Form.Group>
           </Col>
         </Row>
-        <Row form>
+        <Row>
           <Col className='m-auto'>
             <Button type='submit' color='primary'>Add User</Button>
           </Col>
@@ -166,13 +148,11 @@ export default function AdminUser () {
   )
 }
 
-function UserRow ({ username, email, roles, roleList, setModal, setModalData, modal }) {
+function UserRow ({ username, roles, roleList }) {
   const permissionsRef = useRef(null)
   const [update] = useMutation(gql`
-  mutation UpdateUser($key:String!, $email: String!, $username: String!, $roles: [String]!){
-    updateUser(key:$key, email: $email, username: $username, roles: $roles){
-      email
-    }
+  mutation updateUserRoles($username: String!, $roles: [String]!){
+    updateUserRoles(username: $username, roles: $roles)
   }
   `)
   const [remove, { removeLoading }] = useMutation(gql`
@@ -180,22 +160,12 @@ function UserRow ({ username, email, roles, roleList, setModal, setModalData, mo
     deleteUser(username: $username)
   }
   `)
-  const [passMutation] = useMutation(gql`
-  mutation PassUser($username: String!){
-    passUser(username: $username)
-  }
-  `)
 
   const [deleteModal, setDeleteModal] = useState(false)
 
   const handleUpdate = perms => {
     update({
-      variables: {
-        key: username,
-        username,
-        email,
-        roles: permissionsRef.current.state.value.map(e => e.value)
-      }
+      variables: { username, roles: permissionsRef.current.state.value.map(e => e.value) }
     }).then(results => {
       toast.success('Updated user succesfully!')
     }).catch(err => {
@@ -206,32 +176,25 @@ function UserRow ({ username, email, roles, roleList, setModal, setModalData, mo
 
   function handleDelete () {
     remove({ variables: { username } }).then(results => {
-      toast.success(`Deleted OST "${username}" (${email}) succesfully`)
+      toast.success(`Deleted user "${username}" succesfully`)
     }).catch(err => {
       console.log(err)
-      toast.error(`Failed to delete OST "${username}" (${email})`)
+      toast.error(`Failed to delete user "${username}"`)
     }).finally(() => setDeleteModal(!deleteModal))
-  }
-
-  const handlePassword = () => {
-    passMutation({ variables: { username } }).then(results => {
-      setModalData({ email, username, pass: results.data.passUser })
-      setModal(!modal)
-    })
   }
 
   return (
     <>
-      <Modal centered isOpen={deleteModal} toggle={() => setDeleteModal(!deleteModal)}>
-        <ModalBody className='m-3' style={{ color: 'black' }}>
-          <Row><Col>{`Delete user "${username}" (${email})?`}</Col></Row>
+      <Modal centered show={deleteModal} toggle={() => setDeleteModal(!deleteModal)}>
+        <Modal.Body className='m-3' style={{ color: 'black' }}>
+          <Row><Col>{`Delete user "${username}"?`}</Col></Row>
           <Row className='mt-2'>
             <Col>
               <Button color='primary' className='mx-2' onClick={handleDelete}>{removeLoading ? <Loader dev /> : 'Yes'}</Button>
               <Button color='primary' className='mx-2' onClick={() => setDeleteModal(!deleteModal)}>No</Button>
             </Col>
           </Row>
-        </ModalBody>
+        </Modal.Body>
       </Modal>
 
       <tr>
@@ -246,7 +209,6 @@ function UserRow ({ username, email, roles, roleList, setModal, setModalData, mo
           />
         </td>
         <td>
-          <Button className='mr-2' disabled onClick={handlePassword}>Regenerate Password</Button>
           <Button className='mr-2' onClick={() => setDeleteModal(!deleteModal)}>Remove</Button>
         </td>
       </tr>
@@ -338,10 +300,10 @@ function AddRole () {
   return (
     <div className='site-form blackblock mt-3 p-3'>
       <Form onSubmit={handleSubmitForm}>
-        <Row form>
+        <Row>
           <Col>
             <Form.Group>
-              <Form.Label for='name'>Name:</Form.Label>
+              <Form.Label htmlFor='name'>Name:</Form.Label>
               <FormControl type='text' name='name' required />
             </Form.Group>
           </Col>

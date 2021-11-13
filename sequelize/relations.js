@@ -4,10 +4,11 @@ export default function relations (sequelize) {
     publisher, game, series,
     platform, artist, category, store,
     animation, studio,
-    user, role, ostHistory
+    user, role, ostHistory, forgor
   } = sequelize.models
 
   user.belongsToMany(role, { through: 'User_Role' })
+  forgor.belongsTo(user, { foreignKey: 'username' })
 
   classes.belongsToMany(ost, { through: 'Ost_Class' })
 

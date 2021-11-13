@@ -8,6 +8,7 @@ const query = gql`
       roles {
         name
       }
+      email
       permissions
       pages {
         url

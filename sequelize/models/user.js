@@ -9,5 +9,10 @@ module.exports = sequelize => {
     password: DataTypes.STRING
   })
 
+  sequelize.define('forgor', {
+    key: { type: DataTypes.STRING, primaryKey: true },
+    expires: DataTypes.DATE
+  })
+
   return User
 }
