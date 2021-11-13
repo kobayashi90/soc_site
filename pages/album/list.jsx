@@ -31,8 +31,6 @@ export async function /* getStaticProps */ getServerSideProps () {
     else albums[letter].push(ost)
   })
 
-  console.log(data)
-
   return { props: { albums: albums, letters: Object.keys(albums).sort() }/*, revalidate: 60 */ }
 }
 
