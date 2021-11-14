@@ -24,7 +24,8 @@ jobs:
       - run: yarn install
       - run: node prepareCI
       - run: yarn build
-      - run: git diff-index --quiet HEAD || git commit -m 'Deploy!'
+      - run: git add -A
+      - run: git diff-index --quiet HEAD || git commit -m 'Deploy ${{ github.sha }}'
       - uses: ad-m/github-push-action@master
         with:
           branch: dist
