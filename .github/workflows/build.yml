@@ -22,13 +22,14 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
-      - run: git checkout -b dist origin/dist
-      - run: git merge main
-      - run: yarn install
-      - run: node prepareCI
-      - run: yarn build
-      - run: git pull
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Deploy ${{ github.sha }}
-          branch: dist
+      - run: |
+          git checkout -b dist origin/dist
+          git merge main
+      - run: |
+          yarn install
+          node prepareCI
+          yarn build
+      - run: |
+          git add -A
+          git diff-index --quiet HEAD || git commit -m 'Deploy ${{ github.sha }}'
+          git push
