@@ -20,6 +20,7 @@ jobs:
           node-version: '16'
           cache: 'yarn'
       - run: yarn install
+      - run: node prepareCI
       - run: yarn build
       - uses: ad-m/github-push-action@master
         with:

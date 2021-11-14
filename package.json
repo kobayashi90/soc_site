@@ -21,6 +21,7 @@
     "cls-hooked": "^4.2.2",
     "discord.js": "^13.3.0",
     "form-serialize": "^0.7.2",
+    "fs-extra": "^10.0.0",
     "generate-password": "^1.6.1",
     "glob": "^7.2.0",
     "graphql": "^16.0.0",
