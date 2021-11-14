@@ -35,6 +35,11 @@
         font-family: 'Rubik', sans-serif;
         }
     }
+
+    .socials span:hover {
+        opacity: .9 !important;
+        cursor: pointer;
+    }
   }
 
   @media (min-width: 768px) {
