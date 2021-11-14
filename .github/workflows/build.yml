@@ -20,6 +20,8 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
+      - run: git checkout dist
+      - run: git merge master
       - run: yarn install
       - run: node prepareCI
       - run: yarn build
@@ -27,4 +29,3 @@ jobs:
         with:
           commit_message: Deploy ${{ github.sha }}
           branch: dist
-          push_options: '--force'
