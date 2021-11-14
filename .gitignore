@@ -31,11 +31,5 @@ yarn-error.log*
 .env.production.local
 .env
 
-# config files
-config/*.json
-!config/*.example.json
-!config/info.json
-!config/pages.json
-
 # vercel
 .vercel
