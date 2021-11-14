@@ -1,5 +1,7 @@
 const glob = require('glob')
-const { writeJSONSync, readFileSync, appendFileSync } = require('fs-extra')
+const { writeJSONSync, readFileSync, appendFileSync, removeSync } = require('fs-extra')
+const gitignore = readFileSync('./.gitignore', 'utf-8').replace('/.next/\n', '')
 
 glob.sync('./config/**.example.json').forEach(p => writeJSONSync(p.replace('.example', ''), {}))
-appendFileSync('./.gitignore', readFileSync('./.gitignore', 'utf-8').replace('/.next/\n', ''))
+removeSync('./.gitignore')
+appendFileSync('./.gitignore', gitignore)

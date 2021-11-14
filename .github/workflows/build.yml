@@ -25,8 +25,8 @@ jobs:
       - run: node prepareCI
       - run: yarn build
       - run: git add -A
-      - run: git diff-index --quiet HEAD || git commit -m 'Deploy ${{ github.sha }}'
-      - uses: ad-m/github-push-action@master
+      - run: git diff-index --quiet HEAD || git commit -m ''
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          commit_message: Deploy ${{ github.sha }}
           branch: dist
-          force: true
