@@ -11,7 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      IS_GITHUB: true
       IRONCLAD: ${{ secrets.IRONCLAD }}
 
     steps:
