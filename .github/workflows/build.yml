@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IS_GITHUB: true
+      IRONCLAD: ${{ secrets.IRONCLAD }}
 
     steps:
       - uses: actions/checkout@v2
@@ -22,6 +23,7 @@ jobs:
       - run: yarn install
       - run: node prepareCI
       - run: yarn build
+      - run: git diff-index --quiet HEAD || git commit -m 'Deploy!'
       - uses: ad-m/github-push-action@master
         with:
           branch: dist
