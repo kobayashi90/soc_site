@@ -21,7 +21,7 @@ jobs:
           node-version: '16'
           cache: 'yarn'
       - run: git checkout -b dist
-      - run: git merge master
+      - run: git merge main
       - run: yarn install
       - run: node prepareCI
       - run: yarn build
