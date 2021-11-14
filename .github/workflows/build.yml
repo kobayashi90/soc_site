@@ -27,3 +27,4 @@ jobs:
         with:
           commit_message: Deploy ${{ github.sha }}
           branch: dist
+          push_options: '--force'
