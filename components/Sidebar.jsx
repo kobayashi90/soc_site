@@ -85,7 +85,7 @@ function AlbumCount () {
       {loading && <Loader className='mx-auto' size={100} />}
       {data && (
         <>
-          <h5 className='text-center home-side-box-txt'>Soundtrack Count: {data.albumCount}</h5>
+          <h5 className='text-center' style={{ fontWeight: 700 }}>Soundtrack Count: {data.albumCount}</h5>
           {data.classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{name} Soundtracks: {count}</h6>)}
         </>
       )}
@@ -108,7 +108,7 @@ function Highlight () {
       {loading && <Loader className='mx-auto' size={100} />}
       {id && (
         <>
-          <h4 className='text-center home-side-box-txt'>HIGHLIGHT SOUNDTRACK</h4>
+          <h4 className='text-center' style={{ fontWeight: 700 }}>HIGHLIGHT SOUNDTRACK</h4>
           <AlbumBox id={id} title={title} xs={12} />
         </>
       )}
