@@ -1,7 +1,13 @@
 module.exports = {
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true
+  eslint: { ignoreDuringBuilds: true },
+  async redirects () {
+    return [
+      { source: '/series/:slug', destination: 'https://www.sittingonclouds.net/series/:slug', permanent: false },
+      { source: '/publisher/:id', destination: 'https://www.sittingonclouds.net/publisher/:id', permanent: false },
+      { source: '/platform/:slug', destination: 'https://www.sittingonclouds.net/platform/:slug', permanent: false },
+      { source: '/game/:slug', destination: 'https://www.sittingonclouds.net/game/:slug', permanent: false },
+      { source: '/anim/:id', destination: 'https://www.sittingonclouds.net/anim/:id', permanent: false },
+      { source: '/studio/:slug', destination: 'https://www.sittingonclouds.net/studio/:slug', permanent: false }
+    ]
   }
 }
