@@ -7,14 +7,14 @@ import { getImageUrl } from './utils'
 import styles from '../styles/AlbumBoxes.module.scss'
 
 export default function AlbumBox (props) {
-  const { id, title, type = 'album', coming = false } = props
+  const { id, title, type = 'album', coming = false, height, width } = props
 
   return (
     <div className={classNames(styles.albumBox, { [styles.coming]: coming })}>
       <Link href={`/${type}/${id}`}>
         <a>
           <div className={styles.img}>
-            <Image alt={title} src={getImageUrl(id, type)} layout='responsive' width={300} height={300} priority />
+            <Image alt={title} src={getImageUrl(id, type)} layout='responsive' width={width} height={height} priority />
           </div>
           <div className='text-wrap text-center px-1 py-2'>
             {coming ? 'Coming Soon' : title}
@@ -25,10 +25,10 @@ export default function AlbumBox (props) {
   )
 }
 
-export function AlbumBoxList ({ xs, md, items }) {
+export function AlbumBoxList ({ xs, md, items, type, width = 300, height = 300 }) {
   return items.map(props => (
     <Col xs={xs} md={md} key={props.id} className='px-1 mb-3'>
-      <AlbumBox {...props}></AlbumBox>
+      <AlbumBox {...props} type={type} width={width} height={height}/>
     </Col>
   ))
 }
