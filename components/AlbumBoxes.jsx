@@ -7,7 +7,7 @@ import { getImageUrl } from './utils'
 import styles from '../styles/AlbumBoxes.module.scss'
 
 export default function AlbumBox (props) {
-  const { id, title, type = 'album', coming = false, height, width } = props
+  const { id, title, type = 'album', coming = false, height = 300, width = 300 } = props
 
   return (
     <div className={classNames(styles.albumBox, { [styles.coming]: coming })}>
@@ -25,7 +25,7 @@ export default function AlbumBox (props) {
   )
 }
 
-export function AlbumBoxList ({ xs, md, items, type, width = 300, height = 300 }) {
+export function AlbumBoxList ({ xs, md, items, type, width, height }) {
   return items.map(props => (
     <Col xs={xs} md={md} key={props.id} className='px-1 mb-3'>
       <AlbumBox {...props} type={type} width={width} height={height}/>
