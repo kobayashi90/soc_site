@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react'
 import { Button, Col, Row, Form, FormControl } from 'react-bootstrap'
-import { SimpleSelector } from '../Components/Selectors'
+import { SimpleSelector } from './Selectors'
 
 import { clearKeys } from './utils'
 
