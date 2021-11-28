@@ -4,9 +4,9 @@ import { Button, Col, Row, Container, Table, Form, Modal, InputGroup, FormContro
 import { toast } from 'react-toastify'
 import serialize from 'form-serialize'
 
-import { SimpleSelector } from '../../components/Selectors'
-import Loader from '../../components/Loader'
-import { hasRolePage } from '../../lib/util'
+import { SimpleSelector } from '@/components/Selectors'
+import Loader from '@/components/Loader'
+import { hasRolePage } from '@/lib/utils'
 
 export const getServerSideProps = hasRolePage(['MANAGE_USER'])
 

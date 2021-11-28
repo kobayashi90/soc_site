@@ -203,31 +203,29 @@
     }
 
     type Mutation {
-        createArtist(name: String): Artist!
-
         createPlatform(name: String, type: String!): Platform!
         updatePlatform(key: ID!, name: String, type: String!): Platform!
-        deletePlatform(key:ID!): Int!
+        deletePlatform(key:ID!): Int
 
         createPublisher(name: String): Publisher!
         updatePublisher(id:ID!, name: String): Publisher!
-        deletePublisher(id:ID!): Int!
+        deletePublisher(id:ID!): Int
 
-        createSeries(slug: String, name:String, cover:Upload): Series!
+        createSeries(slug: String, name:String, cover:Upload!): Series!
         updateSeries(slug: String, name:String, cover:Upload): Series!
-        deleteSeries(slug:String!): Int!
+        deleteSeries(slug:String!): Int
 
-        createGame(releaseDate:String, slug:String, name:String, publishers:[ID], series:[String], platforms:[ID], cover:Upload): Game!
+        createGame(releaseDate:String, slug:String, name:String, publishers:[ID], series:[String], platforms:[ID], cover:Upload!): Game!
         updateGame(releaseDate:String, slug:String, name:String, publishers:[ID], series:[String], platforms:[ID], cover:Upload): Game!
-        deleteGame(slug:String!): Int!
+        deleteGame(slug:String!): Int
 
         createStudio(slug:String, name:String): Studio!
         updateStudio(slug:String, name:String): Studio!
-        deleteStudio(slug:String!): Int!
+        deleteStudio(slug:String!): Int
 
         createAnimation(title:String, subTitle:String, releaseDate:String, studios:[String], cover:Upload): Animation
         updateAnimation(id:ID!, title:String, subTitle:String, releaseDate:String, studios:[String], cover:Upload): Animation
-        deleteAnimation(id:ID!): Int!
+        deleteAnimation(id:ID!): Int
 
         createAlbum(
             title: String, 

@@ -7,10 +7,10 @@ import { gql, useQuery, useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { OstSelector, SimpleSelector } from '../../components/Selectors'
-import Loader from '../../components/Loader'
-import { hasRolePage } from '../../lib/util'
-import { getFullPageList, getPageList } from '../../components/utils'
+import { OstSelector, SimpleSelector } from '@/components/Selectors'
+import Loader from '@/components/Loader'
+import { hasRolePage } from '@/lib/utils'
+import { getFullPageList, getPageList } from '@/components/utils'
 
 export const getServerSideProps = hasRolePage(['CREATE', 'UPDATE'])
 
@@ -185,7 +185,7 @@ function OstTable () {
       <Row className='my-3'>
         <Col xs='auto'>
           <Form.Group>
-            <Button color='primary'><a href='/admin/album/add'>Add OST</a></Button>
+            <Link href='/admin/album/add' passHref><Button variant='primary'>Add Album</Button></Link>
           </Form.Group>
         </Col>
         <Col>

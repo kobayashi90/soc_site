@@ -2,21 +2,24 @@ import { ApolloServer } from 'apollo-server-micro'
 import path from 'path'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
-import db from '../../lib/startDB'
-import withSession from '../../lib/session'
 
-import mutationUser from '../../graphql/resolvers/mutations/user'
-import mutationData from '../../graphql/resolvers/mutations/data'
-import mutationSite from '../../graphql/resolvers/mutations/site'
+import db from '@ApolloClient/lib/startDB'
+import withSession from '@/lib/session'
+import { processRequest } from 'graphql-upload'
 
-import queryData from '../../graphql/resolvers/queries/data'
-import querySite from '../../graphql/resolvers/queries/site'
-import queryUser from '../../graphql/resolvers/queries/user'
+import mutationUser from '@/graphql/resolvers/mutations/user'
+// import mutationData from '@/graphql/resolvers/mutations/create'
+import mutationUpdate from '@/graphql/resolvers/mutations/update'
+import mutationSite from '@/graphql/resolvers/mutations/site'
 
-import typesData from '../../graphql/resolvers/types/data'
-import typesUser from '../../graphql/resolvers/types/user'
+import queryData from '@/graphql/resolvers/queries/data'
+import querySite from '@/graphql/resolvers/queries/site'
+import queryUser from '@/graphql/resolvers/queries/user'
 
-const Mutation = [mutationUser, mutationData, mutationSite]
+import typesData from '@/graphql/resolvers/types/data'
+import typesUser from '@/graphql/resolvers/types/user'
+
+const Mutation = [mutationUser, mutationUpdate, mutationSite]
 const Query = [queryData, querySite, queryUser]
 const types = [typesData, typesUser]
 
@@ -36,20 +39,17 @@ export default withSession(async (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
-  if (req.method === 'OPTIONS') {
-    res.end()
-    return false
+  const contentType = req.headers['content-type']
+  if (contentType && contentType.startsWith('multipart/form-data')) {
+    req.filePayload = await processRequest(req, res)
   }
 
   await db.sync()
   await startServer
-  await apolloServer.createHandler({
-    path: '/api/graphql'
-  })(req, res)
+
+  return apolloServer.createHandler({ path: '/api/graphql' })(req, res)
 })
 
 export const config = {
-  api: {
-    bodyParser: false
-  }
+  api: { bodyParser: false }
 }

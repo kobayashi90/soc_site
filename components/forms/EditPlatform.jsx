@@ -1,0 +1,107 @@
+import { useRef } from 'react'
+import { Row, FormControl, Form, Col, Label } from 'react-bootstrap'
+import { toast } from 'react-toastify'
+import serialize from 'form-serialize'
+import { PlatformSelector } from '../Selectors'
+import { gql, useMutation, useLazyQuery, useQuery } from '@apollo/client'
+import SubmitButton from '../SubmitButton'
+
+const query = gql`
+  query Platform($key: ID!){
+    platform(id: $key){
+      name
+      type
+    }
+  }
+`
+
+const queryClasses = gql`
+      query {
+        classes {
+          name
+        }     
+      }
+    `
+
+const mutationUpdate = gql`
+    mutation UpdatePlatform($key:ID!, $name:String, $type: String!){
+      updatePlatform(
+        key: $key
+        name: $name
+        type: $type
+      ) {
+        id
+        name
+      }
+    }
+    
+`
+const mutationDelete = gql`
+    mutation DeletePlatform($key:ID!){
+      deletePlatform(key: $key)
+    }
+    
+`
+
+export default function EditPlatform () {
+  const { data: classData } = useQuery(queryClasses)
+  const classes = classData ? classData.classes : []
+
+  const formRef = useRef(null)
+  const [mutateUpdate, { loading: loadingUpdate }] = useMutation(mutationUpdate)
+  const [mutateDelete, { loading: loadingDelete }] = useMutation(mutationDelete)
+  const [getPlatform, { data }] = useLazyQuery(query)
+
+  function handleSubmitForm (mutate, verb) {
+    const target = formRef.current
+    const variables = serialize(target, { hash: true })
+
+    mutate({ variables }).then(results => {
+      toast.success(`${verb} platform succesfully!`)
+      target.reset()
+    }).catch(err => {
+      console.log(err)
+      toast.error(err.message, { autoclose: false })
+    })
+  }
+
+  return (
+    <div className='mt-3'>
+      <div id='editPlat' className='mb-2'>Edit Platform</div>
+      <div className='site-form blackblock'>
+        <Form innerRef={formRef}>
+          <Row form>
+            <Col md={4}>
+              <Form.Group>
+                <Form.Label for='key'>Platform:</Form.Label>
+                <PlatformSelector type='' required name='key' onChange={row => getPlatform({ variables: { key: row.value } })} />
+              </Form.Group>
+            </Col>
+            <Col md={4}>
+              <Form.Group>
+                <Form.Label for='name'>Name:</Form.Label>
+                <FormControl type='text' name='name' required defaultValue={data && data.platform.name} />
+              </Form.Group>
+            </Col>
+            <Col md={4}>
+              <Form.Group>
+                <Form.Label for='type'>Type:</Form.Label>
+                <select className='form-control' name='type'>
+                  {classes.map(c => <option selected={data && data.platform.type === c.name} key={c.name} value={c.name}>{c.name}</option>)}
+                </select>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs='auto' className='my-auto mx-1'>
+              <SubmitButton type='button' onClick={() => handleSubmitForm(mutateUpdate, 'Edited')} loading={loadingUpdate}>Save Changes</SubmitButton>
+            </Col>
+            <Col xs='auto' className='my-auto mx-1'>
+              <SubmitButton type='button' onClick={() => handleSubmitForm(mutateDelete, 'Deleted')} loading={loadingDelete}>Delete Platform</SubmitButton>
+            </Col>
+          </Row>
+        </Form>
+      </div>
+    </div>
+  )
+}

@@ -1,4 +1,4 @@
-const { GraphQLUpload } = require('graphql-upload')
+import { GraphQLUpload } from 'node_modules/graphql-upload/public/index.js'
 
 module.exports = {
   Upload: GraphQLUpload,

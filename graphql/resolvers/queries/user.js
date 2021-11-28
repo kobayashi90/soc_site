@@ -1,4 +1,4 @@
-import { hasRole } from '../../../lib/util'
+import { hasRole } from '@/lib/utils'
 
 const { permissions } = require('../../../config/info.json')
 

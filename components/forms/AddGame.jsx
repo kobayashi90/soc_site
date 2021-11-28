@@ -1,0 +1,111 @@
+import { useState } from 'react'
+import { gql, useMutation } from '@apollo/client'
+import serialize from 'form-serialize'
+import { Col, Row, Form, FormControl } from 'react-bootstrap'
+import { SeriesSelector, PublisherSelector, PlatformSelector } from '../Selectors'
+import { toast } from 'react-toastify'
+import { slugify } from '../utils'
+import SubmitButton from '../SubmitButton'
+
+const mutation = gql`
+mutation CreateGame($cover:Upload!, $releaseDate:String!, $slug:String!, $name:String!, $series: [String]!, $publishers:[ID]!, $platforms:[ID]){
+  createGame(
+    name: $name
+    slug: $slug
+    series: $series
+    publishers: $publishers   
+    releaseDate: $releaseDate
+    cover: $cover,
+    platforms: $platforms
+  ) {
+      slug
+    }
+  }
+`
+
+export default function AddGame () {
+  const [slug, setSlug] = useState('')
+  const [mutate, { loading }] = useMutation(mutation)
+
+  function handleSubmitForm (e) {
+    e.preventDefault()
+    e.persist()
+    const game = serialize(e.target, { hash: true })
+    game.cover = e.target.elements.cover.files[0]
+    game.releaseDate = new Date(game.releaseDate).toISOString().substring(0, 10)
+
+    if (!game.series) game.series = []
+    if (!game.publishers) game.publishers = []
+    if (!game.platforms) game.platforms = []
+
+    mutate({ mutation, variables: game })
+      .then(results => {
+        toast.success(`Added "${game.name}" game succesfully!`)
+        e.target.reset()
+      }).catch(err => {
+        console.log(err)
+        toast.error(err.message, { autoclose: false })
+      })
+  }
+
+  return (
+    <>
+      <div id='addGame' className='mb-2 mt-3'>Add Game</div>
+      <Form className='site-form blackblock' onSubmit={handleSubmitForm}>
+        <Row form>
+          <Col md={4}>
+            <Form.Group>
+              <Form.Label for='slug'>Slug:</Form.Label>
+              <FormControl type='text' name='slug' readOnly value={slug} />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group>
+              <Form.Label for='name'>Name:</Form.Label>
+              <FormControl type='text' name='name' onChange={e => setSlug(slugify(e.target.value))} />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group>
+              <Form.Label for='releaseDate'>Release Date:</Form.Label>
+              <FormControl type='date' name='releaseDate' />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row form>
+          <Col md={4}>
+            <Form.Group>
+              <Form.Label for='series'>Series:</Form.Label>
+              <SeriesSelector isMulti name='series' />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group>
+              <Form.Label for='publishers'>Publishers:</Form.Label>
+              <PublisherSelector isMulti name='publishers' />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group>
+              <Form.Label for='platforms'>Platforms:</Form.Label>
+              <PlatformSelector type='Game' isMulti name='platforms' />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={4}>
+            <Form.Group>
+              <Form.Label for='cover'>Cover:</Form.Label>
+              <FormControl name='cover' type='file' accept='image/*' />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col className='m-auto'>
+            <SubmitButton loading={loading} type='submit' color='primary'>Add Game</SubmitButton>
+          </Col>
+        </Row>
+      </Form>
+    </>
+  )
+}
