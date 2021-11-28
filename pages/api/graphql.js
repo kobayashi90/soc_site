@@ -8,7 +8,7 @@ import withSession from '@/lib/session'
 import { processRequest } from 'graphql-upload'
 
 import mutationUser from '@/graphql/resolvers/mutations/user'
-// import mutationData from '@/graphql/resolvers/mutations/create'
+import mutationCreate from '@/graphql/resolvers/mutations/create'
 import mutationUpdate from '@/graphql/resolvers/mutations/update'
 import mutationSite from '@/graphql/resolvers/mutations/site'
 
@@ -19,7 +19,7 @@ import queryUser from '@/graphql/resolvers/queries/user'
 import typesData from '@/graphql/resolvers/types/data'
 import typesUser from '@/graphql/resolvers/types/user'
 
-const Mutation = [mutationUser, mutationUpdate, mutationSite]
+const Mutation = [mutationUser, mutationUpdate, mutationSite, mutationCreate]
 const Query = [queryData, querySite, queryUser]
 const types = [typesData, typesUser]
 

@@ -1,15 +1,14 @@
-import Image from 'next/image'
-import { Button, Col, Row, Form, FormControl } from 'react-bootstrap'
+import { Col, Row, Form, FormControl } from 'react-bootstrap'
 import { useState } from 'react'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import serialize from 'form-serialize'
 import { toast } from 'react-toastify'
-import loader from 'svg-loaders/svg-smil-loaders/oval.svg'
 
 import { OstSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, Downloads, StoreDownloads, DiscList } from '@/components/SharedForms'
-import { toArray } from '@/components/utils'
+import SubmitButton from '@/components/SubmitButton'
 import { hasRolePage } from '@/lib/utils'
+import { toArray } from '@/components/utils'
 
 export const getServerSideProps = hasRolePage(['CREATE'])
 
@@ -39,27 +38,27 @@ const queryClasses = gql`
     `
 
 const mutation = gql`
-    mutation CreateOst(
+    mutation createAlbum(
       $title: String,
       $subTitle: String,
       $cover: Upload,
       $releaseDate: String,
       $label: String,
       $description: String,
-      $downloads: [DownloadFormControl],
+      $downloads: [DownloadInput],
       $artists: [String],
       $classes: [String],
       $categories: [String],
       $platforms: [ID],
       $games: [String],
       $animations: [ID],
-      $discs: [DiscFormControl],
+      $discs: [DiscInput],
       $related: [ID],
-      $stores: [StoreFormControl],
+      $stores: [StoreInput],
       $vgmdb: String,
       $status: String!
     ){
-      createOst(
+      createAlbum(
         title: $title,
         subTitle: $subTitle,
         cover: $cover,
@@ -257,9 +256,7 @@ function AddAlbum (props) {
 
         <Row form>
           <Col className='m-auto'>
-            {loading
-              ? <Button type='submit' color='primary' className='py-0' disabled><Image alt='' {...loader} height={35} width={35} /></Button>
-              : <Button type='submit' color='primary'>Add Album</Button>}
+            <SubmitButton loading={loading} type='submit' color='primary'>Add Album</SubmitButton>
           </Col>
         </Row>
       </Form>
