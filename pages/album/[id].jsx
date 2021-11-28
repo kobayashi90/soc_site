@@ -1,12 +1,11 @@
 import { gql, useLazyQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
-import client from '../../lib/ApolloClient'
 import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 import Head from 'next/head'
-import url from 'url'
 
+import client from '../../lib/ApolloClient'
 import useUser from '../../components/useUser'
 import styles from '../../styles/Album.module.scss'
 import { AlbumBoxList } from '../../components/AlbumBoxes'
@@ -97,13 +96,10 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
   const { data } = await client.query({ query, variables: { id } })
 
   if (data.album === null) return { redirect: { destination: '/404', permanent: false } }
-  return { props: { id, initialAlbum: data.album, imageUrl: fullImage(data.album.id, 75, req) }/*, revalidate: 60 */ }
+  return { props: { id, initialAlbum: data.album, imageUrl: fullImage(data.album.id, 50) }/*, revalidate: 60 */ }
 }
 
-const fullImage = (id, quality = 75, req) => {
-  const base = `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
-  return req ? url.format({ protocol: req.protocol || 'http', host: req.headers.host, pathname: base }) : base
-}
+const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
 
 export default function Page ({ id, initialAlbum, imageUrl }) {
   const { user } = useUser()
