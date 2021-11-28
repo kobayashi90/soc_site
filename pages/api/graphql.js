@@ -3,7 +3,7 @@ import path from 'path'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
 
-import db from '@ApolloClient/lib/startDB'
+import db from '@/lib/startDB'
 import withSession from '@/lib/session'
 import { processRequest } from 'graphql-upload'
 
