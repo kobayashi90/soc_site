@@ -46,7 +46,7 @@ const resolvers = {
       const ost = await db.models.ost.findByPk(id)
       if (!ost) throw new UserInputError('Not Found')
       return db.transaction(async () => {
-        await createUpdateLog(db, 'updateAlbum', ost, user.username)
+        await createUpdateLog(db, 'deleteAlbum', ost, user.username)
         await ost.destroy()
         return 1
       })

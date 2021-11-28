@@ -14,8 +14,6 @@ import { getFullPageList, getPageList } from '@/components/utils'
 
 export const getServerSideProps = hasRolePage(['CREATE', 'UPDATE'])
 
-const navigate = () => 1
-
 const limit = 10
 
 export default function AdminOst () {
@@ -45,10 +43,10 @@ function OstTable () {
   const page = parseInt(router.query.page || '1')
 
   const mutation = gql`
-                mutation DeleteOst($id: ID!){
-                  deleteOst(id: $id)
-                }
-              `
+    mutation deleteAlbum($id: ID!){
+      deleteAlbum(id: $id)
+    }
+  `
   const query = gql`
       query searchAlbum(
         $title: String,
@@ -114,7 +112,7 @@ function OstTable () {
 
     return (
       <>
-        <Modal centered isOpen={modal} toggle={() => setModal(!modal)}>
+        <Modal centered show={modal} onHide={() => setModal(false)}>
           <ModalBody className='m-3' style={{ color: 'black' }}>
             <Row><Col>{`Delete the OST "${title}" (ID: ${id})?`}</Col></Row>
             <Row className='mt-2'>
@@ -128,11 +126,11 @@ function OstTable () {
 
         {searchAlbum.rows && searchAlbum.rows.map(({ id, title, createdAt, updatedAt }) => (
           <tr key={id}>
-            <td onClick={() => navigate(`/admin/album/${id}`)}>{title}</td>
-            <td onClick={() => navigate(`/admin/album/${id}`)}>{moment(createdAt).format('DD/MM/YYYY HH:mm:ss')}</td>
-            <td onClick={() => navigate(`/admin/album/${id}`)}>{moment(updatedAt).format('DD/MM/YYYY HH:mm:ss')}</td>
+            <Link href={`/admin/album/${id}`} passHref><td>{title}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref><td>{moment(createdAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref><td>{moment(updatedAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
             <td>
-              <Button onClick={() => { setModalData({ id, title }); setModal(!modal) }}>Remove</Button>
+              <Button onClick={() => { setModalData({ id, title }); setModal(true) }}>Remove</Button>
             </td>
           </tr>
         ))}
