@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Row, FormControl, Form, Col, Label } from 'react-bootstrap'
+import { Row, FormControl, Form, Col } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { StudioSelector } from '../Selectors'
 import SubmitButton from '../SubmitButton'
@@ -42,17 +42,17 @@ export default function EditStudio () {
     <div className='mt-3'>
       <div id='editStudio' className='mb-2'>Edit Studio</div>
       <div className='site-form blackblock'>
-        <Form innerRef={formRef}>
-          <Row form>
+        <Form ref={formRef}>
+          <Row>
             <Col md={6}>
               <Form.Group>
-                <Form.Label for='id'>Studio:</Form.Label>
+                <Form.Label htmlFor='id'>Studio:</Form.Label>
                 <StudioSelector required name='slug' />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group>
-                <Form.Label for='name'>Name:</Form.Label>
+                <Form.Label htmlFor='name'>Name:</Form.Label>
                 <FormControl type='text' name='name' required />
               </Form.Group>
             </Col>

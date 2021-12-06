@@ -45,16 +45,16 @@ export default function EditPublisher () {
       <div id='editPub' className='mb-2'>Edit Publisher</div>
       <div className='site-form blackblock'>
         <Form ref={formRef}>
-          <Row form>
+          <Row>
             <Col md={6}>
               <Form.Group>
-                <Form.Label for='id'>Publisher:</Form.Label>
+                <Form.Label htmlFor='id'>Publisher:</Form.Label>
                 <PublisherSelector required name='id' />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group>
-                <Form.Label for='name'>Name:</Form.Label>
+                <Form.Label htmlFor='name'>Name:</Form.Label>
                 <FormControl type='text' name='name' required />
               </Form.Group>
             </Col>

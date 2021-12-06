@@ -8,7 +8,6 @@
         description: String
         stores: [Store]!
         discs: [Disc]!
-        downloads: [Download]!
         artists: [Artist]!
         classes: [Class]!
         categories: [Category]!
@@ -167,6 +166,7 @@
 
     type Query {
         albums: [Album!]!
+        downloads(id: ID!): [Download]!
         albumCount: Float!
         categories: [Category]!
         classes: [Class]!

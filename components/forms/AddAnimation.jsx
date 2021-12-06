@@ -43,36 +43,36 @@ export default function AddAnimation () {
     <>
       <div id='addAnim' className='mb-2 mt-3'>Add Animation</div>
       <Form className='site-form blackblock' onSubmit={handleSubmitForm}>
-        <Row form>
+        <Row>
           <Col md={6}>
             <Form.Group>
-              <Form.Label for='name'>Title:</Form.Label>
+              <Form.Label htmlFor='name'>Title:</Form.Label>
               <FormControl type='text' name='title' />
             </Form.Group>
           </Col>
           <Col md={6}>
             <Form.Group>
-              <Form.Label for='name'>Sub-title:</Form.Label>
+              <Form.Label htmlFor='name'>Sub-title:</Form.Label>
               <FormControl type='text' name='subTitle' />
             </Form.Group>
           </Col>
         </Row>
-        <Row form>
+        <Row>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='releaseDate'>Release Date:</Form.Label>
+              <Form.Label htmlFor='releaseDate'>Release Date:</Form.Label>
               <FormControl type='date' name='releaseDate' />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='studios'>Studios:</Form.Label>
+              <Form.Label htmlFor='studios'>Studios:</Form.Label>
               <StudioSelector isMulti name='studios' />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='cover'>Cover:</Form.Label>
+              <Form.Label htmlFor='cover'>Cover:</Form.Label>
               <FormControl name='cover' type='file' accept='image/*' />
             </Form.Group>
           </Col>

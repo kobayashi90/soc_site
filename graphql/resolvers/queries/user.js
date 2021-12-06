@@ -17,7 +17,7 @@ const resolvers = {
       const valid = await bcrypt.compare(password, user.password)
       if (!valid) throw new AuthenticationError()
 
-      req.session.set('username', user.username)
+      req.session.username = user.username
       await req.session.save()
 
       return 200

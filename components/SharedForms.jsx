@@ -106,14 +106,14 @@ export function DiscList (props) {
         </Col>
       </Row>
 
-      <Row form className='mt-3'>
+      <Row className='mt-3'>
         {keys.map((key, i) => (
           <Col md={6} key={key}>
             <Row>
               <Col md={12}>
                 <Form.Group>
                   <Form.Label>Disc {i + 1}:</Form.Label>
-                  <FormControl required name='discs[][body]' type='textarea' id={`discInput${key}`} defaultValue={defaults[key] ? defaults[key].body : ''} />
+                  <FormControl required name='discs[][body]' as='textarea' id={`discInput${key}`} defaultValue={defaults[key] ? defaults[key].body : ''} />
                 </Form.Group>
               </Col>
             </Row>
@@ -245,7 +245,7 @@ export function Downloads (props) {
               <Col md='auto' className='mt-auto mb-3'>
                 <div className='form-check'>
                   <FormControl defaultValue={cat.small} type='checkbox' name={`downloads[${i}][small]`} className='form-check-input' />
-                  <Form.Label className='form-check-label' for={`downloads[${i}][small]`}>Small Title</Form.Label>
+                  <Form.Label className='form-check-label' htmlFor={`downloads[${i}][small]`}>Small Title</Form.Label>
                 </div>
               </Col>
             </Row>
@@ -253,7 +253,7 @@ export function Downloads (props) {
               <Row key={link.key}>
                 <Col>
                   <Row>
-                    <Col md={3}>
+                    <Col md={4}>
                       <Form.Group>
                         <Form.Label>Provider:</Form.Label>
                         <SimpleSelector
@@ -262,7 +262,7 @@ export function Downloads (props) {
                         />
                       </Form.Group>
                     </Col>
-                    <Col md={3}>
+                    <Col md={4}>
                       <Form.Group>
                         <Form.Label>Url:</Form.Label>
                         <FormControl
@@ -271,21 +271,12 @@ export function Downloads (props) {
                         />
                       </Form.Group>
                     </Col>
-                    <Col md={3}>
+                    <Col md={4}>
                       <Form.Group>
                         <Form.Label>Direct Url:</Form.Label>
                         <FormControl
                           defaultValue={link.directUrl} required type='text'
                           name={`downloads[${i}][links][${i2}][directUrl]`}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={3}>
-                      <Form.Group>
-                        <Form.Label>Custom</Form.Label>
-                        <FormControl
-                          defaultValue={link.custom} type='text'
-                          name={`downloads[${i}][links][${i2}][custom]`}
                         />
                       </Form.Group>
                     </Col>

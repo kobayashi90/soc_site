@@ -128,59 +128,59 @@ function AddAlbum (props) {
     <>
       <div id='addOst' className='mb-2 mt-3'>Add Album</div>
       <Form className='site-form blackblock' onSubmit={handleSubmitForm}>
-        <Row form>
+        <Row>
           <Col md={3}>
             <Form.Group>
-              <Form.Label for='title'>Title:</Form.Label>
+              <Form.Label htmlFor='title'>Title:</Form.Label>
               <FormControl required type='text' name='title' />
             </Form.Group>
           </Col>
           <Col md={3}>
             <Form.Group>
-              <Form.Label for='subTitle'>Sub Title:</Form.Label>
-              <FormControl type='textarea' name='subTitle' />
+              <Form.Label htmlFor='subTitle'>Sub Title:</Form.Label>
+              <FormControl as='textarea' name='subTitle' />
             </Form.Group>
           </Col>
           <Col md={3}>
             <Form.Group>
-              <Form.Label for='releaseDate'>Release Date:</Form.Label>
+              <Form.Label htmlFor='releaseDate'>Release Date:</Form.Label>
               <FormControl required type='date' name='releaseDate' />
             </Form.Group>
           </Col>
           <Col md={3}>
             <Form.Group>
-              <Form.Label for='label'>Label:</Form.Label>
+              <Form.Label htmlFor='label'>Label:</Form.Label>
               <FormControl type='text' name='label' />
             </Form.Group>
           </Col>
         </Row>
-        <Row form>
+        <Row>
           <Col>
             <Form.Group>
-              <Form.Label for='status'>Status:</Form.Label>
+              <Form.Label htmlFor='status'>Status:</Form.Label>
               <SimpleSelector required name='status' defaultValue={[{ value: 'show', label: 'Show' }]} options={['Show', 'Hidden', 'Coming'].map(label => ({ label, value: label.toLowerCase() }))} />
             </Form.Group>
           </Col>
         </Row>
-        <Row form>
+        <Row>
           <Col md={12}>
             <Form.Group>
-              <Form.Label for='title'>Description:</Form.Label>
-              <FormControl type='textarea' name='description' />
+              <Form.Label htmlFor='title'>Description:</Form.Label>
+              <FormControl as='textarea' name='description' />
             </Form.Group>
           </Col>
         </Row>
         <hr className='style2 style-white' />
-        <Row form>
+        <Row>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='artists'>Artists:</Form.Label>
-              <FormControl name='artists' type='textarea' />
+              <Form.Label htmlFor='artists'>Artists:</Form.Label>
+              <FormControl name='artists' as='textarea' />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='classes'>Classification:</Form.Label>
+              <Form.Label htmlFor='classes'>Classification:</Form.Label>
               <SimpleSelector
                 required isMulti name='classes' options={classes.map(c => ({ value: c.name, label: c.name }))}
                 onChange={values => {
@@ -192,22 +192,22 @@ function AddAlbum (props) {
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='categories'>Categories:</Form.Label>
+              <Form.Label htmlFor='categories'>Categories:</Form.Label>
               <SimpleSelector required isMulti name='categories' options={categories.map(c => ({ value: c.name, label: c.name }))} />
             </Form.Group>
           </Col>
         </Row>
 
-        <Row form>
+        <Row>
           <Col md={6}>
             <Form.Group>
-              <Form.Label for='vgmdb'>VGMdb:</Form.Label>
+              <Form.Label htmlFor='vgmdb'>VGMdb:</Form.Label>
               <FormControl name='vgmdb' type='text' />
             </Form.Group>
           </Col>
           <Col md={6}>
             <Form.Group>
-              <Form.Label for='cover'>Cover:</Form.Label>
+              <Form.Label htmlFor='cover'>Cover:</Form.Label>
               <FormControl required name='cover' type='file' accept='image/*' />
             </Form.Group>
           </Col>
@@ -215,22 +215,22 @@ function AddAlbum (props) {
         <Row />
 
         <hr className='style2 style-white' />
-        <Row form>
+        <Row>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='games'>Games:</Form.Label>
+              <Form.Label htmlFor='games'>Games:</Form.Label>
               <GameSelector isMulti name='games' />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='platforms'>Platforms:</Form.Label>
+              <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
               <PlatformSelector type={currentClasses} isMulti name='platforms' />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='animations'>Animations:</Form.Label>
+              <Form.Label htmlFor='animations'>Animations:</Form.Label>
               <AnimSelector isMulti name='animations' />
             </Form.Group>
           </Col>
@@ -241,7 +241,7 @@ function AddAlbum (props) {
         <Row>
           <Col md={12}>
             <Form.Group>
-              <Form.Label for='related'>Related OSTs:</Form.Label>
+              <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
               <OstSelector isMulti name='related' />
             </Form.Group>
           </Col>
@@ -254,7 +254,7 @@ function AddAlbum (props) {
 
         <Downloads />
 
-        <Row form>
+        <Row>
           <Col className='m-auto'>
             <SubmitButton loading={loading} type='submit' color='primary'>Add Album</SubmitButton>
           </Col>

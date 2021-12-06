@@ -4,7 +4,7 @@ export default function relations (sequelize) {
     publisher, game, series,
     platform, artist, category, store,
     animation, studio,
-    user, role, ostHistory, forgor, log
+    user, role, forgor, log
   } = sequelize.models
 
   user.belongsToMany(role, { through: 'User_Role' })
@@ -34,9 +34,6 @@ export default function relations (sequelize) {
   ost.hasMany(download, { onDelete: 'CASCADE' })
   ost.hasMany(store, { onDelete: 'CASCADE' })
   ost.belongsToMany(ost, { onDelete: 'CASCADE', through: 'related_ost', as: 'related' })
-
-  ostHistory.belongsTo(user, { foreignKey: 'username' })
-  ostHistory.belongsTo(ost)
 
   platform.belongsToMany(ost, { through: 'Ost_Platform' })
 

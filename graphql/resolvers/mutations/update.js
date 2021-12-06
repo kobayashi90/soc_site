@@ -1,6 +1,8 @@
 
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 import { hasRole, img, createLog, createUpdateLog } from '@/lib/utils'
+import { postDiscord, postReddit } from '@/lib/plugins'
+import { slugify } from '@/components/utils'
 
 const resolversComposition = { 'Mutation.*': hasRole('UPDATE') }
 const resolvers = {
@@ -199,32 +201,34 @@ const resolvers = {
         await createLog(db, 'deleteAnim', log, user.username)
         await anim.destroy()
       })
-    }
+    },
 
-    /* updateAlbum: async (parent, { data, id }, { db, user }, info) => {
-    // if (!await jwtApi(db, ['UPDATE'])) throw new AuthenticationError()
+    updateAlbum: async (parent, { data, id }, { db, user }, info) => {
+      return db.transaction(async () => {
+        data.artists = data.artists ? data.artists.map(artist => { return { name: artist, slug: slugify(artist) } }) : []
+        await db.models.artist.bulkCreate(data.artists, { ignoreDuplicates: true })
 
-      data.artists = data.artists ? data.artists.map(artist => { return { name: artist, slug: slugify(artist) } }) : []
-      await db.models.artist.bulkCreate(data.artists, { ignoreDuplicates: true })
+        const ost = await db.models.ost.findByPk(id)
+        const triggerPost = (data.status !== ost.status.repeat(1)) && data.status === 'show'
 
-      const ost = await db.models.ost.findByPk(id)
-      const triggerPost = (data.status !== ost.status.repeat(1)) && data.status === 'show'
+        // implement better log lol lmao
 
-      return Promise.all([
-        ost.update(data),
-        ost.setArtists(data.artists.map(({ slug }) => slug)),
-        ost.setClasses(data.classes || []),
-        ost.setCategories(data.categories || []),
-        ost.setPlatforms(data.platforms || []),
-        ost.setGames(data.games || []),
-        ost.setRelated(data.related || []),
-        ost.setAnimations(data.animations || []),
-        db.models.disc.destroy({ where: { ostId: ost.dataValues.id } }).then(() => (data.discs || []).map(disc => ost.createDisc(disc))),
-        db.models.store.destroy({ where: { ostId: ost.dataValues.id } }).then(() => (data.stores || []).map(store => ost.createStore(store))),
-        db.models.download.destroy({ where: { ostId: ost.dataValues.id } }).then(() => (data.downloads || []).map(download => ost.createDownload(download, { include: [db.models.link] }))),
-        ...(data.cover ? [img(data.cover, 'album', ost.dataValues.id, 100)] : [])
-      ]).then(async () => {
-        await db.models.ostHistory.create({ username: payload.username, ostId: id, updatedData: ost.changed() })
+        await Promise.all([
+          ost.update(data),
+          ost.setArtists(data.artists.map(({ slug }) => slug)),
+          ost.setClasses(data.classes || []),
+          ost.setCategories(data.categories || []),
+          ost.setPlatforms(data.platforms || []),
+          ost.setGames(data.games || []),
+          ost.setRelated(data.related || []),
+          ost.setAnimations(data.animations || []),
+          db.models.disc.destroy({ where: { ostId: ost.dataValues.id } }).then(() => (data.discs || []).map(disc => ost.createDisc(disc))),
+          db.models.store.destroy({ where: { ostId: ost.dataValues.id } }).then(() => (data.stores || []).map(store => ost.createStore(store))),
+          db.models.download.destroy({ where: { ostId: ost.dataValues.id } }).then(() => (data.downloads || []).map(download => ost.createDownload(download, { include: [db.models.link] }))),
+          createUpdateLog(db, 'updateAlbum', ost, user.username)
+        ])
+
+        if (data.cover) await img(data.cover, 'album', ost.dataValues.id)
 
         if (triggerPost) {
           postReddit(ost)
@@ -232,8 +236,8 @@ const resolvers = {
         }
         return ost
       })
-    },
- */
+    }
+
   }
 }
 

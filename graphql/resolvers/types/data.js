@@ -8,7 +8,6 @@ module.exports = {
     categories: (parent, args, context, info) => parent.getCategories(),
     platforms: (parent, args, context, info) => parent.getPlatforms({ order: ['name'] }),
     games: (parent, args, context, info) => parent.getGames(),
-    downloads: async (parent, args, context, info) => parent.getDownloads(),
     discs: (parent, args, context, info) => parent.getDiscs({ order: [['number', 'ASC']] }),
     related: (parent, args, context, info) => parent.getRelated(),
     stores: (parent) => parent.getStores(),
@@ -33,7 +32,7 @@ module.exports = {
         const roles = await user.getRoles()
         const perms = roles.map(r => r.permissions).flat()
 
-        donator = perms.includes('SKIP_ADS')
+        donator = perms.includes('DIRECT')
       }
 
       return links.map(l => {

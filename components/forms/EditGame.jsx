@@ -80,44 +80,44 @@ export default function EditGame () {
     <>
       <div id='editGame' className='mb-2 mt-3'>Edit Game</div>
       <Form className='site-form blackblock' ref={formRef}>
-        <Row form>
+        <Row>
           <Col>
             <Form.Group>
-              <Form.Label for='slug'>Game:</Form.Label>
+              <Form.Label htmlFor='slug'>Game:</Form.Label>
               <GameSelector required name='slug' onChange={row => getGame({ variables: { slug: row.value } })} />
             </Form.Group>
           </Col>
 
           <Col>
             <Form.Group>
-              <Form.Label for='name'>Name:</Form.Label>
+              <Form.Label htmlFor='name'>Name:</Form.Label>
               <FormControl type='text' name='name' defaultValue={data && data.game.name} />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label for='releaseDate'>Release Date:</Form.Label>
+              <Form.Label htmlFor='releaseDate'>Release Date:</Form.Label>
               <FormControl type='date' name='releaseDate' defaultValue={data && data.game.releaseDate} />
             </Form.Group>
           </Col>
         </Row>
         {data && (
-          <Row form>
+          <Row>
             <Col md={4}>
               <Form.Group>
-                <Form.Label for='series'>Series:</Form.Label>
+                <Form.Label htmlFor='series'>Series:</Form.Label>
                 <SeriesSelector loading={loading} isMulti name='series[]' defaultValue={data && data.game.series} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
-                <Form.Label for='publishers'>Publishers:</Form.Label>
+                <Form.Label htmlFor='publishers'>Publishers:</Form.Label>
                 <PublisherSelector loading={loading} isMulti name='publishers[]' defaultValue={data && data.game.publishers} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
-                <Form.Label for='platforms'>Platforms:</Form.Label>
+                <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
                 <PlatformSelector loading={loading} type='Game' isMulti name='platforms[]' defaultValue={data && data.game.platforms} />
               </Form.Group>
             </Col>
@@ -126,7 +126,7 @@ export default function EditGame () {
         <Row>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='cover'>Cover:</Form.Label>
+              <Form.Label htmlFor='cover'>Cover:</Form.Label>
               <FormControl name='cover' type='file' accept='image/*' />
             </Form.Group>
           </Col>

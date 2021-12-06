@@ -126,9 +126,9 @@ function OstTable () {
 
         {searchAlbum.rows && searchAlbum.rows.map(({ id, title, createdAt, updatedAt }) => (
           <tr key={id}>
-            <Link href={`/admin/album/${id}`} passHref><td>{title}</td></Link>
-            <Link href={`/admin/album/${id}`} passHref><td>{moment(createdAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
-            <Link href={`/admin/album/${id}`} passHref><td>{moment(updatedAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref><td style={{ cursor: 'pointer' }}>{title}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref><td style={{ cursor: 'pointer' }}>{moment(createdAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref><td style={{ cursor: 'pointer' }}>{moment(updatedAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
             <td>
               <Button onClick={() => { setModalData({ id, title }); setModal(true) }}>Remove</Button>
             </td>

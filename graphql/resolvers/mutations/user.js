@@ -5,7 +5,7 @@ import { composeResolvers } from '@graphql-tools/resolvers-composition'
 import { DateTime } from 'luxon'
 import { Op } from 'sequelize'
 
-import { createForgor } from '../../../lib/forgor'
+import { createForgor } from '@/lib/forgor'
 import { hasRole, isAuthed } from '@/lib/utils'
 
 const resolversComposition = {

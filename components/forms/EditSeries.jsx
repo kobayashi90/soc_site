@@ -61,22 +61,22 @@ export default function EditSeries () {
     <>
       <div id='editSeries' className='mb-2 mt-3'>Edit Series</div>
       <Form className='site-form blackblock' ref={formRef}>
-        <Row form>
+        <Row>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='slug'>Series:</Form.Label>
+              <Form.Label htmlFor='slug'>Series:</Form.Label>
               <SeriesSelector required name='slug' onChange={row => getSeries({ variables: { slug: row.value } })} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='name'>Name:</Form.Label>
+              <Form.Label htmlFor='name'>Name:</Form.Label>
               <FormControl type='text' name='name' defaultValue={data && data.seriesOne.name} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='cover'>Cover:</Form.Label>
+              <Form.Label htmlFor='cover'>Cover:</Form.Label>
               <FormControl name='cover' type='file' accept='image/*' />
             </Form.Group>
           </Col>

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Row, FormControl, Form, Col, Label } from 'react-bootstrap'
+import { Row, FormControl, Form, Col } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import serialize from 'form-serialize'
 import { PlatformSelector } from '../Selectors'
@@ -69,23 +69,23 @@ export default function EditPlatform () {
     <div className='mt-3'>
       <div id='editPlat' className='mb-2'>Edit Platform</div>
       <div className='site-form blackblock'>
-        <Form innerRef={formRef}>
-          <Row form>
+        <Form ref={formRef}>
+          <Row>
             <Col md={4}>
               <Form.Group>
-                <Form.Label for='key'>Platform:</Form.Label>
+                <Form.Label htmlFor='key'>Platform:</Form.Label>
                 <PlatformSelector type='' required name='key' onChange={row => getPlatform({ variables: { key: row.value } })} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
-                <Form.Label for='name'>Name:</Form.Label>
+                <Form.Label htmlFor='name'>Name:</Form.Label>
                 <FormControl type='text' name='name' required defaultValue={data && data.platform.name} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
-                <Form.Label for='type'>Type:</Form.Label>
+                <Form.Label htmlFor='type'>Type:</Form.Label>
                 <select className='form-control' name='type'>
                   {classes.map(c => <option selected={data && data.platform.type === c.name} key={c.name} value={c.name}>{c.name}</option>)}
                 </select>

@@ -38,16 +38,16 @@ export default function AddPlatform () {
       <div id='addPlat' className='mb-2'>Add Platform</div>
       <div className='site-form blackblock'>
         <Form onSubmit={handleSubmitForm}>
-          <Row form>
+          <Row>
             <Col md={6}>
               <Form.Group>
-                <Form.Label for='name'>Name:</Form.Label>
+                <Form.Label htmlFor='name'>Name:</Form.Label>
                 <FormControl type='text' name='name' required />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group>
-                <Form.Label for='type'>Type:</Form.Label>
+                <Form.Label htmlFor='type'>Type:</Form.Label>
                 <select className='form-control' name='type'>
                   <option value='Game'>Game</option>
                   <option value='Animation'>Animation</option>

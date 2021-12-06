@@ -47,22 +47,22 @@ export default function AddSeries () {
     <>
       <div id='addSeries' className='mb-2 mt-3'>Add Series</div>
       <Form className='site-form blackblock' onSubmit={handleSubmitForm}>
-        <Row form>
+        <Row>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='slug'>Slug:</Form.Label>
+              <Form.Label htmlFor='slug'>Slug:</Form.Label>
               <FormControl type='text' name='slug' readOnly value={slug} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='name'>Name:</Form.Label>
+              <Form.Label htmlFor='name'>Name:</Form.Label>
               <FormControl type='text' name='name' onChange={e => setSlug(slugify(e.target.value))} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label for='cover'>Cover:</Form.Label>
+              <Form.Label htmlFor='cover'>Cover:</Form.Label>
               <FormControl name='cover' type='file' accept='image/*' />
             </Form.Group>
           </Col>

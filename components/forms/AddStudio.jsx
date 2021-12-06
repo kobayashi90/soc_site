@@ -41,16 +41,16 @@ export default function AddStudio () {
     <>
       <div id='addStudio' className='mb-2 mt-3'>Add Studio</div>
       <Form className='site-form blackblock' onSubmit={handleSubmitForm}>
-        <Row form>
+        <Row>
           <Col md={6}>
             <Form.Group>
-              <Form.Label for='slug'>Slug:</Form.Label>
+              <Form.Label htmlFor='slug'>Slug:</Form.Label>
               <FormControl type='text' name='slug' readOnly value={slug} />
             </Form.Group>
           </Col>
           <Col md={6}>
             <Form.Group>
-              <Form.Label for='name'>Name:</Form.Label>
+              <Form.Label htmlFor='name'>Name:</Form.Label>
               <FormControl type='text' name='name' onChange={e => setSlug(slugify(e.target.value))} />
             </Form.Group>
           </Col>

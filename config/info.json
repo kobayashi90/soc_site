@@ -3,7 +3,8 @@
         "CREATE",
         "UPDATE",
         "MANAGE_USER",
-        "SKIP_ADS"
+        "SKIP_ADS",
+        "DIRECT"
     ],
     "classes": [
         "Game",

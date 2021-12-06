@@ -1,15 +1,16 @@
-import { gql, useLazyQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 import Head from 'next/head'
 
-import client from '../../lib/ApolloClient'
-import useUser from '../../components/useUser'
 import styles from '../../styles/Album.module.scss'
-import { AlbumBoxList } from '../../components/AlbumBoxes'
-import { getImageUrl } from '../../components/utils'
+import client from '@/lib/ApolloClient'
+import useUser from '@/components/useUser'
+import { AlbumBoxList } from '@/components/AlbumBoxes'
+import { getImageUrl } from '@/components/utils'
+import Loader from '@/components/Loader'
 
 const query = gql`
 query Album ($id: ID!) {
@@ -46,17 +47,6 @@ query Album ($id: ID!) {
       url
       provider
     }
-    downloads{
-      title
-      small
-      links{
-        id
-        url
-        provider
-        custom
-        directUrl
-      }
-    }
     discs {
       number
       body
@@ -64,6 +54,22 @@ query Album ($id: ID!) {
     related {
       id
       title
+    }
+  }
+}
+`
+
+const queryDownload = gql`
+query downloads ($id: ID!) {
+  downloads(id: $id){
+    title
+    small
+    links{
+      id
+      url
+      provider
+      custom
+      directUrl
     }
   }
 }
@@ -96,17 +102,16 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
   const { data } = await client.query({ query, variables: { id } })
 
   if (data.album === null) return { redirect: { destination: '/404', permanent: false } }
-  return { props: { id, initialAlbum: data.album, imageUrl: fullImage(data.album.id, 50) }/*, revalidate: 60 */ }
+  return { props: { id, album: data.album, imageUrl: fullImage(data.album.id, 50) }/*, revalidate: 60 */ }
 }
 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
 
-export default function Page ({ id, initialAlbum, imageUrl }) {
+export default function Page ({ id, album, imageUrl }) {
   const { user } = useUser()
-  const [getAlbum, { data }] = useLazyQuery(query, { fetchPolicy: 'network-only' })
-  const album = data ? data.album : initialAlbum
+  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id }, fetchPolicy: 'network-only' })
 
-  useEffect(() => getAlbum({ variables: { id } }), [user, getAlbum, id])
+  useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
 
   return (
     <Row>
@@ -233,7 +238,15 @@ export default function Page ({ id, initialAlbum, imageUrl }) {
                   </Col>
                 </Row>)}
               <hr className='style-white w-100' />
-              {album.downloads.length > 0 && (album.downloads.map(({ links, title, provider }, di) => (
+
+              {loading && (
+                <Row>
+                  <Col>
+                    <Loader className='mx-auto'/>
+                  </Col>
+                </Row>
+              )}
+              {data?.downloads.map(({ links, title, provider }, di) => (
                 <Row key={di}>
                   <Col>
                     <Row>
@@ -250,9 +263,6 @@ export default function Page ({ id, initialAlbum, imageUrl }) {
                           <Col className='py-2'>
                             <Button variant="secondary" className={styles.download} href={url}>Download</Button>
                           </Col>
-                          {/* <Col className='py-2'>
-                          <Button variant="secondary" className={styles.download, styles.custom} href={custom}>Mirror</Button>
-                  </Col> */}
                           <Col className='py-2'>
                             <DirectButton directUrl={directUrl}></DirectButton>
                           </Col>
@@ -261,8 +271,7 @@ export default function Page ({ id, initialAlbum, imageUrl }) {
                     ))}
                     <hr className='style-white w-100' />
                   </Col>
-
-                </Row>)))}
+                </Row>)) }
             </Col>
           </Row>
 

@@ -36,7 +36,7 @@ export default function AddPublisher () {
       <div id='addPub' className='mb-2'>Add Publisher</div>
       <div className='site-form blackblock'>
         <Form onSubmit={handleSubmitForm}>
-          <Row form>
+          <Row>
             <Col md={8}>
               <FormControl type='text' name='name' />
             </Col>

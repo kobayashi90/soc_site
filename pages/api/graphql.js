@@ -4,7 +4,7 @@ import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
 
 import db from '@/lib/startDB'
-import withSession from '@/lib/session'
+import { withSessionApi } from '@/lib/session'
 import { processRequest } from 'graphql-upload'
 
 import mutationUser from '@/graphql/resolvers/mutations/user'
@@ -28,13 +28,13 @@ const apolloServer = new ApolloServer({
   typeDefs: mergeTypeDefs(loadFilesSync(path.join(process.cwd(), 'graphql/schemas'))),
   resolvers: mergeResolvers([...Mutation, ...Query, ...types]),
   context: async ({ req, res }) => {
-    const username = req.session.get('username')
+    const { username } = req.session
     return { db, req, res, username, user: username && await db.models.user.findByPk(username) }
   }
 })
 const startServer = apolloServer.start()
 
-export default withSession(async (req, res) => {
+export default withSessionApi(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
@@ -44,7 +44,7 @@ export default withSession(async (req, res) => {
     req.filePayload = await processRequest(req, res)
   }
 
-  await db.sync()
+  db.sync()
   await startServer
 
   return apolloServer.createHandler({ path: '/api/graphql' })(req, res)
