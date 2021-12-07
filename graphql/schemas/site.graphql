@@ -177,7 +177,7 @@
         publishers: [Publisher]! 
         publisher(id: ID!): Publisher!  
         series: [Series]!  
-        seriesOne(slug: String): Series!
+        seriesOne(slug: String): Series
         games: [Game!]!
         game(slug: String): Game!
         animations: [Animation]!

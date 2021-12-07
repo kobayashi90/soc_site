@@ -99,7 +99,7 @@ export const getServerSideProps = withSessionSsr(async ({ params, req }) => {
 
   if (!user) return { redirect: { destination: '/500', permanent: false } } */
 
-  const { data } = await client.query({ query, variables: { id }, context: { thisisatest: 123 } })
+  const { data } = await client.query({ query, variables: { id } })
   const { album, categories, classes } = data
 
   if (album === null) return { redirect: { destination: '/404', permanent: false } }
