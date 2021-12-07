@@ -2,7 +2,6 @@ module.exports = {
   eslint: { ignoreDuringBuilds: true },
   async redirects () {
     return [
-      { source: '/publisher/:id', destination: 'https://www.sittingonclouds.net/publisher/:id', permanent: false },
       { source: '/platform/:slug', destination: 'https://www.sittingonclouds.net/platform/:slug', permanent: false },
       { source: '/game/:slug', destination: 'https://www.sittingonclouds.net/game/:slug', permanent: false },
       { source: '/anim/:id', destination: 'https://www.sittingonclouds.net/anim/:id', permanent: false },
