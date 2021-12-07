@@ -108,7 +108,7 @@ export function DiscList (props) {
 
       <Row className='mt-3'>
         {keys.map((key, i) => (
-          <Col md={6} key={key}>
+          <Col md={6} key={key} className='mb-3'>
             <Row>
               <Col md={12}>
                 <Form.Group>
@@ -145,7 +145,7 @@ export function StoreDownloads (props) {
 
       <Row className='mt-3'>
         {keys.map((key, i) => (
-          <Col key={key} md={6}>
+          <Col key={key} md={6} className='mb-3'>
             <Row>
               <Col md={6}>
                 <Form.Group>
@@ -217,7 +217,7 @@ export function Downloads (props) {
       {values.map((cat, i) =>
         <Row key={cat.key}>
           <Col>
-            <Row>
+            <Row className='mb-3'>
               <Col>
                 <Form.Group className='mt-3'>
                   <Form.Label>Category {i + 1} title:</Form.Label>
@@ -250,7 +250,7 @@ export function Downloads (props) {
               </Col>
             </Row>
             {cat.links.map((link, i2) =>
-              <Row key={link.key}>
+              <Row key={link.key} className='mb-3'>
                 <Col>
                   <Row>
                     <Col md={4}>

@@ -154,7 +154,7 @@ function AddAlbum (props) {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
+        <Row className='mb-3'>
           <Col>
             <Form.Group>
               <Form.Label htmlFor='status'>Status:</Form.Label>
@@ -171,7 +171,7 @@ function AddAlbum (props) {
           </Col>
         </Row>
         <hr className='style2 style-white' />
-        <Row>
+        <Row className='mb-3'>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='artists'>Artists:</Form.Label>
