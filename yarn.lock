@@ -1536,7 +1536,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"array.prototype.flat@npm:^1.2.4, array.prototype.flat@npm:^1.2.5":
+"array.prototype.flat@npm:^1.2.5":
   version: 1.2.5
   resolution: "array.prototype.flat@npm:1.2.5"
   dependencies:
@@ -2101,13 +2101,6 @@ __metadata:
   version: 2.2.0
   resolution: "clean-stack@npm:2.2.0"
   checksum: 2ac8cd2b2f5ec986a3c743935ec85b07bc174d5421a5efc8017e1f146a1cf5f781ae962618f416352103b32c9cd7e203276e8c28241bbe946160cab16149fb68
-  languageName: node
-  linkType: hard
-
-"clone@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "clone@npm:2.1.2"
-  checksum: aaf106e9bc025b21333e2f4c12da539b568db4925c0501a1bf4070836c9e848c892fa22c35548ce0d1132b08bbbfa17a00144fe58fccdab6fa900fec4250f67d
   languageName: node
   linkType: hard
 
@@ -4076,16 +4069,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"iron-store@npm:^1.3.0":
-  version: 1.3.5
-  resolution: "iron-store@npm:1.3.5"
-  dependencies:
-    "@hapi/iron": ^6.0.0
-    clone: ^2.1.2
-  checksum: 7ad0af41c72cac87adbdb3a796ecfdad4d6d04ebec988da5724ec5e113324011267abb12e06b69ab9a06f978dd0f57d98322bc81b6ec7369bd8e3d803ea5c4c7
-  languageName: node
-  linkType: hard
-
 "is-arguments@npm:^1.0.4":
   version: 1.1.1
   resolution: "is-arguments@npm:1.1.1"
@@ -5003,20 +4986,6 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
-  languageName: node
-  linkType: hard
-
-"next-iron-session@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "next-iron-session@npm:4.2.0"
-  dependencies:
-    "@types/cookie": ^0.4.0
-    array.prototype.flat: ^1.2.4
-    clone: ^2.1.2
-    cookie: ^0.4.1
-    debug: ^4.3.1
-    iron-store: ^1.3.0
-  checksum: 51351f20a252e8a6362b11cd1c11a8adc6dbbf6c937881c858c7cd7456c0bb9b25853d63ce42871bb6010d86264405e909c712aee38a634111c659d56ffe87cd
   languageName: node
   linkType: hard
 
@@ -6725,7 +6694,6 @@ __metadata:
     micro: ^9.3.4
     mysql2: ^2.3.2
     next: 12.0.1
-    next-iron-session: ^4.2.0
     nodemailer: ^6.7.0
     normalize.css: ^8.0.1
     react: 17.0.2
