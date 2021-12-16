@@ -280,7 +280,7 @@ export default function Page ({ id, album, imageUrl }) {
               <Col>
                 <div className='blackblock w-100 m-3'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
               </Col>
-              <Row className='ljustify-content-center'>
+              <Row className='justify-content-center'>
                 <AlbumBoxList md={3} xs={6} items={album.related} />
               </Row>
             </Row>
