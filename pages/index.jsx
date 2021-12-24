@@ -2,9 +2,9 @@ import { Col, Row } from 'react-bootstrap'
 import { gql } from '@apollo/client'
 import Link from 'next/link'
 
-import Sidebar from '../components/Sidebar'
-import { AlbumBoxList } from '../components/AlbumBoxes'
-import client from '../lib/ApolloClient'
+import Sidebar from '@/components/Sidebar'
+import { AlbumBoxList } from '@/components/AlbumBoxes'
+import { initializeApollo } from '@/lib/ApolloClient'
 
 const md = 3
 const xs = 6
@@ -34,7 +34,9 @@ query searchAlbum($limit: Int){
 `
 
 export async function /* getStaticProps */ getServerSideProps () {
+  const client = initializeApollo()
   const { data } = await client.query({ query, variables: { limit } })
+
   console.log(data.added.rows[0])
   return { props: { ...data }/*, revalidate: 60 */ }
 }

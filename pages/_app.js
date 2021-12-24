@@ -16,13 +16,23 @@ import { useEffect, useRef } from 'react'
 import { ApolloProvider } from '@apollo/client'
 import SSRProvider from 'react-bootstrap/SSRProvider'
 
-import client from '@/lib/ApolloClient'
+import { initializeApollo, useApollo } from '@/lib/ApolloClient'
 import useUser from '@/components/useUser'
 import { skipAds } from '@/components/utils'
 import Header from '@/components/Header'
 // import SpookyGhosts from '../components/SpookyGhosts'
 
+export async function getStaticProps () {
+  const client = initializeApollo()
+
+  return {
+    props: { initialApollo: client.cache.extract() }
+  }
+}
+
 export default function MyApp ({ Component, pageProps }) {
+  const client = useApollo(pageProps.initialApollo)
+
   return (
     <ApolloProvider client={client}>
       <Head>
