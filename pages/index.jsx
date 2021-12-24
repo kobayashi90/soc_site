@@ -35,7 +35,7 @@ query searchAlbum($limit: Int){
 
 export async function /* getStaticProps */ getServerSideProps () {
   const { data } = await client.query({ query, fetchPolicy: 'network-only', variables: { limit } })
-  console.log(data)
+  console.log(data.added.rows[0])
   return { props: { ...data }/*, revalidate: 60 */ }
 }
 
