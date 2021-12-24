@@ -1,4 +1,4 @@
-const pages = require('../../../config/pages.json')
+const pages = require('@/config/pages.json')
 
 const userResolvable = {
   roles: parent => parent.getRoles(),

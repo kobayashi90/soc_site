@@ -1,11 +1,21 @@
-import { hasRole } from '@/lib/utils'
+import { permissions } from '@/config/info.json'
+import { ForbiddenError, AuthenticationError } from 'apollo-server-micro'
+import bcrypt from 'bcrypt'
+import { Op } from 'sequelize'
+import { composeResolvers } from '@graphql-tools/resolvers-composition'
 
-const { permissions } = require('../../../config/info.json')
+const isAuthed = next => (root, args, context, info) => {
+  if (!context.user) throw new AuthenticationError()
+  return next(root, args, context, info)
+}
+const hasPerm = perm => next => async (root, args, context, info) => {
+  const roles = await context.user.getRoles()
+  const permissions = roles.map(r => r.permissions).flat()
+  if (!permissions.includes(perm)) throw new ForbiddenError()
 
-const { composeResolvers } = require('@graphql-tools/resolvers-composition')
-const bcrypt = require('bcrypt')
-const { AuthenticationError } = require('apollo-server-micro')
-const { Op } = require('sequelize')
+  return next(root, args, context, info)
+}
+const hasRole = role => [isAuthed, hasPerm(role)]
 
 const resolversComposition = { 'Query.users': hasRole('MANAGE_USER') }
 const resolvers = {

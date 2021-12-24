@@ -1,14 +1,24 @@
 import bcrypt from 'bcrypt'
-import { UserInputError, ForbiddenError } from 'apollo-server-errors'
+import { UserInputError, ForbiddenError, AuthenticationError } from 'apollo-server-errors'
 import generator from 'generate-password'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 import { DateTime } from 'luxon'
 import { Op } from 'sequelize'
 
 import { createForgor } from '@/lib/forgor'
-import { hasRole, isAuthed } from '@/lib/utils'
 
-console.log(hasRole)
+const isAuthed = next => (root, args, context, info) => {
+  if (!context.user) throw new AuthenticationError()
+  return next(root, args, context, info)
+}
+const hasPerm = perm => next => async (root, args, context, info) => {
+  const roles = await context.user.getRoles()
+  const permissions = roles.map(r => r.permissions).flat()
+  if (!permissions.includes(perm)) throw new ForbiddenError()
+
+  return next(root, args, context, info)
+}
+const hasRole = role => [isAuthed, hasPerm(role)]
 
 const resolversComposition = {
   'Mutation.*': hasRole('MANAGE_USER'),
@@ -16,6 +26,7 @@ const resolversComposition = {
   'Mutation.createForgor': [],
   'Mutation.updateUser': [isAuthed]
 }
+
 const resolvers = {
   Mutation: {
     createUser: async (_, { username, email, roles }, { db }) => {

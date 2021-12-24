@@ -1,5 +1,5 @@
 const { Op } = require('sequelize')
-const info = require('../../../config/info.json')
+const info = require('@/config/info.json')
 
 module.exports = {
   Query: {
