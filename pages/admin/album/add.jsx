@@ -88,7 +88,7 @@ function AddAlbum (props) {
   const [currentClasses, setClasses] = useState('')
   const { data: classData } = useQuery(queryClasses)
 
-  const [addMutation, { loading }] = useMutation(mutation)
+  const [addMutation, { loading }] = useMutation(mutation, { refetchQueries: 'searchAlbum' })
 
   const classes = classData ? classData.classes : []
   const categories = classData ? classData.categories : []
