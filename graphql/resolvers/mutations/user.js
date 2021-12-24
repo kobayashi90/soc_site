@@ -8,6 +8,8 @@ import { Op } from 'sequelize'
 import { createForgor } from '@/lib/forgor'
 import { hasRole, isAuthed } from '@/lib/utils'
 
+console.log(hasRole)
+
 const resolversComposition = {
   'Mutation.*': hasRole('MANAGE_USER'),
   'Mutation.updatePass': [],
