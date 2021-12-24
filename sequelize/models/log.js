@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize')
-module.exports = sequelize => {
+import { DataTypes } from 'sequelize'
+const model = sequelize => {
   return sequelize.define('log', {
     id: {
       type: DataTypes.INTEGER,
@@ -13,3 +13,5 @@ module.exports = sequelize => {
     }
   })
 }
+
+export default model

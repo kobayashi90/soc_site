@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize')
-module.exports = sequelize => {
+import { DataTypes } from 'sequelize'
+const model = sequelize => {
   const Platform = sequelize.define('platform', {
     id: {
       type: DataTypes.INTEGER,
@@ -20,3 +20,5 @@ module.exports = sequelize => {
 
   return Platform
 }
+
+export default model

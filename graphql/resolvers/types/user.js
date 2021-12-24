@@ -1,4 +1,4 @@
-const pages = require('@/config/pages.json')
+import pages from '@/config/pages.json'
 
 const userResolvable = {
   roles: parent => parent.getRoles(),
@@ -14,8 +14,10 @@ const userResolvable = {
   }
 }
 
-module.exports = {
+const funcs = {
   User: userResolvable,
   UserMe: userResolvable,
   Role: { permissions: parent => typeof parent.permissions === 'string' || parent.permissions instanceof String ? JSON.parse(parent.permissions) : parent.permissions }
 }
+
+export default funcs

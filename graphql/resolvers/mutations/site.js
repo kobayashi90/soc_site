@@ -1,7 +1,7 @@
 
-const { AuthenticationError } = require('apollo-server-micro')
+// import { AuthenticationError } from 'apollo-server-micro'
 // const { jwtApi } = require('../../useJwt')
-const { img } = require('../helpers')
+// const { img } = require('../helpers')
 
 module.exports = {
   Mutation: {

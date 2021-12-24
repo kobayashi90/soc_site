@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize')
-module.exports = sequelize => {
+import { DataTypes } from 'sequelize'
+const model = sequelize => {
   const User = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,
@@ -16,3 +16,5 @@ module.exports = sequelize => {
 
   return User
 }
+
+export default model

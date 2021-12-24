@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize')
+import { DataTypes } from 'sequelize'
 
-module.exports = sequelize => {
+const model = sequelize => {
   const Ost = sequelize.define('ost', {
     id: {
       type: DataTypes.INTEGER,
@@ -21,3 +21,5 @@ module.exports = sequelize => {
 
   return Ost
 }
+
+export default model

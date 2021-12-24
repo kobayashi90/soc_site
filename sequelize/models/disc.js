@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize')
-module.exports = sequelize => {
+import { DataTypes } from 'sequelize'
+const model = sequelize => {
   const Disc = sequelize.define('disc', {
     number: DataTypes.INTEGER,
     body: DataTypes.TEXT
@@ -7,3 +7,5 @@ module.exports = sequelize => {
 
   return Disc
 }
+
+export default model

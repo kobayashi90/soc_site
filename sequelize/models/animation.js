@@ -1,5 +1,6 @@
-const { DataTypes } = require('sequelize')
-module.exports = sequelize => {
+import { DataTypes } from 'sequelize'
+
+const animation = sequelize => {
   sequelize.define('animation', {
     id: {
       type: DataTypes.INTEGER,
@@ -19,3 +20,5 @@ module.exports = sequelize => {
     name: DataTypes.STRING
   }, { freezeTableName: true })
 }
+
+export default animation

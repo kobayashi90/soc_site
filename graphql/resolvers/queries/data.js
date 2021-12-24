@@ -1,5 +1,5 @@
-const { Op } = require('sequelize')
-const info = require('@/config/info.json')
+import { Op } from 'sequelize'
+import info from '@/config/info.json'
 
 module.exports = {
   Query: {
