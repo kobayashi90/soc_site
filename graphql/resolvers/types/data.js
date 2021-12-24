@@ -1,4 +1,4 @@
-import { GraphQLUpload } from 'node_modules/graphql-upload/public/index.js'
+import GraphQLUpload from 'graphql-upload/public/GraphQLUpload.js'
 
 module.exports = {
   Upload: GraphQLUpload,
