@@ -9,7 +9,7 @@ function SelectorBase (props) {
   const { startQuery, changeQuery } = props
   const [query, setQuery] = useState(startQuery)
   const [title, setTitle] = useState()
-  const { data, error, loading } = useQuery(gql`${query}`, { variables: { limit: 10, title }, fetchPolicy: 'network-only' })
+  const { data, error, loading } = useQuery(gql`${query}`, { variables: { limit: 10, title },  })
 
   if (error) {
     console.log(error)

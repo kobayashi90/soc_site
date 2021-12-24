@@ -109,7 +109,7 @@ const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${
 
 export default function Page ({ id, album, imageUrl }) {
   const { user } = useUser()
-  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id }, fetchPolicy: 'network-only' })
+  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
 
   useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
 

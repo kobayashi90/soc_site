@@ -18,7 +18,7 @@ export async function /* getStaticProps */ getServerSideProps () {
             }
         }
     `,
-    fetchPolicy: 'network-only'
+    
   })
 
   const series = {}

@@ -19,8 +19,8 @@ export async function /* getStaticProps */ getServerSideProps () {
                 title
             }
         }
-    }`,
-    fetchPolicy: 'network-only'
+    }`
+
   })
 
   return { props: { ...data.result }/*, revalidate: 60 */ }

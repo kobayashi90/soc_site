@@ -134,7 +134,7 @@ function EditOstForm ({ id, album, classes, categories }) {
   const [currentClasses, setClasses] = useState('')
 
   const { user } = useUser()
-  const { data, refetch } = useQuery(queryDownload, { variables: { id }, fetchPolicy: 'network-only' })
+  const { data, refetch } = useQuery(queryDownload, { variables: { id },  })
   useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
 
   function handleSubmitForm (e) {

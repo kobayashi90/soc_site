@@ -15,7 +15,7 @@ export async function /* getStaticProps */ getServerSideProps () {
           name
         }
       }`,
-    fetchPolicy: 'network-only'
+    
   })
 
   const publishers = {}
