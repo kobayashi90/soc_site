@@ -32,8 +32,6 @@ export default function AddSeries () {
     const data = serialize(e.target, { hash: true })
     data.cover = e.target.elements.cover.files[0]
 
-    console.log(data)
-
     mutate({ mutation, variables: data }).then(results => {
       toast.success(`Added "${data.name}" series succesfully!`)
       e.target.reset()

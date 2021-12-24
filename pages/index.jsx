@@ -37,7 +37,6 @@ export async function /* getStaticProps */ getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { limit } })
 
-  console.log(data.added.rows[0])
   return { props: { ...data }/*, revalidate: 60 */ }
 }
 
