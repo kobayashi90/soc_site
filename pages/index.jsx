@@ -10,34 +10,32 @@ const md = 3
 const xs = 6
 const limit = 12
 
+const query = gql`
+query searchAlbum($limit: Int){
+  released: searchAlbum(
+    limit: $limit,
+    status: ["show","coming"],
+    order: ["releaseDate", "createdAt"]
+  ){
+    rows{
+      id,
+      status
+      title
+    }
+  },
+
+  added: searchAlbum(limit: $limit){
+    rows{
+      id,
+      title
+    }
+  }
+}
+`
+
 export async function /* getStaticProps */ getServerSideProps () {
-  const { data } = await client.query({
-    query: gql`
-      query searchAlbum($limit: Int){
-        released: searchAlbum(
-          limit: $limit,
-          status: ["show","coming"],
-          order: ["releaseDate", "createdAt"]
-        ){
-          rows{
-            id,
-            status
-            title
-          }
-        },
-
-        added: searchAlbum(limit: $limit){
-          rows{
-            id,
-            title
-          }
-        }
-      }
-    `,
-    fetchPolicy: 'network-only',
-    variables: { limit }
-  })
-
+  const { data } = await client.query({ query, fetchPolicy: 'network-only', variables: { limit } })
+  console.log(data)
   return { props: { ...data }/*, revalidate: 60 */ }
 }
 
