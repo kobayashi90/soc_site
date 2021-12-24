@@ -4,13 +4,12 @@ import { Container, Col, Row } from 'react-bootstrap'
 import Link from 'next/link'
 
 import styles from '../../styles/LastAdded.module.scss'
-
-import client from '../../lib/ApolloClient'
-import { AlbumBoxList } from '../../components/AlbumBoxes'
+import { AlbumBoxList } from '@/components/AlbumBoxes'
 import React from 'react'
 import classNames from 'classnames'
 
-import { getFullPageList, getPageList } from '../../components/utils'
+import { getFullPageList, getPageList } from '@/components/utils'
+import { initializeApollo } from '@/lib/ApolloClient'
 
 const limit = 80
 const limitMD = 15
@@ -29,6 +28,7 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
   const paramList = params?.params || []
   const page = paramList[0] || '1'
 
+  const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
       query SearchAlbum(

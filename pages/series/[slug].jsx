@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import classNames from 'classnames'
 
-import client from '@/lib/ApolloClient'
+import { initializeApollo } from '@/lib/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 
 import AlbumBoxStyles from '../../styles/AlbumBoxes.module.scss'
@@ -35,6 +35,7 @@ const query = gql`
 
 export const getServerSideProps = async ({ params, req }) => {
   const { slug } = params
+  const client = initializeApollo()
   const { data } = await client.query({ query, variables: { slug } })
   const { seriesOne } = data
 

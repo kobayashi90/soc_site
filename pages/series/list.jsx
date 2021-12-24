@@ -4,11 +4,12 @@ import classname from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import client from '../../lib/ApolloClient'
-import { getImageUrl } from '../../components/utils'
+import { initializeApollo } from '@/lib/ApolloClient'
+import { getImageUrl } from '@/components/utils'
 import style from '../../styles/letter.module.scss'
 
 export async function /* getStaticProps */ getServerSideProps () {
+  const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
         query {
@@ -17,8 +18,7 @@ export async function /* getStaticProps */ getServerSideProps () {
                 name
             }
         }
-    `,
-    
+    `
   })
 
   const series = {}

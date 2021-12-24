@@ -6,7 +6,7 @@ import { DateTime } from 'luxon'
 import Image from 'next/image'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
-import client from '@/lib/ApolloClient'
+import { initializeApollo } from '@/lib/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 
 const query = gql`
@@ -38,6 +38,7 @@ const query = gql`
 
 export async function /* getStaticProps */ getServerSideProps ({ params }) {
   const { slug } = params
+  const client = initializeApollo()
   const { data } = await client.query({ query, variables: { slug } })
   const { game } = data
 

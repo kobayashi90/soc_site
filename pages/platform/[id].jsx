@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client'
 import { Row, Col } from 'react-bootstrap'
-import Sidebar from '../../components/Sidebar'
+import Sidebar from '@/components/Sidebar'
 import Link from 'next/link'
-import client from '../../lib/ApolloClient'
+import { initializeApollo } from '@/lib/ApolloClient'
 
 export async function /* getStaticProps */ getServerSideProps ({ params }) {
   const { id } = params
+  const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
       query platform ($id: ID!){

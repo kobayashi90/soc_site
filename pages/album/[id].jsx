@@ -6,11 +6,12 @@ import classNames from 'classnames'
 import Head from 'next/head'
 
 import styles from '../../styles/Album.module.scss'
-import client from '@/lib/ApolloClient'
+
 import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl } from '@/components/utils'
 import Loader from '@/components/Loader'
+import { initializeApollo } from '@/lib/ApolloClient'
 
 const query = gql`
 query Album ($id: ID!) {
@@ -76,7 +77,8 @@ query downloads ($id: ID!) {
 `
 
 /* export async function getStaticPaths () {
-  const { data } = await client.query({
+  const client = initializeApollo()
+const { data } = await client.query({
     query: gql`
       query searchAlbum($limit: Int, $page: Int ){
         searchAlbum(
@@ -99,6 +101,7 @@ query downloads ($id: ID!) {
 
 export async function /* getStaticProps */ getServerSideProps ({ params, req }) {
   const { id } = params
+  const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
 
   if (data.album === null) return { redirect: { destination: '/404', permanent: false } }

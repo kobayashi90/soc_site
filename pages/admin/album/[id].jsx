@@ -5,11 +5,11 @@ import { Col, Row, Form, FormControl, Container } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
 import { withSessionSsr } from '@/lib/session'
-import client from '@/lib/ApolloClient'
 import { OstSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, DiscList, StoreDownloads, Downloads } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
 import useUser from '@/components/useUser'
+import { initializeApollo } from '@/lib/ApolloClient'
 
 const capitalize = (s) => {
   if (typeof s !== 'string') return ''
@@ -99,6 +99,7 @@ export const getServerSideProps = withSessionSsr(async ({ params, req }) => {
 
   if (!user) return { redirect: { destination: '/500', permanent: false } } */
 
+  const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
   const { album, categories, classes } = data
 
@@ -134,7 +135,7 @@ function EditOstForm ({ id, album, classes, categories }) {
   const [currentClasses, setClasses] = useState('')
 
   const { user } = useUser()
-  const { data, refetch } = useQuery(queryDownload, { variables: { id },  })
+  const { data, refetch } = useQuery(queryDownload, { variables: { id } })
   useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
 
   function handleSubmitForm (e) {

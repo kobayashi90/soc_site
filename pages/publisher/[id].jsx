@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 
 import Sidebar from '@/components/Sidebar'
-import client from '@/lib/ApolloClient'
+import { initializeApollo } from '@/lib/ApolloClient'
 
 const query = gql`
   query publisher ($id: ID!) {
@@ -20,6 +20,7 @@ const query = gql`
 
 export const getServerSideProps = async ({ params, req }) => {
   const { id } = params
+  const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
   const { publisher } = data
 

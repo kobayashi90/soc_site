@@ -1,15 +1,16 @@
 import { gql } from '@apollo/client'
 import { Row, Col, Button } from 'react-bootstrap'
-import Sidebar from '../../components/Sidebar'
+import Sidebar from '@/components/Sidebar'
 import { DateTime } from 'luxon'
 import classname from 'classnames'
 import Link from 'next/link'
-import client from '../../lib/ApolloClient'
+import { initializeApollo } from '@/lib/ApolloClient'
 
 import style from '../../styles/letter.module.scss'
 
 export async function /* getStaticProps */ getServerSideProps () {
   const albums = {}
+  const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
       query {

@@ -2,13 +2,14 @@ import { Fragment } from 'react'
 import { gql } from '@apollo/client'
 import { Row, Col, Button } from 'react-bootstrap'
 
-import client from '../../lib/ApolloClient'
-import { AlbumBoxList } from '../../components/AlbumBoxes'
+import { initializeApollo } from '@/lib/ApolloClient'
+import { AlbumBoxList } from '@/components/AlbumBoxes'
 import classname from 'classnames'
-import Sidebar from '../../components/Sidebar'
+import Sidebar from '@/components/Sidebar'
 import style from '../../styles/letter.module.scss'
 
 export async function /* getStaticProps */ getServerSideProps () {
+  const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
       query {
@@ -17,8 +18,7 @@ export async function /* getStaticProps */ getServerSideProps () {
             title
             subTitle
         }
-      }`,
-    
+      }`
   })
 
   const animations = {}

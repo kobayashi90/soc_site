@@ -2,10 +2,11 @@ import { gql } from '@apollo/client'
 import { Container, Col, Row } from 'react-bootstrap'
 import Link from 'next/link'
 
-import client from '../../lib/ApolloClient'
-import { AlbumBoxList } from '../../components/AlbumBoxes'
+import { initializeApollo } from '@/lib/ApolloClient'
+import { AlbumBoxList } from '@/components/AlbumBoxes'
 
 export async function /* getStaticProps */ getServerSideProps () {
+  const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
         query {
@@ -20,8 +21,8 @@ export async function /* getStaticProps */ getServerSideProps () {
             }
           },
         }
-      `,
-    
+      `
+
   })
 
   return { props: { ...data.result }/*, revalidate: 60 */ }
