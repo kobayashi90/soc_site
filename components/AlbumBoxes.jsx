@@ -16,7 +16,7 @@ export default function AlbumBox (props) {
           <div className={styles.img}>
             <Image alt={title} src={getImageUrl(id, type)} layout='responsive' width={width} height={height} />
           </div>
-          <div className='text-wrap text-center px-1 py-1'>
+          <div className='text-wrap text-center p-2'>
             {coming ? 'Coming Soon' : title}
           </div>
         </a>
