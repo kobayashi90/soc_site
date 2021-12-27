@@ -38,6 +38,8 @@ const resolvers = {
           postReddit(ost)
           postDiscord(ost)
         }
+
+        setTimeout(process.exit, 30 * 1000)
         return ost
       })
     },

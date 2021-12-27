@@ -5,7 +5,9 @@ domainNames.forEach(d => domains.push(`sittingonclouds.${d}`, `www.sittingonclou
 
 module.exports = {
   eslint: { ignoreDuringBuilds: true },
-  domains: ['beta.sittingonclouds.net'],
+  /* images: {
+    domains: ['beta.sittingonclouds.net', ...domains]
+  }, */
   async redirects () {
     return [
       { source: '/anim/:id', destination: 'https://www.sittingonclouds.com/anim/:id', permanent: false },
