@@ -1,6 +1,11 @@
+const domainNames = ['net']
+const domains = []
+
+domainNames.forEach(d => domains.push(`sittingonclouds.${d}`, `www.sittingonclouds.${d}`))
+
 module.exports = {
   eslint: { ignoreDuringBuilds: true },
-  domains: ['sittingonclouds.net'],
+  domains,
   async redirects () {
     return [
       { source: '/anim/:id', destination: 'https://www.sittingonclouds.com/anim/:id', permanent: false },
