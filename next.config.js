@@ -1,5 +1,6 @@
 module.exports = {
   eslint: { ignoreDuringBuilds: true },
+  domains: ['sittingonclouds.net'],
   async redirects () {
     return [
       { source: '/anim/:id', destination: 'https://www.sittingonclouds.com/anim/:id', permanent: false },
