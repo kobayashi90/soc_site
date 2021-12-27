@@ -1,7 +1,7 @@
 
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 import { hasRole, img, createLog, createUpdateLog } from '@/lib/utils'
-import { postDiscord, postReddit } from '@/lib/plugins'
+import { postReddit } from '@/lib/plugins'
 import { slugify } from '@/components/utils'
 
 const resolversComposition = { 'Mutation.*': hasRole('UPDATE') }
@@ -232,7 +232,7 @@ const resolvers = {
 
         if (triggerPost) {
           postReddit(ost)
-          postDiscord(ost)
+          // postDiscord(ost)
         }
         return ost
       })

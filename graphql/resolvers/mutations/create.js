@@ -2,7 +2,7 @@ import { UserInputError } from 'apollo-server-errors'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 
 import { hasRole, img, createLog, createUpdateLog } from '@/lib/utils'
-import { postDiscord, postReddit } from '@/lib/plugins'
+import { postReddit } from '@/lib/plugins'
 import { slugify } from '@/components/utils'
 
 const resolversComposition = { 'Mutation.*': hasRole('CREATE') }
@@ -32,14 +32,17 @@ const resolvers = {
           createLog(db, 'createAlbum', data, user.username)
         ])
 
-        if (data.cover) await img(data.cover, 'album', ost.dataValues.id)
+        const { id } = ost.dataValues
+        if (data.cover) await img(data.cover, 'album', id)
 
         if (ost.status === 'show') {
           postReddit(ost)
-          postDiscord(ost)
+          // postDiscord(ost)
+
+          await db.models.pending.create({ id })
         }
 
-        setTimeout(process.exit, 30 * 1000)
+        setTimeout(process.exit, 10 * 1000)
         return ost
       })
     },

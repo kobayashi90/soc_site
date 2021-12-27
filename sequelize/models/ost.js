@@ -19,6 +19,8 @@ const model = sequelize => {
     freezeTableName: true
   })
 
+  sequelize.define('pending', { id: DataTypes.INTEGER })
+
   return Ost
 }
 
