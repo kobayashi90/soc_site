@@ -19,7 +19,7 @@ const model = sequelize => {
     freezeTableName: true
   })
 
-  sequelize.define('pending', { id: DataTypes.INTEGER })
+  sequelize.define('pending', { id: { primaryKey: true, type: DataTypes.INTEGER } })
 
   return Ost
 }
