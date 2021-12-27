@@ -16,7 +16,7 @@ export default function AlbumBox (props) {
           <div className={styles.img}>
             <Image alt={title} src={getImageUrl(id, type)} layout='responsive' width={width} height={height} />
           </div>
-          <div className='text-wrap text-center px-1 py-2'>
+          <div className='text-wrap text-center px-1 py-1'>
             {coming ? 'Coming Soon' : title}
           </div>
         </a>
@@ -27,7 +27,7 @@ export default function AlbumBox (props) {
 
 export function AlbumBoxList ({ xs, md, items, type, width, height }) {
   return items.map(props => (
-    <Col xs={xs} md={md} key={props.id} className='px-1 mb-3'>
+    <Col xs={xs} md={md} key={props.id} className='px-1 mb-2'>
       <AlbumBox {...props} type={type} width={width} height={height}/>
     </Col>
   ))

@@ -125,7 +125,7 @@ export default function Page ({ id, album, imageUrl }) {
         <meta key='desc' property='og:description' content={album.subTitle || album.artists.map(a => a.name).join(' - ')} />
         <meta key='image' property='og:image' content={imageUrl} />
       </Head>
-      <Col className={classNames(styles.content, 'px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(album.id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
+      <Col className={classNames(styles.content, 'p-0 px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(album.id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
         <Container className='px-5'>
           <Row>
             <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} /></Col>
@@ -227,13 +227,13 @@ export default function Page ({ id, album, imageUrl }) {
               {album.stores.length > 0 && (
                 <Row className='mt-2 px-3'>
                   <Col className={styles.stores} style={{ paddingLeft: '15px', paddingTop: '10px', paddingRight: '15px', paddingBottom: '10px' }}>
-                    <h1 className='text-center homeTitle' style={{ fontSize: '40px' }}>Buy The Original Soundtrack to support the artists</h1>
+                    <h1 className='text-center homeTitle' style={{ fontSize: '30px' }}>Buy The Original Soundtrack to support the artists</h1>
                     <hr className='style-white w-100 mt-0' />
                     <Row>
                       {album.stores.map(({ url, provider }, i) => (
                         <Col md={6} key={i} className='d-flex justify-content-center'>
                           <a target='_blank' rel='noopener noreferrer' href={url}>
-                            <Image width={190} height={65} alt={provider} src={`/img/provider/${provider}.jpg`} />
+                            <Image className="rounded" width={190} height={65} alt={provider} src={`/img/provider/${provider}.jpg`} />
                           </a>
                         </Col>
                       ))}
@@ -281,7 +281,7 @@ export default function Page ({ id, album, imageUrl }) {
           {album.related.length > 0 && (
             <Row>
               <Col>
-                <div className='blackblock w-100 m-3'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
+                <div className='blackblock m-2'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
               </Col>
               <Row className='justify-content-center'>
                 <AlbumBoxList md={3} xs={6} items={album.related} />

@@ -126,3 +126,10 @@ nav {
 .btn-primary {
   margin-right: 10px;
 }
+
+@media (min-width: 768px) {
+  .px-5 {
+    padding-right: 0!important;
+    padding-left: 0!important;
+  }
+}
