@@ -29,18 +29,6 @@ export default function Sidebar ({ radio = false, index = false }) {
       )}
       <Row className='px-3'>
         <Col md={12} className={styles.socials}>
-          <Row>
-            <Col className='d-flex pe-1'>
-              <div className='ms-auto' >
-                <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={50} width={50}></Image>
-              </div>
-            </Col>
-            <Col className='d-flex ps-1'>
-              <div className='me-auto' >
-                <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={50} width={50}></Image>
-              </div>
-            </Col>
-          </Row>
           <Row className='mt-3'>
             <Col md={12}>
               {/* <h5 className='text-center'>JOIN US ON DISCORD</h5> */}
@@ -51,6 +39,18 @@ export default function Sidebar ({ radio = false, index = false }) {
             <Col md={12} className='d-flex justify-content-center'>
               <a target='_blank' rel='noopener noreferrer' href='https://www.paypal.com/donate/?hosted_button_id=Z9M2YNXKCV9XQ'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='paypal' src='/img/assets/paypal-donate-button.png' /></a>
               {/* <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/U7U11Q6QU'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='ko-fi' src='/img/assets/ko-fi-donate-button.png' /></a> */}
+            </Col>
+          </Row>
+          <Row>
+            <Col className='d-flex pe-1'>
+              <div className='ms-auto' >
+                <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={50} width={50}></Image>
+              </div>
+            </Col>
+            <Col className='d-flex ps-1'>
+              <div className='me-auto' >
+                <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={50} width={50}></Image>
+              </div>
             </Col>
           </Row>
         </Col>
