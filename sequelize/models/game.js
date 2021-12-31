@@ -9,7 +9,8 @@ const model = sequelize => {
       type: DataTypes.STRING
 
     },
-    releaseDate: DataTypes.DATEONLY
+    releaseDate: DataTypes.DATEONLY,
+    placeholder: DataTypes.TEXT
   },
   {
     freezeTableName: true

@@ -9,7 +9,8 @@ const animation = sequelize => {
     },
     title: { type: DataTypes.STRING, unique: true },
     subTitle: { type: DataTypes.STRING },
-    releaseDate: DataTypes.DATEONLY
+    releaseDate: DataTypes.DATEONLY,
+    placeholder: DataTypes.TEXT
   }, { freezeTableName: true })
 
   sequelize.define('studio', {

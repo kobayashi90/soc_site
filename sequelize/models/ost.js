@@ -13,7 +13,8 @@ const model = sequelize =>
     label: DataTypes.STRING,
     vgmdb: DataTypes.STRING,
     description: DataTypes.STRING,
-    status: { type: DataTypes.STRING, defaultValue: 'show' }
+    status: { type: DataTypes.STRING, defaultValue: 'show' },
+    placeholder: DataTypes.TEXT
   },
   {
     freezeTableName: true
