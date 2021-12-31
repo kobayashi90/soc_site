@@ -239,7 +239,7 @@ export default function Header () {
                   { name: 'Animation List', href: '/anim/list' },
                   { name: 'Studios', href: '/studio/list' }
                 ]} />
-                <NavLink href='/' name='Contact' />
+                <NavLink href='/contact' name='Contact' />
                 {user && user.pages.map(p => <NavLink key={p.url} href={p.url} name={p.name} />)}
               </Nav>
             </Navbar.Collapse>
