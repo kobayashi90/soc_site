@@ -15,8 +15,6 @@ import useUser from './useUser'
 import { ButtonLoader } from './Loader'
 import logo from '../public/img/assets/logo.png'
 
-const bgUrl = process.env.NODE_ENV === 'development' ? '/img/banner_default.png' : '/img/live/banner.png'
-
 export default function Header () {
   const { user, refetch } = useUser()
   const client = useApolloClient()
@@ -200,7 +198,7 @@ export default function Header () {
       </Modal>
 
       <header>
-        <div id={styles.bannerBg} style={{ backgroundImage: `url('/_next/image?w=3840&q=100&url=${bgUrl}` }}>
+        <div id={styles.bannerBg} style={{ backgroundImage: `url('/_next/image?w=3840&q=100&url=${'https://cdn.sawako.party/live/banner.png'}` }}>
           <Container>
             <Row className='h-100'>
               <Col className='my-auto'>

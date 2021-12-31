@@ -4,7 +4,7 @@ function isString (obj) {
   return (Object.prototype.toString.call(obj) === '[object String]')
 }
 
-export const getImageUrl = (id, type = 'album') => `/img/${type}/${process.env.NODE_ENV === 'development' ? 'default.png' : `live/${id}.png`}`
+export const getImageUrl = (id, type = 'album') => `https://cdn.sawako.party/${type}/${id}.png`
 export const skipAds = user => user && user.permissions.includes('SKIP_ADS')
 export const getFullPageList = (count, limit) => [...Array(Math.ceil(count / limit))].map((v, i) => i + 1)
 export const getPageList = (fullPageList, pageLimit, page) => {

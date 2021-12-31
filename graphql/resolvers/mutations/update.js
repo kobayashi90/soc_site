@@ -1,7 +1,7 @@
 
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 import { hasRole, img, createLog, createUpdateLog } from '@/lib/utils'
-import { postReddit } from '@/lib/plugins'
+import { postReddit, postDiscord } from '@/lib/plugins'
 import { slugify } from '@/components/utils'
 
 const resolversComposition = { 'Mutation.*': hasRole('UPDATE') }
@@ -125,7 +125,7 @@ const resolvers = {
           game.setPlatforms(data.platforms)
         ])
 
-        await img(data.cover, 'game', data.slug)
+        if (data.cover) await img(data.cover, 'game', data.slug)
         await createLog(db, 'createGame', data, user.username)
         return game
       })
@@ -168,7 +168,8 @@ const resolvers = {
       return db.transaction(async () => {
         const anim = await db.models.animation.create(data)
         await anim.setStudios(data.studios)
-        await img(data.cover, 'anim', anim.id, 100)
+
+        if (data.cover) await img(data.cover, 'anim', anim.id)
 
         await createLog(db, 'createAnimation', data, user.username)
 
@@ -182,7 +183,7 @@ const resolvers = {
           anim[key] = value
         })
         anim.setStudios(data.studios)
-        if (data.cover) await img(data.cover, 'anim', anim.id, 100)
+        if (data.cover) await img(data.cover, 'anim', anim.id)
 
         await anim.save()
         await createUpdateLog(db, 'updateAnimation', anim, user.username)
@@ -232,7 +233,7 @@ const resolvers = {
 
         if (triggerPost) {
           postReddit(ost)
-          // postDiscord(ost)
+          postDiscord(ost.id)
         }
         return ost
       })

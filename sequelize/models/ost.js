@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 
-const model = sequelize => {
-  const Ost = sequelize.define('ost', {
+const model = sequelize =>
+  sequelize.define('ost', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -18,10 +18,5 @@ const model = sequelize => {
   {
     freezeTableName: true
   })
-
-  sequelize.define('pending', { id: { primaryKey: true, type: DataTypes.INTEGER } })
-
-  return Ost
-}
 
 export default model

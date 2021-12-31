@@ -2,7 +2,7 @@ import { UserInputError } from 'apollo-server-errors'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 
 import { hasRole, img, createLog, createUpdateLog } from '@/lib/utils'
-import { postReddit } from '@/lib/plugins'
+import { postReddit, postDiscord } from '@/lib/plugins'
 import { slugify } from '@/components/utils'
 
 const resolversComposition = { 'Mutation.*': hasRole('CREATE') }
@@ -37,12 +37,9 @@ const resolvers = {
 
         if (ost.status === 'show') {
           postReddit(ost)
-          // postDiscord(ost)
-
-          await db.models.pending.create({ id })
+          postDiscord(ost.id)
         }
 
-        setTimeout(process.exit, 10 * 1000)
         return ost
       })
     },

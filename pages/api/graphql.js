@@ -5,7 +5,6 @@ import { ApolloServerPluginLandingPageDisabled, ApolloServerPluginLandingPageLoc
 
 import db from '@/lib/startDB'
 import { withSessionApi } from '@/lib/session'
-import { postDiscord } from '@/lib/plugins'
 
 import mutationUser from '@/graphql/resolvers/mutations/user'
 import mutationCreate from '@/graphql/resolvers/mutations/create'
@@ -56,14 +55,6 @@ export default withSessionApi(async (req, res) => {
 
   db.sync()
   await startServer
-
-  setTimeout(async () => {
-    const list = await db.models.pending.findAll()
-    list.forEach(l => {
-      postDiscord(l.id)
-      l.destroy()
-    })
-  }, 5 * 1000)
   return apolloServer.createHandler({ path: '/api/graphql' })(req, res)
 })
 
