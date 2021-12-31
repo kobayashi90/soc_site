@@ -32,19 +32,19 @@ export default function Sidebar ({ radio = false, index = false }) {
           <Row>
             <Col className='d-flex pe-1'>
               <div className='ms-auto' >
-                <Image src='/img/assets/yt.png' alt='youtube' height={50} width={50}></Image>
+                <a href='https://www.youtube.com/channel/UCb1Q0GuOa8p_7fY-pYnWCmQ' target='_blank' rel='noopener noreferrer'><Image src='/img/assets/yt.png' alt='youtube' height={50} width={50}></Image></a>
               </div>
             </Col>
             <Col className='d-flex ps-1'>
               <div className='me-auto' >
-                <Image src='/img/assets/twitter.png' alt='twitter' height={50} width={50}></Image>
+                <a href='https://twitter.com/SittingOnCloud' target='_blank' rel='noopener noreferrer'><Image src='/img/assets/twitter.png' alt='twitter' height={50} width={50}></Image></a>
               </div>
             </Col>
           </Row>
           <Row className='mt-3'>
             <Col md={12}>
               <h5 className='text-center'>JOIN US ON DISCORD</h5>
-              <a className='d-flex justify-content-center' href='https://discord.gg/sittingonclouds'><img alt='' style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} src='/img/assets/discord.png' /></a>
+              <a className='d-flex justify-content-center px-1' href='https://discord.gg/sittingonclouds'><img alt='' style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%', borderRadius: '10px' }} src='/img/assets/discord.png' /></a>
             </Col>
           </Row>
           <Row className='mt-1'>
