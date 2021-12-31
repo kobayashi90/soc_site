@@ -15,6 +15,7 @@ const query = gql`
         slug
         name
         releaseDate
+        placeholder
         publishers {
           id
           name
@@ -32,6 +33,7 @@ const query = gql`
           title
           releaseDate
           createdAt
+          placeholder
         }
       }
     }`
@@ -48,7 +50,7 @@ export async function /* getStaticProps */ getServerSideProps ({ params }) {
 }
 
 export default function GameDetail (props) {
-  const { slug, name, releaseDate, publishers, platforms, series, albums } = props
+  const { slug, name, releaseDate, publishers, platforms, series, albums, placeholder } = props
 
   return (
     <Container>
@@ -61,8 +63,9 @@ export default function GameDetail (props) {
         <Col xs={12} md={4} className='blackblock w-md-auto'>
           <div className='p-1 position-relative w-100 h-100'>
             <Image
-              layout='fill'
-              alt={name} src={getImageUrl(slug, 'game')} />
+              layout='fill' placeholder='blur'
+              alt={name} src={getImageUrl(slug, 'game')}
+              blurDataURL={placeholder} />
           </div>
         </Col>
         <Col md={8} className='blackblock my-0 d-flex justify-content-center flex-column'>

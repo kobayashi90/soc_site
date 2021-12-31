@@ -40,8 +40,9 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
           page: $page
         ){
           rows{
-            id,
+            id
             title
+            placeholder
           }
           count
         }

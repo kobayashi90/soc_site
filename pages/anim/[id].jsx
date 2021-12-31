@@ -18,6 +18,7 @@ query animation ($id: ID) {
     title
     subTitle
     releaseDate
+    placeholder
     studios {
       slug 
       name
@@ -27,6 +28,7 @@ query animation ($id: ID) {
       title
       createdAt
       releaseDate
+      placeholder
     }
   }
 }`
@@ -66,7 +68,7 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'anim')}`
 
-export default function Page ({ id, title, subTitle, releaseDate, studios, albums, imageUrl }) {
+export default function Page ({ id, title, subTitle, releaseDate, studios, albums, imageUrl, placeholder }) {
   return (
     <Row>
       <Head>
@@ -77,7 +79,7 @@ export default function Page ({ id, title, subTitle, releaseDate, studios, album
       <Col className={classNames(styles.content, 'px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
         <Container className='px-5'>
           <Row>
-            <Col lg={5}><Image layout='responsive' width={300} height={300} alt={title} src={getImageUrl(id, 'anim')} /></Col>
+            <Col lg={5}><Image layout='responsive' width={300} height={300} alt={title} src={getImageUrl(id, 'anim')} placeholder='blur' blurDataURL={placeholder} /></Col>
             <Col lg={7} className='blackblock'>
               <h1 className={classNames('text-center', styles.title)}>{title}</h1>
               <h6 className='text-center'>{subTitle}</h6>

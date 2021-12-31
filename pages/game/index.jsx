@@ -16,8 +16,9 @@ export async function /* getStaticProps */ getServerSideProps () {
             classes: ["Game"]
           ){
             rows{
-                id,
+                id
                 title
+                placeholder
             }
           },
         }

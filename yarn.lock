@@ -1708,7 +1708,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"blurhash@npm:1.1.4":
+"blurhash@npm:^1.1.4":
   version: 1.1.4
   resolution: "blurhash@npm:1.1.4"
   checksum: 99a521ff35076f9182cd1c4d458a7aeac43cc101f13cc79f9cfdb8e6c97da6e33963496a1f5c950168b79001d0f17c97d0d57e75703363c3c4c31f97b28008f8
@@ -2455,6 +2455,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"data-uri-to-buffer@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "data-uri-to-buffer@npm:4.0.0"
+  checksum: a010653869abe8bb51259432894ac62c52bf79ad761d418d94396f48c346f2ae739c46b254e8bb5987bded8a653d467db1968db3a69bab1d33aa5567baa5cfc7
+  languageName: node
+  linkType: hard
+
 "debug@npm:2, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -2688,13 +2695,6 @@ __metadata:
   dependencies:
     is-obj: ^2.0.0
   checksum: 0f47600a4b93e1dc37261da4e6909652c008832a5d3684b5bf9a9a0d3f4c67ea949a86dceed9b72f5733ed8e8e6383cc5958df3bbd0799ee317fd181f2ece700
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "dotenv@npm:10.0.0"
-  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
   languageName: node
   linkType: hard
 
@@ -3386,6 +3386,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fetch-blob@npm:^3.1.2":
+  version: 3.1.3
+  resolution: "fetch-blob@npm:3.1.3"
+  dependencies:
+    web-streams-polyfill: ^3.0.3
+  checksum: 7be20e9c9a936601c280ef3cfed1968dbcfb35e31564b9bdc807b48de73587cd358b7c3965a3f03483f5268dc373ae8526608947750f22eb214e20c94efab9c1
+  languageName: node
+  linkType: hard
+
 "file-entry-cache@npm:^6.0.1":
   version: 6.0.1
   resolution: "file-entry-cache@npm:6.0.1"
@@ -3491,6 +3500,15 @@ __metadata:
   version: 0.7.2
   resolution: "form-serialize@npm:0.7.2"
   checksum: b12cbdf3267e8f132bfcadda9afb1b9344f1bd38b5bc92477e75db2caf9fc94de84536989acc019ea47d0db8d0fc3e4b15a166a6d7a67f814b9794c882d85756
+  languageName: node
+  linkType: hard
+
+"formdata-polyfill@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "formdata-polyfill@npm:4.0.10"
+  dependencies:
+    fetch-blob: ^3.1.2
+  checksum: 82a34df292afadd82b43d4a740ce387bc08541e0a534358425193017bf9fb3567875dc5f69564984b1da979979b70703aa73dee715a17b6c229752ae736dd9db
   languageName: node
   linkType: hard
 
@@ -4078,7 +4096,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"image-size@npm:1.0.0":
+"image-size@npm:1.0.0, image-size@npm:^1.0.0":
   version: 1.0.0
   resolution: "image-size@npm:1.0.0"
   dependencies:
@@ -5330,7 +5348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-cache@npm:5.1.2":
+"node-cache@npm:^5.1.2":
   version: 5.1.2
   resolution: "node-cache@npm:5.1.2"
   dependencies:
@@ -5346,19 +5364,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.2":
-  version: 2.6.2
-  resolution: "node-fetch@npm:2.6.2"
-  checksum: de367eae1dfbc0e12283c1cf92256ea7fba7eac8655e2e51ebb217727162396fc6cf24689ef9fc6accf075e3991e2ffaa061f7cfaa958215329649b2297ff06d
-  languageName: node
-  linkType: hard
-
 "node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.5":
   version: 2.6.6
   resolution: "node-fetch@npm:2.6.6"
   dependencies:
     whatwg-url: ^5.0.0
   checksum: ee8290626bdb73629c59722b75dcf4b9b6a67c1ed7eb9102e368479c4a13b56a48c2bb3ad71571e378e98c8b2c64c820e11f9cd39e4b8557dd138ad571ef9a42
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "node-fetch@npm:3.1.0"
+  dependencies:
+    data-uri-to-buffer: ^4.0.0
+    fetch-blob: ^3.1.2
+    formdata-polyfill: ^4.0.10
+  checksum: 23b5977554d21b72d7d99145d00bcf06e463fa621bf0afc276ad121a79509a133f38c7e470b34aad45d4032d3315bf5584ff6a1cb83e8f01be7a44cc7ac72693
   languageName: node
   linkType: hard
 
@@ -5929,20 +5951,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plaiceholder@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "plaiceholder@npm:2.2.0"
-  dependencies:
-    blurhash: 1.1.4
-    image-size: 1.0.0
-    node-cache: 5.1.2
-    node-fetch: 2.6.2
-  peerDependencies:
-    sharp: ">= 0.26.2"
-  checksum: 0a6bf76a93a416ef057d38a1b100673a377bac05633060fe37846e5ad71b56a993d4f5264ba45ad7bcf0b09046b74c796a4c0826feff66e7bf988cbee48f1067
-  languageName: node
-  linkType: hard
-
 "platform@npm:1.3.6":
   version: 1.3.6
   resolution: "platform@npm:1.3.6"
@@ -6016,13 +6024,6 @@ __metadata:
   version: 1.0.1
   resolution: "promise-inflight@npm:1.0.1"
   checksum: 22749483091d2c594261517f4f80e05226d4d5ecc1fc917e1886929da56e22b5718b7f2a75f3807e7a7d471bc3be2907fe92e6e8f373ddf5c64bae35b5af3981
-  languageName: node
-  linkType: hard
-
-"promise-queue@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "promise-queue@npm:2.2.5"
-  checksum: 41dc832a0674ea74f5f9bb4812566769d862eb52a19bdf3773045429f07b2bc433af5d939baaf4930191e37202ea31ec57e43a5a2994c101cb729069fe3eac6a
   languageName: node
   linkType: hard
 
@@ -6929,11 +6930,11 @@ __metadata:
     apollo-server-micro: ^3.4.0
     apollo-upload-client: ^17.0.0
     bcrypt: ^5.0.1
+    blurhash: ^1.1.4
     bootstrap: ^5.1.3
     classnames: ^2.3.1
     cls-hooked: ^4.2.2
     discord.js: ^13.3.0
-    dotenv: ^10.0.0
     eslint: ^7.32.0
     eslint-config-next: 12.0.1
     eslint-config-standard: ^16.0.3
@@ -6946,15 +6947,16 @@ __metadata:
     generate-password: ^1.6.1
     graphql: ^16.0.0
     graphql-upload: ^12.0.0
+    image-size: ^1.0.0
     iron-session: ^6.0.4
     luxon: ^2.0.2
     micro: ^9.3.4
     mysql2: ^2.3.2
     next: ^12.0.7
+    node-cache: ^5.1.2
+    node-fetch: ^3.1.0
     nodemailer: ^6.7.0
     normalize.css: ^8.0.1
-    plaiceholder: ^2.2.0
-    promise-queue: ^2.2.5
     react: 17.0.2
     react-bootstrap: ^2.0.1
     react-dom: 17.0.2
@@ -7831,6 +7833,13 @@ __metadata:
     glob-to-regexp: ^0.4.1
     graceful-fs: ^4.1.2
   checksum: 54f577fe311ae6130b43c3202ddc5c66ea8cdc5e0569b6e1dbccf5c0f5f4f8d4d00b7b97f6ae6d53e9361766bf0dc4e6dc7b30e57392948af9795217f6d9d7a7
+  languageName: node
+  linkType: hard
+
+"web-streams-polyfill@npm:^3.0.3":
+  version: 3.2.0
+  resolution: "web-streams-polyfill@npm:3.2.0"
+  checksum: e23ad0649392fa0159dbfc6bb27474c308c3f332d9078cfef3c06c154165bef18732c5814126147c6c712f604216ddc950c171c854e3821f020e0d2d721a5958
   languageName: node
   linkType: hard
 

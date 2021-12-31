@@ -13,6 +13,7 @@ const query = gql`
       games {
         slug
         name
+        placeholder
       }
     }
   }
@@ -48,7 +49,7 @@ export default function PublisherDetail (props) {
         </Row>
 
         <Row className='links-list justify-content-center py-2'>
-          <AlbumBoxList md={3} xs={6} items={publisher.games.map(({ slug, name }) => ({ id: slug, title: name }))} />
+          <AlbumBoxList md={3} xs={6} items={publisher.games.map(({ slug, name, placeholder }) => ({ id: slug, title: name, placeholder }))} />
         </Row>
       </Col>
       <Sidebar />

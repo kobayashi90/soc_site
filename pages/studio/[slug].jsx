@@ -15,6 +15,7 @@ query ($slug: String!) {
       id
       title
       subTitle
+      placeholder
     }
   }
 }`

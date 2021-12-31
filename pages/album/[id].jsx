@@ -22,6 +22,7 @@ query Album ($id: ID!) {
     releaseDate
     vgmdb
     description
+    placeholder
     platforms {
       id
       name
@@ -55,6 +56,7 @@ query Album ($id: ID!) {
     related {
       id
       title
+      placeholder
     }
   }
 }
@@ -128,7 +130,7 @@ export default function Page ({ id, album, imageUrl }) {
       <Col className={classNames(styles.content, 'p-0 px-md-5 pt-3')} style={{ backgroundImage: `url("${fullImage(album.id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
         <Container className='px-0 px-md-5'>
           <Row>
-            <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} /></Col>
+            <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder} /></Col>
             <Col lg={7} className='blackblock'>
               <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
               <h6 className='text-center'>{album.subTitle}</h6>

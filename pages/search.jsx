@@ -16,7 +16,7 @@ const queryHeader = 'query Search($title: String!, $limit: Int!, $page: Int!)'
 
 const categories = {
   byTitle: {
-    query: 'searchAlbum(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate } }',
+    query: 'searchAlbum(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
     title: 'Albums',
     subTitle: ({ classes, releaseDate }) => `${classes.map(c => c.name).join(' / ')} Album - ${releaseDate}`,
     type: 'album'
@@ -28,7 +28,7 @@ const categories = {
     type: 'album'
   },
   games: {
-    query: 'searchGame(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name, releaseDate } }',
+    query: 'searchGame(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name, releaseDate, placeholder } }',
     title: 'Games',
     subTitle: ({ releaseDate }) => `Game - ${releaseDate}`,
     type: 'game'
@@ -39,13 +39,13 @@ const categories = {
     subTitle: () => 'Studio'
   },
   anims: {
-    query: 'searchAnimation(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, releaseDate } }',
+    query: 'searchAnimation(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, releaseDate, placeholder } }',
     title: 'Animations',
     subTitle: ({ releaseDate }) => `Animation - ${releaseDate}`,
     type: 'anim'
   },
   series: {
-    query: 'searchSeries(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name } }',
+    query: 'searchSeries(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name, placeholder } }',
     title: 'Series',
     subTitle: () => 'Series',
     type: 'series'
@@ -166,7 +166,7 @@ function SearchSection (props) {
                 <Row className={classNames(styles.result, 'mx-1 d-flex flex-row mb-3')}>
                   {type && (
                     <Col md='auto' className={classNames(styles.cover, 'px-0')}>
-                      <Image objectFit='contain' alt={item.title} src={getImageUrl(item.id, type)} width={180} height={180} />
+                      <Image objectFit='contain' alt={item.title} src={getImageUrl(item.id, type)} width={180} height={180} placeholder={'blur'} blurDataURL={item.placeholder} />
                     </Col>
                   )}
                   <Col className='p-2 px-4 my-auto'>

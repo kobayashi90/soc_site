@@ -5,14 +5,12 @@ const model = sequelize => {
       type: DataTypes.STRING,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING
-    }
+    name: { type: DataTypes.STRING },
+    placeholder: { type: DataTypes.TEXT }
   },
   {
     freezeTableName: true
-  }
-  )
+  })
 
   return Series
 }

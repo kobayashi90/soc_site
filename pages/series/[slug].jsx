@@ -15,6 +15,7 @@ const query = gql`
   query seriesOne ($slug: String) {
     seriesOne(slug: $slug){
       name
+      placeholder
       games {
         slug
         name
@@ -22,6 +23,7 @@ const query = gql`
         albums {
           id
           title
+          placeholder
           games {
             slug
             name
@@ -45,7 +47,7 @@ export const getServerSideProps = async ({ params, req }) => {
 }
 
 function AlbumBox (props) {
-  const { id, title, coming = false } = props
+  const { id, title, coming = false, placeholder } = props
   return (
     <Col xs={6} className='py-0 px-2 mb-3'>
       <Link href={coming ? '' : `/album/${id}`} passHref>
@@ -63,6 +65,7 @@ function AlbumBox (props) {
                   layout='responsive'
                   height={150}
                   width={150}
+                  placeholder='blur' blurDataURL={placeholder}
                   alt={title} src={getImageUrl(id, 'album')} />
               </div>
             </Col>
@@ -111,6 +114,7 @@ export default function SeriesDetail ({ slug, seriesOne }) {
           <div className='p-1 position-relative w-100 h-100'>
             <Image
               layout='fill'
+              placeholder='blur' blurDataURL={seriesOne.placeholder}
               alt={seriesOne.name} src={getImageUrl(slug, 'series')} />
           </div>
         </Col>
@@ -155,7 +159,7 @@ function OstList (props) {
       <div className='w-100 d-flex flex-wrap justify-content-center'>
         {albums
           .sort((a, b) => a.title > b.title)
-          .map(({ id, title }) => <AlbumBox key={id} id={id} title={title} md={6} xs={12} />)}
+          .map(({ id, title, placeholder }) => <AlbumBox key={id} id={id} title={title} placeholder={placeholder} md={6} xs={12} />)}
       </div>
     </>
   )

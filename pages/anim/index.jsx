@@ -16,8 +16,9 @@ export async function /* getStaticProps */ getServerSideProps () {
             classes: ["Animation"]
         ){
             rows { 
-                id,
+                id
                 title
+                placeholder
             }
         }
     }`

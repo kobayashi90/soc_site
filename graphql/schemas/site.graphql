@@ -19,6 +19,7 @@
         createdAt: Float!
         createdBy: User
         status: String!
+        placeholder: String!
     }
 
     type Disc {
@@ -83,6 +84,7 @@
         slug: String!
         name: String
         releaseDate: String
+        placeholder: String!
         publishers: [Publisher]
         platforms: [Platform]
         albums: [Album]
@@ -94,6 +96,7 @@
         title: String
         subTitle: String
         releaseDate: String
+        placeholder: String!
         studios: [Studio]!
         albums: [Album]!
     }
@@ -121,6 +124,7 @@
     type Series {
         slug: String!
         name: String
+        placeholder: String!
         games: [Game]
     }
 

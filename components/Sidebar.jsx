@@ -98,10 +98,11 @@ function Highlight () {
     highlight{
       id
       title
+      placeholder
     }
   }`
   const { data = { highlight: {} }, loading } = useQuery(query)
-  const { id, title } = data.highlight
+  const { id, title, placeholder } = data.highlight
 
   return (
     <div className={classNames(styles.socials, 'mt-3 p-1 mb-4')}>
@@ -109,7 +110,7 @@ function Highlight () {
       {id && (
         <>
           <h4 className='text-center' style={{ fontWeight: 700 }}>HIGHLIGHT SOUNDTRACK</h4>
-          <AlbumBox id={id} title={title} xs={12} />
+          <AlbumBox id={id} title={title} placeholder={placeholder} xs={12} />
         </>
       )}
     </div>

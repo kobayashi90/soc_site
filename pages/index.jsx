@@ -18,16 +18,18 @@ query searchAlbum($limit: Int){
     order: ["releaseDate", "createdAt"]
   ){
     rows{
-      id,
+      id
       status
       title
+      placeholder
     }
   },
 
   added: searchAlbum(limit: $limit){
     rows{
-      id,
+      id
       title
+      placeholder
     }
   }
 }

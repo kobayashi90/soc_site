@@ -12,12 +12,13 @@ export async function /* getStaticProps */ getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
-        query {
-            series {
-                slug
-                name
-            }
+      query {
+        series {
+          slug
+          name
+          placeholder
         }
+      }
     `
   })
 
@@ -52,10 +53,10 @@ export default function SeriesList ({ series, letters, seriesList }) {
         </Col>
         <Col className='px-4'>
           <Row>
-            {seriesList.map(({ slug }) => (
+            {seriesList.map(({ slug, placeholder }) => (
               <Col key={slug} xs={4}>
                 <Link href={`/series/${slug}`} passHref>
-                  <a><Image alt={slug} src={getImageUrl(slug, 'series')} layout='responsive' width={300} height={100} /></a>
+                  <a><Image alt={slug} src={getImageUrl(slug, 'series')} layout='responsive' width={300} height={100} placeholder='blur' blurDataURL={placeholder} /></a>
                 </Link>
               </Col>
             ))}
