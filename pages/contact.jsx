@@ -9,7 +9,7 @@ export default function Contact () {
         <Row>
           <Col md={12} className='mt-3 flex-grow-1'>
             <h3 className='text-center'>Contact Form in Work in Progress, join our Discord to contact us</h3>
-            <a className='d-flex justify-content-center' href='https://discord.gg/sittingonclouds'><img alt='' style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} src='/img/assets/discord.png' /></a>
+            <a className='d-flex justify-content-center' href='https://discord.gg/sittingonclouds'><img alt='' style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%', borderRadius: '10px' }} src='/img/assets/discord.png' /></a>
           </Col>
         </Row>
         <Row>
