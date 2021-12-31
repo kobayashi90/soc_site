@@ -110,7 +110,7 @@ function Highlight () {
       {id && (
         <>
           <h4 className='text-center' style={{ fontWeight: 700 }}>HIGHLIGHT SOUNDTRACK</h4>
-          <AlbumBox id={id} title={title} placeholder={placeholder} xs={12} />
+          <AlbumBox id={id} title={title} placeholder={placeholder} xs={12} style={{ height: 'auto' }} />
         </>
       )}
     </div>
