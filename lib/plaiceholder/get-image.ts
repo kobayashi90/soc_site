@@ -97,10 +97,10 @@ const loadImage: ILoadImage = async (imagePath) => {
     };
   }
 
-  if (!imagePath.startsWith("/"))
+  /* if (!imagePath.startsWith("/"))
     throw new Error(
       `Failed to parse src \"${imagePath}\", if using relative image it must start with a leading slash "/"`
-    );
+    ); */
 
   const file = path.join("", imagePath);
   const imageSize = getImageSize(file);

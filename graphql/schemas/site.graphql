@@ -251,6 +251,26 @@
             related: [ID],
             status: String!
         ): Album!
-        updateAlbum(id: ID!, data: JSONObject!): Album!
+        updateAlbum(
+            id: ID!
+            title: String, 
+            subTitle: String, 
+            cover: Upload,
+            releaseDate: String,
+            label: String,
+            vgmdb: String,
+            description: String,
+            stores: [StoreInput],
+            downloads: [DownloadInput],
+            artists: [String],
+            classes: [String],
+            categories: [String],
+            platforms: [ID],
+            games: [String],
+            animations: [ID],
+            discs: [DiscInput],
+            related: [ID],
+            status: String!
+        ): Album!
         deleteAlbum(id: ID!): Int
     }

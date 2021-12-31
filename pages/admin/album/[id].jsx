@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { gql, useMutation, useQuery } from '@apollo/client'
-import serialize from 'form-serialize'
 import { Col, Row, Form, FormControl, Container } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
@@ -10,6 +9,7 @@ import { Navigation, SharedForms, DiscList, StoreDownloads, Downloads } from '@/
 import SubmitButton from '@/components/SubmitButton'
 import useUser from '@/components/useUser'
 import { initializeApollo } from '@/lib/ApolloClient'
+import { prepareForm } from '@/components/utils'
 
 const capitalize = (s) => {
   if (typeof s !== 'string') return ''
@@ -109,8 +109,48 @@ export const getServerSideProps = withSessionSsr(async ({ params, req }) => {
 })
 
 const mutation = gql`
-    mutation updateAlbum($id: ID!, $data: JSONObject!){
-      updateAlbum(id: $id, data: $data){ id }
+    mutation updateAlbum(
+      $id: ID!,
+      $title: String,
+      $subTitle: String,
+      $cover: Upload,
+      $releaseDate: String,
+      $label: String,
+      $description: String,
+      $downloads: [DownloadInput],
+      $artists: [String],
+      $classes: [String],
+      $categories: [String],
+      $platforms: [ID],
+      $games: [String],
+      $animations: [ID],
+      $discs: [DiscInput],
+      $related: [ID],
+      $stores: [StoreInput],
+      $vgmdb: String,
+      $status: String!
+    ){
+      updateAlbum(
+        id: $id,
+        title: $title,
+        subTitle: $subTitle,
+        cover: $cover,
+        releaseDate: $releaseDate,
+        label: $label,
+        description: $description,
+        downloads: $downloads,
+        artists: $artists,
+        classes: $classes,
+        categories: $categories,
+        platforms: $platforms,
+        games: $games,
+        animations: $animations
+        discs: $discs,
+        related: $related,
+        stores: $stores,
+        vgmdb: $vgmdb,
+        status: $status
+      ){ id }
     } 
   `
 
@@ -141,22 +181,10 @@ function EditOstForm ({ id, album, classes, categories }) {
   function handleSubmitForm (e) {
     e.persist()
     e.preventDefault()
-    const formData = serialize(e.target, { hash: true })
+    const formData = prepareForm(e)
+    formData.id = album.id
 
-    if (formData.artists) formData.artists = formData.artists.split(',')
-    formData.discs = formData.discs.map((d, i) => {
-      const payload = d
-      payload.number = i
-      return payload
-    })
-    if (e.target.elements.cover.files[0] !== undefined) formData.cover = e.target.elements.cover.files[0]
-
-    if (formData.downloads) {
-      formData.downloads.forEach(link => { link.small = link.small === 'on' })
-    }
-    formData.releaseDate = new Date(formData.releaseDate).toISOString().substring(0, 10)
-
-    mutate({ mutation, variables: { id: album.id, data: formData } }).then(results => {
+    mutate({ mutation, variables: formData }).then(results => {
       toast.success(`Updated "${formData.title}" succesfully!`)
     }).catch(err => {
       console.log(err)

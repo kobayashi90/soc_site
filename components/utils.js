@@ -1,4 +1,5 @@
 import slugifyFn from 'slugify'
+import serialize from 'form-serialize'
 
 function isString (obj) {
   return (Object.prototype.toString.call(obj) === '[object String]')
@@ -32,7 +33,29 @@ export function clearKeys (keys, baseIds) {
 }
 
 export const slugify = text => slugifyFn(text, { lower: true, strict: true })
-export function toArray (obj) {
+function toArray (obj) {
   if (isString(obj)) return [obj]
   else return obj
+}
+
+export const prepareForm = e => {
+  const data = serialize(e.target, { hash: true })
+  data.platforms = toArray(data.platforms)
+  data.games = toArray(data.games)
+  data.animations = toArray(data.animations)
+  data.categories = toArray(data.categories)
+  data.classes = toArray(data.classes)
+  data.releaseDate = new Date(data.releaseDate).toISOString().substring(0, 10)
+
+  if (data.artists) data.artists = data.artists.split(',').map(e => e.trim())
+
+  data.discs = data.discs.map((d, i) => {
+    const payload = d
+    payload.number = i
+    return payload
+  })
+  if (data.downloads) data.downloads.forEach(link => { link.small = link.small === 'on' })
+  if (e.target.elements.cover.files[0] !== undefined) data.cover = e.target.elements.cover.files[0]
+
+  return data
 }

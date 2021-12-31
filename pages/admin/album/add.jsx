@@ -1,14 +1,13 @@
 import { Col, Row, Form, FormControl } from 'react-bootstrap'
 import { useState } from 'react'
 import { gql, useQuery, useMutation } from '@apollo/client'
-import serialize from 'form-serialize'
 import { toast } from 'react-toastify'
 
 import { OstSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, Downloads, StoreDownloads, DiscList } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
 import { hasRolePage } from '@/lib/utils'
-import { toArray } from '@/components/utils'
+import { prepareForm } from '@/components/utils'
 
 export const getServerSideProps = hasRolePage(['CREATE'])
 
@@ -96,23 +95,7 @@ function AddAlbum (props) {
   async function handleSubmitForm (e) {
     e.persist()
     e.preventDefault()
-    const data = serialize(e.target, { hash: true })
-    data.platforms = toArray(data.platforms)
-    data.games = toArray(data.games)
-    data.animations = toArray(data.animations)
-    data.categories = toArray(data.categories)
-    data.classes = toArray(data.classes)
-    data.releaseDate = new Date(data.releaseDate).toISOString().substring(0, 10)
-
-    if (data.artists) data.artists = data.artists.split(',').map(e => e.trim())
-
-    data.discs = data.discs.map((d, i) => {
-      const payload = d
-      payload.number = i
-      return payload
-    })
-    data.downloads.forEach(link => { link.small = link.small === 'on' })
-    data.cover = e.target.elements.cover.files[0]
+    const data = prepareForm(e)
 
     addMutation({ variables: data })
       .then(results => {

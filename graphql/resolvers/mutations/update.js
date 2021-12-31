@@ -204,12 +204,12 @@ const resolvers = {
       })
     },
 
-    updateAlbum: async (parent, { data, id }, { db, user }, info) => {
+    updateAlbum: async (parent, data, { db, user }, info) => {
       return db.transaction(async () => {
         data.artists = data.artists ? data.artists.map(artist => { return { name: artist, slug: slugify(artist) } }) : []
         await db.models.artist.bulkCreate(data.artists, { ignoreDuplicates: true })
 
-        const ost = await db.models.ost.findByPk(id)
+        const ost = await db.models.ost.findByPk(data.id)
         const triggerPost = (data.status !== ost.status.repeat(1)) && data.status === 'show'
 
         // implement better log lol lmao
