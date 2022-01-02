@@ -42,6 +42,12 @@ export async function /* getStaticProps */ getServerSideProps () {
   return { props: { ...data }/*, revalidate: 60 */ }
 }
 
+const BlackButton = ({ href, name }) => (
+  <Link href={href}>
+    <a><h4 className='text-center blackButton px-3 py-2'>{name}</h4></a>
+  </Link>
+)
+
 export default function Home ({ added, released }) {
   return (
     <Row className='h-100'>
@@ -56,14 +62,10 @@ export default function Home ({ added, released }) {
         </Row>
         <Row>
           <Col md={6} className='mt-3 flex-grow-1'>
-            <h4 className='text-center blackButton px-3 py-2'>
-              <Link href="/game"><a>More Games Releases</a></Link>
-            </h4>
+            <BlackButton href='/game' name='More Games Releases' />
           </Col>
           <Col md={6} className='mt-3  flex-grow-1'>
-            <h4 className='text-center blackButton px-3 py-2'>
-              <Link href="/anim"><a>More Animation Releases</a></Link>
-            </h4>
+            <BlackButton href='/anim' name='More Animation Releases' />
           </Col>
         </Row>
         <hr />
@@ -78,9 +80,9 @@ export default function Home ({ added, released }) {
         </Row>
         <Row className='mt-3'>
           <Col md={12}>
-            <h1 className='text-center blackButton'>
-              <Link href="/last-added"><a>More Last Added</a></Link>
-            </h1>
+            <Link href="/last-added">
+              <a><h1 className='text-center blackButton'>More Last Added</h1></a>
+            </Link>
           </Col>
         </Row>
       </Col>

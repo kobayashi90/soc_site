@@ -31,9 +31,11 @@ export async function /* getStaticProps */ getServerSideProps () {
 function Button ({ name, href }) {
   return (
     <Col md={3} className='mt-3  flex-grow-1'>
-      <h4 className='text-center blackButton d-flex align-items-center justify-content-center px-3 py-2'>
-        <Link href={href}><a>{name}</a></Link>
-      </h4>
+      <Link href={href}><a>
+        <h4 className='text-center blackButton d-flex align-items-center justify-content-center px-3 py-2'>
+          {name}
+        </h4>
+      </a></Link>
     </Col>
   )
 }
