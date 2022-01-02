@@ -7,12 +7,13 @@ import { Row, Col, Container, Button, Navbar, Nav, NavDropdown, Modal, Form } fr
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import serialize from 'form-serialize'
-import { useApolloClient, useMutation } from '@apollo/client'
+import { useApolloClient, useMutation, useLazyQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { toast } from 'react-toastify'
 
 import useUser from './useUser'
 import { ButtonLoader } from './Loader'
+import SubmitButton from './SubmitButton'
 import logo from '../public/img/assets/logo.png'
 
 export default function Header () {
@@ -42,6 +43,8 @@ export default function Header () {
 
   const [mutateForgor, { loading: loadingForgor }] = useMutation(forgorMutation)
   const [mutateUser, { loading: loadingUser }] = useMutation(userMutation)
+  const [queryLogin, { loading: loadingLogin }] = useLazyQuery(loginQuery)
+
   const [show, setShow] = useState(false)
   const [showForgor, setForgor] = useState(false)
   const [showForgorMessage, setForgorMessage] = useState(false)
@@ -71,10 +74,24 @@ export default function Header () {
     e.preventDefault()
     const variables = serialize(e.target, { hash: true })
 
-    client.query({ query: loginQuery, variables })
-      .then(() => {
-        refetch()
-        setShow(false)
+    queryLogin({ variables })
+      .then(res => {
+        const { error } = res
+        if (error) {
+          const { graphQLErrors } = error
+          let message = 'Unknown error'
+
+          if (graphQLErrors && graphQLErrors.length > 0) {
+            const { code } = graphQLErrors[0].extensions
+            if (code === 'BAD_USER_INPUT') message = 'Invalid username/email or password'
+          }
+
+          console.error(error)
+          toast.error(message)
+        } else {
+          refetch()
+          setShow(false)
+        }
       })
       .catch(error => console.error('An unexpected error happened:', error))
   }
@@ -126,7 +143,7 @@ export default function Header () {
             </Row>
             <Row className='mt-4'>
               <Col md={4} className='mx-auto'>
-                <Button type='submit' className='w-100' color='primary'>Login</Button>
+                <SubmitButton loading={loadingLogin} type='submit' className='w-100' color='primary'>Login</SubmitButton>
               </Col>
             </Row>
             <Row className='mt-2'>

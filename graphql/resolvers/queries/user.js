@@ -1,5 +1,5 @@
 import { permissions } from '@/config/info.json'
-import { ForbiddenError, AuthenticationError } from 'apollo-server-micro'
+import { ForbiddenError, AuthenticationError, UserInputError } from 'apollo-server-micro'
 import bcrypt from 'bcrypt'
 import { Op } from 'sequelize'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
@@ -22,10 +22,10 @@ const resolvers = {
   Query: {
     login: async (parent, { username, password }, { db, req }) => {
       const user = await db.models.user.findByPk(username)
-      if (!user) throw new AuthenticationError()
+      if (!user) throw new UserInputError()
 
       const valid = await bcrypt.compare(password, user.password)
-      if (!valid) throw new AuthenticationError()
+      if (!valid) throw new UserInputError()
 
       req.session.username = user.username
       await req.session.save()
