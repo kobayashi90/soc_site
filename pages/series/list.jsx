@@ -54,9 +54,11 @@ export default function SeriesList ({ series, letters, seriesList }) {
         <Col className='px-4'>
           <Row>
             {seriesList.map(({ slug, placeholder }) => (
-              <Col key={slug} xs={4}>
-                <Link href={`/series/${slug}`} passHref>
-                  <a><Image alt={slug} src={getImageUrl(slug, 'series')} layout='responsive' width={300} height={100} placeholder='blur' blurDataURL={placeholder} /></a>
+              <Col key={slug} className='position-relative' xs={4} style={{ height: '150px' }}>
+                <Link href={`/series/${slug}`}>
+                  <a>
+                    <Image alt={slug} src={getImageUrl(slug, 'series')} layout='fill' objectFit='contain' width={300} height={100} placeholder='blur' blurDataURL={placeholder} />
+                  </a>
                 </Link>
               </Col>
             ))}
