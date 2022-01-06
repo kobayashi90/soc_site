@@ -32,12 +32,16 @@ export default function Sidebar ({ radio = false, index = false }) {
           <Row>
             <Col className='d-flex pe-1'>
               <div className='ms-auto' >
-                <a href='https://www.youtube.com/channel/UCb1Q0GuOa8p_7fY-pYnWCmQ' target='_blank' rel='noopener noreferrer'><Image src='/img/assets/yt.png' alt='youtube' height={50} width={50}></Image></a>
+                <a href='https://www.youtube.com/channel/UCb1Q0GuOa8p_7fY-pYnWCmQ' target='_blank' rel='noopener noreferrer'>
+                  <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={25} width={25}></Image>
+                </a>
               </div>
             </Col>
             <Col className='d-flex ps-1'>
               <div className='me-auto' >
-                <a href='https://twitter.com/SittingOnCloud' target='_blank' rel='noopener noreferrer'><Image src='/img/assets/twitter.png' alt='twitter' height={50} width={50}></Image></a>
+                <a href='https://twitter.com/SittingOnCloud' target='_blank' rel='noopener noreferrer'>
+                  <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={25} width={25}></Image>
+                </a>
               </div>
             </Col>
           </Row>
@@ -49,7 +53,7 @@ export default function Sidebar ({ radio = false, index = false }) {
           </Row>
           <Row className='mt-1'>
             <Col md={12} className='d-flex justify-content-center'>
-              <a target='_blank' rel='noopener noreferrer' href='https://www.paypal.com/donate?hosted_button_id=DRRACDJKG755Y'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='paypal' src='/img/assets/paypal-donate-button.png' /></a>
+              <a target='_blank' rel='noopener noreferrer' href='https://www.paypal.com/donate/?hosted_button_id=BBGTBGSDAXA8N'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='paypal' src='/img/assets/paypal-donate-button.png' /></a>
               <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/sittingonclouds'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='ko-fi' src='/img/assets/ko-fi-donate-button.png' /></a>
             </Col>
           </Row>
