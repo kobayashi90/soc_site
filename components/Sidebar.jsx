@@ -44,12 +44,12 @@ export default function Sidebar ({ radio = false, index = false }) {
           <Row>
             <Col className='d-flex pe-1'>
               <div className='ms-auto' >
-                <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={50} width={50}></Image>
+                <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={25} width={25}></Image>
               </div>
             </Col>
             <Col className='d-flex ps-1'>
               <div className='me-auto' >
-                <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={50} width={50}></Image>
+                <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={25} width={25}></Image>
               </div>
             </Col>
           </Row>
