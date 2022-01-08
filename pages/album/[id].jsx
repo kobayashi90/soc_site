@@ -266,7 +266,7 @@ export default function Page ({ id, album, imageUrl }) {
                         </Row>
                         <Row className='mx-auto mb-3'>
                           <Col className='py-2'>
-                            <Button variant="secondary" className={styles.download} href={url}>Download</Button>
+                            <Button target="_blank" variant="secondary" className={styles.download} href={url}>Download</Button>
                           </Col>
                           <Col className='py-2'>
                             <DirectButton directUrl={directUrl}></DirectButton>
@@ -306,7 +306,7 @@ function DirectButton ({ directUrl }) {
 
   return (
     <OverlayTrigger placement='top' overlay={renderTooltip}>
-      <Button variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl} disabled={disabled}>Direct</Button>
+      <Button target="_blank" variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl} disabled={disabled}>Direct</Button>
     </OverlayTrigger>
   )
 }
