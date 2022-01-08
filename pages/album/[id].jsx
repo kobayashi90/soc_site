@@ -266,10 +266,10 @@ export default function Page ({ id, album, imageUrl }) {
                         </Row>
                         <Row className='mx-auto mb-3'>
                           <Col className='py-2'>
-                            <Button variant="secondary" className={styles.download} href={url}>Download</Button>
+                            <Button target='_blank' variant="secondary" className={styles.download} href={url}>Download</Button>
                           </Col>
                           <Col className='py-2'>
-                            <DirectButton directUrl={directUrl}></DirectButton>
+                            <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
                           </Col>
                         </Row>
                       </Fragment>
