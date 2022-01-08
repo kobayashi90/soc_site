@@ -9,7 +9,7 @@ export default function Contact () {
         <Row>
           <Col md={12} className='mt-3 flex-grow-1'>
             <h3 className='text-center'>Contact Form in Work in Progress, join our Discord to contact us</h3>
-            <a className='d-flex justify-content-center' href='https://discord.gg/sittingonclouds'><img alt='' style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%', borderRadius: '10px' }} src='/img/assets/discord.png' /></a>
+            <a className='d-flex justify-content-center' href='https://discord.gg/x23SFbE'><img alt='' style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%', borderRadius: '10px' }} src='/img/assets/discord.png' /></a>
           </Col>
         </Row>
         <Row>
@@ -17,7 +17,7 @@ export default function Contact () {
             <h3 className='ml-0'>Requests</h3>
             <h2>How to Request</h2>
             <ul>
-              <li>Join our <a href='https://discord.gg/sittingonclouds'>Discord</a></li>
+              <li>Join our <a href='https://discord.gg/x23SFbE'>Discord</a></li>
               <li>Go to #request-submission</li>
               <li>Use the command "&gt;request" and then the url or name</li>
             </ul>
@@ -37,7 +37,7 @@ export default function Contact () {
           <Col md={12} className='d-flex justify-content-center'>
             <h3 className='text-centerm my-auto'>Donation Info:</h3>
             <a target='_blank' rel='noopener noreferrer' href='https://www.paypal.com/donate?hosted_button_id=DRRACDJKG755Y'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='paypal' src='/img/assets/paypal-donate-button.png' /></a>
-            <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/U7U11Q6QU'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='ko-fi' src='/img/assets/ko-fi-donate-button.png' /></a>
+            <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/sittingonclouds'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='ko-fi' src='/img/assets/ko-fi-donate-button.png' /></a>
           </Col>
         </Row>
         <Row className='my-4'>
