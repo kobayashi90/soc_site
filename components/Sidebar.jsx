@@ -33,14 +33,14 @@ export default function Sidebar ({ radio = false, index = false }) {
             <Col className='d-flex pe-1'>
               <div className='ms-auto' >
                 <a href='https://www.youtube.com/channel/UCb1Q0GuOa8p_7fY-pYnWCmQ' target='_blank' rel='noopener noreferrer'>
-                  <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={25} width={25}></Image>
+                  <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={50} width={50} />
                 </a>
               </div>
             </Col>
             <Col className='d-flex ps-1'>
               <div className='me-auto' >
                 <a href='https://twitter.com/SittingOnCloud' target='_blank' rel='noopener noreferrer'>
-                  <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={25} width={25}></Image>
+                  <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={50} width={50} />
                 </a>
               </div>
             </Col>
