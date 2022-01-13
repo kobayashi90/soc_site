@@ -133,7 +133,7 @@ export default function Page ({ id, album, imageUrl }) {
             <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder} /></Col>
             <Col lg={7} className='blackblock'>
               <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
-              <h6 className='text-center'>{album.subTitle}</h6>
+              <h6 className='text-center' style={{ whiteSpace: 'pre-wrap' }}>{album.subTitle}</h6>
               <table className={styles.table}>
                 <tbody>
                   <tr>
