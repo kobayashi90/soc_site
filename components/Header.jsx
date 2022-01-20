@@ -215,7 +215,7 @@ export default function Header () {
       </Modal>
 
       <header>
-        <div id={styles.bannerBg} style={{ backgroundImage: `url('/_next/image?w=3840&q=100&url=${'https://cdn.sawako.party/live/banner.png'}` }}>
+        <div id={styles.bannerBg} style={{ backgroundImage: `url('/_next/image?w=3840&q=100&url=${'https://cdn.sittingonclouds.net/live/banner.png'}` }}>
           <Container>
             <Row className='h-100'>
               <Col className='my-auto'>
