@@ -1,7 +1,7 @@
 module.exports = {
   eslint: { ignoreDuringBuilds: true },
   images: {
-    domains: ['cdn.sawako.party']
+    domains: ['cdn.sittingonclouds.net']
   },
 
   webpack: config => {
