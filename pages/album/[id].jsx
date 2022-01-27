@@ -171,7 +171,10 @@ export default function Page ({ id, album, imageUrl }) {
                       <td>
                         {album.platforms.map(({ id, name }, i) => (
                           <Fragment key={id}>
-                            <a className='btn btn-link p-0' href={`/platform/${id}`}>{name}</a>
+                            {id === '29'
+                              ? <span className='p-0' >{name}</span>
+                              : <a className='btn btn-link p-0' href={`/platform/${id}`}>{name}</a>
+                            }
                             {i !== album.platforms.length - 1 && ', '}
                           </Fragment>
                         ))}

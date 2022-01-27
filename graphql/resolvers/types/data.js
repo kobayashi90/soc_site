@@ -1,5 +1,4 @@
 import GraphQLUpload from 'graphql-upload/public/GraphQLUpload.js'
-import { Op } from 'sequelize'
 
 module.exports = {
   Upload: GraphQLUpload,
@@ -7,7 +6,7 @@ module.exports = {
     artists: (parent, args, context, info) => parent.getArtists(),
     classes: (parent, args, context, info) => parent.getClasses(),
     categories: (parent, args, context, info) => parent.getCategories(),
-    platforms: (parent, args, context, info) => parent.getPlatforms({ where: { [Op.not]: { id: '29' } }, order: ['name'] }),
+    platforms: (parent, args, context, info) => parent.getPlatforms({ order: ['name'] }),
     games: (parent, args, context, info) => parent.getGames(),
     discs: (parent, args, context, info) => parent.getDiscs({ order: [['number', 'ASC']] }),
     related: (parent, args, context, info) => parent.getRelated(),
