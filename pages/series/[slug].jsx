@@ -50,33 +50,36 @@ function AlbumBox (props) {
   const { id, title, coming = false, placeholder } = props
   return (
     <Col xs={6} className='py-0 px-2 mb-3'>
-      <Link href={coming ? '' : `/album/${id}`} passHref>
-        <div className={classNames(AlbumBoxStyles.albumBox, 'd-flex m-0 w-100 h-100')} style={{
-          whiteSpace: 'nowrap',
-          textAlign: 'center',
-          flexFlow: 'column',
-          backgroundColor: '#222222',
-          padding: '2px'
-        }}>
-          <Row>
-            <Col xs={3}>
-              <div className='position-relative w-100 h-100'>
-                <Image
-                  layout='responsive'
-                  height={150}
-                  width={150}
-                  placeholder='blur' blurDataURL={placeholder}
-                  alt={title} src={getImageUrl(id, 'album')} />
-              </div>
-            </Col>
-            <Col>
-              <div className='ost-list-text text-wrap my-auto px-1 py-2'>
-                {coming ? 'Coming Soon' : title}
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </Link>
+      <div className={classNames(AlbumBoxStyles.albumBox, 'd-flex m-0 w-100 h-100')} style={{
+        whiteSpace: 'nowrap',
+        textAlign: 'center',
+        flexFlow: 'column',
+        backgroundColor: '#222222',
+        padding: '2px'
+      }}>
+        <Link href={coming ? '' : `/album/${id}`}>
+          <a>
+            <Row>
+              <Col xs={3}>
+                <div className='position-relative w-100 h-100'>
+                  <Image
+                    layout='responsive'
+                    height={150}
+                    width={150}
+                    placeholder='blur' blurDataURL={placeholder}
+                    alt={title} src={getImageUrl(id, 'album')} />
+                </div>
+              </Col>
+              <Col>
+                <div className='ost-list-text text-wrap my-auto px-1 py-2'>
+                  {coming ? 'Coming Soon' : title}
+                </div>
+              </Col>
+            </Row>
+          </a>
+        </Link>
+      </div>
+
     </Col>
   )
 }
