@@ -43,7 +43,7 @@ export const getServerSideProps = async ({ params, req }) => {
 
   if (seriesOne === null) return { redirect: { destination: '/404', permanent: false } }
 
-  return { props: { seriesOne }/*, revalidate: 60 */ }
+  return { props: { seriesOne, slug }/*, revalidate: 60 */ }
 }
 
 function AlbumBox (props) {
