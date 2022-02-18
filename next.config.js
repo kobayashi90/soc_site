@@ -12,8 +12,5 @@ module.exports = {
 
     return config
   },
-  swcMinify: true,
-  experimental: {
-    outputStandalone: true
-  }
+  swcMinify: true
 }

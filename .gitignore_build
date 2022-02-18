@@ -13,10 +13,6 @@
 # next.js
 /out/
 
-# dev
-.github
-.vscode
-
 # production
 /build
 
