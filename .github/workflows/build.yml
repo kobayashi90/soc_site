@@ -33,7 +33,7 @@ jobs:
           node prepareCI
 
       - run: |
-        git add -A
+          git add -A
 
       - name: Push from dev to prod branch.
         uses: Automattic/action-commit-to-branch@master
