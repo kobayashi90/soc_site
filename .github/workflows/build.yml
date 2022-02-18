@@ -32,10 +32,14 @@ jobs:
           yarn build
           node prepareCI
 
-      - name: Deploy
-        uses: s0/git-publish-subdir-action@develop
+      - run: |
+        git add -A
+
+      - name: Push from dev to prod branch.
+        uses: Automattic/action-commit-to-branch@master
+        with:
+          dest_branch: 'dist'
+          source_branch: 'main'
+          commit_message: 'Automated build'
         env:
-          REPO: self
-          BRANCH: dist
-          FOLDER: .next/standalone
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
