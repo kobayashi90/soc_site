@@ -44,12 +44,13 @@ const resolvers = {
       })
     },
 
-    deleteAlbum: async (parent, { id }, { db, user }, info) => {
+    deleteAlbum: async (parent, { id }, { db, user, res }, info) => {
       const ost = await db.models.ost.findByPk(id)
       if (!ost) throw new UserInputError('Not Found')
       return db.transaction(async () => {
         await createUpdateLog(db, 'deleteAlbum', ost, user.username)
         await ost.destroy()
+        res.unstable_revalidate(`/album/${id}`)
         return 1
       })
     }

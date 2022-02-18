@@ -204,7 +204,7 @@ const resolvers = {
       })
     },
 
-    updateAlbum: async (parent, data, { db, user }, info) => {
+    updateAlbum: async (parent, data, { db, user, res }, info) => {
       return db.transaction(async () => {
         data.artists = data.artists ? data.artists.map(artist => { return { name: artist, slug: slugify(artist) } }) : []
         await db.models.artist.bulkCreate(data.artists, { ignoreDuplicates: true })
@@ -235,6 +235,8 @@ const resolvers = {
           postReddit(ost)
           postDiscord(ost.id)
         }
+
+        res.unstable_revalidate(`/album/${ost.id}`)
         return ost
       })
     }

@@ -78,9 +78,9 @@ query downloads ($id: ID!) {
 }
 `
 
-/* export async function getStaticPaths () {
+export async function getStaticPaths () {
   const client = initializeApollo()
-const { data } = await client.query({
+  const { data } = await client.query({
     query: gql`
       query searchAlbum($limit: Int, $page: Int ){
         searchAlbum(
@@ -91,7 +91,7 @@ const { data } = await client.query({
         }
       }
     `,
-    variables: { limit: 100 }
+    variables: { limit: 40 }
   })
 
   const paths = data.searchAlbum.rows.map(({ id }) => ({
@@ -99,15 +99,15 @@ const { data } = await client.query({
   }))
 
   return { paths, fallback: 'blocking' }
-} */
+}
 
-export async function /* getStaticProps */ getServerSideProps ({ params, req }) {
+export async function getStaticProps ({ params, req }) {
   const { id } = params
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
 
   if (data.album === null) return { redirect: { destination: '/404', permanent: false } }
-  return { props: { id, album: data.album, imageUrl: fullImage(data.album.id, 50) }/*, revalidate: 60 */ }
+  return { props: { id, album: data.album, imageUrl: fullImage(data.album.id, 50) } }
 }
 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
