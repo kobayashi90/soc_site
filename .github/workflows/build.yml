@@ -23,6 +23,11 @@ jobs:
           node-version: '16'
           cache: 'yarn'
 
+      - name: Prepare repository
+        run: |
+          git checkout -b dist origin/dist
+          git merge main
+
       - name: Install dependencies
         run: |
           yarn install --production --pure-lockfile    
@@ -32,14 +37,8 @@ jobs:
           yarn build
           node prepareCI
 
-      - run: |
+      - name: Push from main to dist branch.
+        run: |
           git add -A
-
-      - name: Push from dev to prod branch.
-        uses: Automattic/action-commit-to-branch@master
-        with:
-          dest_branch: 'dist'
-          source_branch: 'main'
-          commit_message: 'Automated build'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git diff-index --quiet HEAD || git commit -m 'Deploy ${{ github.sha }}'
+          git push 
