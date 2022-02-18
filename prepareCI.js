@@ -1,2 +1,3 @@
-const { copyFileSync } = require('fs-extra')
-copyFileSync('./.gitignore_build', './.next/standalone/.gitignore')
+const { copyFileSync, removeSync } = require('fs-extra')
+removeSync('./.gitignore')
+copyFileSync('./.gitignore_build', './.gitignore')
