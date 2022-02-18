@@ -3,7 +3,6 @@ module.exports = {
   images: {
     domains: ['cdn.sittingonclouds.net']
   },
-
   webpack: config => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
@@ -12,5 +11,9 @@ module.exports = {
     })
 
     return config
+  },
+  swcMinify: true,
+  experimental: {
+    outputStandalone: true
   }
 }
