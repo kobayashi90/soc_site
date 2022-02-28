@@ -65,7 +65,7 @@ export default function Sidebar ({ radio = false, index = false }) {
 
       {radio && (
         <div className={classNames(styles.socials, 'mt-3 p-2 mb-4')}>
-          <iframe title='radio' frameBorder='0' style={{ height: '335px', width: '100%' }} src='https://squid-radio.net/widget' />
+          <iframe title='radio' frameBorder='0' style={{ height: '335px', width: '100%' }} src='https://radio.sittingonclouds.net/widget' />
         </div>
       )}
 
