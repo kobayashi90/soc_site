@@ -15,7 +15,7 @@ export default function Custom500 () {
         </Row>
         <Row className='mt-4'>
           <Col className='d-flex justify-content-center'>
-            <iframe width='560' height='315' title='AJR- Bummerland' src='https://www.youtube-nocookie.com/embed/7Kuwwta_Mms' frameBorder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowFullScreen />
+            <iframe width='560' height='315' title='AJR- Bummerland' src='https://www.youtube-nocookie.com/embed/k4V3Mo61fJM' frameBorder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowFullScreen />
           </Col>
         </Row>
       </Col>
