@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro'
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
 import { processRequest } from 'graphql-upload'
-import { ApolloServerPluginLandingPageDisabled, ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
+// import { ApolloServerPluginLandingPageDisabled, ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 
 import db from '@/lib/startDB'
 import { withSessionApi } from '@/lib/session'
@@ -35,11 +35,13 @@ const apolloServer = new ApolloServer({
     const { username } = req.session
     return { db, req, res, username, user: username && await db.models.user.findByPk(username) }
   },
-  plugins: [
+  /* plugins: [
     process.env.NODE_ENV === 'production'
       ? ApolloServerPluginLandingPageDisabled()
       : ApolloServerPluginLandingPageGraphQLPlayground()
-  ]
+  ] */
+  playground: true,
+  introspection: true
 })
 const startServer = apolloServer.start()
 
