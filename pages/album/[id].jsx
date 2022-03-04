@@ -11,7 +11,7 @@ import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl } from '@/components/utils'
 import Loader from '@/components/Loader'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo, isGithub } from '@/lib/ApolloClient'
 
 const query = gql`
 query Album ($id: ID!) {
@@ -79,6 +79,8 @@ query downloads ($id: ID!) {
 `
 
 export async function getStaticPaths () {
+  if (isGithub) return { paths: [], fallback: 'blocking' }
+
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
