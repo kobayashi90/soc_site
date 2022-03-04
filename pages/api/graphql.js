@@ -50,7 +50,7 @@ export default withSessionApi(async (req, res) => {
 
   const contentType = req.headers['content-type']
   if (contentType && contentType.startsWith('multipart/form-data')) {
-    req.filePayload = await processRequest(req, res)
+    req.filePayload = await processRequest(req, res, { maxFieldSize: Infinity, maxFileSize: Infinity, maxFiles: 1 })
   }
 
   db.sync()
