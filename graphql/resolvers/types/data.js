@@ -1,5 +1,7 @@
 import GraphQLUpload from 'graphql-upload/public/GraphQLUpload.js'
 
+const PLACEHOLDER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVQImWN4fGrVhZ0z/v+5zZAc5yfOwGCtrsbg4em/f7ZvZ7w2Q15Vi6e1iggPAwBwDg7L//0+xAAAAABJRU5ErkJggg=='
+
 module.exports = {
   Upload: GraphQLUpload,
   Album: {
@@ -60,7 +62,8 @@ module.exports = {
 
   Animation: {
     studios: parent => parent.getStudios(),
-    albums: parent => parent.getOsts()
+    albums: parent => parent.getOsts(),
+    placeholder: parent => parent.placeholder || PLACEHOLDER
   },
   Studio: {
     animations: async (parent, args, { db }) => {

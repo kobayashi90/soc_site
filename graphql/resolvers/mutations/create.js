@@ -33,7 +33,9 @@ const resolvers = {
         ])
 
         const { id } = ost.dataValues
-        if (data.cover) await img(data.cover, 'album', id, ost)
+        ost.placeholder = data.cover ? await img(data.cover, 'album', id) : ''
+
+        await ost.save()
 
         if (ost.status === 'show') {
           postReddit(ost)

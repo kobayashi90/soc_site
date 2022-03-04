@@ -90,7 +90,8 @@ const resolvers = {
     createSeries: async (parent, data, { db, user }, info) => (
       db.transaction(async () => {
         const series = await db.models.series.create(data)
-        if (data.cover) await img(data.cover, 'series', series.dataValues.slug, series)
+        series.placeholder = data.cover ? await img(data.cover, 'series', series.dataValues.slug) : ''
+        await series.save()
 
         await createLog(db, 'createSeries', data, user.username)
         return series
@@ -100,7 +101,7 @@ const resolvers = {
       db.transaction(async () => {
         const series = await db.models.series.findByPk(slug)
         if (name) series.name = name
-        if (cover) await img(cover, 'series', slug, series)
+        if (cover) series.placeholder = await img(cover, 'series', slug)
 
         await series.save()
         await createUpdateLog(db, 'updateSeries', series, user.username)
@@ -125,7 +126,8 @@ const resolvers = {
           game.setPlatforms(data.platforms)
         ])
 
-        if (data.cover) await img(data.cover, 'game', data.slug, game)
+        game.placeholder = data.cover ? await img(data.cover, 'game', data.slug) : ''
+        await game.save()
         await createLog(db, 'createGame', data, user.username)
         return game
       })
@@ -140,7 +142,7 @@ const resolvers = {
         game.setSeries(series)
         game.setPublishers(publishers)
         game.setPlatforms(platforms)
-        if (cover) await img(cover, 'game', slug, game)
+        if (cover) game.placeholder = await img(cover, 'game', slug)
 
         // make more comprehensible log
 
@@ -169,7 +171,8 @@ const resolvers = {
         const anim = await db.models.animation.create(data)
         await anim.setStudios(data.studios)
 
-        if (data.cover) await img(data.cover, 'anim', anim.id, anim)
+        anim.placeholder = data.cover ? await img(data.cover, 'anim', anim.id) : ''
+        await anim.save()
 
         await createLog(db, 'createAnimation', data, user.username)
 
@@ -183,7 +186,7 @@ const resolvers = {
           anim[key] = value
         })
         anim.setStudios(data.studios)
-        if (data.cover) await img(data.cover, 'anim', anim.id, anim)
+        if (data.cover) anim.placeholder = await img(data.cover, 'anim', anim.id)
 
         await anim.save()
         await createUpdateLog(db, 'updateAnimation', anim, user.username)
@@ -229,7 +232,10 @@ const resolvers = {
           createUpdateLog(db, 'updateAlbum', ost, user.username)
         ])
 
-        if (data.cover) await img(data.cover, 'album', ost.dataValues.id, ost)
+        if (data.cover) {
+          ost.placeholder = await img(data.cover, 'album', ost.dataValues.id)
+          await ost.save()
+        }
 
         if (triggerPost) {
           postReddit(ost)
