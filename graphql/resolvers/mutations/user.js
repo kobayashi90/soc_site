@@ -3,9 +3,22 @@ import { UserInputError, ForbiddenError, AuthenticationError } from 'apollo-serv
 import generator from 'generate-password'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 import { DateTime } from 'luxon'
-import { Op } from 'sequelize'
+import { Op, literal } from 'sequelize'
 
-import { createForgor } from '@/lib/forgor'
+import { template, transporter, mailConfig } from '@/lib/forgor'
+
+async function createForgor (user, db) {
+  await db.models.forgor.destroy({ where: { username: user.username } })
+  const key = generator.generate({ length: 15, numbers: true, upercase: false, strict: true })
+  const row = await db.models.forgor.create({ key, expires: literal('DATE_ADD(NOW(), INTERVAL 24 HOUR)') })
+  row.setUser(user)
+
+  const html = template.replaceAll('{{forgor_link}}', `https://sittingonclouds.net/forgor?key=${key}`)
+  const message = { from: mailConfig.auth.user, to: user.email, subject: 'Password Reset', html }
+  await transporter.sendMail(message)
+
+  return row
+}
 
 const isAuthed = next => (root, args, context, info) => {
   if (!context.user) throw new AuthenticationError()
@@ -23,7 +36,7 @@ const hasRole = role => [isAuthed, hasPerm(role)]
 const resolversComposition = {
   'Mutation.*': hasRole('MANAGE_USER'),
   'Mutation.updatePass': [],
-  'Mutation.createForgor': [],
+  'Mutation.createForgorLink': [],
   'Mutation.updateUser': [isAuthed]
 }
 
@@ -53,7 +66,7 @@ const resolvers = {
       return 1
     },
 
-    createForgor: async (_, { key }, { db }) => {
+    createForgorLink: async (_, { key }, { db }) => {
       const user = await db.models.user.findOne({ where: { [Op.or]: [{ username: key }, { email: key }] } })
       if (!user) throw new UserInputError('Not Found')
 

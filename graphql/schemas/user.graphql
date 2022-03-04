@@ -39,7 +39,7 @@
         updateUserRoles(username: String!, roles: [String]!): Boolean!
         deleteUser(username: String!): Int
 
-        createForgor(key: String!): Boolean!
+        createForgorLink(key: String!): Boolean!
         updatePass(key: String!, pass:String!): Boolean!
         updateUser(username: String, password: String, email: String): Boolean!
 

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import serialize from 'form-serialize'
 
 import { SimpleSelector } from '@/components/Selectors'
-import Loader from '@/components/Loader'
+import Loader, { ButtonLoader } from '@/components/Loader'
 import { hasRolePage } from '@/lib/utils'
 
 export const getServerSideProps = hasRolePage(['MANAGE_USER'])
@@ -28,7 +28,7 @@ export default function AdminUser () {
       permissions
     }
   `, { variables: { username: '' } })
-
+  const [loading, setLoading] = useState(false)
   const [create] = useMutation(gql`
   mutation createUser($email: String!, $username: String!, $roles: [String]!){
     createUser(email: $email, username: $username, roles: $roles)
@@ -50,10 +50,16 @@ export default function AdminUser () {
     const variables = serialize(e.target, { hash: true })
     if (!variables.roles) variables.roles = []
 
-    create({ variables }).then(results => {
-      e.target.reset()
-      toast.success(`User "${variables.username}" created succesfully`)
-    })
+    setLoading(true)
+    create({ variables })
+      .then(results => {
+        e.target.reset()
+        toast.success(`User "${variables.username}" created succesfully`)
+      })
+      .catch(results => {
+        toast.error(`Failed to add user "${variables.username}"`)
+      })
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -139,7 +145,7 @@ export default function AdminUser () {
         </Row>
         <Row>
           <Col className='m-auto'>
-            <Button type='submit' color='primary'>Add User</Button>
+            <ButtonLoader text='Add User' loading={loading} type='submit' color='primary' />
           </Col>
         </Row>
       </Form>

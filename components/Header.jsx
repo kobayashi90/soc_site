@@ -30,8 +30,8 @@ export default function Header () {
   }
 `
   const forgorMutation = gql`
-  mutation createForgor($key: String!){
-    createForgor(key: $key)
+  mutation createForgorLink($key: String!){
+    createForgorLink(key: $key)
   }
 `
 

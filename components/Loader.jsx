@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import classNames from 'classnames'
-import loader from 'svg-loaders/svg-smil-loaders/oval.svg'
 import { Button } from 'react-bootstrap'
 
+import loader from 'svg-loaders/svg-smil-loaders/oval.svg'
 import styles from '../styles/Search.module.scss'
 import logo from '../public/img/assets/clouds.png'
 
