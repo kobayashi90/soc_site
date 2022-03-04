@@ -59,3 +59,9 @@ export const prepareForm = e => {
 
   return data
 }
+
+const utils = {
+  slugify
+}
+
+export default utils
