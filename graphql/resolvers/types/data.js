@@ -1,6 +1,7 @@
 import GraphQLUpload from 'graphql-upload/public/GraphQLUpload.js'
 
 const PLACEHOLDER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVQImWN4fGrVhZ0z/v+5zZAc5yfOwGCtrsbg4em/f7ZvZ7w2Q15Vi6e1iggPAwBwDg7L//0+xAAAAABJRU5ErkJggg=='
+const placeholder = parent => parent.placeholder || PLACEHOLDER
 
 module.exports = {
   Upload: GraphQLUpload,
@@ -13,7 +14,8 @@ module.exports = {
     discs: (parent, args, context, info) => parent.getDiscs({ order: [['number', 'ASC']] }),
     related: (parent, args, context, info) => parent.getRelated(),
     stores: (parent) => parent.getStores(),
-    animations: (parent) => parent.getAnimations()
+    animations: (parent) => parent.getAnimations(),
+    placeholder
   },
 
   Category: {
@@ -49,7 +51,8 @@ module.exports = {
     albums: (parent, args, context, info) => parent.getOsts(),
     series: (parent, args, context, info) => parent.getSeries(),
     publishers: (parent, args, context, info) => parent.getPublishers(),
-    platforms: (parent, args, context, info) => parent.getPlatforms({ order: ['name'] })
+    platforms: (parent, args, context, info) => parent.getPlatforms({ order: ['name'] }),
+    placeholder
   },
 
   Platform: {
@@ -63,7 +66,7 @@ module.exports = {
   Animation: {
     studios: parent => parent.getStudios(),
     albums: parent => parent.getOsts(),
-    placeholder: parent => parent.placeholder || PLACEHOLDER
+    placeholder
   },
   Studio: {
     animations: async (parent, args, { db }) => {
@@ -73,7 +76,8 @@ module.exports = {
   },
 
   Series: {
-    games: (parent, args, context, info) => parent.getGames()
+    games: (parent, args, context, info) => parent.getGames(),
+    placeholder
   },
 
   Publisher: {
