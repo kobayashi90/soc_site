@@ -5084,6 +5084,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-multi-select-component@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "react-multi-select-component@npm:4.2.3"
+  peerDependencies:
+    react: ^16 || ^17
+    react-dom: ^16 || ^17
+  checksum: 6ba551a64cccbf6059f781c7fafd3b3b73d756fe5d3e03223a91a4a9e7a0332b7330784f4874e4a6ba68a44aff47569740ad5c52f55da50c4d09f1488753b30f
+  languageName: node
+  linkType: hard
+
 "react-select@npm:^5.2.0":
   version: 5.2.2
   resolution: "react-select@npm:5.2.2"
@@ -5714,6 +5724,7 @@ __metadata:
     react: 17.0.2
     react-bootstrap: ^2.0.1
     react-dom: 17.0.2
+    react-multi-select-component: ^4.2.3
     react-select: ^5.2.0
     react-toastify: ^8.0.3
     reddit: ^1.2.1

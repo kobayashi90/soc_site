@@ -1,15 +1,83 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Select from 'react-select'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, useLazyQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
+import { MultiSelect } from 'react-multi-select-component'
 
 const styles = { option: () => ({ color: 'black' }), multiValueLabel: provided => ({ ...provided, whiteSpace: 'normal' }) }
+
+const getOptions = data => data && data[Object.keys(data)[0]]
+const valueRenderer = (selected, _options) => {
+  return selected.length
+    ? selected.map(({ label }) => label).join(', ')
+    : 'Select...'
+}
+const runError = err => {
+  if (!err) return
+
+  console.log(err)
+  toast.error('Selector: Failed to fetch server info')
+}
+
+export function BetaSelector (props) {
+  const { startQuery, changeQuery, defaults = [], name = '' } = props
+  const { isSingle = false, required = false, onChange, loading: loadingProp = false } = props
+
+  const [options, setOptions] = useState(defaults)
+  const [selected, setSelected] = useState(defaults)
+
+  const { data: dataInitial, error: initialError, loading: loadingInitial } = useQuery(gql`${startQuery}`, { variables: { limit: 10 } })
+  const [getQuery, { data, error, loading }] = useLazyQuery(gql`${changeQuery}`)
+
+  const filterOptions = (_, filter) => {
+    if (filter.length > 0) getQuery({ variables: { filter } })
+    return _
+  }
+
+  const onChangeFn = (items = []) => {
+    const result = isSingle ? [items[items.length - 1]] : items
+
+    if (onChange) onChange(isSingle ? result[0] : result)
+    setSelected(result)
+  }
+
+  useEffect(() => runError(initialError), [initialError])
+  useEffect(() => runError(error), [error])
+
+  useEffect(() => {
+    if (!dataInitial && !data) return
+
+    const searchOptions = data ? getOptions(data) : getOptions(dataInitial)
+    const currentOptions = selected.filter(o => !searchOptions.includes(o.value))
+    setOptions([...currentOptions, ...searchOptions])
+  }, [dataInitial, data])
+
+  return (
+    <>
+      <MultiSelect
+        valueRenderer={valueRenderer}
+        filterOptions={filterOptions}
+        onChange={onChangeFn}
+        hasSelectAll={!isSingle}
+        isLoading={loading || loadingInitial || loadingProp}
+        value={selected} options={options}
+      />
+      {isSingle
+        ? (
+          <input value={selected[0]?.label} name={name} hidden required={required} />
+        )
+        : (
+          selected.map(s => <input key={s.value} value={s.value} name={`${name}[]`} hidden />)
+        )}
+    </>
+  )
+}
 
 function SelectorBase (props) {
   const { startQuery, changeQuery } = props
   const [query, setQuery] = useState(startQuery)
   const [title, setTitle] = useState()
-  const { data, error, loading } = useQuery(gql`${query}`, { variables: { limit: 10, title },  })
+  const { data, error, loading } = useQuery(gql`${query}`, { variables: { limit: 10, title } })
 
   if (error) {
     console.log(error)
