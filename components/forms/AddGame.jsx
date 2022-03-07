@@ -82,7 +82,7 @@ export default function AddGame () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='publishers'>Publishers:</Form.Label>
-              <PublisherSelector isMulti name='publishers' />
+              <PublisherSelector name='publishers' />
             </Form.Group>
           </Col>
           <Col md={4}>

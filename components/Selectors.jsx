@@ -235,23 +235,24 @@ export function SeriesSelector (props) {
 
 export function PublisherSelector (props) {
   return (
-    <SelectorBase
+    <BetaSelector
       {...props}
       startQuery={`
-                    query RecentPublishers($limit: Int!){
-                        recentPublishers(limit: $limit) {
-                        value: id
-                        label: name
-                        }
-                    }`}
+        query ($limit: Int!){
+          recentPublishers(limit: $limit) {
+            value: id
+            label: name
+          }
+        }`
+      }
       changeQuery={`
-                    query SearchPublishers($title: String){
-                        searchPublishersByName(name: $title) {
-                          value: id
-                          label: name
-                        }
-                    }
-                  `}
+        query ($filter: String){
+          searchPublishersByName(name: $filter) {
+            value: id
+            label: name
+          }
+        }`
+      }
     />
   )
 }

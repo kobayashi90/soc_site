@@ -112,7 +112,7 @@ export default function EditGame () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='publishers'>Publishers:</Form.Label>
-                <PublisherSelector loading={loading} isMulti name='publishers[]' defaultValue={data && data.game.publishers} />
+                <PublisherSelector loading={loading} name='publishers' defaults={data && data.game.publishers} />
               </Form.Group>
             </Col>
             <Col md={4}>
