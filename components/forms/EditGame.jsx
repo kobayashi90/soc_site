@@ -106,7 +106,7 @@ export default function EditGame () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='series'>Series:</Form.Label>
-                <SeriesSelector loading={loading} isMulti name='series[]' defaultValue={data && data.game.series} />
+                <SeriesSelector loading={loading} name='series' defaults={data && data.game.series} />
               </Form.Group>
             </Col>
             <Col md={4}>

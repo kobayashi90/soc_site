@@ -64,10 +64,10 @@ export function BetaSelector (props) {
       />
       {isSingle
         ? (
-          <input value={selected[0]?.label} name={name} required={required} hidden readOnly />
+          <input defaultValue={selected[0]?.label} name={name} required={required} hidden readOnly />
         )
         : (
-          selected.map(s => <input key={s.value} value={s.value} name={`${name}[]`} hidden readOnly/>)
+          selected.map(s => <input key={s.value} defaultValue={s.value} name={`${name}[]`} hidden readOnly />)
         )}
     </>
   )
@@ -212,23 +212,24 @@ export function AnimSelector (props) {
 
 export function SeriesSelector (props) {
   return (
-    <SelectorBase
+    <BetaSelector
       {...props}
       startQuery={`
-                  query RecentSeries($limit: Int!){
-                      recentSeries(limit: $limit) {
-                      value: slug
-                      label: name
-                      }
-                  }`}
+        query RecentSeries($limit: Int!){
+          recentSeries(limit: $limit) {
+            value: slug
+            label: name
+          }
+        }
+      `}
       changeQuery={`
-                  query SearchSeries($title: String){
-                      searchSeriesByName(name: $title) {
-                        value: slug
-                        label: name
-                      }
-                  }
-                `}
+        query SearchSeries($filter: String){
+          searchSeriesByName(name: $filter) {
+            value: slug
+            label: name
+          }
+        }
+      `}
     />
   )
 }

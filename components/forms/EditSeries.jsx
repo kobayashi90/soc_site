@@ -36,7 +36,7 @@ export default function EditSeries () {
   const formRef = useRef(null)
   const [mutateUpdate, { loading: loadingUpdate }] = useMutation(mutationUpdate)
   const [mutateDelete, { loading: loadingDelete }] = useMutation(mutationDelete)
-  const [getSeries, { data, error }] = useLazyQuery(query)
+  const [getSeries, { data, error, loading: loadingInfo }] = useLazyQuery(query)
 
   useEffect(() => {
     if (!error) return
@@ -65,7 +65,7 @@ export default function EditSeries () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='slug'>Series:</Form.Label>
-              <SeriesSelector required name='slug' onChange={row => getSeries({ variables: { slug: row.value } })} />
+              <SeriesSelector isSingle required name='slug' onChange={row => getSeries({ variables: { slug: row.value } })} loading={loadingInfo} />
             </Form.Group>
           </Col>
           <Col md={4}>

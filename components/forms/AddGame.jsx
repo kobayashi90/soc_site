@@ -76,7 +76,7 @@ export default function AddGame () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='series'>Series:</Form.Label>
-              <SeriesSelector isMulti name='series' />
+              <SeriesSelector name='series' />
             </Form.Group>
           </Col>
           <Col md={4}>
