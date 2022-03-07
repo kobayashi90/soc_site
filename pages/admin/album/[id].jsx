@@ -4,7 +4,7 @@ import { Col, Row, Form, FormControl, Container } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
 import { withSessionSsr } from '@/lib/session'
-import { OstSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
+import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, DiscList, StoreDownloads, Downloads } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
 import useUser from '@/components/useUser'
@@ -314,7 +314,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={12}>
             <Form.Group>
               <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
-              <OstSelector defaultValue={album.related} isMulti name='related' />
+              <AlbumSelector defaults={album.related} name='related' />
             </Form.Group>
           </Col>
         </Row>

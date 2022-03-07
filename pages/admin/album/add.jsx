@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import { toast } from 'react-toastify'
 
-import { OstSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
+import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, Downloads, StoreDownloads, DiscList } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
 import { hasRolePage } from '@/lib/utils'
@@ -225,7 +225,7 @@ function AddAlbum (props) {
           <Col md={12}>
             <Form.Group>
               <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
-              <OstSelector isMulti name='related' />
+              <AlbumSelector name='related' />
             </Form.Group>
           </Col>
         </Row>

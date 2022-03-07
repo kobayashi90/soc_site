@@ -7,7 +7,7 @@ import { gql, useQuery, useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { OstSelector, SimpleSelector } from '@/components/Selectors'
+import { AlbumSelector, SimpleSelector } from '@/components/Selectors'
 import Loader from '@/components/Loader'
 import { hasRolePage } from '@/lib/utils'
 import { getFullPageList, getPageList } from '@/components/utils'
@@ -235,7 +235,7 @@ function Highlight () {
       query {
         highlight {
           value: id
-        label: title
+          label: title
         }
       }
     `
@@ -248,7 +248,7 @@ function Highlight () {
       }
     `
 
-  const { data, error, refetch } = useQuery(queryConfig)
+  const { loading, data, error, refetch } = useQuery(queryConfig)
   const [mutateConfig] = useMutation(mutation)
 
   if (error) {
@@ -271,9 +271,7 @@ function Highlight () {
   return (
     <Col md={12} className='mt-3 site-form blackblock p-3'>
       <Form.Label>Highlight OST:</Form.Label>
-      {data
-        ? <OstSelector defaultValue={data.highlight} onChange={handleHighlight} />
-        : <Loader dev />}
+      <AlbumSelector isSingle defaults={data && [data.highlight]} onChange={handleHighlight} loading={loading} />
     </Col>
   )
 }

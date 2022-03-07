@@ -104,29 +104,33 @@ export function SimpleSelector (props) {
   )
 }
 
-export function OstSelector (props) {
+export function AlbumSelector (props) {
+  const rowsFn = data => data.rows
+
   return (
-    <SelectorBase
+    <BetaSelector
       {...props}
+      rowsFn={rowsFn}
       startQuery={`
-              query searchAlbum($limit: Int){
-                  searchAlbum(limit: $limit) {
-                    options: rows{
-                      value: id
-                      label: title
-                    }
-                  }
-              }`}
+        query ($limit: Int){
+          searchAlbum(limit: $limit) {
+            rows {
+              value: id
+              label: title
+            }
+          }
+        }
+      `}
       changeQuery={`
-              query searchAlbum($title: String){
-                  searchAlbum(title: $title) {
-                    options: rows{
-                      value: id
-                      label: title
-                    }
-                  }
-              }
-            `}
+        query ($filter: String){
+          searchAlbum(title: $filter) {
+            rows {
+              value: id
+              label: title
+            }
+          }
+        }
+      `}
     />
   )
 }
