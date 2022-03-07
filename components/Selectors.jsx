@@ -50,7 +50,7 @@ export function BetaSelector (props) {
 
     const searchOptions = data ? getOptions(data) : getOptions(dataInitial)
     const currentOptions = selected.filter(o => !searchOptions.includes(o.value))
-    console.log({ currentOptions, searchOptions })
+
     setOptions([...currentOptions, ...searchOptions])
   }, [dataInitial, data])
 
@@ -159,28 +159,32 @@ export function StudioSelector (props) {
 }
 
 export function GameSelector (props) {
+  const rowsFn = data => data.rows
+
   return (
-    <SelectorBase
+    <BetaSelector
       {...props}
+      rowsFn={rowsFn}
       startQuery={`
-              query SearchGame($limit: Int){
-                  searchGame(limit: $limit) {
-                    options: rows{
-                      value: slug
-                      label: name
-                    }
-                  }
-              }`}
+        query ($limit: Int){
+          searchGame (limit: $limit) {
+            rows{
+              value: slug
+              label: name
+            }
+          }
+        }
+      `}
       changeQuery={`
-              query SearchGame($name: String){
-                  searchGame(name: $name) {
-                    options: rows{
-                      value: slug
-                      label: name
-                    }
-                  }
-              }
-            `}
+        query ($filter: String){
+          searchGame(name: $filter) {
+            rows {
+              value: slug
+              label: name
+            }
+          }
+        }
+      `}
     />
   )
 }

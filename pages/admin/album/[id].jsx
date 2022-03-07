@@ -35,7 +35,7 @@ query Album ($id: ID!) {
       label: title
     }
     games {
-      name: slug
+      value: slug
       label: name
     }
     artists {
@@ -292,9 +292,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='games'>Games:</Form.Label>
-              <GameSelector
-                defaultValue={album.games}
-                isMulti name='games' />
+              <GameSelector defaults={album.games} name='games' />
             </Form.Group>
           </Col>
           <Col md={4}>

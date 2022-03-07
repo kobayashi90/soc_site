@@ -84,7 +84,7 @@ export default function EditGame () {
           <Col>
             <Form.Group>
               <Form.Label htmlFor='slug'>Game:</Form.Label>
-              <GameSelector required name='slug' onChange={row => getGame({ variables: { slug: row.value } })} />
+              <GameSelector isSingle required name='slug' onChange={row => getGame({ variables: { slug: row.value } })} loading={loading} />
             </Form.Group>
           </Col>
 

@@ -202,7 +202,7 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='games'>Games:</Form.Label>
-              <GameSelector isMulti name='games' />
+              <GameSelector name='games' />
             </Form.Group>
           </Col>
           <Col md={4}>
