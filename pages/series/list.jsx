@@ -36,35 +36,37 @@ export async function /* getStaticProps */ getServerSideProps () {
 
 export default function SeriesList ({ series, letters, seriesList }) {
   return (
-    <Col className='blackbg p-2 pb-5'>
-      <Row className='my-2'>
-        <Col>
-          {letters.map(letter => <Button key={letter} variant='secondary' md='auto' className={classname(style.letter, 'p-2 m-1')} href={`#${letter}`}><h2>{letter}</h2></Button>)}
-        </Col>
-      </Row>
-      <Row className='mt-4'>
-        <Col xs='auto' className='px-4'>
-          {letters.map(letter => (
-            <div id={letter} key={letter} className='mt-4 d-flex flex-column'>
-              <h2 className='text-center ost-title text-capitalize'>{letter.toUpperCase()}</h2>
-              {series[letter].map(({ slug, name }) => <Link href={`/series/${slug}`} key={slug}><a className='text-center mt-2 link' >{name}</a></Link>)}
-            </div>
-          ))}
-        </Col>
-        <Col className='px-4'>
-          <Row>
-            {seriesList.map(({ slug, placeholder }) => (
-              <Col key={slug} className='position-relative' xs={4} style={{ height: '150px' }}>
-                <Link href={`/series/${slug}`}>
-                  <a>
-                    <Image alt={slug} src={getImageUrl(slug, 'series')} layout='fill' objectFit='contain' width={300} height={100} placeholder='blur' blurDataURL={placeholder} />
-                  </a>
-                </Link>
-              </Col>
+    <Row className='blackbg h-100 px-0'>
+      <Col className='p-2'>
+        <Row className='my-2'>
+          <Col>
+            {letters.map(letter => <Button key={letter} variant='secondary' md='auto' className={classname(style.letter, 'p-2 m-1')} href={`#${letter}`}><h2>{letter}</h2></Button>)}
+          </Col>
+        </Row>
+        <Row className='mt-4'>
+          <Col xs='auto' className='px-4'>
+            {letters.map(letter => (
+              <div id={letter} key={letter} className='mt-4 d-flex flex-column'>
+                <h2 className='text-center ost-title text-capitalize'>{letter.toUpperCase()}</h2>
+                {series[letter].map(({ slug, name }) => <Link href={`/series/${slug}`} key={slug}><a className='text-center mt-2 link' >{name}</a></Link>)}
+              </div>
             ))}
-          </Row>
-        </Col>
-      </Row>
-    </Col>
+          </Col>
+          <Col className='px-4'>
+            <Row>
+              {seriesList.map(({ slug, placeholder }) => (
+                <Col key={slug} className='position-relative' xs={4} style={{ height: '150px' }}>
+                  <Link href={`/series/${slug}`}>
+                    <a>
+                      <Image alt={slug} src={getImageUrl(slug, 'series')} layout='fill' objectFit='contain' width={300} height={100} placeholder='blur' blurDataURL={placeholder} />
+                    </a>
+                  </Link>
+                </Col>
+              ))}
+            </Row>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
   )
 }

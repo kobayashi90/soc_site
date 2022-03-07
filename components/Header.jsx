@@ -236,7 +236,7 @@ export default function Header () {
           </Container>
         </div>
 
-        <Navbar expand='sm' bg="dark" variant="dark" className='py-0'>
+        <Navbar expand='sm' bg="dark" variant="dark" className='py-md-0'>
           <Container>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
