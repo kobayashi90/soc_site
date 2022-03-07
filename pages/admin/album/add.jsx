@@ -214,7 +214,7 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='animations'>Animations:</Form.Label>
-              <AnimSelector isMulti name='animations' />
+              <AnimSelector name='animations' />
             </Form.Group>
           </Col>
         </Row>

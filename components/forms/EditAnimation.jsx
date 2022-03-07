@@ -44,7 +44,7 @@ export default function AddAnimation () {
   const formRef = useRef(null)
   const [mutateUpdate, { loading: loadingUpdate }] = useMutation(mutationUpdate)
   const [mutateDelete, { loading: loadingDelete }] = useMutation(mutationDelete)
-  const [getAnim, { data, error }] = useLazyQuery(query)
+  const [getAnim, { data, error, loading: loadingInfo }] = useLazyQuery(query)
 
   useEffect(() => {
     if (!error) return
@@ -76,7 +76,7 @@ export default function AddAnimation () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='name'>Animation:</Form.Label>
-              <AnimSelector name='id' onChange={row => getAnim({ variables: { id: row.value } })} />
+              <AnimSelector isSingle name='id' onChange={row => getAnim({ variables: { id: row.value } })} loading={loadingInfo} />
             </Form.Group>
           </Col>
           <Col md={4}>

@@ -6,7 +6,6 @@ import { MultiSelect } from 'react-multi-select-component'
 
 const styles = { option: () => ({ color: 'black' }), multiValueLabel: provided => ({ ...provided, whiteSpace: 'normal' }) }
 
-const getOptions = data => data && data[Object.keys(data)[0]]
 const valueRenderer = (selected, _options) => {
   return selected.length
     ? selected.map(({ label }) => label).join(', ')
@@ -22,6 +21,7 @@ const runError = err => {
 export function BetaSelector (props) {
   const { startQuery, changeQuery, defaults = [], name = '' } = props
   const { isSingle = false, required = false, onChange, loading: loadingProp = false } = props
+  const { rowsFn } = props
 
   const [options, setOptions] = useState(defaults)
   const [selected, setSelected] = useState(defaults)
@@ -29,6 +29,7 @@ export function BetaSelector (props) {
   const { data: dataInitial, error: initialError, loading: loadingInitial } = useQuery(gql`${startQuery}`, { variables: { limit: 10 } })
   const [getQuery, { data, error, loading }] = useLazyQuery(gql`${changeQuery}`)
 
+  const getOptions = data => data ? (rowsFn ? rowsFn(data[Object.keys(data)[0]]) : data[Object.keys(data)[0]]) : []
   const filterOptions = (_, filter) => {
     if (filter.length > 0) getQuery({ variables: { filter } })
     return _
@@ -49,6 +50,7 @@ export function BetaSelector (props) {
 
     const searchOptions = data ? getOptions(data) : getOptions(dataInitial)
     const currentOptions = selected.filter(o => !searchOptions.includes(o.value))
+    console.log({ currentOptions, searchOptions })
     setOptions([...currentOptions, ...searchOptions])
   }, [dataInitial, data])
 
@@ -184,28 +186,32 @@ export function GameSelector (props) {
 }
 
 export function AnimSelector (props) {
+  const rowsFn = data => data.rows
+
   return (
-    <SelectorBase
+    <BetaSelector
       {...props}
+      rowsFn={rowsFn}
       startQuery={`
-                query SearchAnimation($limit: Int!){
-                  searchAnimation(limit: $limit, order: "createdAt", mode: "DESC") {
-                    options: rows{
-                      value: id
-                      label: title
-                    }
-                  }
-                }`}
+        query ($limit: Int!){
+          searchAnimation(limit: $limit, order: "createdAt", mode: "DESC") {
+            rows{
+              value: id
+              label: title
+            }
+          }
+        }
+      `}
       changeQuery={`
-                query SearchAnimation($title: String){
-                    searchAnimation(title: $title) {
-                      options: rows{
-                        value: id
-                        label: title
-                      }
-                    }
-                }
-              `}
+        query SearchAnimation($filter: String){
+          searchAnimation(title: $filter) {
+            rows {
+              value: id
+              label: title
+            }
+          }
+        }
+      `}
     />
   )
 }

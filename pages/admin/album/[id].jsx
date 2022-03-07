@@ -307,7 +307,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='animations'>Animations:</Form.Label>
-              <AnimSelector defaultValue={album.animations} isMulti name='animations' />
+              <AnimSelector defaults={album.animations} name='animations' />
             </Form.Group>
           </Col>
         </Row>
