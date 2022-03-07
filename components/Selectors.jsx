@@ -18,7 +18,7 @@ const runError = err => {
   toast.error('Selector: Failed to fetch server info')
 }
 
-export function BetaSelector (props) {
+export function BaseSelector (props) {
   const { startQuery, changeQuery, defaults = [], name = '' } = props
   const { isSingle = false, required = false, onChange, loading: loadingProp = false } = props
   const { rowsFn } = props
@@ -75,29 +75,6 @@ export function BetaSelector (props) {
   )
 }
 
-function SelectorBase (props) {
-  const { startQuery, changeQuery } = props
-  const [query, setQuery] = useState(startQuery)
-  const [title, setTitle] = useState()
-  const { data, error, loading } = useQuery(gql`${query}`, { variables: { limit: 10, title } })
-
-  if (error) {
-    console.log(error)
-    toast.error('Selector: Failed to fetch server info')
-  }
-
-  function handleChange (newValue) {
-    setTitle(newValue)
-    setQuery(changeQuery)
-  }
-
-  const results = data ? data[Object.keys(data)[0]].options || data[Object.keys(data)[0]] : []
-
-  return (
-    <Select {...props} onInputChange={handleChange} isLoading={loading || loading} options={results} styles={styles} />
-  )
-}
-
 export function SimpleSelector (props) {
   return (
     <Select {...props} styles={styles} />
@@ -108,7 +85,7 @@ export function AlbumSelector (props) {
   const rowsFn = data => data.rows
 
   return (
-    <BetaSelector
+    <BaseSelector
       {...props}
       rowsFn={rowsFn}
       startQuery={`
@@ -139,7 +116,7 @@ export function StudioSelector (props) {
   const rowsFn = data => data.rows
 
   return (
-    <BetaSelector
+    <BaseSelector
       {...props}
       rowsFn={rowsFn}
       startQuery={`
@@ -170,7 +147,7 @@ export function GameSelector (props) {
   const rowsFn = data => data.rows
 
   return (
-    <BetaSelector
+    <BaseSelector
       {...props}
       rowsFn={rowsFn}
       startQuery={`
@@ -201,7 +178,7 @@ export function AnimSelector (props) {
   const rowsFn = data => data.rows
 
   return (
-    <BetaSelector
+    <BaseSelector
       {...props}
       rowsFn={rowsFn}
       startQuery={`
@@ -230,7 +207,7 @@ export function AnimSelector (props) {
 
 export function SeriesSelector (props) {
   return (
-    <BetaSelector
+    <BaseSelector
       {...props}
       startQuery={`
         query RecentSeries($limit: Int!){
@@ -254,7 +231,7 @@ export function SeriesSelector (props) {
 
 export function PublisherSelector (props) {
   return (
-    <BetaSelector
+    <BaseSelector
       {...props}
       startQuery={`
         query ($limit: Int!){
@@ -278,7 +255,7 @@ export function PublisherSelector (props) {
 
 export function PlatformSelector (props) {
   return (
-    <BetaSelector
+    <BaseSelector
       {...props}
       startQuery={`
         query ($limit: Int!){
