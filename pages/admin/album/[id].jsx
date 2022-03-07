@@ -27,7 +27,7 @@ query Album ($id: ID!) {
     description
     status
     platforms {
-      name: id
+      value: id
       label: name
     }
     animations {
@@ -184,6 +184,8 @@ function EditOstForm ({ id, album, classes, categories }) {
     const formData = prepareForm(e)
     formData.id = album.id
 
+    console.log(formData)
+
     mutate({ mutation, variables: formData }).then(results => {
       toast.success(`Updated "${formData.title}" succesfully!`)
     }).catch(err => {
@@ -298,8 +300,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector type={currentClasses} defaultValue={album.platforms} isMulti name='platforms' />
-
+              <PlatformSelector type={currentClasses} defaults={album.platforms} name='platforms' />
             </Form.Group>
           </Col>
 

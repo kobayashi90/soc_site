@@ -64,10 +64,10 @@ export function BetaSelector (props) {
       />
       {isSingle
         ? (
-          <input value={selected[0]?.label} name={name} hidden required={required} />
+          <input value={selected[0]?.label} name={name} required={required} hidden readOnly />
         )
         : (
-          selected.map(s => <input key={s.value} value={s.value} name={`${name}[]`} hidden />)
+          selected.map(s => <input key={s.value} value={s.value} name={`${name}[]`} hidden readOnly/>)
         )}
     </>
   )
@@ -258,23 +258,24 @@ export function PublisherSelector (props) {
 
 export function PlatformSelector (props) {
   return (
-    <SelectorBase
+    <BetaSelector
       {...props}
       startQuery={`
-                      query RecentPlatforms($limit: Int!){
-                          recentPlatforms(limit: $limit, type: "${props.type}") {
-                          value: id
-                          label: name
-                          }
-                      }`}
+        query ($limit: Int!){
+          recentPlatforms(limit: $limit, type: "${props.type}") {
+            value: id
+            label: name
+          }
+        }
+      `}
       changeQuery={`
-                      query SearchPlatforms($title: String){
-                          searchPlatformsByName(name: $title, type: "${props.type}") {
-                            value: id
-                            label: name
-                          }
-                      }
-                    `}
+        query ($filter: String){
+          searchPlatformsByName(name: $filter, type: "${props.type}") {
+            value: id
+            label: name
+          }
+        }
+      `}
     />
   )
 }

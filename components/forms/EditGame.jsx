@@ -118,7 +118,7 @@ export default function EditGame () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-                <PlatformSelector loading={loading} type='Game' isMulti name='platforms[]' defaultValue={data && data.game.platforms} />
+                <PlatformSelector type='Game'name='platforms' defaults={data && data.game.platforms} />
               </Form.Group>
             </Col>
           </Row>

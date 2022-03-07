@@ -208,7 +208,7 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector type={currentClasses} isMulti name='platforms' />
+              <PlatformSelector type={currentClasses} name='platforms' />
             </Form.Group>
           </Col>
           <Col md={4}>

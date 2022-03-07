@@ -50,7 +50,7 @@ export default function EditPlatform () {
   const formRef = useRef(null)
   const [mutateUpdate, { loading: loadingUpdate }] = useMutation(mutationUpdate)
   const [mutateDelete, { loading: loadingDelete }] = useMutation(mutationDelete)
-  const [getPlatform, { data }] = useLazyQuery(query)
+  const [getPlatform, { data, loading: loadingInfo }] = useLazyQuery(query)
 
   function handleSubmitForm (mutate, verb) {
     const target = formRef.current
@@ -74,7 +74,7 @@ export default function EditPlatform () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='key'>Platform:</Form.Label>
-                <PlatformSelector type='' required name='key' onChange={row => getPlatform({ variables: { key: row.value } })} />
+                <PlatformSelector isSingle type='' required name='key' onChange={row => getPlatform({ variables: { key: row.value } })} loading={loadingInfo} />
               </Form.Group>
             </Col>
             <Col md={4}>
