@@ -176,7 +176,7 @@ function EditOstForm ({ id, album, classes, categories }) {
 
   const { user } = useUser()
   const { data, refetch } = useQuery(queryDownload, { variables: { id } })
-  useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
+  useEffect(() => refetch({ id }), [user, id, refetch])
 
   function handleSubmitForm (e) {
     e.persist()

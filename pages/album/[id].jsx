@@ -118,7 +118,7 @@ export default function Page ({ id, album, imageUrl }) {
   const { user } = useUser()
   const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
 
-  useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
+  useEffect(() => refetch({ id }), [user, id, refetch])
 
   return (
     <Row>
