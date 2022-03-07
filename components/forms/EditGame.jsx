@@ -106,19 +106,19 @@ export default function EditGame () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='series'>Series:</Form.Label>
-                <SeriesSelector loading={loading} name='series' defaults={data && data.game.series} />
+                <SeriesSelector loading={loading} name='series' defaultValue={data && data.game.series} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='publishers'>Publishers:</Form.Label>
-                <PublisherSelector loading={loading} name='publishers' defaults={data && data.game.publishers} />
+                <PublisherSelector loading={loading} name='publishers' defaultValue={data && data.game.publishers} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-                <PlatformSelector type='Game'name='platforms' defaults={data && data.game.platforms} />
+                <PlatformSelector type='Game'name='platforms' defaultValue={data && data.game.platforms} />
               </Form.Group>
             </Col>
           </Row>

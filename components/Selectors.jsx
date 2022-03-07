@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
-import Select from 'react-select'
 import { gql, useQuery, useLazyQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
 import { MultiSelect } from 'react-multi-select-component'
-
-const styles = { option: () => ({ color: 'black' }), multiValueLabel: provided => ({ ...provided, whiteSpace: 'normal' }) }
 
 const valueRenderer = (selected, _options) => {
   return selected.length
@@ -18,13 +15,26 @@ const runError = err => {
   toast.error('Selector: Failed to fetch server info')
 }
 
+function HiddenInputs (props) {
+  const { isSingle = false, selected = isSingle ? {} : [], required = false, name = '' } = props
+
+  return isSingle
+    ? (
+      <input defaultValue={selected.value} name={name} required={required} hidden readOnly />
+    )
+    : (
+      selected.map(s => <input key={s.value} defaultValue={s.value} name={`${name}[]`} hidden readOnly />)
+    )
+}
+
 export function BaseSelector (props) {
-  const { startQuery, changeQuery, defaults = [], name = '' } = props
   const { isSingle = false, required = false, onChange, loading: loadingProp = false } = props
+  const { startQuery, changeQuery, defaultValue = isSingle ? undefined : [], name = '' } = props
   const { rowsFn } = props
 
-  const [options, setOptions] = useState(defaults)
-  const [selected, setSelected] = useState(defaults)
+  const [options, setOptions] = useState(defaultValue || [])
+  const [selected, setSelected] = useState(defaultValue)
+  const value = isSingle ? (selected ? [selected] : []) : selected
 
   const { data: dataInitial, error: initialError, loading: loadingInitial } = useQuery(gql`${startQuery}`, { variables: { limit: 10 } })
   const [getQuery, { data, error, loading }] = useLazyQuery(gql`${changeQuery}`)
@@ -36,9 +46,9 @@ export function BaseSelector (props) {
   }
 
   const onChangeFn = (items = []) => {
-    const result = isSingle ? [items[items.length - 1]] : items
+    const result = isSingle ? items[items.length - 1] : items
 
-    if (onChange) onChange(isSingle ? result[0] : result)
+    if (onChange) onChange(result)
     setSelected(result)
   }
 
@@ -49,7 +59,7 @@ export function BaseSelector (props) {
     if (!dataInitial && !data) return
 
     const searchOptions = data ? getOptions(data) : getOptions(dataInitial)
-    const currentOptions = selected.filter(o => !searchOptions.includes(o.value))
+    const currentOptions = value.filter(o => !searchOptions.includes(o.value))
 
     setOptions([...currentOptions, ...searchOptions])
   }, [dataInitial, data])
@@ -62,22 +72,36 @@ export function BaseSelector (props) {
         onChange={onChangeFn}
         hasSelectAll={!isSingle}
         isLoading={loading || loadingInitial || loadingProp}
-        value={selected} options={options}
+        value={value} options={options}
       />
-      {isSingle
-        ? (
-          <input defaultValue={selected[0]?.label} name={name} required={required} hidden readOnly />
-        )
-        : (
-          selected.map(s => <input key={s.value} defaultValue={s.value} name={`${name}[]`} hidden readOnly />)
-        )}
+      <HiddenInputs isSingle={isSingle} required={required} selected={selected} name={name} />
     </>
   )
 }
 
 export function SimpleSelector (props) {
+  const { isSingle = false, defaultValue = isSingle ? undefined : [], required = false, name = '' } = props
+
+  const [selected, setSelected] = useState(defaultValue)
+
+  const onChangeFn = (items = []) => {
+    const result = isSingle ? items[items.length - 1] : items
+    setSelected(result)
+  }
+
+  const value = isSingle ? (selected ? [selected] : []) : selected
+
   return (
-    <Select {...props} styles={styles} />
+    <>
+      <MultiSelect
+        valueRenderer={valueRenderer}
+        hasSelectAll={!isSingle}
+        {...props}
+        onChange={onChangeFn}
+        value={value}
+      />
+      <HiddenInputs isSingle={isSingle} required={required} selected={selected} name={name} />
+    </>
   )
 }
 

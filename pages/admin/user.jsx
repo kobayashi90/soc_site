@@ -138,7 +138,7 @@ export default function AdminUser () {
               <SimpleSelector
                 defaultValue={[]}
                 options={data && data.roles.map(({ name }) => ({ label: name, value: name }))}
-                isMulti name='roles'
+                name='roles'
               />
             </Form.Group>
           </Col>
@@ -211,7 +211,6 @@ function UserRow ({ username, roles, roleList }) {
             onChange={e => handleUpdate(e)}
             defaultValue={roles.map(({ name }) => ({ label: name, value: name }))}
             options={roleList.map(({ name }) => ({ label: name, value: name }))}
-            isMulti
           />
         </td>
         <td>

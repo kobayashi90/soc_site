@@ -43,11 +43,11 @@ query Album ($id: ID!) {
       name
     }
     classes {
-      name
+      value: name
       label: name
     }
     categories {
-      name
+      value: name
       label: name
     }
     stores {
@@ -65,11 +65,11 @@ query Album ($id: ID!) {
   }
 
   categories {
-    name
+    value: name
     label: name
   }
   classes {
-    name
+    value: name
     label: name
   } 
 }
@@ -228,7 +228,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col>
             <Form.Group>
               <Form.Label htmlFor='status'>Status:</Form.Label>
-              <SimpleSelector required name='status' defaultValue={[{ value: album.status, label: capitalize(album.status) }]} options={['Show', 'Hidden', 'Coming'].map(label => ({ label, value: label.toLowerCase() }))} />
+              <SimpleSelector isSingle required name='status' defaultValue={{ value: album.status, label: capitalize(album.status) }} options={['Show', 'Hidden', 'Coming'].map(label => ({ label, value: label.toLowerCase() }))} />
             </Form.Group>
           </Col>
         </Row>
@@ -254,7 +254,7 @@ function EditOstForm ({ id, album, classes, categories }) {
               <Form.Label htmlFor='classes'>Classification:</Form.Label>
               <SimpleSelector
                 defaultValue={album.classes}
-                required isMulti name='classes' options={classes}
+                required name='classes' options={classes}
                 onChange={values => setClasses(values && values.length === 1 ? values[0].label : '')}
               />
             </Form.Group>
@@ -264,7 +264,7 @@ function EditOstForm ({ id, album, classes, categories }) {
               <Form.Label htmlFor='categories'>Categories:</Form.Label>
               <SimpleSelector
                 defaultValue={album.categories}
-                required isMulti name='categories' options={categories} />
+                required name='categories' options={categories} />
             </Form.Group>
           </Col>
 
@@ -292,20 +292,20 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='games'>Games:</Form.Label>
-              <GameSelector defaults={album.games} name='games' />
+              <GameSelector defaultValue={album.games} name='games' />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector type={currentClasses} defaults={album.platforms} name='platforms' />
+              <PlatformSelector type={currentClasses} defaultValue={album.platforms} name='platforms' />
             </Form.Group>
           </Col>
 
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='animations'>Animations:</Form.Label>
-              <AnimSelector defaults={album.animations} name='animations' />
+              <AnimSelector defaultValue={album.animations} name='animations' />
             </Form.Group>
           </Col>
         </Row>
@@ -314,7 +314,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={12}>
             <Form.Group>
               <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
-              <AlbumSelector defaults={album.related} name='related' />
+              <AlbumSelector defaultValue={album.related} name='related' />
             </Form.Group>
           </Col>
         </Row>

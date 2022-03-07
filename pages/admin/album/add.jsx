@@ -141,7 +141,7 @@ function AddAlbum (props) {
           <Col>
             <Form.Group>
               <Form.Label htmlFor='status'>Status:</Form.Label>
-              <SimpleSelector required name='status' defaultValue={[{ value: 'show', label: 'Show' }]} options={['Show', 'Hidden', 'Coming'].map(label => ({ label, value: label.toLowerCase() }))} />
+              <SimpleSelector isSingle required name='status' defaultValue={{ value: 'show', label: 'Show' }} options={['Show', 'Hidden', 'Coming'].map(label => ({ label, value: label.toLowerCase() }))} />
             </Form.Group>
           </Col>
         </Row>
@@ -165,7 +165,7 @@ function AddAlbum (props) {
             <Form.Group>
               <Form.Label htmlFor='classes'>Classification:</Form.Label>
               <SimpleSelector
-                required isMulti name='classes' options={classes.map(c => ({ value: c.name, label: c.name }))}
+                required name='classes' options={classes.map(c => ({ value: c.name, label: c.name }))}
                 onChange={values => {
                   if (values && values.length === 1) setClasses(values[0].label)
                   else setClasses('')
@@ -176,7 +176,7 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='categories'>Categories:</Form.Label>
-              <SimpleSelector required isMulti name='categories' options={categories.map(c => ({ value: c.name, label: c.name }))} />
+              <SimpleSelector required name='categories' options={categories.map(c => ({ value: c.name, label: c.name }))} />
             </Form.Group>
           </Col>
         </Row>

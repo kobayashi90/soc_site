@@ -200,7 +200,7 @@ function OstTable () {
         <Col>
           <SimpleSelector
             onChange={e => setStatus(e.map(v => v.value))}
-            isMulti required name='status'
+            required name='status'
             defaultValue={statusOptions} options={statusOptions}
           />
         </Col>
@@ -271,7 +271,7 @@ function Highlight () {
   return (
     <Col md={12} className='mt-3 site-form blackblock p-3'>
       <Form.Label>Highlight OST:</Form.Label>
-      <AlbumSelector isSingle defaults={data && [data.highlight]} onChange={handleHighlight} loading={loading} />
+      <AlbumSelector isSingle defaultValue={data && [data.highlight]} onChange={handleHighlight} loading={loading} />
     </Col>
   )
 }

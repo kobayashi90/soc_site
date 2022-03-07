@@ -151,7 +151,7 @@ export function StoreDownloads (props) {
                 <Form.Group>
                   <Form.Label>Provider:</Form.Label>
                   <SimpleSelector
-                    name={`stores[${i}][provider]`} defaultValue={defaults[key] ? [providers.find(e => e.value === defaults[key].provider)] : [providers[0]]} options={providers}
+                    isSingle name={`stores[${i}][provider]`} defaultValue={defaults[key] ? providers.find(e => e.value === defaults[key].provider) : providers[0]} options={providers}
                   />
                 </Form.Group>
               </Col>
@@ -257,7 +257,8 @@ export function Downloads (props) {
                       <Form.Group>
                         <Form.Label>Provider:</Form.Label>
                         <SimpleSelector
-                          defaultValue={[providersDownload.find(p => p.value === link.provider)]}
+                          isSingle
+                          defaultValue={providersDownload.find(p => p.value === link.provider)}
                           name={`downloads[${i}][links][${i2}][provider]`} options={providersDownload}
                         />
                       </Form.Group>
