@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Row, FormControl, Form, Col } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { StudioSelector } from '../Selectors'
@@ -24,6 +24,7 @@ const mutationDelete = gql`
 
 export default function EditStudio () {
   const formRef = useRef(null)
+  const [defaultName, setName] = useState()
   const [mutateUpdate, { loading: loadingUpdate }] = useMutation(mutationUpdate)
   const [mutateDelete, { loading: loadingDelete }] = useMutation(mutationDelete)
 
@@ -47,13 +48,13 @@ export default function EditStudio () {
             <Col md={6}>
               <Form.Group>
                 <Form.Label htmlFor='id'>Studio:</Form.Label>
-                <StudioSelector required name='slug' />
+                <StudioSelector isSingle required name='slug' onChange={row => setName(row.label)}/>
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group>
                 <Form.Label htmlFor='name'>Name:</Form.Label>
-                <FormControl type='text' name='name' required />
+                <FormControl type='text' name='name' required defaultValue={defaultName} />
               </Form.Group>
             </Col>
           </Row>

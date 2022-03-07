@@ -67,7 +67,7 @@ export default function AddAnimation () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='studios'>Studios:</Form.Label>
-              <StudioSelector isMulti name='studios' />
+              <StudioSelector name='studios' />
             </Form.Group>
           </Col>
           <Col md={4}>

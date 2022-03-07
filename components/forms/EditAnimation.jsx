@@ -103,7 +103,7 @@ export default function AddAnimation () {
             <Col>
               <Form.Group>
                 <Form.Label htmlFor='studios'>Studios:</Form.Label>
-                <StudioSelector isMulti name='studios[]' defaultValue={data.animation.studios} />
+                <StudioSelector name='studios' defaults={data.animation.studios} />
               </Form.Group>
             </Col>
           )}

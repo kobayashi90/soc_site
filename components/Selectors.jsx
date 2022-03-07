@@ -132,28 +132,32 @@ export function OstSelector (props) {
 }
 
 export function StudioSelector (props) {
+  const rowsFn = data => data.rows
+
   return (
-    <SelectorBase
+    <BetaSelector
       {...props}
+      rowsFn={rowsFn}
       startQuery={`
-              query SearchStudio($limit: Int){
-                  searchStudio(limit: $limit) {
-                    options: rows{
-                      value: slug
-                      label: name
-                    }
-                  }
-              }`}
+        query ($limit: Int){
+          searchStudio(limit: $limit) {
+            rows {
+              value: slug
+              label: name
+            }
+          }
+        }
+      `}
       changeQuery={`
-              query SearchStudio($title: String){
-                  searchStudio(name: $title) {
-                    options: rows{
-                      value: slug
-                      label: name
-                    }
-                  }
-              }
-            `}
+        query ($filter: String){
+          searchStudio(name: $filter) {
+            rows {
+              value: slug
+              label: name
+            }
+          }
+        }
+      `}
     />
   )
 }
