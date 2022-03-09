@@ -25,9 +25,10 @@ query searchAlbum($limit: Int){
     }
   },
 
-  added: searchAlbum(limit: $limit){
+  added: searchAlbum(limit: $limit, status: ["show","coming"]){
     rows{
       id
+      status
       title
       placeholder
     }

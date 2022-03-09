@@ -7,7 +7,8 @@ import { getImageUrl } from './utils'
 import styles from '../styles/AlbumBoxes.module.scss'
 
 export default function AlbumBox (props) {
-  const { id, title, type = 'album', coming = false, height = 300, width = 300, placeholder, style } = props
+  const { id, title, type = 'album', status, height = 300, width = 300, placeholder, style } = props
+  const coming = status === 'coming'
 
   return (
     <div className={classNames(styles.albumBox, { [styles.coming]: coming })} style={style} >
