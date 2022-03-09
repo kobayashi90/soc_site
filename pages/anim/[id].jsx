@@ -71,6 +71,7 @@ const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${
 export default function Page ({ id, title, subTitle, releaseDate, studios, albums, imageUrl, placeholder }) {
   return (
     <Row>
+      Col
       <Head>
         <title>{title}</title>
         <meta property='og:url' content={`/anim/${id}`} />
@@ -79,9 +80,9 @@ export default function Page ({ id, title, subTitle, releaseDate, studios, album
       <Col className={classNames(styles.content, 'px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
         <Container className='px-5'>
           <Row>
-            <Col lg={5}><Image layout='responsive' width={100} height={150} alt={title} src={getImageUrl(id, 'anim')} placeholder='blur' blurDataURL={placeholder} /></Col>
-            <Col lg={7} className='blackblock'>
-              <h1 className={classNames('text-center', styles.title)}>{title}</h1>
+            <Col lg={2}>
+              <Image layout='responsive' width={100} height={150} alt={title} src={getImageUrl(id, 'anim')} placeholder='blur' blurDataURL={placeholder} />
+              <h3 className={classNames('text-center', styles.title)}>{title}</h3>
               <h6 className='text-center'>{subTitle}</h6>
               <table className={styles.table}>
                 <tbody>
@@ -89,9 +90,8 @@ export default function Page ({ id, title, subTitle, releaseDate, studios, album
                     <th className='width-row'>Release Date</th>
                     <td>{new Date(releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                   </tr>
-
                   <tr>
-                    <th>Studio</th>
+                    <th>Studios</th>
                     <td>
                       {studios.map(({ slug, name }, i) => (
                         <Fragment key={id}>
@@ -104,20 +104,14 @@ export default function Page ({ id, title, subTitle, releaseDate, studios, album
                 </tbody>
               </table>
             </Col>
+            <Col lg={10} className='blackblock'>
+              {albums.length > 0 && (
+                <Row className='justify-content-center'>
+                  <AlbumBoxList md={3} xs={6} items={albums} />
+                </Row>
+              )}
+            </Col>
           </Row>
-
-          <hr className='style-white w-100' />
-
-          {albums.length > 0 && (
-            <Row>
-              <Col>
-                <div className='blackblock w-100 m-3'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
-              </Col>
-              <Row className='justify-content-center'>
-                <AlbumBoxList md={3} xs={6} items={albums} />
-              </Row>
-            </Row>
-          )}
         </Container>
       </Col>
     </Row>

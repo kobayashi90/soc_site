@@ -52,8 +52,10 @@ export default function Sidebar ({ radio = false, index = false }) {
             </Col>
           </Row>
           <Row className='mt-1'>
-            <Col md={12} className='d-flex justify-content-center'>
+            {/* <Col md={12} className='d-flex justify-content-center'>
               <a target='_blank' rel='noopener noreferrer' href='https://www.paypal.com/donate/?hosted_button_id=BBGTBGSDAXA8N'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='paypal' src='/img/assets/paypal-donate-button.png' /></a>
+            </Col> */}
+            <Col md={12} className='d-flex justify-content-center'>
               <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/sittingonclouds'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='ko-fi' src='/img/assets/ko-fi-donate-button.png' /></a>
             </Col>
           </Row>
