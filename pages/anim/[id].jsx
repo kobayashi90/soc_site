@@ -71,7 +71,6 @@ const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${
 export default function Page ({ id, title, subTitle, releaseDate, studios, albums, imageUrl, placeholder }) {
   return (
     <Row>
-      Col
       <Head>
         <title>{title}</title>
         <meta property='og:url' content={`/anim/${id}`} />
