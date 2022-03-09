@@ -184,8 +184,6 @@ function EditOstForm ({ id, album, classes, categories }) {
     const formData = prepareForm(e)
     formData.id = album.id
 
-    console.log(formData)
-
     mutate({ mutation, variables: formData }).then(results => {
       toast.success(`Updated "${formData.title}" succesfully!`)
     }).catch(err => {

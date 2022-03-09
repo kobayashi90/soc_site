@@ -26,10 +26,10 @@ export default function AlbumBox (props) {
   )
 }
 
-export function AlbumBoxList ({ xs, md, items, type, width, height }) {
+export function AlbumBoxList ({ xs, md, items, type, width, height, style }) {
   return items.map(props => (
     <Col xs={xs} md={md} key={props.id} className='px-1 mb-2'>
-      <AlbumBox {...props} type={type} width={width} height={height}/>
+      <AlbumBox {...props} style={style} type={type} width={width} height={height}/>
     </Col>
   ))
 }
