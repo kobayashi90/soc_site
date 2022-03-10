@@ -103,7 +103,9 @@ export default function Page ({ id, title, subTitle, releaseDate, studios, album
                 </tbody>
               </table>
             </Col>
-            <AlbumBoxList xs={6} md={2} items={albums} style={{ height: 'fit-content' }} />
+            <Col>
+              <AlbumBoxList xs={6} md={2} items={albums} style={{ height: 'fit-content' }} />
+            </Col>
           </Row>
         </Container>
       </Col>
