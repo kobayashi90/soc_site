@@ -134,7 +134,7 @@ const resolvers = {
     },
     updateGame: async (parent, args, { user, db }, info) => {
       return db.transaction(async () => {
-        const { slug, name, cover, releaseDate, series, publishers, platforms } = args
+        const { slug, name, cover, releaseDate, series = [], publishers, platforms } = args
         const game = await db.models.game.findByPk(slug)
 
         game.name = name
