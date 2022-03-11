@@ -14,6 +14,8 @@ import { ToastContainer } from 'react-toastify'
 import { useEffect, useRef } from 'react'
 import { ApolloProvider } from '@apollo/client'
 import SSRProvider from 'react-bootstrap/SSRProvider'
+import { useRouter } from 'next/router'
+import ReactGA from 'react-ga'
 
 import { initializeApollo, useApollo } from '@/lib/ApolloClient'
 import useUser from '@/components/useUser'
@@ -27,6 +29,37 @@ export async function getStaticProps () {
   return {
     props: { initialApollo: client.cache.extract() }
   }
+}
+
+function Analytics () {
+  const router = useRouter()
+  const { asPath: page } = router
+
+  useEffect(() => {
+    ReactGA.set({ page })
+    ReactGA.pageview(page)
+  }, [page])
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Mode: Dev')
+      ReactGA.initialize('UA-106185794-1')
+    } else {
+      console.log('Mode: Prod')
+      const domains = ['www.sittingonclouds.net', 'www.sittingonclouds.com', 'www.sittingonclouds.org', 'www.sittingonclouds.ru']
+        .filter(url => url !== window.location.host)
+      console.log('Link domains: ', domains)
+
+      ReactGA.initialize('UA-106185794-1', { gaOptions: { allowLinker: true } })
+      ReactGA.ga('require', 'linker')
+      ReactGA.ga('linker:autoLink', domains)
+    }
+
+    ReactGA.set({ page })
+    ReactGA.pageview(page)
+  }, [])
+
+  return null
 }
 
 export default function MyApp ({ Component, pageProps }) {
@@ -45,6 +78,7 @@ export default function MyApp ({ Component, pageProps }) {
         <meta key='desc' property='og:description' content='Largest Video Game & Animation Soundtrack サウンドトラック Archive' />
         <meta key='image' property='og:image' content='/img/assets/clouds_thumb.png' />
       </Head>
+      <Analytics />
       <ToastContainer newestOnTop />
       <SSRProvider>
         <Header />

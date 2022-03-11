@@ -4972,6 +4972,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-ga@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "react-ga@npm:3.3.0"
+  peerDependencies:
+    prop-types: ^15.6.0
+    react: ^15.6.2 || ^16.0 || ^17
+  checksum: b4f5b0ed3a5d7ea781397d6a1f8dacae2284fe7f03f72dde330958dd0a64732f8766c6fa26cf0f1a8fb1303fa02aa51f23cf0b261e52981d0275262b831c7fea
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.3.2, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -5608,6 +5618,7 @@ __metadata:
     react: 17.0.2
     react-bootstrap: ^2.0.1
     react-dom: 17.0.2
+    react-ga: ^3.3.0
     react-multi-select-component: ^4.2.3
     react-toastify: ^8.0.3
     reddit: ^1.2.1
