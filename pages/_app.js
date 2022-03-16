@@ -16,6 +16,7 @@ import { ApolloProvider } from '@apollo/client'
 import SSRProvider from 'react-bootstrap/SSRProvider'
 import { useRouter } from 'next/router'
 import ReactGA from 'react-ga'
+import Script from 'next/script'
 
 import { initializeApollo, useApollo } from '@/lib/ApolloClient'
 import useUser from '@/components/useUser'
@@ -77,10 +78,8 @@ export default function MyApp ({ Component, pageProps }) {
         <meta key='title' property='og:title' content='Sitting on Clouds — High Quality soundtrack library' />
         <meta key='desc' property='og:description' content='Largest Video Game & Animation Soundtrack サウンドトラック Archive' />
         <meta key='image' property='og:image' content='/img/assets/clouds_thumb.png' />
-
-        <script data-cfasync="false" src="//dba9ytko5p72r.cloudfront.net/?tyabd=951926"></script>
-
       </Head>
+      <Script data-cfasync="false" src="//dba9ytko5p72r.cloudfront.net/?tyabd=951926"></Script>
       <Analytics />
       <ToastContainer newestOnTop />
       <SSRProvider>
