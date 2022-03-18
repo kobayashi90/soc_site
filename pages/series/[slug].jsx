@@ -16,6 +16,7 @@ const query = gql`
     seriesOne(slug: $slug){
       name
       placeholder
+      headerColor
       games {
         slug
         name
@@ -43,7 +44,7 @@ export const getServerSideProps = async ({ params, req }) => {
 
   if (seriesOne === null) return { redirect: { destination: '/404', permanent: false } }
 
-  return { props: { seriesOne, slug }/*, revalidate: 60 */ }
+  return { props: { seriesOne, slug, imageUrl: fullImage(slug, 50) }/*, revalidate: 60 */ }
 }
 
 function AlbumBox (props) {
@@ -84,7 +85,11 @@ function AlbumBox (props) {
   )
 }
 
-export default function SeriesDetail ({ slug, seriesOne }) {
+const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'series')}`
+
+export default function SeriesDetail (props) {
+  const { slug, seriesOne, imageUrl } = props
+  const { headerColor } = seriesOne
   const gameList = [...seriesOne.games]
   const various = []
   const games = {}
@@ -109,7 +114,10 @@ export default function SeriesDetail ({ slug, seriesOne }) {
     <Container>
       <Head>
         <title>{seriesOne.name}</title>
-        <meta property='og:url' content={`/series/${slug}`} />
+        <meta key='url' property='og:url' content={`/series/${slug}`} />
+        <meta key='color' name="theme-color" content={headerColor}></meta>
+        <meta key='title' property='og:title' content={seriesOne.name} />
+        <meta key='image' property='og:image' content={imageUrl} />
       </Head>
 
       <Row className='mt-3'>

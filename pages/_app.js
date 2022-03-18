@@ -72,8 +72,8 @@ export default function MyApp ({ Component, pageProps }) {
         <title>Sitting on Clouds</title>
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Sitting on Clouds" />
-        <meta name="theme-color" content="#ffffff"></meta>
 
+        <meta key='color' name="theme-color" content="#ffffff"></meta>
         <meta key='url' property='og:url' content='/' />
         <meta key='title' property='og:title' content='Sitting on Clouds — High Quality soundtrack library' />
         <meta key='desc' property='og:description' content='Largest Video Game & Animation Soundtrack サウンドトラック Archive' />
