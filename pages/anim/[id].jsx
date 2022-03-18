@@ -19,6 +19,7 @@ query animation ($id: ID) {
     subTitle
     releaseDate
     placeholder
+    headerColor
     studios {
       slug 
       name
@@ -63,17 +64,26 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
   const { animation } = data
 
   if (animation === null) return { redirect: { destination: '/404', permanent: false } }
-  return { props: { ...animation, imageUrl: fullImage(id, 50) }/*, revalidate: 60 */ }
+  return { props: { animation, imageUrl: fullImage(id, 50) }/*, revalidate: 60 */ }
 }
 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'anim')}`
 
-export default function Page ({ id, title, subTitle, releaseDate, studios, albums = [], imageUrl, placeholder }) {
+export default function Page (props) {
+  const { animation } = props
+  const { id, title, subTitle, releaseDate, studios, albums = [], imageUrl, placeholder, headerColor } = animation
+
   return (
     <Row className='h-100'>
       <Head>
         <title>{title}</title>
-        <meta property='og:url' content={`/anim/${id}`} />
+        <meta name="theme-color" content={headerColor}></meta>
+        <meta key='url' property='og:url' content={`/anim/${id}`} />
+        <meta key='title' property='og:title' content={title} />
+        <meta key='desc' property='og:description' content={
+          subTitle && studios.length > 0
+            ? `${subTitle} / ${studios.map(a => a.name).join(' - ')}`
+            : subTitle || studios.map(a => a.name).join(' - ')} />
         <meta key='image' property='og:image' content={imageUrl} />
       </Head>
       <Col className={classNames(styles.content, 'px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>

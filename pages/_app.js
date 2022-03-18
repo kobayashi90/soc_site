@@ -67,7 +67,7 @@ export default function MyApp ({ Component, pageProps }) {
   const client = useApollo(pageProps.initialApollo)
 
   return (
-    <ApolloProvider client={client}>
+    <>
       <Head>
         <title>Sitting on Clouds</title>
         <meta property="og:type" content="website" />
@@ -79,17 +79,19 @@ export default function MyApp ({ Component, pageProps }) {
         <meta key='desc' property='og:description' content='Largest Video Game & Animation Soundtrack サウンドトラック Archive' />
         <meta key='image' property='og:image' content='/img/assets/clouds_thumb.png' />
       </Head>
-      {/* <Script data-cfasync="false" src="//dba9ytko5p72r.cloudfront.net/?tyabd=951926"></Script> */}
       <Analytics />
       <ToastContainer newestOnTop />
-      <SSRProvider>
-        <Header />
-        <Container fluid className='flex-grow-1'>
-          <Component {...pageProps} />
-        </Container>
-        <FooterAd />
-      </SSRProvider>
-    </ApolloProvider>
+
+      <ApolloProvider client={client}>
+        <SSRProvider>
+          <Header />
+          <Container fluid className='flex-grow-1'>
+            <Component {...pageProps} />
+          </Container>
+          <FooterAd />
+        </SSRProvider>
+      </ApolloProvider>
+    </>
   )
 }
 
