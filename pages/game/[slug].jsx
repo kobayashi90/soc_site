@@ -16,6 +16,7 @@ const query = gql`
         name
         releaseDate
         placeholder
+        headerColor
         publishers {
           id
           name
@@ -46,17 +47,27 @@ export async function /* getStaticProps */ getServerSideProps ({ params }) {
 
   if (game === null) return { redirect: { destination: '/404', permanent: false } }
 
-  return { props: { ...game }/*, revalidate: 60 */ }
+  return { props: { game, imageUrl: fullImage(slug, 50) }/*, revalidate: 60 */ }
 }
 
+const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'game')}`
+
 export default function GameDetail (props) {
-  const { slug, name, releaseDate, publishers, platforms, series, albums, placeholder } = props
+  const { game } = props
+  const { slug, name, releaseDate, publishers, platforms, series, albums, placeholder, headerColor, imageUrl } = game
+  const albumList = [...albums]
 
   return (
     <Container>
       <Head>
         <title>{name}</title>
         <meta property='og:url' content={`/game/${slug}`} />
+        <meta name="theme-color" content={headerColor}></meta>
+        <meta key='title' property='og:title' content={name} />
+        <meta key='desc' property='og:description' content={
+          `${series.map(({ name }) => name).join(' - ')}${series.length > 0 ? ' / ' : ''}${publishers.map(({ name }) => name).join(' - ')}`
+        } />
+        <meta key='image' property='og:image' content={imageUrl} />
       </Head>
 
       <Row className='mt-3'>
@@ -124,7 +135,7 @@ export default function GameDetail (props) {
 
       <hr className='style2 style-white' />
       <Row className='justify-content-center'>
-        <AlbumBoxList md={3} xs={6} items={albums.sort((a, b) => a.title > b.title)} />
+        <AlbumBoxList md={3} xs={6} items={albumList.sort((a, b) => a.title > b.title)} />
       </Row>
 
     </Container>
