@@ -114,7 +114,9 @@ export default function Page (props) {
               </table>
             </Col>
             <Col>
-              <AlbumBoxList xs={6} md={2} items={albums} style={{ height: 'fit-content' }} />
+              <Row>
+                <AlbumBoxList xs={6} md={2} items={albums} style={{ height: 'fit-content' }} />
+              </Row>
             </Col>
           </Row>
         </Container>
