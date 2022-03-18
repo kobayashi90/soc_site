@@ -174,7 +174,7 @@ export default function Page ({ id, album, imageUrl }) {
                         {album.platforms.map(({ id, name }, i) => (
                           <Fragment key={id}>
                             {id === '29'
-                              ? <span className='p-0' >{name}</span>
+                              ? <span className='btn p-0' style={{ color: 'white' }}>{name}</span>
                               : <a className='btn btn-link p-0' href={`/platform/${id}`}>{name}</a>
                             }
                             {i !== album.platforms.length - 1 && ', '}
