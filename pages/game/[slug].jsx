@@ -61,8 +61,8 @@ export default function GameDetail (props) {
     <Container>
       <Head>
         <title>{name}</title>
-        <meta property='og:url' content={`/game/${slug}`} />
-        <meta name="theme-color" content={headerColor}></meta>
+        <meta key='url' property='og:url' content={`/game/${slug}`} />
+        <meta key='color' name="theme-color" content={headerColor}></meta>
         <meta key='title' property='og:title' content={name} />
         <meta key='desc' property='og:description' content={
           `${series.map(({ name }) => name).join(' - ')}${series.length > 0 ? ' / ' : ''}${publishers.map(({ name }) => name).join(' - ')}`

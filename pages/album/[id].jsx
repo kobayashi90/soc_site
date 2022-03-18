@@ -134,7 +134,7 @@ export default function Page (props) {
     <Row>
       <Head>
         <title>{album.title}</title>
-        <meta name="theme-color" content={album.headerColor}></meta>
+        <meta key='color' name="theme-color" content={album.headerColor}></meta>
         <meta key='url' property='og:url' content={`/album/${album.id}`} />
         <meta key='title' property='og:title' content={album.title} />
         <meta key='desc' property='og:description' content={album.subTitle || album.artists.map(a => a.name).join(' - ')} />

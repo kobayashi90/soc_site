@@ -77,7 +77,7 @@ export default function Page (props) {
     <Row className='h-100'>
       <Head>
         <title>{title}</title>
-        <meta name="theme-color" content={headerColor}></meta>
+        <meta key='color' name="theme-color" content={headerColor}></meta>
         <meta key='url' property='og:url' content={`/anim/${id}`} />
         <meta key='title' property='og:title' content={title} />
         <meta key='desc' property='og:description' content={
