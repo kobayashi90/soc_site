@@ -136,8 +136,7 @@ export default function AdminUser () {
             <Form.Group>
               <Form.Label htmlFor='roles'>Roles:</Form.Label>
               <SimpleSelector
-                defaultValue={[]}
-                options={data && data.roles.map(({ name }) => ({ label: name, value: name }))}
+                options={data ? data.roles.map(({ name }) => ({ label: name, value: name })) : []}
                 name='roles'
               />
             </Form.Group>
