@@ -1,7 +1,7 @@
 import { UserInputError } from 'apollo-server-errors'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 
-import { hasRole, img, createLog, createUpdateLog } from '@/lib/utils'
+import { hasRole, img, createLog, createUpdateLog, getImgColor } from '@/lib/utils'
 import { postReddit, postDiscord } from '@/lib/plugins'
 import { slugify } from '@/components/utils'
 
@@ -33,7 +33,8 @@ const resolvers = {
         ])
 
         const { id } = ost.dataValues
-        ost.placeholder = data.cover ? await img(data.cover, 'album', id) : ''
+        ost.placeholder = data.cover ? await img(data.cover, 'album', id) : undefined
+        ost.headerColor = data.cover ? await getImgColor(`album/${id}`) : undefined
 
         await ost.save()
 

@@ -1,6 +1,6 @@
 
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
-import { hasRole, img, createLog, createUpdateLog } from '@/lib/utils'
+import { hasRole, img, createLog, createUpdateLog, getImgColor } from '@/lib/utils'
 import { postReddit, postDiscord } from '@/lib/plugins'
 import { slugify } from '@/components/utils'
 
@@ -90,7 +90,10 @@ const resolvers = {
     createSeries: async (parent, data, { db, user }, info) => (
       db.transaction(async () => {
         const series = await db.models.series.create(data)
-        series.placeholder = data.cover ? await img(data.cover, 'series', series.dataValues.slug) : ''
+        const { slug } = series.dataValues
+
+        series.placeholder = data.cover ? await img(data.cover, 'series', slug) : undefined
+        series.headerColor = data.cover ? await getImgColor(`series/${slug}`) : undefined
         await series.save()
 
         await createLog(db, 'createSeries', data, user.username)
@@ -101,7 +104,10 @@ const resolvers = {
       db.transaction(async () => {
         const series = await db.models.series.findByPk(slug)
         if (name) series.name = name
-        if (cover) series.placeholder = await img(cover, 'series', slug)
+        if (cover) {
+          series.placeholder = await img(cover, 'series', slug)
+          series.headerColor = await getImgColor(`series/${slug}`)
+        }
 
         await series.save()
         await createUpdateLog(db, 'updateSeries', series, user.username)
@@ -127,6 +133,8 @@ const resolvers = {
         ])
 
         game.placeholder = data.cover ? await img(data.cover, 'game', data.slug) : ''
+        game.headerColor = data.cover ? await getImgColor(`game/${data.slug}`) : undefined
+
         await game.save()
         await createLog(db, 'createGame', data, user.username)
         return game
@@ -142,7 +150,11 @@ const resolvers = {
         game.setSeries(series)
         game.setPublishers(publishers)
         game.setPlatforms(platforms)
-        if (cover) game.placeholder = await img(cover, 'game', slug)
+
+        if (cover) {
+          game.placeholder = await img(cover, 'game', slug)
+          series.headerColor = await getImgColor(`game/${slug}`)
+        }
 
         // make more comprehensible log
 
@@ -172,6 +184,7 @@ const resolvers = {
         await anim.setStudios(data.studios)
 
         anim.placeholder = data.cover ? await img(data.cover, 'anim', anim.id) : ''
+        anim.headerColor = data.cover ? await getImgColor(`anim/${anim.id}`) : undefined
         await anim.save()
 
         await createLog(db, 'createAnimation', data, user.username)
@@ -186,7 +199,11 @@ const resolvers = {
           anim[key] = value
         })
         anim.setStudios(data.studios)
-        if (data.cover) anim.placeholder = await img(data.cover, 'anim', anim.id)
+
+        if (data.cover) {
+          anim.placeholder = await img(data.cover, 'anim', anim.id)
+          anim.headerColor = await getImgColor(`anim/${anim.id}`)
+        }
 
         await anim.save()
         await createUpdateLog(db, 'updateAnimation', anim, user.username)
@@ -233,7 +250,8 @@ const resolvers = {
         ])
 
         if (data.cover) {
-          ost.placeholder = await img(data.cover, 'album', ost.dataValues.id)
+          ost.placeholder = await img(data.cover, 'album', ost.id)
+          ost.headerColor = await getImgColor(`album/${ost.id}`)
           await ost.save()
         }
 

@@ -1,4 +1,5 @@
 import { DataTypes } from 'sequelize'
+const PLACEHOLDER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVQImWN4fGrVhZ0z/v+5zZAc5yfOwGCtrsbg4em/f7ZvZ7w2Q15Vi6e1iggPAwBwDg7L//0+xAAAAABJRU5ErkJggg=='
 
 const model = sequelize =>
   sequelize.define('ost', {
@@ -14,7 +15,8 @@ const model = sequelize =>
     vgmdb: DataTypes.STRING,
     description: DataTypes.STRING,
     status: { type: DataTypes.STRING, defaultValue: 'show' },
-    placeholder: DataTypes.TEXT
+    placeholder: { type: DataTypes.TEXT, defaultValue: PLACEHOLDER },
+    headerColor: { type: DataTypes.STRING, defaultValue: '#ffffff' }
   },
   {
     freezeTableName: true

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start -p 58991 -H 127.0.0.1",
     "lint": "next lint",
-    "sequelize": "sequelize-cli --config ./sequelize.json"
+    "sequelize": "sequelize-cli"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
@@ -17,12 +17,14 @@
     "@graphql-tools/resolvers-composition": "^6.4.1",
     "apollo-server-micro": "^3.4.0",
     "apollo-upload-client": "^17.0.0",
+    "babel-register": "^6.26.0",
     "bcrypt": "^5.0.1",
     "blurhash": "^1.1.4",
     "bootstrap": "^5.1.3",
     "classnames": "^2.3.1",
     "cls-hooked": "^4.2.2",
     "discord.js": "^13.3.0",
+    "dotenv": "^16.0.0",
     "form-serialize": "^0.7.2",
     "fs-extra": "^10.0.0",
     "generate-password": "^1.6.1",
@@ -47,6 +49,7 @@
     "reddit": "^1.2.1",
     "sass": "^1.43.4",
     "sequelize": "^6.8.0",
+    "sequelize-cli": "^6.3.0",
     "sharp": "^0.29.2",
     "slugify": "^1.6.2",
     "sqlite3": "^5.0.2",
@@ -59,7 +62,6 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
-    "eslint-plugin-react": "^7.26.1",
-    "sequelize-cli": "^6.3.0"
+    "eslint-plugin-react": "^7.26.1"
   }
 }

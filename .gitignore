@@ -36,3 +36,4 @@ sequelize.json
 
 # vercel
 .vercel
+sequelize-config.json

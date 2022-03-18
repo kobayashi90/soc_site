@@ -20,6 +20,7 @@
         createdBy: User
         status: String!
         placeholder: String!
+        headerColor: String!
     }
 
     type Disc {
@@ -89,6 +90,7 @@
         platforms: [Platform]
         albums: [Album]
         series: [Series]
+        headerColor: String!
     }
 
     type Animation {
@@ -99,6 +101,7 @@
         placeholder: String!
         studios: [Studio]!
         albums: [Album]!
+        headerColor: String!
     }
 
     type Studio {
@@ -126,6 +129,7 @@
         name: String
         placeholder: String!
         games: [Game]
+        headerColor: String!
     }
 
     type Category {

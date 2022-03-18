@@ -12,7 +12,6 @@ import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl } from '@/components/utils'
 import Loader from '@/components/Loader'
 import { initializeApollo, isGithub } from '@/lib/ApolloClient'
-import { getImgColor } from '@/lib/utils'
 
 const query = gql`
 query Album ($id: ID!) {
@@ -24,6 +23,7 @@ query Album ($id: ID!) {
     vgmdb
     description
     placeholder
+    headerColor
     status
     platforms {
       id
@@ -116,7 +116,6 @@ export async function getStaticProps ({ params, req }) {
     props: {
       id,
       album: data.album,
-      headerColor: await getImgColor(`album/${id}.png`),
       imageUrl: fullImage(data.album.id, 50)
     }
   }
@@ -125,7 +124,7 @@ export async function getStaticProps ({ params, req }) {
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
 
 export default function Page (props) {
-  const { id, album, imageUrl, headerColor } = props
+  const { id, album, imageUrl } = props
   const { user } = useUser()
   const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
 
@@ -135,7 +134,7 @@ export default function Page (props) {
     <Row>
       <Head>
         <title>{album.title}</title>
-        <meta name="theme-color" content={headerColor}></meta>
+        <meta name="theme-color" content={album.headerColor}></meta>
         <meta key='url' property='og:url' content={`/album/${album.id}`} />
         <meta key='title' property='og:title' content={album.title} />
         <meta key='desc' property='og:description' content={album.subTitle || album.artists.map(a => a.name).join(' - ')} />
