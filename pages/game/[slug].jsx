@@ -53,8 +53,8 @@ export async function /* getStaticProps */ getServerSideProps ({ params }) {
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'game')}`
 
 export default function GameDetail (props) {
-  const { game } = props
-  const { slug, name, releaseDate, publishers, platforms, series, albums, placeholder, headerColor, imageUrl } = game
+  const { game, imageUrl } = props
+  const { slug, name, releaseDate, publishers, platforms, series, albums, placeholder, headerColor } = game
   const albumList = [...albums]
 
   return (

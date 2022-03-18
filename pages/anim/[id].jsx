@@ -70,8 +70,8 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'anim')}`
 
 export default function Page (props) {
-  const { animation } = props
-  const { id, title, subTitle, releaseDate, studios, albums = [], imageUrl, placeholder, headerColor } = animation
+  const { animation, imageUrl } = props
+  const { id, title, subTitle, releaseDate, studios, albums = [], placeholder, headerColor } = animation
 
   return (
     <Row className='h-100'>
