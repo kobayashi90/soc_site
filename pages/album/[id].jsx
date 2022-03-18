@@ -108,7 +108,8 @@ export async function getStaticProps ({ params, req }) {
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
 
-  if (data.album === null) return { redirect: { destination: '/404', permanent: false } }
+  if (data.album === null || data.status !== 'show') return { redirect: { destination: '/404', permanent: false } }
+
   return { props: { id, album: data.album, imageUrl: fullImage(data.album.id, 50) } }
 }
 
