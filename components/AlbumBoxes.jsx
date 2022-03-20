@@ -2,18 +2,20 @@ import { Col } from 'react-bootstrap'
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getImageUrl } from './utils'
 
 import styles from '../styles/AlbumBoxes.module.scss'
+
+import { PLACEHOLDER, getImageUrl } from './utils'
 
 export default function AlbumBox (props) {
   const { id, title, type = 'album', status, height = 300, width = 300, placeholder, style } = props
   const coming = status === 'coming'
+  const blurDataURL = placeholder === null || !placeholder ? PLACEHOLDER : placeholder
 
   const BoxContent = () => (
     <>
       <div className={styles.img}>
-        <Image alt={title}src={getImageUrl(id, type)} layout='responsive' width={width} height={height} placeholder='blur' blurDataURL={placeholder} />
+        <Image alt={title}src={getImageUrl(id, type)} layout='responsive' width={width} height={height} placeholder='blur' blurDataURL={blurDataURL} />
       </div>
       <div className='text-wrap text-center p-2'>
         {coming ? 'Coming Soon' : title}

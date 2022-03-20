@@ -19,7 +19,7 @@
         createdAt: Float!
         createdBy: User
         status: String!
-        placeholder: String!
+        placeholder: String
         headerColor: String!
     }
 
@@ -85,7 +85,7 @@
         slug: String!
         name: String
         releaseDate: String
-        placeholder: String!
+        placeholder: String
         publishers: [Publisher]
         platforms: [Platform]
         albums: [Album]
@@ -98,7 +98,7 @@
         title: String
         subTitle: String
         releaseDate: String
-        placeholder: String!
+        placeholder: String
         studios: [Studio]!
         albums: [Album]!
         headerColor: String!
@@ -127,7 +127,7 @@
     type Series {
         slug: String!
         name: String
-        placeholder: String!
+        placeholder: String
         games: [Game]
         headerColor: String!
     }
