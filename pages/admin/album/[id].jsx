@@ -31,7 +31,7 @@ query Album ($id: ID!) {
       label: name
     }
     animations {
-      name: id
+      value: id
       label: title
     }
     games {
@@ -59,7 +59,7 @@ query Album ($id: ID!) {
       body
     }
     related {
-      name: id
+      value: id
       label: title
     }
   }

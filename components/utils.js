@@ -3,10 +3,6 @@ import serialize from 'form-serialize'
 
 export const PLACEHOLDER = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVQImWN4fGrVhZ0z/v+5zZAc5yfOwGCtrsbg4em/f7ZvZ7w2Q15Vi6e1iggPAwBwDg7L//0+xAAAAABJRU5ErkJggg=='
 
-function isString (obj) {
-  return (Object.prototype.toString.call(obj) === '[object String]')
-}
-
 export const getImageUrl = (id, type = 'album') => `https://cdn.sittingonclouds.net/${type}/${id}.png`
 export const skipAds = user => user && user.permissions.includes('SKIP_ADS')
 export const getFullPageList = (count, limit) => [...Array(Math.ceil(count / limit))].map((v, i) => i + 1)
@@ -35,18 +31,9 @@ export function clearKeys (keys, baseIds) {
 }
 
 export const slugify = text => slugifyFn(text, { lower: true, strict: true })
-function toArray (obj) {
-  if (isString(obj)) return [obj]
-  else return obj
-}
 
 export const prepareForm = e => {
   const data = serialize(e.target, { hash: true })
-  data.platforms = toArray(data.platforms)
-  data.games = toArray(data.games)
-  data.animations = toArray(data.animations)
-  data.categories = toArray(data.categories)
-  data.classes = toArray(data.classes)
   data.releaseDate = new Date(data.releaseDate).toISOString().substring(0, 10)
 
   if (data.artists) data.artists = data.artists.split(',').map(e => e.trim())
