@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { gql, useQuery, useLazyQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
 import { MultiSelect } from 'react-multi-select-component'
@@ -34,7 +34,13 @@ export function BaseSelector (props) {
 
   const [options, setOptions] = useState(defaultValue || [])
   const [selected, setSelected] = useState(defaultValue)
+  const stubElement = useRef(null)
   const value = isSingle ? (selected ? [selected] : []) : selected
+
+  useEffect(() => {
+    const form = stubElement.current.closest('form')
+    form?.addEventListener('reset', () => setSelected(defaultValue))
+  }, [])
 
   const { data: dataInitial, error: initialError, loading: loadingInitial } = useQuery(gql`${startQuery}`, { variables: { limit: 10 } })
   const [getQuery, { data, error, loading }] = useLazyQuery(gql`${changeQuery}`)
@@ -66,6 +72,7 @@ export function BaseSelector (props) {
 
   return (
     <>
+      <div ref={stubElement} style={{ display: 'none' }} />
       <MultiSelect
         valueRenderer={valueRenderer}
         filterOptions={filterOptions}
@@ -82,7 +89,13 @@ export function BaseSelector (props) {
 export function SimpleSelector (props) {
   const { isSingle = false, defaultValue = isSingle ? undefined : [], required = false, name = '' } = props
 
+  const stubElement = useRef(null)
   const [selected, setSelected] = useState(defaultValue)
+
+  useEffect(() => {
+    const form = stubElement.current.closest('form')
+    form?.addEventListener('reset', () => setSelected(defaultValue))
+  }, [])
 
   const onChangeFn = (items = []) => {
     const result = isSingle ? items[items.length - 1] : items
@@ -93,6 +106,7 @@ export function SimpleSelector (props) {
 
   return (
     <>
+      <div ref={stubElement} style={{ display: 'none' }} />
       <MultiSelect
         valueRenderer={valueRenderer}
         hasSelectAll={!isSingle}

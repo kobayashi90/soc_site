@@ -23,7 +23,7 @@ export default function AdminOst () {
         <div className='sticky-top'>
           <div className='mb-2 mt-3 text-center'>Navigation</div>
           <div className='py-2 site-form blackblock d-flex flex-column'>
-            <a href='#addOst'>OST List</a>
+            <a href='#addAlbum'>OST List</a>
             <a href='#addSeries'>Edit highlight</a>
             <a href='#addGame'>Edit banner</a>
           </div>

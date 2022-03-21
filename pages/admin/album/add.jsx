@@ -109,7 +109,7 @@ function AddAlbum (props) {
 
   return (
     <>
-      <div id='addOst' className='mb-2 mt-3'>Add Album</div>
+      <div id='addAlbum' className='mb-2 mt-3'>Add Album</div>
       <Form className='site-form blackblock' onSubmit={handleSubmitForm}>
         <Row>
           <Col md={3}>

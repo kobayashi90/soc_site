@@ -48,7 +48,7 @@ export function Navigation ({ title }) {
     <div className='sticky-top'>
       <div className='mb-2 mt-3 text-center'>Navigation</div>
       <div className='py-2 site-form blackblock d-flex flex-column'>
-        <a href='#addOst'>{title} Ost</a>
+        <a href='#addAlbum'>{title} Ost</a>
         <a href='#addPub'>Add Publisher</a>
         <a href='#addPlat'>Add Platform</a>
         <a href='#addSeries'>Add Series</a>
