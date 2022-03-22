@@ -20,10 +20,10 @@ function HiddenInputs (props) {
 
   return isSingle
     ? (
-      <input defaultValue={selected.value} name={name} required={required} hidden readOnly />
+      <input value={selected.value} name={name} required={required} hidden readOnly />
     )
     : (
-      selected.map(s => <input key={s.value} defaultValue={s.value} name={`${name}[]`} hidden readOnly />)
+      selected.map(s => <input key={s.value} value={s.value} name={`${name}[]`} hidden readOnly />)
     )
 }
 

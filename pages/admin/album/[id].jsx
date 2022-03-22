@@ -77,10 +77,11 @@ query Album ($id: ID!) {
 
 const queryDownload = gql`
 query downloads ($id: ID!) {
-  downloads(id: $id){
+  downloads(id: $id) {
+    id
     title
     small
-    links{
+    links {
       id
       url
       provider
@@ -194,7 +195,7 @@ function EditOstForm ({ id, album, classes, categories }) {
 
   return (
     <>
-      <div className='mb-2 mt-3'>Editing &#34{album.title}&#34 ({album.id})</div>
+      <div id='addAlbum' className='mb-2 mt-3'>Editing {`"${album.title}"`} ({album.id})</div>
       <Form className='site-form blackblock' onSubmit={handleSubmitForm}>
         <Row>
           <Col md={3}>

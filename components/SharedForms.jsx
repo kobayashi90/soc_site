@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Col, Row, Form, FormControl } from 'react-bootstrap'
 import { SimpleSelector } from './Selectors'
 
@@ -48,7 +48,7 @@ export function Navigation ({ title }) {
     <div className='sticky-top'>
       <div className='mb-2 mt-3 text-center'>Navigation</div>
       <div className='py-2 site-form blackblock d-flex flex-column'>
-        <a href='#addAlbum'>{title} Ost</a>
+        <a href='#addAlbum'>{title} Album</a>
         <a href='#addPub'>Add Publisher</a>
         <a href='#addPlat'>Add Platform</a>
         <a href='#addSeries'>Add Series</a>
@@ -169,136 +169,131 @@ export function StoreDownloads (props) {
   )
 }
 
-function downloadReducer (state, action) {
-  switch (action.type) {
-  case 'addCategory':
-    return [...state, { key: state[state.length - 1].key + 1, links: [{ key: 0 }] }]
+function DownloadList (props) {
+  const { valueList = [], length = 0, setValueList, prefix = 0 } = props
 
-  case 'removeCategory':
-    return state.filter(s => s.key !== action.key)
+  function removeItem (index) {
+    const newArray = [...valueList]
+    newArray.splice(index, 1)
 
-  case 'addLink': {
-    const newState = [...state]
-    const newKey = newState[action.catIndex].links[newState[action.catIndex].links.length - 1].key + 1
-    newState[action.catIndex].links.push({ key: newKey })
-    return newState
+    setValueList(newArray)
   }
 
-  case 'removeLink': {
-    const newState = [...state]
-    newState[action.catIndex].links = newState[action.catIndex].links.filter(l => l.key !== action.key)
-    return newState
+  function removeLink (i, i2) {
+    const newArray = [...valueList]
+    const newLinks = [...newArray[i].links]
+
+    newLinks.splice(i2, 1)
+    newArray[i] = { ...newArray[i], links: newLinks }
+
+    setValueList(newArray)
   }
 
-  default:
-    return state
+  function addLink (i) {
+    const newArray = [...valueList]
+    const newLinks = [...newArray[i].links, { id: `n${newArray[i].links.length}` }]
+
+    newArray[i] = { ...newArray[i], links: newLinks }
+
+    setValueList(newArray)
   }
+
+  return (
+    valueList.map((cat, i) =>
+      <Row key={cat.id}>
+        <Col>
+          <Row className='mb-3'>
+            <Col>
+              <Form.Group className='mt-3'>
+                <Form.Label>Category {prefix + i + 1} title:</Form.Label>
+                <FormControl defaultValue={cat.title} required name={`downloads[${i + prefix}][title]`} type='text' />
+              </Form.Group>
+            </Col>
+            <Col md='auto' className='mt-auto'>
+              <Form.Group>
+                <Button color='primary' onClick={() => removeItem(i)} disabled={length === 1} >
+                  Remove category
+                </Button>
+              </Form.Group>
+            </Col>
+            <Col md='auto' className='mt-auto'>
+              <Form.Group>
+                <Button className='mr-2' color='primary' onClick={() => addLink(i)}>
+                  Add Download Link
+                </Button>
+              </Form.Group>
+            </Col>
+            <Col md='auto' className='mt-auto mb-3'>
+              <div className='form-check'>
+                <FormControl defaultValue={cat.small} type='checkbox' name={`downloads[${i + prefix}][small]`} className='form-check-input' />
+                <Form.Label className='form-check-label' htmlFor={`downloads[${i + prefix}][small]`}>Small Title</Form.Label>
+              </div>
+            </Col>
+          </Row>
+          {cat.links.map((link, i2) =>
+            <Row key={link.id} className='mb-3'>
+              <Col>
+                <Row>
+                  <Col md={4}>
+                    <Form.Group>
+                      <Form.Label>Provider:</Form.Label>
+                      <SimpleSelector
+                        isSingle
+                        defaultValue={providersDownload.find(p => p.value === link.provider)}
+                        name={`downloads[${i + prefix}][links][${i2}][provider]`} options={providersDownload}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={4}>
+                    <Form.Group>
+                      <Form.Label>Url:</Form.Label>
+                      <FormControl
+                        defaultValue={link.url} required type='text'
+                        name={`downloads[${i + prefix}][links][${i2}][url]`}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={4}>
+                    <Form.Group>
+                      <Form.Label>Direct Url:</Form.Label>
+                      <FormControl
+                        defaultValue={link.directUrl} required type='text'
+                        name={`downloads[${i + prefix}][links][${i2}][directUrl]`}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Col>
+
+              <Col md='auto' className='mt-auto'>
+                <Form.Group>
+                  <Button color='primary' onClick={() => removeLink(i, i2)}>Remove link</Button>
+                </Form.Group>
+              </Col>
+            </Row>
+          )}
+        </Col>
+      </Row>
+    )
+  )
 }
 
 export function Downloads (props) {
-  let initial = []
-  if (props.defaults) {
-    initial = props.defaults.map((download, i) => (
-      { ...download, key: i, links: download.links.map((link, i2) => { return { ...link, key: i2 } }) }
-    ))
-  } else initial = [{ key: 0, links: [{ key: 0 }] }]
+  const { defaults = [] } = props
+  const [defaultValues, setDefaultValues] = useState(defaults)
+  const [newValues, setNewValues] = useState([])
 
-  const [values, dispatch] = useReducer(downloadReducer, initial)
+  const length = defaultValues.length + newValues.length
 
   return (
     <>
+      <DownloadList valueList={defaultValues} setValueList={setDefaultValues} length={length} />
+      <DownloadList valueList={newValues} setValueList={setNewValues} length={length} prefix={defaultValues.length} />
       <Row>
         <Col>
-          <Button className='mr-2' color='primary' onClick={() => dispatch({ type: 'addCategory' })}>
-            Add Download Section
-          </Button>
+          <Button className='mr-2' color='primary' onClick={() => setNewValues([...newValues, { id: `n${newValues.length}`, links: [] }])} >Add Download Section</Button>
         </Col>
       </Row>
-      {values.map((cat, i) =>
-        <Row key={cat.key}>
-          <Col>
-            <Row className='mb-3'>
-              <Col>
-                <Form.Group className='mt-3'>
-                  <Form.Label>Category {i + 1} title:</Form.Label>
-                  <FormControl defaultValue={cat.title} required name={`downloads[${i}][title]`} type='text' />
-                </Form.Group>
-              </Col>
-              <Col md='auto' className='mt-auto'>
-                <Form.Group>
-                  <Button color='primary' disabled={values.length === 1} onClick={() => dispatch({ type: 'removeCategory', key: cat.key })}>
-                    Remove category
-                  </Button>
-                </Form.Group>
-              </Col>
-              <Col md='auto' className='mt-auto'>
-                <Form.Group>
-                  <Button
-                    className='mr-2'
-                    color='primary'
-                    onClick={() => dispatch({ type: 'addLink', catIndex: i })}
-                  >
-                    Add Download Link
-                  </Button>
-                </Form.Group>
-              </Col>
-              <Col md='auto' className='mt-auto mb-3'>
-                <div className='form-check'>
-                  <FormControl defaultValue={cat.small} type='checkbox' name={`downloads[${i}][small]`} className='form-check-input' />
-                  <Form.Label className='form-check-label' htmlFor={`downloads[${i}][small]`}>Small Title</Form.Label>
-                </div>
-              </Col>
-            </Row>
-            {cat.links.map((link, i2) =>
-              <Row key={link.key} className='mb-3'>
-                <Col>
-                  <Row>
-                    <Col md={4}>
-                      <Form.Group>
-                        <Form.Label>Provider:</Form.Label>
-                        <SimpleSelector
-                          isSingle
-                          defaultValue={providersDownload.find(p => p.value === link.provider)}
-                          name={`downloads[${i}][links][${i2}][provider]`} options={providersDownload}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={4}>
-                      <Form.Group>
-                        <Form.Label>Url:</Form.Label>
-                        <FormControl
-                          defaultValue={link.url} required type='text'
-                          name={`downloads[${i}][links][${i2}][url]`}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={4}>
-                      <Form.Group>
-                        <Form.Label>Direct Url:</Form.Label>
-                        <FormControl
-                          defaultValue={link.directUrl} required type='text'
-                          name={`downloads[${i}][links][${i2}][directUrl]`}
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                </Col>
-
-                <Col md='auto' className='mt-auto'>
-                  <Form.Group>
-                    <Button
-                      color='primary' disabled={cat.links.length === 1}
-                      onClick={() => dispatch({ type: 'removeLink', catIndex: i, key: link.key })}
-                    >
-                      Remove link
-                    </Button>
-                  </Form.Group>
-                </Col>
-              </Row>
-            )}
-          </Col>
-        </Row>
-      )}
     </>
   )
 }
