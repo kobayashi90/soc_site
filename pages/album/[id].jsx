@@ -248,13 +248,17 @@ export default function Page (props) {
                     <h1 className='text-center homeTitle' style={{ fontSize: '30px' }}>Buy The Original Soundtrack to support the artists</h1>
                     <hr className='style-white w-100 mt-0' />
                     <Row>
-                      {album.stores.map(({ url, provider }, i) => (
-                        <Col md={6} key={i} className='d-flex justify-content-center'>
-                          <a target='_blank' rel='noopener noreferrer' href={url}>
-                            <Image className="rounded" width={190} height={65} alt={provider} src={`/img/provider/${provider}.jpg`} />
-                          </a>
-                        </Col>
-                      ))}
+                      {album.stores.map(({ url, provider }, i) =>
+                        provider === 'SOON'
+                          ? null
+                          : (
+                            <Col md={6} key={i} className='d-flex justify-content-center'>
+                              <a target='_blank' rel='noopener noreferrer' href={url}>
+                                <Image className="rounded" width={190} height={65} alt={provider} src={`/img/provider/${provider}.jpg`} />
+                              </a>
+                            </Col>
+                          )
+                      )}
                     </Row>
                   </Col>
                 </Row>)}
