@@ -7,7 +7,7 @@ import { Row, Col, Container, Button, Navbar, Nav, NavDropdown, Modal, Form } fr
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import serialize from 'form-serialize'
-import { useApolloClient, useMutation, useLazyQuery } from '@apollo/client'
+import { useApolloClient, useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { toast } from 'react-toastify'
 
@@ -20,30 +20,39 @@ export default function Header () {
   const { user, refetch } = useUser()
   const client = useApolloClient()
   const loginQuery = gql`
-  query Login($username: String!, $password: String!){
-    login(username: $username, password: $password)
-  }
-`
+    query Login($username: String!, $password: String!){
+      login(username: $username, password: $password)
+    }
+  `
   const logoutQuery = gql`
-  query {
-    logout
-  }
-`
+    query {
+      logout
+    }
+  `
   const forgorMutation = gql`
-  mutation createForgorLink($key: String!){
-    createForgorLink(key: $key)
-  }
-`
+    mutation createForgorLink($key: String!){
+      createForgorLink(key: $key)
+    }
+  `
 
   const userMutation = gql`
-  mutation updateUser($username: String, $password: String, $email: String){
-    updateUser(username: $username, password: $password, email: $email)
-  }
-`
+    mutation updateUser($username: String, $password: String, $email: String){
+      updateUser(username: $username, password: $password, email: $email)
+    }
+  `
+
+  const queryHeader = gql`
+    query {
+      config(name: "banner"){
+        value
+      }
+    }
+  `
 
   const [mutateForgor, { loading: loadingForgor }] = useMutation(forgorMutation)
   const [mutateUser, { loading: loadingUser }] = useMutation(userMutation)
   const [queryLogin, { loading: loadingLogin }] = useLazyQuery(loginQuery)
+  const { data: headerData } = useQuery(queryHeader)
 
   const [show, setShow] = useState(false)
   const [showForgor, setForgor] = useState(false)
@@ -215,7 +224,7 @@ export default function Header () {
       </Modal>
 
       <header>
-        <div id={styles.bannerBg} style={{ backgroundImage: `url('/_next/image?w=3840&q=100&url=${'https://cdn.sittingonclouds.net/live/banner.png'}` }}>
+        <div id={styles.bannerBg} style={headerData ? { backgroundImage: `url('/_next/image?w=3840&q=100&url=${`https://cdn.sittingonclouds.net/live/${headerData.config.value}.png`}` } : {}}>
           <Container>
             <Row className='h-100'>
               <Col className='my-auto'>
