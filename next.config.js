@@ -15,7 +15,7 @@ module.exports = {
   async headers () {
     return [
       {
-        source: '_next/image',
+        source: '/_next/image',
         headers: [
           { key: '759154', value: '759154' }
         ]
