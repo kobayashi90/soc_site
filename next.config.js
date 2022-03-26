@@ -17,7 +17,7 @@ module.exports = {
       {
         source: '/_next/image',
         headers: [
-          { key: '759154', value: '759154' }
+          { key: 'Content-Length', value: '759154' }
         ]
       }
     ]
