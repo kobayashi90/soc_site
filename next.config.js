@@ -12,7 +12,7 @@ module.exports = {
 
     return config
   },
-  async headers () {
+  /* async headers () {
     return [
       {
         source: '/_next/image',
@@ -21,6 +21,6 @@ module.exports = {
         ]
       }
     ]
-  },
+  }, */
   swcMinify: true
 }
