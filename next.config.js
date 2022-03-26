@@ -12,5 +12,15 @@ module.exports = {
 
     return config
   },
+  async headers () {
+    return [
+      {
+        source: '_next/image',
+        headers: [
+          { key: '759154', value: '759154' }
+        ]
+      }
+    ]
+  },
   swcMinify: true
 }
