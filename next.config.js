@@ -15,7 +15,7 @@ module.exports = {
   async headers () {
     return [
       {
-        source: '/:all*(svg|jpg|png|webp)',
+        source: '/_next/image',
         locale: false,
         headers: [
           {
