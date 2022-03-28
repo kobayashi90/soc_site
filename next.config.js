@@ -15,9 +15,13 @@ module.exports = {
   async headers () {
     return [
       {
-        source: '/_next/image',
+        source: '/:all*(svg|jpg|png|webp)',
+        locale: false,
         headers: [
-          { key: 'Content-Length', value: '759154' }
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=9999999999, must-revalidate'
+          }
         ]
       }
     ]
