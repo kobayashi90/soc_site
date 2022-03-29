@@ -6,8 +6,7 @@ import Sidebar from '@/components/Sidebar'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { initializeApollo } from '@/lib/ApolloClient'
 
-const md = 3
-const xs = 6
+const colProps = { xs: 6, md: 3 }
 const limit = 12
 
 const query = gql`
@@ -59,7 +58,7 @@ export default function Home ({ added, released }) {
           </Col>
         </Row>
         <Row className='justify-content-center'>
-          <AlbumBoxList xs={xs} md={md} items={released.rows} />
+          <AlbumBoxList colProps={colProps} items={released.rows} />
         </Row>
         <Row>
           <Col md={6} className='mt-3 flex-grow-1'>
@@ -77,7 +76,7 @@ export default function Home ({ added, released }) {
         </Row>
 
         <Row className='justify-content-center'>
-          <AlbumBoxList xs={xs} md={md} items={added.rows} />
+          <AlbumBoxList colProps={colProps} items={added.rows} />
         </Row>
         <Row className='mt-3'>
           <Col md={12}>

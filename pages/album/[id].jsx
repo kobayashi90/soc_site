@@ -306,7 +306,7 @@ export default function Page (props) {
                 <div className='blackblock m-2'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
               </Col>
               <Row className='justify-content-center'>
-                <AlbumBoxList xl={2} md={3} xs={6} items={album.related} />
+                <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={album.related} />
               </Row>
             </Row>
           )}

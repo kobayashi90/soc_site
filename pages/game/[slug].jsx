@@ -135,7 +135,7 @@ export default function GameDetail (props) {
 
       <hr className='style2 style-white' />
       <Row className='justify-content-center'>
-        <AlbumBoxList md={3} xs={6} items={albumList.sort((a, b) => a.title > b.title)} />
+        <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={albumList.sort((a, b) => a.title > b.title)} />
       </Row>
 
     </Container>

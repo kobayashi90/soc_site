@@ -49,7 +49,7 @@ export default function PublisherDetail (props) {
         </Row>
 
         <Row className='links-list justify-content-center py-2'>
-          <AlbumBoxList type='game' md={3} xs={6} items={publisher.games.map(({ slug, name, placeholder }) => ({ id: slug, title: name, placeholder }))} />
+          <AlbumBoxList type='game' colProps={{ md: 3, xs: 6 }} items={publisher.games.map(({ slug, name, placeholder }) => ({ id: slug, title: name, placeholder }))} />
         </Row>
       </Col>
       <Sidebar />

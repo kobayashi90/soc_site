@@ -45,7 +45,7 @@ export default function Studio ({ name, animations }) {
         </Row>
 
         <Row className='links-list justify-content-center py-2'>
-          <AlbumBoxList type='anim' height={150} width={100} md={2} xs={6} items={animations}/>
+          <AlbumBoxList type='anim' height={150} width={100} colProps={{ md: 2, xs: 6 }} items={animations}/>
         </Row>
       </Col>
 

@@ -56,7 +56,7 @@ export default function GameHome ({ rows }) {
           </Row>
 
           <Row className='links-list justify-content-center'>
-            <AlbumBoxList xs={6} md={3} items={rows} />
+            <AlbumBoxList colProps={{ xs: 6, md: 3 }} items={rows} />
           </Row>
         </Col>
       </Row>

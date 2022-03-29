@@ -62,7 +62,7 @@ export default function Content ({ letters, animations }) {
             </Row>
 
             <Row className='links-list justify-content-center py-2'>
-              <AlbumBoxList type='anim' height={150} width={100} md={2} xs={6} items={animations[letter].map(({ id, title, subTitle, placeholder }) => ({ id, title: title[0].toUpperCase() === letter ? title : subTitle, placeholder }))}/>
+              <AlbumBoxList type='anim' height={150} width={100} colProps={{ md: 2, xs: 6 }} items={animations[letter].map(({ id, title, subTitle, placeholder }) => ({ id, title: title[0].toUpperCase() === letter ? title : subTitle, placeholder }))}/>
             </Row>
           </Fragment>
         ))}
