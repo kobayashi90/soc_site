@@ -10,8 +10,18 @@ import styles from '../styles/Sidebar.module.scss'
 import { useEffect, useRef } from 'react'
 import { skipAds } from './utils'
 import { useQuery } from '@apollo/client'
+import Link from 'next/link'
 
 export default function Sidebar ({ radio = false, index = false }) {
+  const query = gql`
+    query {
+      getRandomAlbum {
+        id
+      }
+    }
+  `
+  const { data } = useQuery(query)
+
   return (
     <Col md={3} className={classNames(styles.root, 'p-3 ml-md-auto d-flex flex-column col-md-3')}>
       {index && (
@@ -19,11 +29,15 @@ export default function Sidebar ({ radio = false, index = false }) {
           <Row className='side-menu'>
             <h1 className='mx-auto text-center my-2'><a href='#last-releases'>LAST RELEASES</a></h1>
           </Row>
-          {/* <Row className='side-menu'>
-            <h1 className='mx-auto text-center my-2'><a href='#most-popular'>Most Popular</a></h1>
-      </Row> */}
-          <Row className='side-menu mb-3'>
+          <Row className='side-menu'>
             <h1 className='mx-auto text-center my-2'><a href='#last-added'>Last Added</a></h1>
+          </Row>
+          <Row className='side-menu  mb-3'>
+            <h1 className='mx-auto text-center my-2'>
+              <Link href={data ? `/album/${data.getRandomAlbum.id}` : ''}>
+                <a>GET LUCKY</a>
+              </Link>
+            </h1>
           </Row>
         </>
       )}

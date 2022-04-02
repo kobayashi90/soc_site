@@ -99,7 +99,9 @@ module.exports = {
       limit: limit,
       order: [['createdAt', 'DESC']],
       where: { type: { [Op.like]: `%${type}%` } }
-    })
+    }),
+
+    getRandomAlbum: (parent, args, { db }) => db.models.ost.findOne({ order: db.random() })
   }
 }
 

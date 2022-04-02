@@ -208,6 +208,8 @@
         recentPublishers(limit: Int!): [Publisher]
         searchPlatformsByName(name: String, type: String!): [Platform] 
         recentPlatforms(limit: Int!, type: String!): [Platform]
+
+        getRandomAlbum: Album!
     }
 
     type Mutation {
