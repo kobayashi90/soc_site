@@ -27,7 +27,11 @@
 
 .content {
     background-blend-mode: overlay;
-    background-size: contain;
+    position: fixed;
+    transform: translate(-12px, -205px);
+    z-index: -1;
+    height: 100%;
+    width: 100%;
 }
 
 .stores {

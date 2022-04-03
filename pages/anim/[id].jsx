@@ -74,53 +74,56 @@ export default function Page (props) {
   const { id, title, subTitle, releaseDate, studios, albums = [], placeholder, headerColor } = animation
 
   return (
-    <Row className='h-100'>
-      <Head>
-        <title>{title}</title>
-        <meta key='color' name="theme-color" content={headerColor}></meta>
-        <meta key='url' property='og:url' content={`/anim/${id}`} />
-        <meta key='title' property='og:title' content={title} />
-        <meta key='desc' property='og:description' content={
-          subTitle && studios.length > 0
-            ? `${subTitle} / ${studios.map(a => a.name).join(' - ')}`
-            : subTitle || studios.map(a => a.name).join(' - ')} />
-        <meta key='image' property='og:image' content={imageUrl} />
-      </Head>
-      <Col className={classNames(styles.content, 'px-5 pt-3')} style={{ backgroundImage: `url("${fullImage(id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
-        <Container className='px-5'>
-          <Row>
-            <Col lg={3} className='blackblock py-3'>
-              <Image layout='responsive' width={100} height={150} alt={title} src={getImageUrl(id, 'anim')} placeholder='blur' blurDataURL={placeholder} />
-              <h3 className={classNames('text-center mt-3', styles.title)}>{title}</h3>
-              <h6 className='text-center'>{subTitle}</h6>
-              <table className={styles.table}>
-                <tbody>
-                  <tr>
-                    <th className='width-row'>Release Date</th>
-                    <td>{new Date(releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
-                  </tr>
-                  <tr>
-                    <th>Studios</th>
-                    <td>
-                      {studios.map(({ slug, name }, i) => (
-                        <Fragment key={id}>
-                          <a className='btn btn-link p-0' href={`/studio/${slug}`}>{name}</a>
-                          {i !== studios.length - 1 && ', '}
-                        </Fragment>
-                      ))}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </Col>
-            <Col>
-              <Row>
-                <AlbumBoxList colProps={{ xs: 6, md: 2 }} items={albums} style={{ height: 'fit-content' }} />
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      </Col>
-    </Row>
+    <>
+      <div className={styles.content} style={{ backgroundSize: 'cover', backgroundImage: `url("${fullImage(id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }} />
+      <Row className='h-100'>
+        <Head>
+          <title>{title}</title>
+          <meta key='color' name="theme-color" content={headerColor}></meta>
+          <meta key='url' property='og:url' content={`/anim/${id}`} />
+          <meta key='title' property='og:title' content={title} />
+          <meta key='desc' property='og:description' content={
+            subTitle && studios.length > 0
+              ? `${subTitle} / ${studios.map(a => a.name).join(' - ')}`
+              : subTitle || studios.map(a => a.name).join(' - ')} />
+          <meta key='image' property='og:image' content={imageUrl} />
+        </Head>
+        <Col className={'px-5 pt-3'}>
+          <Container className='px-5'>
+            <Row>
+              <Col lg={3} className='blackblock py-3'>
+                <Image layout='responsive' width={100} height={150} alt={title} src={getImageUrl(id, 'anim')} placeholder='blur' blurDataURL={placeholder} />
+                <h3 className={classNames('text-center mt-3', styles.title)}>{title}</h3>
+                <h6 className='text-center'>{subTitle}</h6>
+                <table className={styles.table}>
+                  <tbody>
+                    <tr>
+                      <th className='width-row'>Release Date</th>
+                      <td>{new Date(releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+                    </tr>
+                    <tr>
+                      <th>Studios</th>
+                      <td>
+                        {studios.map(({ slug, name }, i) => (
+                          <Fragment key={id}>
+                            <a className='btn btn-link p-0' href={`/studio/${slug}`}>{name}</a>
+                            {i !== studios.length - 1 && ', '}
+                          </Fragment>
+                        ))}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </Col>
+              <Col>
+                <Row>
+                  <AlbumBoxList colProps={{ xs: 6, md: 2 }} items={albums} style={{ height: 'fit-content' }} />
+                </Row>
+              </Col>
+            </Row>
+          </Container>
+        </Col>
+      </Row>
+    </>
   )
 }

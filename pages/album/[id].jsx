@@ -136,190 +136,193 @@ export default function Page (props) {
   useEffect(() => refetch({ id }), [user, id, refetch])
 
   return (
-    <Row>
-      <Head>
-        <title>{album.title}</title>
-        <meta key='color' name="theme-color" content={album.headerColor}></meta>
-        <meta key='url' property='og:url' content={`/album/${album.id}`} />
-        <meta key='title' property='og:title' content={album.title} />
-        <meta key='desc' property='og:description' content={album.subTitle || album.artists.map(a => a.name).join(' - ')} />
-        <meta key='image' property='og:image' content={imageUrl} />
-      </Head>
-      <Col className={classNames(styles.content, 'p-0 px-md-5 pt-3')} style={{ backgroundImage: `url("${fullImage(album.id, 90)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }}>
-        <Container className='px-0 px-md-5'>
-          <Row>
-            <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder} /></Col>
-            <Col lg={7} className='blackblock'>
-              <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
-              <h6 className='text-center' style={{ whiteSpace: 'pre-wrap' }}>{album.subTitle}</h6>
-              <table className={styles.table}>
-                <tbody>
-                  <tr>
-                    <th className='width-row'>Release Date</th>
-                    <td>{new Date(album.releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
-                  </tr>
-
-                  {album.artists.length > 0 && (
-                    <tr>
-                      <th>Artists</th>
-                      <td>
-                        {album.artists.map(({ id, name }) => name).join(', ')}
-                      </td>
-                    </tr>
-                  )}
-
-                  <tr>
-                    <th>Classification</th>
-                    <td>
-                      {[
-                        album.classes.map(({ name }) => `${name} Soundtrack`).join(' & '),
-                        album.categories.map(({ name }) => name).join(', ')
-                      ].filter(f => f !== '').join(' - ')}
-                    </td>
-                  </tr>
-                  {album.label && (
-                    <tr>
-                      <th>Published by</th>
-                      <td><a className='btn btn-link p-0' href={`/publisher/${album.label}`}>{album.label}</a></td>
-                    </tr>
-                  )}
-                  {album.platforms.length > 0 && (
-                    <tr>
-                      <th>Platforms</th>
-                      <td>
-                        {album.platforms.map(({ id, name }, i) => (
-                          <Fragment key={id}>
-                            {id === '29'
-                              ? <span className='btn p-0' style={{ color: 'white' }}>{name}</span>
-                              : <a className='btn btn-link p-0' href={`/platform/${id}`}>{name}</a>
-                            }
-                            {i !== album.platforms.length - 1 && ', '}
-                          </Fragment>
-                        ))}
-                      </td>
-                    </tr>
-                  )}
-
-                  {album.games.length > 0 && (
-                    <tr>
-                      <th>Games</th>
-                      <td>
-                        {album.games.map(({ slug, name }, i) => (
-                          <Fragment key={slug}>
-                            <a className='btn btn-link p-0' href={`/game/${slug}`}>{name}</a>
-                            {i !== album.games.length - 1 && ', '}
-                          </Fragment>
-                        ))}
-                      </td>
-                    </tr>
-                  )}
-
-                  {album.animations.length > 0 && (
-                    <tr>
-                      <th>Animations</th>
-                      <td>
-                        {album.animations.map(({ id, title }, i) => (
-                          <Fragment key={id}>
-                            <a className='btn btn-link p-0' href={`/anim/${id}`}>{title}</a>
-                            {i !== album.animations.length - 1 && ', '}
-                          </Fragment>
-                        ))}
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-              <h6 className='text-center'>{album.description}</h6>
-            </Col>
-          </Row>
-          <hr></hr>
-          <Row>
-            <TrackList discs={album.discs} />
-            <Col lg={6} className='blackblock px-10px'>
-              {album.vgmdb && (
-                <Row>
-                  <Col className='mb-2 ml-2'>
-                    <span>Check album at:</span>
-                    <a className='ms-2' target='_blank' rel='noopener noreferrer' href={album.vgmdb}>
-                      <Image width={100} height={30} alt={'VGMdb'} src='/img/assets/vgmdblogo.png' />
-                    </a>
-                  </Col>
-                </Row>
-              )}
-
-              {album.stores.length > 0 && (
-                <Row className='mt-2 px-3'>
-                  <Col className={styles.stores} style={{ paddingLeft: '15px', paddingTop: '10px', paddingRight: '15px', paddingBottom: '10px' }}>
-                    <h1 className='text-center homeTitle' style={{ fontSize: '30px' }}>Buy The Original Soundtrack to support the artists</h1>
-                    <hr className='style-white w-100 mt-0' />
-                    <Row>
-                      {album.stores.map(({ url, provider }, i) =>
-                        provider === 'SOON'
-                          ? null
-                          : (
-                            <Col md={6} key={i} className='d-flex justify-content-center'>
-                              <a target='_blank' rel='noopener noreferrer' href={url}>
-                                <Image className="rounded" width={190} height={65} alt={provider} src={`/img/provider/${provider}.jpg`} />
-                              </a>
-                            </Col>
-                          )
-                      )}
-                    </Row>
-                  </Col>
-                </Row>)}
-              <hr className='style-white w-100' />
-
-              {loading && (
-                <Row>
-                  <Col>
-                    <Loader className='mx-auto'/>
-                  </Col>
-                </Row>
-              )}
-              {data?.downloads.map(({ links, title, provider }, di) => (
-                <Row key={di}>
-                  <Col>
-                    <Row>
-                      <Col md={12}>
-                        <h2 className='text-center download-txt mb-0'>{title}</h2>
-                      </Col>
-                    </Row>
-                    {links.map(({ id, url, custom, provider, directUrl }) => (
-                      <Fragment key={id}>
-                        <Row className='mt-2'>
-                          <Col md={12}><h5 className='text-center'>{provider}</h5></Col>
-                        </Row>
-                        <Row className='mx-auto mb-3'>
-                          <Col className='py-2'>
-                            <Button target="_blank" variant="secondary" className={styles.download} href={url}>Download</Button>
-                          </Col>
-                          <Col className='py-2'>
-                            <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
-                          </Col>
-                        </Row>
-                      </Fragment>
-                    ))}
-                    <hr className='style-white w-100' />
-                  </Col>
-                </Row>)) }
-            </Col>
-          </Row>
-
-          <CommentCarrousel ostId={id} comments={album.comments} />
-
-          {album.related.length > 0 && (
+    <>
+      <div className={styles.content} style={{ backgroundSize: 'contain', backgroundImage: `url("${fullImage(album.id, 90)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }} />
+      <Row>
+        <Head>
+          <title>{album.title}</title>
+          <meta key='color' name="theme-color" content={album.headerColor}></meta>
+          <meta key='url' property='og:url' content={`/album/${album.id}`} />
+          <meta key='title' property='og:title' content={album.title} />
+          <meta key='desc' property='og:description' content={album.subTitle || album.artists.map(a => a.name).join(' - ')} />
+          <meta key='image' property='og:image' content={imageUrl} />
+        </Head>
+        <Col className={'p-0 px-md-5 pt-3'} >
+          <Container className='px-0 px-md-5'>
             <Row>
-              <Col>
-                <div className='blackblock m-2'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
+              <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder} /></Col>
+              <Col lg={7} className='blackblock'>
+                <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
+                <h6 className='text-center' style={{ whiteSpace: 'pre-wrap' }}>{album.subTitle}</h6>
+                <table className={styles.table}>
+                  <tbody>
+                    <tr>
+                      <th className='width-row'>Release Date</th>
+                      <td>{new Date(album.releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+                    </tr>
+
+                    {album.artists.length > 0 && (
+                      <tr>
+                        <th>Artists</th>
+                        <td>
+                          {album.artists.map(({ id, name }) => name).join(', ')}
+                        </td>
+                      </tr>
+                    )}
+
+                    <tr>
+                      <th>Classification</th>
+                      <td>
+                        {[
+                          album.classes.map(({ name }) => `${name} Soundtrack`).join(' & '),
+                          album.categories.map(({ name }) => name).join(', ')
+                        ].filter(f => f !== '').join(' - ')}
+                      </td>
+                    </tr>
+                    {album.label && (
+                      <tr>
+                        <th>Published by</th>
+                        <td><a className='btn btn-link p-0' href={`/publisher/${album.label}`}>{album.label}</a></td>
+                      </tr>
+                    )}
+                    {album.platforms.length > 0 && (
+                      <tr>
+                        <th>Platforms</th>
+                        <td>
+                          {album.platforms.map(({ id, name }, i) => (
+                            <Fragment key={id}>
+                              {id === '29'
+                                ? <span className='btn p-0' style={{ color: 'white' }}>{name}</span>
+                                : <a className='btn btn-link p-0' href={`/platform/${id}`}>{name}</a>
+                              }
+                              {i !== album.platforms.length - 1 && ', '}
+                            </Fragment>
+                          ))}
+                        </td>
+                      </tr>
+                    )}
+
+                    {album.games.length > 0 && (
+                      <tr>
+                        <th>Games</th>
+                        <td>
+                          {album.games.map(({ slug, name }, i) => (
+                            <Fragment key={slug}>
+                              <a className='btn btn-link p-0' href={`/game/${slug}`}>{name}</a>
+                              {i !== album.games.length - 1 && ', '}
+                            </Fragment>
+                          ))}
+                        </td>
+                      </tr>
+                    )}
+
+                    {album.animations.length > 0 && (
+                      <tr>
+                        <th>Animations</th>
+                        <td>
+                          {album.animations.map(({ id, title }, i) => (
+                            <Fragment key={id}>
+                              <a className='btn btn-link p-0' href={`/anim/${id}`}>{title}</a>
+                              {i !== album.animations.length - 1 && ', '}
+                            </Fragment>
+                          ))}
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+                <h6 className='text-center'>{album.description}</h6>
               </Col>
-              <Row className='justify-content-center'>
-                <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={album.related} />
-              </Row>
             </Row>
-          )}
-        </Container>
-      </Col>
-    </Row>
+            <hr></hr>
+            <Row>
+              <TrackList discs={album.discs} />
+              <Col lg={6} className='blackblock px-10px'>
+                {album.vgmdb && (
+                  <Row>
+                    <Col className='mb-2 ml-2'>
+                      <span>Check album at:</span>
+                      <a className='ms-2' target='_blank' rel='noopener noreferrer' href={album.vgmdb}>
+                        <Image width={100} height={30} alt={'VGMdb'} src='/img/assets/vgmdblogo.png' />
+                      </a>
+                    </Col>
+                  </Row>
+                )}
+
+                {album.stores.length > 0 && (
+                  <Row className='mt-2 px-3'>
+                    <Col className={styles.stores} style={{ paddingLeft: '15px', paddingTop: '10px', paddingRight: '15px', paddingBottom: '10px' }}>
+                      <h1 className='text-center homeTitle' style={{ fontSize: '30px' }}>Buy The Original Soundtrack to support the artists</h1>
+                      <hr className='style-white w-100 mt-0' />
+                      <Row>
+                        {album.stores.map(({ url, provider }, i) =>
+                          provider === 'SOON'
+                            ? null
+                            : (
+                              <Col md={6} key={i} className='d-flex justify-content-center'>
+                                <a target='_blank' rel='noopener noreferrer' href={url}>
+                                  <Image className="rounded" width={190} height={65} alt={provider} src={`/img/provider/${provider}.jpg`} />
+                                </a>
+                              </Col>
+                            )
+                        )}
+                      </Row>
+                    </Col>
+                  </Row>)}
+                <hr className='style-white w-100' />
+
+                {loading && (
+                  <Row>
+                    <Col>
+                      <Loader className='mx-auto'/>
+                    </Col>
+                  </Row>
+                )}
+                {data?.downloads.map(({ links, title, provider }, di) => (
+                  <Row key={di}>
+                    <Col>
+                      <Row>
+                        <Col md={12}>
+                          <h2 className='text-center download-txt mb-0'>{title}</h2>
+                        </Col>
+                      </Row>
+                      {links.map(({ id, url, custom, provider, directUrl }) => (
+                        <Fragment key={id}>
+                          <Row className='mt-2'>
+                            <Col md={12}><h5 className='text-center'>{provider}</h5></Col>
+                          </Row>
+                          <Row className='mx-auto mb-3'>
+                            <Col className='py-2'>
+                              <Button target="_blank" variant="secondary" className={styles.download} href={url}>Download</Button>
+                            </Col>
+                            <Col className='py-2'>
+                              <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
+                            </Col>
+                          </Row>
+                        </Fragment>
+                      ))}
+                      <hr className='style-white w-100' />
+                    </Col>
+                  </Row>)) }
+              </Col>
+            </Row>
+
+            <CommentCarrousel ostId={id} comments={album.comments} />
+
+            {album.related.length > 0 && (
+              <Row>
+                <Col>
+                  <div className='blackblock m-2'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
+                </Col>
+                <Row className='justify-content-center'>
+                  <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={album.related} />
+                </Row>
+              </Row>
+            )}
+          </Container>
+        </Col>
+      </Row>
+    </>
   )
 }
 
