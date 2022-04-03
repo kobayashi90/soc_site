@@ -9,7 +9,7 @@ import styles from '../../styles/Album.module.scss'
 
 import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
-import { getImageUrl } from '@/components/utils'
+import { getImageUrl, PLACEHOLDER } from '@/components/utils'
 import Loader, { ButtonLoader } from '@/components/Loader'
 import { initializeApollo, isGithub } from '@/lib/ApolloClient'
 import serialize from 'form-serialize'
@@ -150,7 +150,7 @@ export default function Page (props) {
         <Col className={'p-0 px-md-5 pt-3'} >
           <Container className='px-0 px-md-5'>
             <Row>
-              <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder} /></Col>
+              <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder || PLACEHOLDER} /></Col>
               <Col lg={7} className='blackblock'>
                 <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
                 <h6 className='text-center' style={{ whiteSpace: 'pre-wrap' }}>{album.subTitle}</h6>
