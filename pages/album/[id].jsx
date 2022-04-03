@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container, Modal, Form, FormControl } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
@@ -64,6 +64,9 @@ query Album ($id: ID!) {
     comments {
       text
       username
+    }
+    selfComment {
+      text
     }
   }
 }
@@ -349,7 +352,18 @@ function CommentCarrousel (props) {
     }
   `
   const [updateComment, { loading: loadingComment }] = useMutation(mutateComment)
+  const getComment = gql`
+    query ($ostId: ID!) {
+      getSelfComment (ostId: $ostId) {
+        text
+        anon
+      }
+    }
+  `
+  const [fetchComment, { data }] = useLazyQuery(getComment)
   const [show, setShow] = useState(false)
+
+  useEffect(() => fetchComment({ variables: { ostId } }), [user, fetchComment, ostId])
 
   function submit (ev) {
     let variables = serialize(ev.target, { hash: true })
@@ -361,6 +375,8 @@ function CommentCarrousel (props) {
     ev.preventDefault()
   }
 
+  const isSelfComment = data && data.getSelfComment != null
+
   return (
     <>
       <Modal show={show} centered onHide={() => setShow(false)}>
@@ -368,12 +384,12 @@ function CommentCarrousel (props) {
           <Form onSubmit={submit} style={{ color: 'black' }}>
             <Row>
               <Form.Group as={Col} >
-                <FormControl required as='textarea' name='text' maxLength={300} />
+                <FormControl required as='textarea' name='text' maxLength={300} defaultValue={isSelfComment ? data.getSelfComment.text : ''} />
               </Form.Group>
             </Row>
             <Row className='mt-2'>
               <Form.Group as={Col}>
-                <Form.Check type="checkbox" label="Check this to comment anonymously" name='anon' />
+                <Form.Check type="checkbox" label="Check this to comment anonymously" name='anon' defaultChecked={isSelfComment ? data.getSelfComment.anon : false} />
               </Form.Group>
             </Row>
             <Row className='mt-2'>
@@ -405,7 +421,7 @@ function CommentCarrousel (props) {
   </Col> */}
             <Col xs='2'>
               <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                {user ? 'Add comment' : 'Login to leave a comment'}
+                {user ? (isSelfComment ? 'Edit comment' : 'Add comment') : 'Login to leave a comment'}
               </Button>
             </Col>
           </Row>

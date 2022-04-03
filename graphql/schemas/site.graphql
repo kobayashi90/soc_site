@@ -22,6 +22,7 @@
         placeholder: String
         headerColor: String!
         comments: [Comment]!
+        selfComment: Comment
     }
 
     type Disc {
@@ -217,6 +218,8 @@
         recentPlatforms(limit: Int!, type: String!): [Platform]
 
         getRandomAlbum(limit: Int): [Album!]!
+
+        getSelfComment(ostId: ID!): Comment
     }
 
     type Mutation {
