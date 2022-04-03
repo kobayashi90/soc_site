@@ -101,7 +101,10 @@ module.exports = {
       where: { type: { [Op.like]: `%${type}%` } }
     }),
 
-    getRandomAlbum: (parent, args, { db }) => db.models.ost.findOne({ order: db.random() })
+    getRandomAlbum: async (parent, { limit = 1 }, { db }) => {
+      const result = await db.models.ost.findAll({ order: db.random(), limit })
+      return result
+    }
   }
 }
 

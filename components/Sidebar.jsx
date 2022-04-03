@@ -11,36 +11,46 @@ import { useEffect, useRef } from 'react'
 import { skipAds } from './utils'
 import { useQuery } from '@apollo/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+function GetLucky () {
+  const query = gql`
+  query {
+    getRandomAlbum {
+      id
+    }
+  }
+`
+  const { data, refetch } = useQuery(query)
+  const router = useRouter()
+
+  useEffect(refetch, [router.pathname, refetch])
+
+  return (
+    <h1 className='mx-auto text-center my-2'>
+      <Link href={data ? `/album/${data.getRandomAlbum[0].id}` : ''}>
+        <a>GET LUCKY</a>
+      </Link>
+    </h1>
+  )
+}
 
 export default function Sidebar ({ radio = false, index = false }) {
-  const query = gql`
-    query {
-      getRandomAlbum {
-        id
-      }
-    }
-  `
-  const { data } = useQuery(query)
-
   return (
     <Col md={3} className={classNames(styles.root, 'p-3 ml-md-auto d-flex flex-column col-md-3')}>
       {index && (
         <>
           <Row className='side-menu'>
-            <h1 className='mx-auto text-center my-2'><a href='#last-releases'>LAST RELEASES</a></h1>
-          </Row>
-          <Row className='side-menu'>
             <h1 className='mx-auto text-center my-2'><a href='#last-added'>Last Added</a></h1>
-          </Row>
-          <Row className='side-menu  mb-3'>
-            <h1 className='mx-auto text-center my-2'>
-              <Link href={data ? `/album/${data.getRandomAlbum.id}` : ''}>
-                <a>GET LUCKY</a>
-              </Link>
-            </h1>
           </Row>
         </>
       )}
+      <Row className='side-menu'>
+        <GetLucky />
+      </Row>
+      <Row className='side-menu mb-3'>
+        <Link href='/holy12'><a><h1 className='mx-auto text-center my-2'>RANDOM PULL</h1></a></Link>
+      </Row>
       <Row className='px-3'>
         <Col md={12} className={styles.socials}>
           <Row>

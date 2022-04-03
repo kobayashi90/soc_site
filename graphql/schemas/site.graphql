@@ -209,7 +209,7 @@
         searchPlatformsByName(name: String, type: String!): [Platform] 
         recentPlatforms(limit: Int!, type: String!): [Platform]
 
-        getRandomAlbum: Album!
+        getRandomAlbum(limit: Int): [Album!]!
     }
 
     type Mutation {
