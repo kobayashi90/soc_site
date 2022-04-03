@@ -10,6 +10,7 @@ import mutationUser from '@/graphql/resolvers/mutations/user'
 import mutationCreate from '@/graphql/resolvers/mutations/create'
 import mutationUpdate from '@/graphql/resolvers/mutations/update'
 import mutationSite from '@/graphql/resolvers/mutations/site'
+import mutationComments from '@/graphql/resolvers/mutations/comments'
 
 import queryData from '@/graphql/resolvers/queries/data'
 import querySite from '@/graphql/resolvers/queries/site'
@@ -23,7 +24,7 @@ import siteSchema from '@/graphql/schemas/site.graphql'
 import userSchema from '@/graphql/schemas/user.graphql'
 
 const schemas = [indexSchema, siteSchema, userSchema]
-const Mutation = [mutationUser, mutationUpdate, mutationSite, mutationCreate]
+const Mutation = [mutationUser, mutationUpdate, mutationSite, mutationCreate, mutationComments]
 const Query = [queryData, querySite, queryUser]
 const types = [typesData, typesUser]
 

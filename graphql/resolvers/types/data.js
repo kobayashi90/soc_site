@@ -11,7 +11,12 @@ module.exports = {
     discs: (parent, args, context, info) => parent.getDiscs({ order: [['number', 'ASC']] }),
     related: (parent, args, context, info) => parent.getRelated(),
     stores: (parent) => parent.getStores(),
-    animations: (parent) => parent.getAnimations()
+    animations: (parent) => parent.getAnimations(),
+    comments: parent => parent.getComments()
+  },
+
+  Comment: {
+    username: parent => parent.anon ? null : parent.username
   },
 
   Category: {

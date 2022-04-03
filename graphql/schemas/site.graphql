@@ -21,6 +21,7 @@
         status: String!
         placeholder: String
         headerColor: String!
+        comments: [Comment]!
     }
 
     type Disc {
@@ -162,6 +163,12 @@
         count: Int
     }
 
+    type Comment {
+        text: String!
+        anon: Boolean!
+        username: String
+    }
+
     input ArtistInput {
         name: String!
         slug: String!
@@ -279,4 +286,6 @@
             status: String!
         ): Album!
         deleteAlbum(id: ID!): Int
+
+        updateComment(text: String!, anon: Boolean!, ostId: ID!): Boolean
     }
