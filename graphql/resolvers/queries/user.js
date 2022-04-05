@@ -45,7 +45,8 @@ const resolvers = {
       const username = args.username.trim()
       if (username.length < 3) return []
       return db.models.user.findAll({ where: { username: { [Op.like]: `%${username}%` } } })
-    }
+    },
+    user: (parent, { username }, { db }) => db.models.user.findByPk(username)
   }
 }
 

@@ -9,8 +9,6 @@ const resolversComposition = { 'Mutation.*': hasRole('CREATE') }
 const resolvers = {
   Mutation: {
     createAlbum: async (parent, data, { db, user }, info) => {
-      data.createdBy = user.username
-
       return db.transaction(async () => {
         data.artists = data.artists ? data.artists.map(artist => { return { name: artist, slug: slugify(artist) } }) : []
         await db.models.artist.bulkCreate(data.artists, { ignoreDuplicates: true })

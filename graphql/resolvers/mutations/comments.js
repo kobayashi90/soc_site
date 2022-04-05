@@ -28,22 +28,12 @@ const resolvers = {
       return true
     },
     addFavorite: async (_, { ostId }, { db, user, res }) => {
-      const { username } = user
-      const row = await db.models.favorite.findOne({ where: { ostId, username } })
-
-      if (row) return true
-      await db.models.favorite.create({ ostId, username })
-
+      await user.addOst(ostId)
       await res.unstable_revalidate(`/album/${ostId}`)
       return true
     },
     removeFavorite: async (_, { ostId }, { db, user, res }) => {
-      const { username } = user
-      const row = await db.models.favorite.findOne({ where: { ostId, username } })
-
-      if (!row) return true
-      await db.models.favorite.destroy({ where: { ostId, username } })
-
+      await user.removeOst(ostId)
       await res.unstable_revalidate(`/album/${ostId}`)
       return true
     }

@@ -17,7 +17,6 @@
         related: [Album]!
         updatedAt: Float!
         createdAt: Float!
-        createdBy: User
         status: String!
         placeholder: String
         headerColor: String!
