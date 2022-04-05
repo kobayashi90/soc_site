@@ -3,6 +3,9 @@
         roles: [Role]! 
         permissions: [String]!  
         pages: [Page]!
+        comments: [Comment]!
+        favorites: [Album]!
+        createdAt: Float!
     }
 
     type UserMe {
@@ -11,6 +14,9 @@
         roles: [Role]! 
         permissions: [String]!  
         pages: [Page]!
+        comments: [Comment]!
+        favorites: [Album]!
+        createdAt: Float!
     }
 
     type Page {
@@ -29,6 +35,7 @@
         roles: [Role]!
         permissions: [String]!
         users(username: String): [User]!
+        user(username: String!): User
 
         login(username: String!, password: String!): Int!
         logout: Int!

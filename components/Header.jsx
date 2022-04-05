@@ -35,12 +35,6 @@ export default function Header () {
     }
   `
 
-  const userMutation = gql`
-    mutation updateUser($username: String, $password: String, $email: String){
-      updateUser(username: $username, password: $password, email: $email)
-    }
-  `
-
   const queryHeader = gql`
     query {
       config(name: "banner"){
@@ -50,14 +44,13 @@ export default function Header () {
   `
 
   const [mutateForgor, { loading: loadingForgor }] = useMutation(forgorMutation)
-  const [mutateUser, { loading: loadingUser }] = useMutation(userMutation)
+
   const [queryLogin, { loading: loadingLogin }] = useLazyQuery(loginQuery)
   const { data: headerData } = useQuery(queryHeader)
 
   const [show, setShow] = useState(false)
   const [showForgor, setForgor] = useState(false)
   const [showForgorMessage, setForgorMessage] = useState(false)
-  const [showProfile, setProfile] = useState(false)
 
   useEffect(() => {
     if (showForgor) setShow(false)
@@ -115,22 +108,6 @@ export default function Header () {
       .catch(err => {
         if (process.env.NODE_ENV === 'development') console.log(err)
         toast.error('Failed to recover password')
-      })
-  }
-
-  const handleUpdateUser = ev => {
-    ev.preventDefault()
-    const variables = serialize(ev.target, { hash: true })
-
-    mutateUser({ variables })
-      .then(() => {
-        toast.success('User updated succesfully!')
-        refetch()
-        setProfile(false)
-      })
-      .catch(err => {
-        if (process.env.NODE_ENV === 'development') console.log(err)
-        toast.error('Failed to update user')
       })
   }
 
@@ -194,35 +171,6 @@ export default function Header () {
         </Modal.Body>
       </Modal>
 
-      <Modal show={showProfile} centered onHide={() => setProfile(false)}>
-        <Modal.Body className='m-3'>
-          <Form onSubmit={handleUpdateUser}>
-            <Row>
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
-                <Form.Control type='text' name='username' defaultValue={user?.username} />
-              </Form.Group>
-
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='email' style={{ color: 'black' }}>Email:</Form.Label>
-                <Form.Control type='text' name='email' defaultValue={user?.email} />
-              </Form.Group>
-            </Row>
-            <Row className='mt-3'>
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='password' style={{ color: 'black' }}>Password (empty to keep it unchanged):</Form.Label>
-                <Form.Control type='password' name='password' />
-              </Form.Group>
-            </Row>
-            <Row className='mt-4'>
-              <Col md={6} className='mx-auto'>
-                <ButtonLoader loading={loadingUser} type='submit' className='w-100' color='primary' text='Update User'></ButtonLoader>
-              </Col>
-            </Row>
-          </Form>
-        </Modal.Body>
-      </Modal>
-
       <header>
         <div id={styles.bannerBg} style={headerData ? { backgroundImage: `url('/_next/image?w=3840&q=100&url=${`https://cdn.sittingonclouds.net/live/${headerData.config.value}.png`}` } : {}}>
           <Container>
@@ -235,7 +183,7 @@ export default function Header () {
 
               {user && (
                 <Col xs='auto' className={classNames(styles.login, 'ms-sm-auto mb-sm-5')}>
-                  <Button onClick={() => setProfile(true)} variant="primary">Profile</Button>
+                  <Link href={`/profile/${user.username}`}><a><Button variant="primary">Profile</Button></a></Link>
                 </Col>
               )}
               <Col xs='auto' className={classNames(styles.login, 'ms-sm-auto mb-sm-5')}>

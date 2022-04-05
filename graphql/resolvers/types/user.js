@@ -11,7 +11,9 @@ const userResolvable = {
     const permissions = roles.map(r => r.permissions).flat()
 
     return pages.filter(({ perms, name }) => name && perms.some(r => permissions.includes(r)))
-  }
+  },
+  comments: (parent, _, { db }) => db.models.comment.findAll({ where: { anon: false, username: parent.username } }),
+  favorites: user => user.getOsts()
 }
 
 const funcs = {

@@ -16,6 +16,7 @@ import { ApolloProvider } from '@apollo/client'
 import SSRProvider from 'react-bootstrap/SSRProvider'
 import { useRouter } from 'next/router'
 import ReactGA from 'react-ga'
+import { Settings } from 'luxon'
 // import Script from 'next/script'
 
 import { initializeApollo, useApollo } from '@/lib/ApolloClient'
@@ -23,6 +24,8 @@ import useUser from '@/components/useUser'
 import { skipAds } from '@/components/utils'
 import Header from '@/components/Header'
 // import SpookyGhosts from '../components/SpookyGhosts'
+
+Settings.defaultLocale = 'en-US'
 
 export async function getStaticProps () {
   const client = initializeApollo()
