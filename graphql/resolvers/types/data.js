@@ -12,11 +12,21 @@ module.exports = {
     related: (parent, args, context, info) => parent.getRelated(),
     stores: (parent) => parent.getStores(),
     animations: (parent) => parent.getAnimations(),
-    comments: parent => parent.getComments()
+    comments: parent => parent.getComments(),
+    isFavorite: async (album, _, { db, user }) => user
+      ? (
+        await db.models.favorite
+          .findOne({ where: { ostId: album.id, username: user.username } })
+          .then(token => token !== null)
+      )
+      : false,
+    selfComment: (album, _, { db, user }) => user ? db.models.comment.findOne({ where: { ostId: album.id, username: user.username } }) : null,
+    favorites: (album, _, { db }) => db.models.favorite.count({ where: { ostId: album.id } })
   },
 
   Comment: {
-    username: parent => parent.anon ? null : parent.username
+    username: parent => parent.anon ? null : parent.username,
+    album: (parent, _, { db }) => db.models.ost.findByPk(parent.ostId)
   },
 
   Category: {

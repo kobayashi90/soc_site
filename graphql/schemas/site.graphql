@@ -23,6 +23,8 @@
         headerColor: String!
         comments: [Comment]!
         selfComment: Comment
+        isFavorite: Boolean!
+        favorites: Int!
     }
 
     type Disc {
@@ -167,6 +169,7 @@
     type Comment {
         text: String!
         anon: Boolean!
+        album: Album!
         username: String
     }
 
@@ -218,8 +221,6 @@
         recentPlatforms(limit: Int!, type: String!): [Platform]
 
         getRandomAlbum(limit: Int): [Album!]!
-
-        getSelfComment(ostId: ID!): Comment
     }
 
     type Mutation {
@@ -291,4 +292,6 @@
         deleteAlbum(id: ID!): Int
 
         updateComment(text: String!, anon: Boolean!, ostId: ID!): Boolean
+        addFavorite(ostId: String!): Boolean
+        removeFavorite(ostId: String!): Boolean
     }

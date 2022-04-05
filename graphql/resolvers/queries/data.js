@@ -104,8 +104,7 @@ module.exports = {
     getRandomAlbum: async (parent, { limit = 1 }, { db }) => {
       const result = await db.models.ost.findAll({ order: db.random(), limit })
       return result
-    },
-    getSelfComment: (_, { ostId }, { user, db }) => user ? db.models.comment.findOne({ where: { ostId, username: user.username } }) : null
+    }
   }
 }
 

@@ -1,5 +1,5 @@
-import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
-import { Col, Row, Button, OverlayTrigger, Tooltip, Container, Modal, Form, FormControl } from 'react-bootstrap'
+import { gql, useQuery } from '@apollo/client'
+import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
@@ -10,12 +10,12 @@ import styles from '../../styles/Album.module.scss'
 import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl, PLACEHOLDER } from '@/components/utils'
-import Loader, { ButtonLoader } from '@/components/Loader'
+import Loader from '@/components/Loader'
 import { initializeApollo, isGithub } from '@/lib/ApolloClient'
-import serialize from 'form-serialize'
+import CommentCarrousel from '@/components/CommentsCarrousel'
 
 const query = gql`
-query Album ($id: ID!) {
+query ($id: ID!) {
   album(id: $id){
     id
     title
@@ -68,6 +68,7 @@ query Album ($id: ID!) {
     selfComment {
       text
     }
+    favorites
   }
 }
 `
@@ -232,6 +233,12 @@ export default function Page (props) {
                         </td>
                       </tr>
                     )}
+
+                    {album.favorites > 0 && (
+                      <tr>
+                        <td>Favorite Score: {album.favorites}<span className='ms-1 fas fa-star'></span></td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
                 <h6 className='text-center'>{album.description}</h6>
@@ -323,108 +330,6 @@ export default function Page (props) {
               </Row>
             )}
           </Container>
-        </Col>
-      </Row>
-    </>
-  )
-}
-
-function SideButton (props) {
-  const { side, onClick } = props
-
-  return (
-    <Col xs={'auto'}>
-      <Button onClick={onClick} className='h-100 rounded-3' variant="outline-light" style={{ fontSize: '30px' }}><span className={`fas fa-angle-${side}`} /></Button>
-    </Col>
-  )
-}
-
-function CommentCarrousel (props) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const { ostId, comments = [] } = props
-  const current = comments[currentIndex]
-
-  const { user } = useUser()
-  const mutateComment = gql`
-    mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
-      updateComment(text: $text, anon: $anon, ostId: $ostId)
-    }
-  `
-  const [updateComment, { loading: loadingComment }] = useMutation(mutateComment)
-  const getComment = gql`
-    query ($ostId: ID!) {
-      getSelfComment (ostId: $ostId) {
-        text
-        anon
-      }
-    }
-  `
-  const [fetchComment, { data }] = useLazyQuery(getComment)
-  const [show, setShow] = useState(false)
-
-  useEffect(() => fetchComment({ variables: { ostId } }), [user, fetchComment, ostId])
-
-  function submit (ev) {
-    let variables = serialize(ev.target, { hash: true })
-    variables = { ...variables, anon: variables.anon === 'on', ostId }
-
-    updateComment({ variables })
-      .then(() => setShow(false))
-
-    ev.preventDefault()
-  }
-
-  const isSelfComment = data && data.getSelfComment != null
-
-  return (
-    <>
-      <Modal show={show} centered onHide={() => setShow(false)}>
-        <Modal.Body className='m-3'>
-          <Form onSubmit={submit} style={{ color: 'black' }}>
-            <Row>
-              <Form.Group as={Col} >
-                <FormControl required as='textarea' name='text' maxLength={300} defaultValue={isSelfComment ? data.getSelfComment.text : ''} />
-              </Form.Group>
-            </Row>
-            <Row className='mt-2'>
-              <Form.Group as={Col}>
-                <Form.Check type="checkbox" label="Check this to comment anonymously" name='anon' defaultChecked={isSelfComment ? data.getSelfComment.anon : false} />
-              </Form.Group>
-            </Row>
-            <Row className='mt-2'>
-              <Col className='mx-auto'>
-                <ButtonLoader loading={loadingComment} type='submit' color='primary' text='Save comment' />
-              </Col>
-            </Row>
-
-          </Form>
-        </Modal.Body>
-      </Modal>
-
-      <Row>
-        <Col className='blackblock m-2'>
-          {current && (
-            <Row>
-              <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />
-              <Col className='py-3' style={{ fontSize: '18px' }}>
-                {current.text}
-                <br />
-                <div className='mt-2'>{current.username ? ` - ${current.username}` : ''}</div>
-              </Col>
-              <SideButton side='right' onClick={() => setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1)} />
-            </Row>
-          )}
-          <Row className='mt-3 justify-content-center'>
-            {/* <Col xs='2'>
-              <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>Favorite</Button>
-  </Col> */}
-            <Col xs='2'>
-              <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                {user ? (isSelfComment ? 'Edit comment' : 'Add comment') : 'Login to leave a comment'}
-              </Button>
-            </Col>
-          </Row>
         </Col>
       </Row>
     </>
