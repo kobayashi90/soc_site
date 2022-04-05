@@ -1,11 +1,10 @@
 import { Col, Button, Modal, Form, Row, FormControl } from 'react-bootstrap'
 import { useEffect, useRef, useState } from 'react'
-import { gql, useApolloClient, useLazyQuery, useMutation } from '@apollo/client'
+import { gql, useLazyQuery, useMutation } from '@apollo/client'
 import serialize from 'form-serialize'
 
 import useUser from './useUser'
 import { ButtonLoader } from './Loader'
-import { toast } from 'react-toastify'
 
 function SideButton (props) {
   const { side, onClick } = props
@@ -56,7 +55,7 @@ export default function CommentCarrousel (props) {
                 : (
                   <Col xs='4'>
                     <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                    Login to leave a comment and favorite
+                      Login to leave a comment
                     </Button>
                   </Col>
                 )}
@@ -68,21 +67,11 @@ export default function CommentCarrousel (props) {
   )
 }
 
-const favoriteTemplate = query => gql`
-  mutation ($ostId: String!) {
-    ${query}Favorite(ostId: $ostId)
-  }
-`
-const addFavorite = favoriteTemplate('add')
-const removeFavorite = favoriteTemplate('remove')
-
 function CommentButtons (props) {
   const { ostId } = props
 
   const [show, setShow] = useState(false)
-  const [loadingFavorite, setLoading] = useState(false)
   const { user } = useUser()
-  const client = useApolloClient()
 
   const getComment = gql`
     query ($ostId: ID!) {
@@ -91,11 +80,10 @@ function CommentButtons (props) {
           text
           anon
         }
-        isFavorite
       }
     }
   `
-  const [fetchComment, { data, refetch }] = useLazyQuery(getComment)
+  const [fetchComment, { data }] = useLazyQuery(getComment)
 
   const mutateComment = gql`
     mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
@@ -118,23 +106,6 @@ function CommentButtons (props) {
 
   const album = data?.album
   const selfComment = album?.selfComment
-
-  function submitFavorite () {
-    setLoading(true)
-
-    client.mutate({ mutation: album.isFavorite ? removeFavorite : addFavorite, variables: { ostId } })
-      .then(() => toast.success(`${album.isFavorite ? 'Removed from' : 'Added to'} your favorites!`))
-      .catch(err => {
-        console.log(err)
-        toast.error('Query failed')
-      })
-      .finally(() => {
-        setLoading(false)
-        refetch()
-      })
-  }
-
-  console.log(album)
 
   return (
     <>
@@ -161,18 +132,11 @@ function CommentButtons (props) {
       </Modal>
 
       {album && (
-        <>
-          <Col xs='2'>
-            <ButtonLoader
-              loading={loadingFavorite} onClick={submitFavorite}
-              className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }} text={album.isFavorite ? 'Unfavorite' : 'Favorite'} />
-          </Col>
-          <Col xs='2'>
-            <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-              {selfComment ? 'Edit comment' : 'Add comment'}
-            </Button>
-          </Col>
-        </>
+        <Col xs={3}>
+          <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+            {selfComment ? 'Edit comment' : 'Add comment'}
+          </Button>
+        </Col>
       )}
     </>
   )

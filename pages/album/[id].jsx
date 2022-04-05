@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client'
+import { gql, useApolloClient, useQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
@@ -10,9 +10,11 @@ import styles from '../../styles/Album.module.scss'
 import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl, PLACEHOLDER } from '@/components/utils'
-import Loader from '@/components/Loader'
+import Loader, { ButtonLoader } from '@/components/Loader'
 import { initializeApollo, isGithub } from '@/lib/ApolloClient'
 import CommentCarrousel from '@/components/CommentsCarrousel'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 const query = gql`
 query ($id: ID!) {
@@ -132,12 +134,48 @@ export async function getStaticProps ({ params, req }) {
 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
 
+const favoriteTemplate = query => gql`
+  mutation ($ostId: String!) {
+    ${query}Favorite(ostId: $ostId)
+  }
+`
+const addFavorite = favoriteTemplate('add')
+const removeFavorite = favoriteTemplate('remove')
+
 export default function Page (props) {
   const { id, album, imageUrl } = props
-  const { user } = useUser()
-  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
 
+  const router = useRouter()
+  const { user } = useUser()
+  const [loadingFavorite, setLoading] = useState(false)
+  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
+  const client = useApolloClient()
+  const getFavorite = gql`
+  query ($ostId: ID!) {
+    album(id: $ostId){
+      isFavorite
+    }
+  }
+`
+  const { data: dataFavorite, refetch: refetchFavorite } = useQuery(getFavorite)
   useEffect(() => refetch({ id }), [user, id, refetch])
+  useEffect(() => refetchFavorite({ ostId: id }), [user, id, refetchFavorite])
+
+  function submitFavorite () {
+    setLoading(true)
+
+    client.mutate({ mutation: dataFavorite.album.isFavorite ? removeFavorite : addFavorite, variables: { ostId: id } })
+      .then(() => toast.success(`${dataFavorite.album.isFavorite ? 'Removed from' : 'Added to'} your favorites!`))
+      .catch(err => {
+        console.log(err)
+        toast.error('Query failed')
+      })
+      .finally(() => {
+        setLoading(false)
+        refetchFavorite()
+        router.replace(router.asPath)
+      })
+  }
 
   return (
     <>
@@ -156,92 +194,109 @@ export default function Page (props) {
             <Row>
               <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder || PLACEHOLDER} /></Col>
               <Col lg={7} className='blackblock'>
-                <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
-                <h6 className='text-center' style={{ whiteSpace: 'pre-wrap' }}>{album.subTitle}</h6>
-                <table className={styles.table}>
-                  <tbody>
-                    <tr>
-                      <th className='width-row'>Release Date</th>
-                      <td>{new Date(album.releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
-                    </tr>
+                <Row>
+                  <Col>
+                    <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
+                    <h6 className='text-center' style={{ whiteSpace: 'pre-wrap' }}>{album.subTitle}</h6>
+                    <table className={styles.table}>
+                      <tbody>
+                        <tr>
+                          <th className='width-row'>Release Date</th>
+                          <td>{new Date(album.releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+                        </tr>
 
-                    {album.artists.length > 0 && (
-                      <tr>
-                        <th>Artists</th>
-                        <td>
-                          {album.artists.map(({ id, name }) => name).join(', ')}
-                        </td>
-                      </tr>
-                    )}
+                        {album.artists.length > 0 && (
+                          <tr>
+                            <th>Artists</th>
+                            <td>
+                              {album.artists.map(({ id, name }) => name).join(', ')}
+                            </td>
+                          </tr>
+                        )}
 
-                    <tr>
-                      <th>Classification</th>
-                      <td>
-                        {[
-                          album.classes.map(({ name }) => `${name} Soundtrack`).join(' & '),
-                          album.categories.map(({ name }) => name).join(', ')
-                        ].filter(f => f !== '').join(' - ')}
-                      </td>
-                    </tr>
-                    {album.label && (
-                      <tr>
-                        <th>Published by</th>
-                        <td><a className='btn btn-link p-0' href={`/publisher/${album.label}`}>{album.label}</a></td>
-                      </tr>
-                    )}
-                    {album.platforms.length > 0 && (
-                      <tr>
-                        <th>Platforms</th>
-                        <td>
-                          {album.platforms.map(({ id, name }, i) => (
-                            <Fragment key={id}>
-                              {id === '29'
-                                ? <span className='btn p-0' style={{ color: 'white' }}>{name}</span>
-                                : <a className='btn btn-link p-0' href={`/platform/${id}`}>{name}</a>
-                              }
-                              {i !== album.platforms.length - 1 && ', '}
-                            </Fragment>
-                          ))}
-                        </td>
-                      </tr>
-                    )}
+                        <tr>
+                          <th>Classification</th>
+                          <td>
+                            {[
+                              album.classes.map(({ name }) => `${name} Soundtrack`).join(' & '),
+                              album.categories.map(({ name }) => name).join(', ')
+                            ].filter(f => f !== '').join(' - ')}
+                          </td>
+                        </tr>
+                        {album.label && (
+                          <tr>
+                            <th>Published by</th>
+                            <td><a className='btn btn-link p-0' href={`/publisher/${album.label}`}>{album.label}</a></td>
+                          </tr>
+                        )}
+                        {album.platforms.length > 0 && (
+                          <tr>
+                            <th>Platforms</th>
+                            <td>
+                              {album.platforms.map(({ id, name }, i) => (
+                                <Fragment key={id}>
+                                  {id === '29'
+                                    ? <span className='btn p-0' style={{ color: 'white' }}>{name}</span>
+                                    : <a className='btn btn-link p-0' href={`/platform/${id}`}>{name}</a>
+                                  }
+                                  {i !== album.platforms.length - 1 && ', '}
+                                </Fragment>
+                              ))}
+                            </td>
+                          </tr>
+                        )}
 
-                    {album.games.length > 0 && (
-                      <tr>
-                        <th>Games</th>
-                        <td>
-                          {album.games.map(({ slug, name }, i) => (
-                            <Fragment key={slug}>
-                              <a className='btn btn-link p-0' href={`/game/${slug}`}>{name}</a>
-                              {i !== album.games.length - 1 && ', '}
-                            </Fragment>
-                          ))}
-                        </td>
-                      </tr>
-                    )}
+                        {album.games.length > 0 && (
+                          <tr>
+                            <th>Games</th>
+                            <td>
+                              {album.games.map(({ slug, name }, i) => (
+                                <Fragment key={slug}>
+                                  <a className='btn btn-link p-0' href={`/game/${slug}`}>{name}</a>
+                                  {i !== album.games.length - 1 && ', '}
+                                </Fragment>
+                              ))}
+                            </td>
+                          </tr>
+                        )}
 
-                    {album.animations.length > 0 && (
-                      <tr>
-                        <th>Animations</th>
-                        <td>
-                          {album.animations.map(({ id, title }, i) => (
-                            <Fragment key={id}>
-                              <a className='btn btn-link p-0' href={`/anim/${id}`}>{title}</a>
-                              {i !== album.animations.length - 1 && ', '}
-                            </Fragment>
-                          ))}
-                        </td>
-                      </tr>
-                    )}
+                        {album.animations.length > 0 && (
+                          <tr>
+                            <th>Animations</th>
+                            <td>
+                              {album.animations.map(({ id, title }, i) => (
+                                <Fragment key={id}>
+                                  <a className='btn btn-link p-0' href={`/anim/${id}`}>{title}</a>
+                                  {i !== album.animations.length - 1 && ', '}
+                                </Fragment>
+                              ))}
+                            </td>
+                          </tr>
+                        )}
 
-                    {album.favorites > 0 && (
-                      <tr>
-                        <td>Favorite Score: {album.favorites}<span className='ms-1 fas fa-star'></span></td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-                <h6 className='text-center'>{album.description}</h6>
+                        {album.favorites > 0 && (
+                          <tr>
+                            <td>Favorite Score: {album.favorites}<span className='ms-1 fas fa-star'></span></td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <h6 className='text-center'>{album.description}</h6>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <ButtonLoader
+                      loading={loadingFavorite} onClick={dataFavorite ? submitFavorite : null}
+                      className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }} text={dataFavorite ? (dataFavorite.album.isFavorite ? 'Remove from favorites' : 'Add to favorites') : 'Login to add to favorites'} />
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <hr></hr>
