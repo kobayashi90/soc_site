@@ -21,7 +21,9 @@ export default function relations (sequelize) {
   game.belongsToMany(publisher, { through: 'Publisher_Game' })
   game.belongsToMany(ost, { through: 'Ost_Game' })
   game.belongsToMany(series, { through: 'Series_Game' })
+
   game.belongsToMany(platform, { through: 'Game_Platform' })
+  platform.belongsToMany(game, { through: 'Game_Platform' })
 
   ost.belongsToMany(artist, { onDelete: 'CASCADE', through: 'Ost_Artist' })
   ost.belongsToMany(classes, { onDelete: 'CASCADE', through: 'Ost_Class' })
@@ -41,7 +43,8 @@ export default function relations (sequelize) {
   series.belongsToMany(game, { through: 'Series_Game' })
 
   animation.belongsToMany(studio, { through: 'Studio_Animation' })
-  studio.hasMany(animation)
+  studio.belongsToMany(animation, { through: 'Studio_Animation' })
+
   animation.belongsToMany(ost, { through: 'Ost_Animation' })
 
   ost.hasMany(comment)

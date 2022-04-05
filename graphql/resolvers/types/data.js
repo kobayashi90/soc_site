@@ -20,7 +20,7 @@ module.exports = {
 
   Comment: {
     username: parent => parent.anon ? null : parent.username,
-    album: (parent, _, { db }) => db.models.ost.findByPk(parent.ostId)
+    album: (comment, _, { db }) => comment.getOst()
   },
 
   Category: {
@@ -61,10 +61,7 @@ module.exports = {
 
   Platform: {
     albums: parent => parent.getOsts(),
-    games: async (parent, args, { db }) => {
-      const games = await db.models.game.findAll({ include: [db.models.platform] })
-      return games.filter(g => g.platforms.filter(p => p.id === parent.id).length > 0)
-    }
+    games: (platform, args, { db }) => platform.getGames()
   },
 
   Animation: {
@@ -72,10 +69,7 @@ module.exports = {
     albums: parent => parent.getOsts()
   },
   Studio: {
-    animations: async (parent, args, { db }) => {
-      const animations = await db.models.animation.findAll({ include: [db.models.studio] })
-      return animations.filter(a => a.studios.filter(p => p.slug === parent.slug).length > 0)
-    }
+    animations: studio => studio.getAnimations()
   },
 
   Series: {

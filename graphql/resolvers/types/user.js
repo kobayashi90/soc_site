@@ -12,7 +12,7 @@ const userResolvable = {
 
     return pages.filter(({ perms, name }) => name && perms.some(r => permissions.includes(r)))
   },
-  comments: (parent, _, { db }) => db.models.comment.findAll({ where: { anon: false, username: parent.username } }),
+  comments: (user, _, { db }) => user.getComments(),
   favorites: user => user.getOsts()
 }
 
