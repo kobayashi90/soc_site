@@ -2,36 +2,19 @@ import { ApolloServer } from 'apollo-server-micro'
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
 import { processRequest } from 'graphql-upload'
 import { ApolloServerPluginLandingPageDisabled, ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
+import { loadFilesSync } from '@graphql-tools/load-files'
+import path from 'path'
 
 import db from '@/lib/startDB'
 import { withSessionApi } from '@/lib/session'
+import resolvers from '@/graphql/resolvers'
 
-import mutationUser from '@/graphql/resolvers/mutations/user'
-import mutationCreate from '@/graphql/resolvers/mutations/create'
-import mutationUpdate from '@/graphql/resolvers/mutations/update'
-import mutationSite from '@/graphql/resolvers/mutations/site'
-import mutationComments from '@/graphql/resolvers/mutations/comments'
-
-import queryData from '@/graphql/resolvers/queries/data'
-import querySite from '@/graphql/resolvers/queries/site'
-import queryUser from '@/graphql/resolvers/queries/user'
-
-import typesData from '@/graphql/resolvers/types/data'
-import typesUser from '@/graphql/resolvers/types/user'
-
-import indexSchema from '@/graphql/schemas/index.graphql'
-import siteSchema from '@/graphql/schemas/site.graphql'
-import userSchema from '@/graphql/schemas/user.graphql'
-
-const schemas = [indexSchema, siteSchema, userSchema]
-const Mutation = [mutationUser, mutationUpdate, mutationSite, mutationCreate, mutationComments]
-const Query = [queryData, querySite, queryUser]
-const types = [typesData, typesUser]
+const schemas = loadFilesSync(path.join(process.cwd(), './graphql/schemas'))
 
 const apolloServer = new ApolloServer({
   credentials: true,
   typeDefs: mergeTypeDefs(schemas),
-  resolvers: mergeResolvers([...Mutation, ...Query, ...types]),
+  resolvers: mergeResolvers(resolvers),
   context: async ({ req, res }) => {
     const { username } = req.session
     return { db, req, res, username, user: username && await db.models.user.findByPk(username) }

@@ -13,10 +13,12 @@
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.1",
     "@graphql-tools/resolvers-composition": "^6.4.1",
     "apollo-server-micro": "^3.4.0",
     "apollo-upload-client": "^17.0.0",
+    "babel-plugin-import-directory": "^1.1.0",
     "babel-register": "^6.26.0",
     "bcrypt": "^5.0.1",
     "blurhash": "^1.1.4",

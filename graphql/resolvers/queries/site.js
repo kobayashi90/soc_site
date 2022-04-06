@@ -1,4 +1,4 @@
-module.exports = {
+const resolvers = {
   Query: {
     config: (parent, { name }, { db, req }, info) => {
       return db.models.config.findOrCreate({ where: { name } })
@@ -11,3 +11,5 @@ module.exports = {
     }
   }
 }
+
+export default resolvers

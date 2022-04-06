@@ -1,6 +1,6 @@
 import GraphQLUpload from 'graphql-upload/public/GraphQLUpload.js'
 
-module.exports = {
+const resolvers = {
   Upload: GraphQLUpload,
   Album: {
     artists: (parent, args, context, info) => parent.getArtists(),
@@ -68,6 +68,7 @@ module.exports = {
     studios: parent => parent.getStudios(),
     albums: parent => parent.getOsts()
   },
+
   Studio: {
     animations: studio => studio.getAnimations()
   },
@@ -84,3 +85,5 @@ module.exports = {
     album: (parent) => parent.getOst()
   }
 }
+
+export default resolvers

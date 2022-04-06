@@ -40,4 +40,4 @@ const resolvers = {
   }
 }
 
-module.exports = composeResolvers(resolvers, resolversComposition)
+export default composeResolvers(resolvers, resolversComposition)

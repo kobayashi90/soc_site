@@ -3,8 +3,6 @@
         roles: [Role]! 
         permissions: [String]!  
         pages: [Page]!
-        comments: [Comment]!
-        favorites: [Album]!
         createdAt: Float!
     }
 
@@ -14,8 +12,6 @@
         roles: [Role]! 
         permissions: [String]!  
         pages: [Page]!
-        comments: [Comment]!
-        favorites: [Album]!
         createdAt: Float!
     }
 

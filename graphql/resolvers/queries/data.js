@@ -1,7 +1,7 @@
 import { Op } from 'sequelize'
 import info from '@/config/info.json'
 
-module.exports = {
+const resolvers = {
   Query: {
     artists: (parent, args, { db }, info) => db.models.artist.findAll(),
     platforms: (parent, args, { db }, info) => db.models.platform.findAll(),
@@ -118,3 +118,5 @@ const searchPage = (args, options, db) => {
 
   return db.models[model].findAndCountAll(options)
 }
+
+export default resolvers
