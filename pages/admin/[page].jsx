@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 import { AlbumSelector, SimpleSelector } from '@/components/Selectors'
 import Loader from '@/components/Loader'
-import { hasRolePage } from '@/lib/utils'
+import { hasRolePage } from '@/lib/resolvers'
 import { getFullPageList, getPageList } from '@/components/utils'
 
 export const getServerSideProps = hasRolePage(['CREATE', 'UPDATE'])

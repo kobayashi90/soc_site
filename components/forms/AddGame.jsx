@@ -4,7 +4,8 @@ import serialize from 'form-serialize'
 import { Col, Row, Form, FormControl } from 'react-bootstrap'
 import { SeriesSelector, PublisherSelector, PlatformSelector } from '../Selectors'
 import { toast } from 'react-toastify'
-import { slugify } from '@/components/utils'
+
+import { slugify } from '../utils'
 import SubmitButton from '../SubmitButton'
 
 const mutation = gql`

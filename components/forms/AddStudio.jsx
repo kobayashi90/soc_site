@@ -3,7 +3,8 @@ import { gql, useMutation } from '@apollo/client'
 import { Button, Col, Row, Form, FormControl } from 'react-bootstrap'
 import serialize from 'form-serialize'
 import { toast } from 'react-toastify'
-import { slugify } from '@/components/utils'
+
+import { slugify } from '../utils'
 
 const mutation = gql`
 mutation CreateStudio($slug:String!, $name:String!){

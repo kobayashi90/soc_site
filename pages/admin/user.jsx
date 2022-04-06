@@ -6,7 +6,7 @@ import serialize from 'form-serialize'
 
 import { SimpleSelector } from '@/components/Selectors'
 import Loader, { ButtonLoader } from '@/components/Loader'
-import { hasRolePage } from '@/lib/utils'
+import { hasRolePage } from '@/lib/resolvers'
 
 export const getServerSideProps = hasRolePage(['MANAGE_USER'])
 

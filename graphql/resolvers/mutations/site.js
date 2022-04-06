@@ -1,5 +1,6 @@
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
-import { hasRole, img } from '@/lib/utils'
+import { img } from '@/lib/utils'
+import { hasRole } from '@/lib/resolvers'
 
 const resolversComposition = { 'Mutation.*': hasRole('UPDATE') }
 const resolvers = {

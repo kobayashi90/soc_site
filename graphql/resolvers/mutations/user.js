@@ -1,37 +1,12 @@
 import bcrypt from 'bcrypt'
-import { UserInputError, ForbiddenError, AuthenticationError } from 'apollo-server-errors'
+import { UserInputError, ForbiddenError } from 'apollo-server-errors'
 import generator from 'generate-password'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 import { DateTime } from 'luxon'
-import { Op, literal } from 'sequelize'
+import { Op } from 'sequelize'
 
-import { template, transporter, mailConfig } from '@/lib/forgor'
-
-async function createForgor (user, db) {
-  await db.models.forgor.destroy({ where: { username: user.username } })
-  const key = generator.generate({ length: 15, numbers: true, upercase: false, strict: true })
-  const row = await db.models.forgor.create({ key, expires: literal('DATE_ADD(NOW(), INTERVAL 24 HOUR)') })
-  row.setUser(user)
-
-  const html = template.replaceAll('{{forgor_link}}', `https://sittingonclouds.net/forgor?key=${key}`)
-  const message = { from: mailConfig.auth.user, to: user.email, subject: 'Password Reset', html }
-  await transporter.sendMail(message)
-
-  return row
-}
-
-const isAuthed = next => (root, args, context, info) => {
-  if (!context.user) throw new AuthenticationError()
-  return next(root, args, context, info)
-}
-const hasPerm = perm => next => async (root, args, context, info) => {
-  const roles = await context.user.getRoles()
-  const permissions = roles.map(r => r.permissions).flat()
-  if (!permissions.includes(perm)) throw new ForbiddenError()
-
-  return next(root, args, context, info)
-}
-const hasRole = role => [isAuthed, hasPerm(role)]
+import { createForgor } from '@/lib/forgor'
+import { hasRole, isAuthed } from '@/lib/resolvers'
 
 const resolversComposition = {
   'Mutation.*': hasRole('MANAGE_USER'),

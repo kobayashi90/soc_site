@@ -1,15 +1,9 @@
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
-import { AuthenticationError } from 'apollo-server-micro'
 
-const isAuthed = next => (root, args, context, info) => {
-  if (!context.user) throw new AuthenticationError()
-  return next(root, args, context, info)
-}
+import { isAuthed } from '@/lib/resolvers'
 
 const resolversComposition = {
-  'Mutation.updateComment': [isAuthed],
-  'Mutation.addFavorite': [isAuthed],
-  'Mutation.removeFavorite': [isAuthed]
+  'Mutation.*': [isAuthed]
 }
 
 const resolvers = {
