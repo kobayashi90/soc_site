@@ -1,10 +1,12 @@
-import { permissions } from '@/config/info.json'
+import info from '@/config/info.json'
 import { UserInputError } from 'apollo-server-micro'
 import bcrypt from 'bcrypt'
 import { Op } from 'sequelize'
 import { composeResolvers } from '@graphql-tools/resolvers-composition'
 
 import { hasRole } from '@/lib/resolvers'
+
+const { permissions } = info
 
 const resolversComposition = { 'Query.users': hasRole('MANAGE_USER') }
 const resolvers = {
