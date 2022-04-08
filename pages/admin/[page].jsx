@@ -145,33 +145,36 @@ function OstTable () {
 
     return (
       <Col xs='auto' className='pagination mx-auto page-bar'>
-        {currentListIndex > 0 && (
+        {currentList && (
           <>
-            <Link href={'/admin/1'}>
-              <a className='fas fa-angle-double-left align-middle nav-link' />
-            </Link>
+            {currentListIndex > 0 && (
+              <>
+                <Link href={'/admin/1'}>
+                  <a className='fas fa-angle-double-left align-middle nav-link' />
+                </Link>
 
-            <Link href={`/admin/${currentList[0] - 1}`}>
-              <a className='fas fa-angle-left align-middle nav-link' />
-            </Link>
+                <Link href={`/admin/${currentList[0] - 1}`}>
+                  <a className='fas fa-angle-left align-middle nav-link' />
+                </Link>
+              </>
+            )}
+            {currentList.map(e => (
+              <Link key={e} href={`/admin/${e}`}>
+                <a className={classNames({ disabled: e === parseInt(page) }, 'nav-link')} >{e}</a>
+              </Link>
+            ))}
+            {currentListIndex !== pageList.length - 1 && (
+              <>
+                <Link href={`/admin/${currentList[currentList.length - 1] + 1}`}>
+                  <a className='fas fa-angle-right align-middle nav-link' />
+                </Link>
+                <Link href={`/admin/${fullPageList[fullPageList.length - 1]}`}>
+                  <a className='fas fa-angle-double-right align-middle nav-link' />
+                </Link>
+              </>
+            ) }
           </>
         )}
-        {currentList.map(e => (
-          <Link key={e} href={`/admin/${e}`}>
-            <a className={classNames({ disabled: e === parseInt(page) }, 'nav-link')} >{e}</a>
-          </Link>
-        ))}
-        {currentListIndex !== pageList.length - 1 && (
-          <>
-            <Link href={`/admin/${currentList[currentList.length - 1] + 1}`}>
-              <a className='fas fa-angle-right align-middle nav-link' />
-            </Link>
-            <Link href={`/admin/${fullPageList[fullPageList.length - 1]}`}>
-              <a className='fas fa-angle-double-right align-middle nav-link' />
-            </Link>
-          </>
-        ) }
-
       </Col>
     )
   }
