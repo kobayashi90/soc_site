@@ -87,7 +87,7 @@ export function BaseSelector (props) {
 }
 
 export function SimpleSelector (props) {
-  const { isSingle = false, defaultValue = isSingle ? undefined : [], required = false, name = '' } = props
+  const { isSingle = false, defaultValue = isSingle ? undefined : [], required = false, name = '', onChange } = props
 
   const stubElement = useRef(null)
   const [selected, setSelected] = useState(defaultValue)
@@ -100,6 +100,8 @@ export function SimpleSelector (props) {
   const onChangeFn = (items = []) => {
     const result = isSingle ? items[items.length - 1] : items
     setSelected(result)
+
+    if (onChange) onChange(result)
   }
 
   const value = isSingle ? (selected ? [selected] : []) : selected

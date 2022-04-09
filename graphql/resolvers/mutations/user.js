@@ -12,16 +12,25 @@ const resolversComposition = {
   'Mutation.*': hasRole('MANAGE_USER'),
   'Mutation.updatePass': [],
   'Mutation.createForgorLink': [],
-  'Mutation.updateUser': [isAuthed]
+  'Mutation.updateUser': [isAuthed],
+  'Mutation.registerUser': []
 }
 
 const resolvers = {
   Mutation: {
-    createUser: async (_, { username, email, roles }, { db }) => {
+    registerUser: async (_, { username, email }, { db }) => {
       return db.transaction(async () => {
+        await Promise.all([
+          db.models.user.findByPk(username).then(result => {
+            if (result) throw new UserInputError('Username already in use')
+          }),
+          db.models.user.findOne({ where: { email } }).then(result => {
+            if (result) throw new UserInputError('Email already in use')
+          })
+        ])
+
         const password = generator.generate({ length: 30, numbers: true, upercase: true, strict: true })
         const user = await db.models.user.create({ username, email, password: await bcrypt.hash(password, 10) })
-        user.setRoles(roles)
 
         await createForgor(user, db)
 

@@ -43,12 +43,20 @@ export default function Header () {
     }
   `
 
+  const registerMutation = gql`
+    mutation ($username: String!, $email: String!) {
+      registerUser(username: $username, email: $email)
+    }
+  `
+
   const [mutateForgor, { loading: loadingForgor }] = useMutation(forgorMutation)
+  const [mutateRegister, { loading: loadingRegister }] = useMutation(registerMutation)
 
   const [queryLogin, { loading: loadingLogin }] = useLazyQuery(loginQuery)
   const { data: headerData } = useQuery(queryHeader)
 
   const [show, setShow] = useState(false)
+  const [showRegister, setRegister] = useState(false)
   const [showForgor, setForgor] = useState(false)
   const [showForgorMessage, setForgorMessage] = useState(false)
 
@@ -96,6 +104,31 @@ export default function Header () {
         }
       })
       .catch(error => console.error('An unexpected error happened:', error))
+  }
+
+  const submitRegister = e => {
+    e.persist()
+    e.preventDefault()
+    const variables = serialize(e.target, { hash: true })
+
+    mutateRegister({ variables })
+      .then(res => {
+        setRegister(false)
+        setForgorMessage(true)
+      })
+      .catch(error => {
+        const { graphQLErrors } = error
+        let message = 'Unknown error'
+
+        if (graphQLErrors && graphQLErrors.length > 0) {
+          const { message: messageGQL } = graphQLErrors[0]
+          message = messageGQL
+        }
+
+        console.error(error)
+        toast.error(message)
+        // console.error('An unexpected error happened:', error)
+      })
   }
 
   const handleForgor = ev => {
@@ -159,6 +192,29 @@ export default function Header () {
         </Modal.Body>
       </Modal>
 
+      <Modal show={showRegister} centered onHide={() => setRegister(false)}>
+        <Modal.Body className='m-3'>
+          <Form onSubmit={submitRegister}>
+            <Row>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
+                <Form.Control required type='text' name='username' />
+              </Form.Group>
+
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='email' style={{ color: 'black' }}>Email:</Form.Label>
+                <Form.Control required type='text' name='email' />
+              </Form.Group>
+            </Row>
+            <Row className='mt-4'>
+              <Col md={4} className='mx-auto'>
+                <SubmitButton loading={loadingRegister} type='submit' className='w-100' color='primary'>Register</SubmitButton>
+              </Col>
+            </Row>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
       <Modal show={showForgorMessage} centered onHide={() => setForgorMessage(false)}>
         <Modal.Body className='m-3'>
           <Form onSubmit={submit}>
@@ -181,12 +237,17 @@ export default function Header () {
                 </Link>
               </Col>
 
-              {user && (
-                <Col xs='auto' className={classNames(styles.login, 'ms-sm-auto mb-sm-5')}>
-                  <Link href={`/profile/${user.username}`}><a><Button variant="primary">Profile</Button></a></Link>
-                </Col>
-              )}
-              <Col xs='auto' className={classNames(styles.login, 'ms-sm-auto mb-sm-5')}>
+              <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
+                {user
+                  ? (
+                    <Link href={`/profile/${user.username}`}><a><Button variant="primary">Profile</Button></a></Link>
+                  )
+                  : (
+                    <Button onClick={() => setRegister(true)} className='me-0' variant="primary">Register</Button>
+                  )}
+              </Col>
+
+              <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
                 <Button onClick={handleLogin} variant="primary">{user ? 'Logout' : 'Login'}</Button>
               </Col>
             </Row>
@@ -198,6 +259,14 @@ export default function Header () {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto d-flex align-items-center">
+                {user
+                  ? (
+                    <NavLink href={`/profile/${user.username}`} name='Profile' className='d-block d-sm-none' />
+                  )
+                  : (
+                    <NavLink onClick={() => setRegister(true)} name='Register' className='d-block d-sm-none' />
+                  )}
+                <NavLink onClick={handleLogin} name={user ? 'Logout' : 'Login'} className='d-block d-sm-none' />
                 <NavLink href='/' name='Home' />
                 <NavLink href='/last-added' name='Last Added' />
                 <NavLink href='/album/list' name='Album List' />
@@ -237,12 +306,16 @@ function Dropdown ({ name, items = [] }) {
   )
 }
 
-function NavLink ({ href, name }) {
-  return (
-    <Link href={href} passHref>
-      <Nav.Link className={styles.navLink}>{name}</Nav.Link>
-    </Link>
-  )
+function NavLink (props) {
+  const { href, name, onClick, className } = props
+
+  return onClick
+    ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{name}</a>
+    : (
+      <Link href={href} passHref>
+        <Nav.Link className={classNames(styles.navLink, className)}>{name}</Nav.Link>
+      </Link>
+    )
 }
 
 function SearchBar () {

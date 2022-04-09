@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import serialize from 'form-serialize'
 
 import { SimpleSelector } from '@/components/Selectors'
-import Loader, { ButtonLoader } from '@/components/Loader'
+import Loader from '@/components/Loader'
 import { hasRolePage } from '@/lib/resolvers'
 
 export const getServerSideProps = hasRolePage(['MANAGE_USER'])
@@ -28,12 +28,6 @@ export default function AdminUser () {
       permissions
     }
   `, { variables: { username: '' } })
-  const [loading, setLoading] = useState(false)
-  const [create] = useMutation(gql`
-  mutation createUser($email: String!, $username: String!, $roles: [String]!){
-    createUser(email: $email, username: $username, roles: $roles)
-  }
-  `)
 
   function handleSearch (e) {
     e.persist()
@@ -42,24 +36,6 @@ export default function AdminUser () {
 
     if (username.length < 3) return
     refetch({ username })
-  }
-
-  function handleCreate (e) {
-    e.persist()
-    e.preventDefault()
-    const variables = serialize(e.target, { hash: true })
-    if (!variables.roles) variables.roles = []
-
-    setLoading(true)
-    create({ variables })
-      .then(results => {
-        e.target.reset()
-        toast.success(`User "${variables.username}" created succesfully`)
-      })
-      .catch(results => {
-        toast.error(`Failed to add user "${variables.username}"`)
-      })
-      .finally(() => setLoading(false))
   }
 
   return (
@@ -88,7 +64,7 @@ export default function AdminUser () {
                 </thead>
                 <tbody>
                   {data && data.users.map(props => (
-                    <UserRow key={props.username} {...props} roleList={data.roles} />
+                    <UserRow key={props.username} {...props} roleList={data.roles} refetch={refetch}/>
                   ))}
                 </tbody>
               </Table>
@@ -118,7 +94,7 @@ export default function AdminUser () {
 
       <AddRole />
 
-      <Form className='site-form blackblock mt-3' onSubmit={handleCreate}>
+      {/* <Form className='site-form blackblock mt-3' onSubmit={handleCreate}>
         <Row>
           <Col>
             <Form.Group>
@@ -147,15 +123,14 @@ export default function AdminUser () {
             <ButtonLoader text='Add User' loading={loading} type='submit' color='primary' />
           </Col>
         </Row>
-      </Form>
-
+              </Form> */}
     </Container>
   )
 }
 
-function UserRow ({ username, roles, roleList }) {
-  const permissionsRef = useRef(null)
-  const [update] = useMutation(gql`
+function UserRow (props) {
+  const { username, roles, roleList, refetch } = props
+  const [update, { loading }] = useMutation(gql`
   mutation updateUserRoles($username: String!, $roles: [String]!){
     updateUserRoles(username: $username, roles: $roles)
   }
@@ -168,9 +143,9 @@ function UserRow ({ username, roles, roleList }) {
 
   const [deleteModal, setDeleteModal] = useState(false)
 
-  const handleUpdate = perms => {
+  const handleUpdate = roles => {
     update({
-      variables: { username, roles: permissionsRef.current.state.value.map(e => e.value) }
+      variables: { username, roles: roles.map(r => r.value) }
     }).then(results => {
       toast.success('Updated user succesfully!')
     }).catch(err => {
@@ -182,6 +157,7 @@ function UserRow ({ username, roles, roleList }) {
   function handleDelete () {
     remove({ variables: { username } }).then(results => {
       toast.success(`Deleted user "${username}" succesfully`)
+      refetch()
     }).catch(err => {
       console.log(err)
       toast.error(`Failed to delete user "${username}"`)
@@ -206,8 +182,8 @@ function UserRow ({ username, roles, roleList }) {
         <td>{username}</td>
         <td>
           <SimpleSelector
-            ref={permissionsRef}
-            onChange={e => handleUpdate(e)}
+            loading={loading}
+            onChange={result => handleUpdate(result)}
             defaultValue={roles.map(({ name }) => ({ label: name, value: name }))}
             options={roleList.map(({ name }) => ({ label: name, value: name }))}
           />

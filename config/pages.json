@@ -6,7 +6,7 @@
     },
     {
         "url": "/admin/user",
-        "name": "Manage User",
+        "name": "Manage Users",
         "perms": ["MANAGE_USER"]
     },
     {
