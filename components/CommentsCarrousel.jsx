@@ -2,9 +2,11 @@ import { Col, Button, Modal, Form, Row, FormControl } from 'react-bootstrap'
 import { useEffect, useRef, useState } from 'react'
 import { gql, useLazyQuery, useMutation } from '@apollo/client'
 import serialize from 'form-serialize'
+import Link from 'next/link'
 
 import useUser from './useUser'
 import { ButtonLoader } from './Loader'
+import styles from '../styles/Profile.module.scss'
 
 function SideButton (props) {
   const { side, onClick } = props
@@ -43,7 +45,7 @@ export default function CommentCarrousel (props) {
               <Col className='py-3' style={{ fontSize: '18px' }}>
                 {current.text}
                 <br />
-                <div className='mt-2'>{current.album ? ` - ${current.album.title}` : (current.username ? ` - ${current.username}` : '')}</div>
+                <div className='mt-2'>{current.album ? <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span> : (current.username ? ` - ${current.username}` : '')}</div>
               </Col>
               <SideButton side='right' onClick={plusIndex} />
             </Row>

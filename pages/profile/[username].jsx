@@ -20,6 +20,7 @@ const query = gql`
         comments {
           text
           album {
+            id
             title
           }
         }
