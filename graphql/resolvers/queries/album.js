@@ -14,7 +14,7 @@ const resolvers = {
 
     album: (parent, { id, title }, { db }, info) => db.models.ost.findByPk(id),
     downloads: (parent, { id }, { db }) => db.models.download.findAll({ where: { ostId: id } }),
-    albums: (parent, args, { db }, info) => db.models.ost.findAll(),
+    albums: (parent, args, { db }, info) => db.models.ost.findAll({ order: [['title', 'ASC']] }),
 
     platform: async (parent, { id }, { db }) => db.models.platform.findByPk(id),
     animation: (parent, { id }, { db }) => db.models.animation.findByPk(id),
