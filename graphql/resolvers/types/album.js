@@ -1,5 +1,5 @@
 import GraphQLUpload from 'graphql-upload/public/GraphQLUpload.js'
-import { placeholder } from '@/lib/resolvers'
+import { headerColor, placeholder } from '@/lib/resolvers'
 
 const resolvers = {
   Upload: GraphQLUpload,
@@ -17,7 +17,8 @@ const resolvers = {
     isFavorite: async (album, _, { db, user }) => user ? album.hasUser(user.username) : false,
     selfComment: (album, _, { db, user }) => user ? db.models.comment.findOne({ where: { ostId: album.id, username: user.username } }) : null,
     favorites: (album, _, { db }) => album.countUsers(),
-    placeholder: (album, _, { db }) => placeholder(album, 'album', db)
+    placeholder: (album, _, { db }) => placeholder(album, 'album'),
+    headerColor: (album, _, { db }) => headerColor(album, 'album')
   },
 
   Comment: {
@@ -59,7 +60,8 @@ const resolvers = {
     series: (parent, args, context, info) => parent.getSeries(),
     publishers: (parent, args, context, info) => parent.getPublishers(),
     platforms: (parent, args, context, info) => parent.getPlatforms({ order: ['name'] }),
-    placeholder: (game, _, { db }) => placeholder(game, 'game', db)
+    placeholder: (game, _, { db }) => placeholder(game, 'game'),
+    headerColor: (game, _, { db }) => headerColor(game, 'game')
   },
 
   Platform: {
@@ -70,7 +72,8 @@ const resolvers = {
   Animation: {
     studios: parent => parent.getStudios(),
     albums: parent => parent.getOsts(),
-    placeholder: (anim, _, { db }) => placeholder(anim, 'anim', db)
+    placeholder: (anim, _, { db }) => placeholder(anim, 'anim'),
+    headerColor: (anim, _, { db }) => placeholder(anim, 'anim')
   },
 
   Studio: {
@@ -79,7 +82,8 @@ const resolvers = {
 
   Series: {
     games: (parent, args, context, info) => parent.getGames(),
-    placeholder: (series, _, { db }) => placeholder(series, 'series', db)
+    placeholder: (series, _, { db }) => placeholder(series, 'series'),
+    headerColor: (series, _, { db }) => placeholder(series, 'series')
   },
 
   Publisher: {
