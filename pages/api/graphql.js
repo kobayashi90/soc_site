@@ -37,7 +37,7 @@ export default withSessionApi(async (req, res) => {
     req.filePayload = await processRequest(req, res, { maxFieldSize: Infinity, maxFileSize: Infinity, maxFiles: 1 })
   }
 
-  db.sync()
+  if (process.env.NODE_ENV === 'production' || process.env.SYNC) db.sync()
   await startServer
   return apolloServer.createHandler({ path: '/api/graphql' })(req, res)
 })
