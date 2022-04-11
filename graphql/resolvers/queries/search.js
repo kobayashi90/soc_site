@@ -1,4 +1,4 @@
-import { Op } from 'sequelize'
+import { Op, literal } from 'sequelize'
 
 const resolvers = {
   Query: {
@@ -14,7 +14,7 @@ const resolvers = {
           status: { [Op.in]: status }
         },
         include: classes ? [{ model: db.models.class, where: { name: { [Op.in]: classes } } }] : [],
-        order: order.map(o => [o, mode])
+        order: [literal('`ost`.`status` = \'coming\' DESC'), ...order.map(o => [o, mode])]
       }, db)
     },
     searchAlbumByArtist: async (parent, { name, classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {

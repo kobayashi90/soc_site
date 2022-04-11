@@ -38,9 +38,11 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
         searchAlbum(
           limit: $limit
           page: $page
+          status: ["show","coming"]
         ){
           rows{
             id
+            status
             title
             placeholder
           }

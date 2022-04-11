@@ -24,7 +24,7 @@ query searchAlbum($limit: Int){
     }
   },
 
-  added: searchAlbum(limit: $limit, status: ["show","coming"]){
+  added: searchAlbum(limit: $limit, status: ["show"]){
     rows{
       id
       status
