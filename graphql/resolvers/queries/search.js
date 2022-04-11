@@ -1,9 +1,8 @@
 import { Op } from 'sequelize'
-import info from '@/config/info.json'
 
 const resolvers = {
   Query: {
-    searchAlbum: (parent, { title = '', classes = info.classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
+    searchAlbum: (parent, { title = '', classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
       const titleWords = title.split(' ')
 
       return searchPage({ limit, page, model: 'ost' }, {
@@ -14,17 +13,18 @@ const resolvers = {
           ],
           status: { [Op.in]: status }
         },
-        include: [{ model: db.models.class, where: { name: { [Op.in]: classes } } }],
+        include: classes ? [{ model: db.models.class, where: { name: { [Op.in]: classes } } }] : [],
         order: order.map(o => [o, mode])
       }, db)
     },
-    searchAlbumByArtist: async (parent, { name, classes = info.classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
+    searchAlbumByArtist: async (parent, { name, classes, limit, page = 0, order = ['createdAt'], mode = 'DESC', status = ['show'] }, { db }) => {
+      const include = [{ model: db.models.artist, where: { name: { [Op.like]: `%${name}%` } } }]
+
+      if (classes) include.push({ model: db.models.class, where: { name: { [Op.in]: classes } } })
+
       return searchPage({ limit, page, model: 'ost' }, {
         where: { status: { [Op.in]: status } },
-        include: [
-          { model: db.models.class, where: { name: { [Op.in]: classes } } },
-          { model: db.models.artist, where: { name: { [Op.like]: `%${name}%` } } }
-        ],
+        include,
         order: order.map(o => [o, mode])
       }, db)
     },
