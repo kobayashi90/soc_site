@@ -10,7 +10,7 @@ import { PLACEHOLDER, getImageUrl } from './utils'
 export default function AlbumBox (props) {
   const { id, title, type = 'album', status, height = 300, width = 300, placeholder, style } = props
   const coming = status === 'coming'
-  const blurDataURL = (placeholder === null || !placeholder) ? PLACEHOLDER : placeholder
+  const blurDataURL = placeholder || PLACEHOLDER
 
   const BoxContent = () => (
     <>
