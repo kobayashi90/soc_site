@@ -8,7 +8,8 @@ const model = sequelize => {
     },
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    placeholder: { type: DataTypes.TEXT }
+    placeholder: { type: DataTypes.TEXT },
+    imgId: DataTypes.STRING
   })
 
   sequelize.define('forgor', {

@@ -29,10 +29,10 @@ const streamToString = (stream) => {
   })
 }
 
-async function cropPFP (streamItem, username) {
+async function cropPFP (streamItem, username, imgId) {
   const { createReadStream } = await streamItem
   const pathString = '/var/www/soc_img/img/user'
-  const fullPath = path.join(pathString, `${username}.png`)
+  const fullPath = path.join(pathString, `${username}_${imgId}.png`)
 
   await fs.ensureDir(pathString)
 
@@ -74,8 +74,15 @@ const resolvers = {
 
         const password = generator.generate({ length: 30, numbers: true, upercase: true, strict: true })
         const user = await db.models.user.create({ username, email, password: await bcrypt.hash(password, 10) })
-        if (pfp) user.placeholder = pfp ? await cropPFP(pfp, username) : 'data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAQCdASoEAAQAAUAmJZgCdAEO9p5AAPa//NFYLcn+a7b+3z7ynq/qXv+iG0yH/y1D9eBf9pqWugq9G0RnxmxwsjaA2bW8AAA='
+        if (pfp) {
+          const imgId = Date.now()
+          user.placeholder = await cropPFP(pfp, username, imgId)
+          user.imgId = imgId
+        } else {
+          user.placeholder = 'data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAQCdASoEAAQAAUAmJZgCdAEO9p5AAPa//NFYLcn+a7b+3z7ynq/qXv+iG0yH/y1D9eBf9pqWugq9G0RnxmxwsjaA2bW8AAA='
+        }
 
+        await user.save()
         await createForgor(user, db)
 
         return true
@@ -123,7 +130,11 @@ const resolvers = {
       if (username) user.username = username
       if (email) user.email = email
       if (password) user.password = await bcrypt.hash(password, 10)
-      if (pfp) user.placeholder = await cropPFP(pfp, username)
+      if (pfp) {
+        const imgId = Date.now()
+        user.placeholder = await cropPFP(pfp, username, imgId)
+        user.imgId = imgId
+      }
 
       await user.save()
       return true
