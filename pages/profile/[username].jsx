@@ -75,7 +75,7 @@ export default function Profile (props) {
         <Row className='mt-3'>
           <Col xs='auto' className='blackblock'>
             <div className='p-1 position-relative' style={{ height: '200px', width: '200px' }}>
-              <Image layout='fill' alt={'placeholder'} src={imgUrl} blurDataURL={placeholder} />
+              <Image style={{ borderRadius: '25px' }} layout='fill' alt={'placeholder'} src={imgUrl} blurDataURL={placeholder} />
             </div>
           </Col>
           <Col className='blackblock ms-3 my-0 d-flex justify-content-center flex-column'>
