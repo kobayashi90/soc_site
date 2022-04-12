@@ -131,6 +131,9 @@ const resolvers = {
       if (email) user.email = email
       if (password) user.password = await bcrypt.hash(password, 10)
       if (pfp) {
+        const pathString = '/var/www/soc_img/img/user'
+        await fs.remove(path.join(pathString, `${user.username}_${user.imgId}.png`))
+
         const imgId = Date.now()
         user.placeholder = await cropPFP(pfp, username, imgId)
         user.imgId = imgId
