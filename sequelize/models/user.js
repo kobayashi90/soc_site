@@ -1,4 +1,5 @@
 import { DataTypes } from 'sequelize'
+
 const model = sequelize => {
   const User = sequelize.define('user', {
     username: {
@@ -6,7 +7,8 @@ const model = sequelize => {
       primaryKey: true
     },
     email: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    placeholder: { type: DataTypes.TEXT }
   })
 
   sequelize.define('forgor', {

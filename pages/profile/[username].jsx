@@ -11,12 +11,15 @@ import serialize from 'form-serialize'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import useUser from '@/components/useUser'
+import Head from 'next/head'
 
 const query = gql`
     query ($username: String!) {
       user(username: $username){
         username
         createdAt
+        placeholder
+        imgUrl
         comments {
           text
           album {
@@ -50,7 +53,7 @@ export async function getServerSideProps (context) {
 export default function Profile (props) {
   const { user } = useUser()
   const { userProfile } = props
-  const { comments, favorites } = userProfile
+  const { comments, favorites, imgUrl, placeholder, username } = userProfile
   const albumList = [...favorites]
 
   const [showProfile, setProfile] = useState(false)
@@ -62,20 +65,23 @@ export default function Profile (props) {
 
   return (
     <>
-      {user?.username === userProfile.username && <EditProfile setProfile={setProfile} showProfile={showProfile} />}
+      <Head>
+        <meta key='url' property='og:url' content={`/profile/${username}`} />
+        <meta key='desc' property='og:description' content={`${username}'s awesome cloud`}/>
+        <meta key='image' property='og:image' content={imgUrl} />
+      </Head>
+      {user?.username === username && <EditProfile setProfile={setProfile} showProfile={showProfile} />}
       <Container>
         <Row className='mt-3'>
           <Col xs='auto' className='blackblock'>
             <div className='p-1 position-relative' style={{ height: '200px', width: '200px' }}>
-              <Image
-                layout='fill'
-                alt={'placeholder'} src='/img/assets/clouds.png' />
+              <Image layout='fill' alt={'placeholder'} src={imgUrl} blurDataURL={placeholder} />
             </div>
           </Col>
           <Col className='blackblock ms-3 my-0 d-flex justify-content-center flex-column'>
             <Row>
               <Col md={12}>
-                <h1 className='text-center ost-title'>{userProfile.username}</h1>
+                <h1 className='text-center ost-title'>{username}</h1>
               </Col>
             </Row>
             <Row className='my-1'>
@@ -111,9 +117,9 @@ export default function Profile (props) {
 }
 
 const userMutation = gql`
-mutation updateUser($username: String, $password: String, $email: String){
-  updateUser(username: $username, password: $password, email: $email)
-}
+  mutation updateUser($username: String, $password: String, $email: String, $pfp: Upload){
+    updateUser(username: $username, password: $password, email: $email, pfp: $pfp)
+  }
 `
 
 function EditProfile (props) {
@@ -123,7 +129,9 @@ function EditProfile (props) {
 
   const handleUpdateUser = ev => {
     ev.preventDefault()
+
     const variables = serialize(ev.target, { hash: true })
+    variables.pfp = ev.target.elements.pfp.files[0]
 
     mutateUser({ variables })
       .then(() => {
@@ -157,6 +165,12 @@ function EditProfile (props) {
               <Form.Group as={Col} >
                 <Form.Label htmlFor='password' style={{ color: 'black' }}>Password (empty to keep it unchanged):</Form.Label>
                 <Form.Control type='password' name='password' />
+              </Form.Group>
+            </Row>
+            <Row className='mt-3'>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='pfp' style={{ color: 'black' }}>Profile pic:</Form.Label>
+                <Form.Control type='file' name='pfp' />
               </Form.Group>
             </Row>
             <Row className='mt-4'>

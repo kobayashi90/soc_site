@@ -44,8 +44,8 @@ export default function Header () {
   `
 
   const registerMutation = gql`
-    mutation ($username: String!, $email: String!) {
-      registerUser(username: $username, email: $email)
+    mutation ($username: String!, $email: String!, $pfp: Upload) {
+      registerUser(username: $username, email: $email, pfp: $pfp)
     }
   `
 
@@ -109,7 +109,9 @@ export default function Header () {
   const submitRegister = e => {
     e.persist()
     e.preventDefault()
+
     const variables = serialize(e.target, { hash: true })
+    variables.pfp = e.target.elements.pfp.files[0]
 
     mutateRegister({ variables })
       .then(res => {
@@ -134,6 +136,7 @@ export default function Header () {
   const handleForgor = ev => {
     ev.preventDefault()
     const variables = serialize(ev.target, { hash: true })
+
     mutateForgor({ variables })
       .then(() => {
         setForgorMessage(true)
@@ -204,6 +207,12 @@ export default function Header () {
               <Form.Group as={Col} >
                 <Form.Label htmlFor='email' style={{ color: 'black' }}>Email:</Form.Label>
                 <Form.Control required type='text' name='email' />
+              </Form.Group>
+            </Row>
+            <Row className='mt-3'>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='pfp' style={{ color: 'black' }}>Profile pic:</Form.Label>
+                <Form.Control type='file' name='pfp' />
               </Form.Group>
             </Row>
             <Row className='mt-4'>

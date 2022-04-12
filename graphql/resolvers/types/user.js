@@ -1,4 +1,5 @@
 import pages from '@/config/pages.json'
+import fs from 'fs-extra'
 
 const userResolvable = {
   roles: parent => parent.getRoles(),
@@ -13,7 +14,10 @@ const userResolvable = {
     return pages.filter(({ perms, name }) => name && perms.some(r => permissions.includes(r)))
   },
   comments: (user, _, { db }) => user.getComments(),
-  favorites: user => user.getOsts()
+  favorites: user => user.getOsts(),
+  imgUrl: async user => `https://cdn.sittingonclouds.net/user/${
+    await fs.exists(`/var/www/soc_img/img/user/${user.username}.png`) ? user.username : 'default'
+  }.png`
 }
 
 const funcs = {

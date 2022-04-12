@@ -4,6 +4,8 @@
         permissions: [String]!  
         pages: [Page]!
         createdAt: Float!
+        placeholder: String!
+        imgUrl: String!
     }
 
     type UserMe {
@@ -13,6 +15,8 @@
         permissions: [String]!  
         pages: [Page]!
         createdAt: Float!
+        placeholder: String!
+        imgUrl: String!
     }
 
     type Page {
@@ -38,13 +42,13 @@
     }
 
     type Mutation {
-        registerUser(email: String!, username: String!): Boolean!
+        registerUser(email: String!, username: String!, pfp: Upload): Boolean!
         updateUserRoles(username: String!, roles: [String]!): Boolean!
         deleteUser(username: String!): Int
 
         createForgorLink(key: String!): Boolean!
         updatePass(key: String!, pass:String!): Boolean!
-        updateUser(username: String, password: String, email: String): Boolean!
+        updateUser(username: String, password: String, email: String, pfp: Upload): Boolean!
 
         createRole(name: String!, permissions: [String]!): Role
         updateRole(key:String!, name: String!, permissions: [String]!): Role
