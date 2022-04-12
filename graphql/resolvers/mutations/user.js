@@ -44,8 +44,8 @@ async function cropPFP (streamItem, username, imgId) {
   if (width !== height) {
     sharpImage = sharpImage
       .extract(width > height
-        ? { left: (width - height) / 2, top: 0, width: height, height }
-        : { left: 0, top: (height - width) / 2, width, height: width }
+        ? { left: Math.floor((width - height) / 2), top: 0, width: height, height }
+        : { left: 0, top: Math.floor((height - width) / 2), width, height: width }
       )
   }
 
