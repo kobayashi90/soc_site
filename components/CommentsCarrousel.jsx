@@ -124,7 +124,7 @@ function CommentButtons (props) {
             </Row>
             <Row className='mt-2'>
               <Form.Group as={Col}>
-                <Form.Check type="checkbox" label="Check this to comment anonymously" name='anon' defaultChecked={selfComment ? selfComment.anon : false} />
+                <Form.Check type="checkbox" label="Don't show on profile and hide username" name='anon' defaultChecked={selfComment ? selfComment.anon : false} />
               </Form.Group>
             </Row>
             <Row className='mt-2'>
