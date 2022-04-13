@@ -45,7 +45,10 @@ export default function CommentCarrousel (props) {
               <Col className='py-3' style={{ fontSize: '18px' }}>
                 {current.text}
                 <br />
-                <div className='mt-2'>{current.album ? <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span> : (current.username ? ` - ${current.username}` : '')}</div>
+                <div className='mt-2'>
+                  {current.album && <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span>}
+                  {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`}><a className={styles.albumSpan}>{current.username}</a></Link></span>}
+                </div>
               </Col>
               <SideButton side='right' onClick={plusIndex} />
             </Row>
