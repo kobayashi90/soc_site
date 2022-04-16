@@ -273,7 +273,7 @@ export default function Header () {
                     <Link href={`/profile/${user.username}`}><a><Button variant="primary">{t.Profile}</Button></a></Link>
                   )
                   : (
-                    <Button onClick={() => setRegister(true)} className='me-0' variant="primary">Register</Button>
+                    <Button onClick={() => setRegister(true)} className='me-0' variant="primary">{t.Register}</Button>
                   )}
               </Col>
 
