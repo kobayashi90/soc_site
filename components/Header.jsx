@@ -15,8 +15,27 @@ import useUser from './useUser'
 import { ButtonLoader } from './Loader'
 import SubmitButton from './SubmitButton'
 import logo from '../public/img/assets/logo.png'
+import logoES from '../public/img/assets/logo_es.png'
+import useTranslation from './useTranslation'
+
+function LangSelector () {
+  const router = useRouter()
+  const handleLocaleChange = event => router.push(router.route, router.asPath, { locale: event.target.value })
+
+  return (
+    <Col xs='auto' className={classNames(styles.login, styles.blueBullet, 'ms-sm-auto mb-sm-5 py-2')}>
+      <select onChange={handleLocaleChange} value={router.locale}>
+        <option value="en">🇺🇸 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+      </select>
+    </Col>
+  )
+}
 
 export default function Header () {
+  const t = useTranslation()
+  const router = useRouter()
   const { user, refetch } = useUser()
   const client = useApolloClient()
   const loginQuery = gql`
@@ -242,14 +261,16 @@ export default function Header () {
             <Row className='h-100'>
               <Col className='my-auto'>
                 <Link href="/">
-                  <a><Image alt='SOC Logo' src={logo} height={150} width={265} /></a>
+                  <a><Image alt='SOC Logo' src={router.locale === 'es' ? logoES : logo} height={150} width={265} /></a>
                 </Link>
               </Col>
+
+              <LangSelector />
 
               <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
                 {user
                   ? (
-                    <Link href={`/profile/${user.username}`}><a><Button variant="primary">Profile</Button></a></Link>
+                    <Link href={`/profile/${user.username}`}><a><Button variant="primary">{t.Profile}</Button></a></Link>
                   )
                   : (
                     <Button onClick={() => setRegister(true)} className='me-0' variant="primary">Register</Button>
@@ -257,7 +278,7 @@ export default function Header () {
               </Col>
 
               <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
-                <Button onClick={handleLogin} variant="primary">{user ? 'Logout' : 'Login'}</Button>
+                <Button onClick={handleLogin} variant="primary">{t[user ? 'Logout' : 'Login']}</Button>
               </Col>
             </Row>
           </Container>
@@ -277,17 +298,17 @@ export default function Header () {
                   )}
                 <NavLink onClick={handleLogin} name={user ? 'Logout' : 'Login'} className='d-block d-sm-none' />
                 <NavLink href='/' name='Home' />
-                <NavLink href='/last-added' name='Last Added' />
+                <NavLink href='/last-added' name='Last Added_header' />
                 <NavLink href='/album/list' name='Album List' />
                 <Dropdown name='Games' items={[
-                  { name: 'Game Releases', href: '/game' },
-                  { name: 'Game Series', href: '/series/list' },
-                  { name: 'Game Publishers', href: '/publisher/list' },
-                  { name: 'Game Platforms', href: '/platform/list' },
+                  { name: 'Albums', href: '/game' },
+                  { name: 'Series', href: '/series/list' },
+                  { name: 'Publishers', href: '/publisher/list' },
+                  { name: 'Platforms', href: '/platform/list' },
                   { name: 'Game List', href: '/game/list' }
                 ]} />
-                <Dropdown name='Animations' items={[
-                  { name: 'Animation Releases', href: '/anim' },
+                <Dropdown name='Animation' items={[
+                  { name: 'Albums', href: '/anim' },
                   { name: 'Animation List', href: '/anim/list' },
                   { name: 'Studios', href: '/studio/list' }
                 ]} />
@@ -304,11 +325,13 @@ export default function Header () {
 }
 
 function Dropdown ({ name, items = [] }) {
+  const t = useTranslation()
+
   return (
-    <NavDropdown title={name} className={classNames(styles.navLink, styles.dropMenu)}>
+    <NavDropdown title={t[name]} className={classNames(styles.navLink, styles.dropMenu)}>
       {items.map(({ href, name }, i) => (
         <Link key={i} href={href} passHref>
-          <NavDropdown.Item>{name}</NavDropdown.Item>
+          <NavDropdown.Item>{t[name]}</NavDropdown.Item>
         </Link>
       ))}
     </NavDropdown>
@@ -317,12 +340,13 @@ function Dropdown ({ name, items = [] }) {
 
 function NavLink (props) {
   const { href, name, onClick, className } = props
+  const t = useTranslation()
 
   return onClick
-    ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{name}</a>
+    ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{t[name]}</a>
     : (
       <Link href={href} passHref>
-        <Nav.Link className={classNames(styles.navLink, className)}>{name}</Nav.Link>
+        <Nav.Link className={classNames(styles.navLink, className)}>{t[name]}</Nav.Link>
       </Link>
     )
 }

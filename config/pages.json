@@ -1,7 +1,7 @@
 [
     {
         "url": "/admin/1",
-        "name": "OST Admin",
+        "name": "Album Admin",
         "perms": ["UPDATE"]
     },
     {
