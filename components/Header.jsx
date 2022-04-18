@@ -33,11 +33,57 @@ function LangSelector () {
   )
 }
 
-export default function Header () {
-  const t = useTranslation()
-  const router = useRouter()
-  const { user, refetch } = useUser()
-  const client = useApolloClient()
+function ForgorForm (props) {
+  const { defaultValue = false } = props
+  const forgorMutation = gql`
+    mutation createForgorLink($key: String!){
+      createForgorLink(key: $key)
+    }
+  `
+  const [mutateForgor, { loading: loadingForgor }] = useMutation(forgorMutation)
+  const [showForgorMessage, setForgorMessage] = useState(defaultValue)
+
+  const handleForgor = ev => {
+    ev.preventDefault()
+    const variables = serialize(ev.target, { hash: true })
+
+    mutateForgor({ variables })
+      .then(() => {
+        setForgorMessage(true)
+      })
+      .catch(err => {
+        if (process.env.NODE_ENV === 'development') console.log(err)
+        toast.error('Failed to recover password')
+      })
+  }
+
+  return showForgorMessage
+    ? (
+      <Row>
+        <Col style={{ color: 'black' }}>
+          An email has been sent to the address linked to the account. Check your spam folder
+        </Col>
+      </Row>
+    )
+    : (
+      <Form onSubmit={handleForgor}>
+        <Row>
+          <Form.Group as={Col} >
+            <Form.Label htmlFor='username' style={{ color: 'black' }}>Username or email:</Form.Label>
+            <Form.Control required type='text' name='key' />
+          </Form.Group>
+        </Row>
+        <Row className='mt-4'>
+          <Col md={6} className='mx-auto'>
+            <ButtonLoader loading={loadingForgor} type='submit' className='w-100' color='primary' text='Recover password' />
+          </Col>
+        </Row>
+      </Form>
+    )
+}
+
+function LoginButton (props) {
+  const { navMobile = false } = props
   const loginQuery = gql`
     query Login($username: String!, $password: String!){
       login(username: $username, password: $password)
@@ -48,44 +94,18 @@ export default function Header () {
       logout
     }
   `
-  const forgorMutation = gql`
-    mutation createForgorLink($key: String!){
-      createForgorLink(key: $key)
-    }
-  `
 
-  const queryHeader = gql`
-    query {
-      config(name: "banner"){
-        value
-      }
-    }
-  `
-
-  const registerMutation = gql`
-    mutation ($username: String!, $email: String!, $pfp: Upload) {
-      registerUser(username: $username, email: $email, pfp: $pfp)
-    }
-  `
-
-  const [mutateForgor, { loading: loadingForgor }] = useMutation(forgorMutation)
-  const [mutateRegister, { loading: loadingRegister }] = useMutation(registerMutation)
-
+  const { user, refetch } = useUser()
+  const client = useApolloClient()
   const [queryLogin, { loading: loadingLogin }] = useLazyQuery(loginQuery)
-  const { data: headerData } = useQuery(queryHeader)
 
-  const [show, setShow] = useState(false)
-  const [showRegister, setRegister] = useState(false)
   const [showForgor, setForgor] = useState(false)
-  const [showForgorMessage, setForgorMessage] = useState(false)
+  const [show, setShow] = useState(false)
+  const t = useTranslation()
 
   useEffect(() => {
-    if (showForgor) setShow(false)
-  }, [showForgor])
-
-  useEffect(() => {
-    if (showForgorMessage) setForgor(false)
-  }, [showForgorMessage])
+    if (!show) setForgor(false)
+  }, [show])
 
   const handleLogin = async () => {
     if (user) {
@@ -125,6 +145,65 @@ export default function Header () {
       .catch(error => console.error('An unexpected error happened:', error))
   }
 
+  if (navMobile) {
+    return <NavLink onClick={handleLogin} name={user ? 'Logout' : 'Login'} className='d-block d-sm-none' />
+  }
+
+  return (
+    <>
+      <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
+        <Button onClick={handleLogin} variant="primary">{t[user ? 'Logout' : 'Login']}</Button>
+      </Col>
+      <Modal show={show} centered onHide={() => setShow(false)}>
+        <Modal.Body className='m-3'>
+          {showForgor
+            ? <ForgorForm />
+            : (
+              <Form onSubmit={submit}>
+                <Row>
+                  <Form.Group as={Col} >
+                    <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
+                    <Form.Control required type='text' name='username' />
+                  </Form.Group>
+
+                  <Form.Group as={Col} >
+                    <Form.Label htmlFor='password' style={{ color: 'black' }}>Password:</Form.Label>
+                    <Form.Control required type='password' name='password' />
+                  </Form.Group>
+                </Row>
+                <Row className='mt-4'>
+                  <Col md={4} className='mx-auto'>
+                    <SubmitButton loading={loadingLogin} type='submit' className='w-100' color='primary'>Login</SubmitButton>
+                  </Col>
+                </Row>
+                <Row className='mt-2'>
+                  <Col md={6} className='mx-auto'>
+                    <Button onClick={() => setForgor(true)} className='w-100' color='primary'>Recover password</Button>
+                  </Col>
+                </Row>
+              </Form>
+            )
+          }
+        </Modal.Body>
+      </Modal>
+    </>
+  )
+}
+
+function RegisterProfileButton (props) {
+  const { navMobile = false } = props
+  const registerMutation = gql`
+    mutation ($username: String!, $email: String!, $pfp: Upload) {
+      registerUser(username: $username, email: $email, pfp: $pfp)
+    }
+  `
+
+  const { user } = useUser()
+  const [showRegister, setRegister] = useState(false)
+  const [showForgor, setForgor] = useState(false)
+  const t = useTranslation()
+  const [mutateRegister, { loading: loadingRegister }] = useMutation(registerMutation)
+
   const submitRegister = e => {
     e.persist()
     e.preventDefault()
@@ -135,7 +214,7 @@ export default function Header () {
     mutateRegister({ variables })
       .then(res => {
         setRegister(false)
-        setForgorMessage(true)
+        setForgor(true)
       })
       .catch(error => {
         const { graphQLErrors } = error
@@ -152,109 +231,86 @@ export default function Header () {
       })
   }
 
-  const handleForgor = ev => {
-    ev.preventDefault()
-    const variables = serialize(ev.target, { hash: true })
+  useEffect(() => {
+    if (!showRegister) setForgor(false)
+  }, [showRegister])
 
-    mutateForgor({ variables })
-      .then(() => {
-        setForgorMessage(true)
-      })
-      .catch(err => {
-        if (process.env.NODE_ENV === 'development') console.log(err)
-        toast.error('Failed to recover password')
-      })
+  if (navMobile) {
+    return (
+      user
+        ? (
+          <NavLink href={`/profile/${user.username}`} name='Profile' className='d-block d-sm-none' />
+        )
+        : (
+          <NavLink onClick={() => setRegister(true)} name='Register' className='d-block d-sm-none' />
+        )
+    )
   }
 
   return (
     <>
-      <Modal show={show} centered onHide={() => setShow(false)}>
-        <Modal.Body className='m-3'>
-          <Form onSubmit={submit}>
-            <Row>
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
-                <Form.Control required type='text' name='username' />
-              </Form.Group>
-
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='password' style={{ color: 'black' }}>Password:</Form.Label>
-                <Form.Control required type='password' name='password' />
-              </Form.Group>
-            </Row>
-            <Row className='mt-4'>
-              <Col md={4} className='mx-auto'>
-                <SubmitButton loading={loadingLogin} type='submit' className='w-100' color='primary'>Login</SubmitButton>
-              </Col>
-            </Row>
-            <Row className='mt-2'>
-              <Col md={6} className='mx-auto'>
-                <Button onClick={() => setForgor(true)} className='w-100' color='primary'>Recover password</Button>
-              </Col>
-            </Row>
-          </Form>
-        </Modal.Body>
-      </Modal>
-
-      <Modal show={showForgor} centered onHide={() => setForgor(false)}>
-        <Modal.Body className='m-3'>
-          <Form onSubmit={handleForgor}>
-            <Row>
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='username' style={{ color: 'black' }}>Username or email:</Form.Label>
-                <Form.Control required type='text' name='key' />
-              </Form.Group>
-            </Row>
-            <Row className='mt-4'>
-              <Col md={6} className='mx-auto'>
-                <ButtonLoader loading={loadingForgor} type='submit' className='w-100' color='primary' text='Recover password' />
-              </Col>
-            </Row>
-          </Form>
-        </Modal.Body>
-      </Modal>
-
+      <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
+        {user
+          ? (
+            <Link href={`/profile/${user.username}`}><a><Button variant="primary">{t.Profile}</Button></a></Link>
+          )
+          : (
+            <Button onClick={() => setRegister(true)} className='me-0' variant="primary">{t.Register}</Button>
+          )}
+      </Col>
       <Modal show={showRegister} centered onHide={() => setRegister(false)}>
         <Modal.Body className='m-3'>
-          <Form onSubmit={submitRegister}>
-            <Row>
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
-                <Form.Control required type='text' name='username' />
-              </Form.Group>
+          {showForgor
+            ? <ForgorForm defaultValue={true} />
+            : (
+              <Form onSubmit={submitRegister}>
+                <Row>
+                  <Form.Group as={Col} >
+                    <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
+                    <Form.Control required type='text' name='username' />
+                  </Form.Group>
 
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='email' style={{ color: 'black' }}>Email:</Form.Label>
-                <Form.Control required type='text' name='email' />
-              </Form.Group>
-            </Row>
-            <Row className='mt-3'>
-              <Form.Group as={Col} >
-                <Form.Label htmlFor='pfp' style={{ color: 'black' }}>Profile pic:</Form.Label>
-                <Form.Control type='file' name='pfp' />
-              </Form.Group>
-            </Row>
-            <Row className='mt-4'>
-              <Col md={4} className='mx-auto'>
-                <SubmitButton loading={loadingRegister} type='submit' className='w-100' color='primary'>Register</SubmitButton>
-              </Col>
-            </Row>
-          </Form>
+                  <Form.Group as={Col} >
+                    <Form.Label htmlFor='email' style={{ color: 'black' }}>Email:</Form.Label>
+                    <Form.Control required type='text' name='email' />
+                  </Form.Group>
+                </Row>
+                <Row className='mt-3'>
+                  <Form.Group as={Col} >
+                    <Form.Label htmlFor='pfp' style={{ color: 'black' }}>Profile pic:</Form.Label>
+                    <Form.Control type='file' name='pfp' />
+                  </Form.Group>
+                </Row>
+                <Row className='mt-4'>
+                  <Col md={4} className='mx-auto'>
+                    <SubmitButton loading={loadingRegister} type='submit' className='w-100' color='primary'>Register</SubmitButton>
+                  </Col>
+                </Row>
+              </Form>
+            )
+          }
         </Modal.Body>
       </Modal>
+    </>
+  )
+}
 
-      <Modal show={showForgorMessage} centered onHide={() => setForgorMessage(false)}>
-        <Modal.Body className='m-3'>
-          <Form onSubmit={submit}>
-            <Row>
-              <Form.Group as={Col} >
-                <Form.Label style={{ color: 'black' }}>An email has been sent to the address linked to the account. Check your spam folder</Form.Label>
-              </Form.Group>
-            </Row>
-          </Form>
-        </Modal.Body>
-      </Modal>
+export default function Header () {
+  const router = useRouter()
+  const { user } = useUser()
 
+  const queryHeader = gql`
+    query {
+      config(name: "banner"){
+        value
+      }
+    }
+  `
+
+  const { data: headerData } = useQuery(queryHeader)
+
+  return (
+    <>
       <header>
         <div id={styles.bannerBg} style={headerData ? { backgroundImage: `url('/_next/image?w=3840&q=100&url=${`https://cdn.sittingonclouds.net/live/${headerData.config.value}.png`}` } : {}}>
           <Container>
@@ -266,20 +322,8 @@ export default function Header () {
               </Col>
 
               <LangSelector />
-
-              <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
-                {user
-                  ? (
-                    <Link href={`/profile/${user.username}`}><a><Button variant="primary">{t.Profile}</Button></a></Link>
-                  )
-                  : (
-                    <Button onClick={() => setRegister(true)} className='me-0' variant="primary">{t.Register}</Button>
-                  )}
-              </Col>
-
-              <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
-                <Button onClick={handleLogin} variant="primary">{t[user ? 'Logout' : 'Login']}</Button>
-              </Col>
+              <RegisterProfileButton />
+              <LoginButton />
             </Row>
           </Container>
         </div>
@@ -289,14 +333,8 @@ export default function Header () {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto d-flex align-items-center">
-                {user
-                  ? (
-                    <NavLink href={`/profile/${user.username}`} name='Profile' className='d-block d-sm-none' />
-                  )
-                  : (
-                    <NavLink onClick={() => setRegister(true)} name='Register' className='d-block d-sm-none' />
-                  )}
-                <NavLink onClick={handleLogin} name={user ? 'Logout' : 'Login'} className='d-block d-sm-none' />
+                <RegisterProfileButton navMobile />
+                <LoginButton navMobile />
                 <NavLink href='/' name='Home' />
                 <NavLink href='/last-added' name='Last Added_header' />
                 <NavLink href='/album/list' name='Album List' />
