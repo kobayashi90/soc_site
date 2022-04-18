@@ -1,16 +1,21 @@
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { LocaleContext } from 'pages/_app'
+import { useContext } from 'react'
 
-import bundle from '@/locales/index.json'
-
-export default function useTranslation (ns = ['common']) {
-  const router = useRouter()
-  const { locale } = router
-  const [t, setT] = useState({})
-
-  useEffect(() => {
-    setT(bundle[locale].common)
-  }, [locale])
+export default function useTranslation () {
+  const locales = useContext(LocaleContext)
+  const t = key => locales[key] || key
 
   return t
+}
+
+export async function getTranslation (locale = 'en', ns = []) {
+  let tl = {}
+  const keys = ['common', ...ns]
+  const bundle = await import(`../locales/${locale}.json`)
+
+  keys.forEach(key => {
+    tl = { ...tl, ...bundle[key] }
+  })
+
+  return tl
 }

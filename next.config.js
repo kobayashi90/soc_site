@@ -26,10 +26,10 @@ module.exports = {
       }
     ]
   },
-  swcMinify: true
-  /* i18n: {
+  swcMinify: true,
+  i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'de'],
     localeDetection: false
-  } */
+  }
 }

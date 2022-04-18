@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { initializeApollo } from '@/lib/ApolloClient'
-// import useTranslation from '@/components/useTranslation'
+import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const colProps = { xs: 6, md: 3 }
 const limit = 12
@@ -36,11 +36,13 @@ query searchAlbum($limit: Int){
 }
 `
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function /* getStaticProps */ getServerSideProps (context) {
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { limit } })
 
-  return { props: { ...data }/*, revalidate: 60 */ }
+  const localeStrings = await getTranslation(context.locale)
+
+  return { props: { ...data, localeStrings }/*, revalidate: 60 */ }
 }
 
 const BlackButton = ({ href, name }) => (
@@ -50,14 +52,14 @@ const BlackButton = ({ href, name }) => (
 )
 
 export default function Home ({ added, released }) {
-  // const t = useTranslation()
+  const t = useTranslation()
 
   return (
     <Row className='h-100'>
       <Col className='p-3 mx-3'>
         <Row>
           <Col>
-            <h1 className='text-center text-uppercase homeTitle p-3' id='last-releases'>{/* t[ */'Last Releases'/* ] */}</h1>
+            <h1 className='text-center text-uppercase homeTitle p-3' id='last-releases'>{t('Last Releases')}</h1>
           </Col>
         </Row>
         <Row className='justify-content-center'>
@@ -65,16 +67,16 @@ export default function Home ({ added, released }) {
         </Row>
         <Row>
           <Col md={6} className='mt-3 flex-grow-1'>
-            <BlackButton href='/game' name={/* t[ */'More game releases'/* ] */} />
+            <BlackButton href='/game' name={t('More game releases')} />
           </Col>
           <Col md={6} className='mt-3  flex-grow-1'>
-            <BlackButton href='/anim' name={/* t[ */'More animation releases'/* ] */} />
+            <BlackButton href='/anim' name={t('More animation releases')} />
           </Col>
         </Row>
         <hr />
         <Row>
           <Col>
-            <h1 className='text-center text-uppercase homeTitle p-3' id='last-added'>{/* t[ */'Last Added'/* ] */}</h1>
+            <h1 className='text-center text-uppercase homeTitle p-3' id='last-added'>{t('Last Added')}</h1>
           </Col>
         </Row>
 
@@ -84,7 +86,7 @@ export default function Home ({ added, released }) {
         <Row className='mt-3'>
           <Col md={12}>
             <Link href="/last-added">
-              <a><h1 className='text-center blackButton'>{/* t[ */'More last added'/* ] */}</h1></a>
+              <a><h1 className='text-center blackButton'>{t('More last added')}</h1></a>
             </Link>
           </Col>
         </Row>

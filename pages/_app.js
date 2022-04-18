@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Head from 'next/head'
 import { Container } from 'react-bootstrap'
 import { ToastContainer } from 'react-toastify'
-import { useEffect, useRef } from 'react'
+import { createContext, useEffect, useRef } from 'react'
 import { ApolloProvider } from '@apollo/client'
 import SSRProvider from 'react-bootstrap/SSRProvider'
 import { useRouter } from 'next/router'
@@ -19,21 +19,13 @@ import ReactGA from 'react-ga'
 import { Settings } from 'luxon'
 // import Script from 'next/script'
 
-import { initializeApollo, useApollo } from '@/lib/ApolloClient'
+import { useApollo } from '@/lib/ApolloClient'
 import useUser from '@/components/useUser'
 import { skipAds } from '@/components/utils'
 import Header from '@/components/Header'
 // import SpookyGhosts from '../components/SpookyGhosts'
 
 Settings.defaultLocale = 'en-US'
-
-export async function getStaticProps () {
-  const client = initializeApollo()
-
-  return {
-    props: { initialApollo: client.cache.extract() }
-  }
-}
 
 function Analytics () {
   const router = useRouter()
@@ -66,11 +58,15 @@ function Analytics () {
   return null
 }
 
-export default function MyApp ({ Component, pageProps }) {
-  const client = useApollo(pageProps.initialApollo)
+export const LocaleContext = createContext()
+
+export default function MyApp (context) {
+  const { Component, pageProps } = context
+  const { localeStrings = {} } = pageProps
+  const client = useApollo()
 
   return (
-    <>
+    <LocaleContext.Provider value={localeStrings}>
       <Head>
         <title>Sitting on Clouds</title>
         <meta property="og:type" content="website" />
@@ -94,7 +90,7 @@ export default function MyApp ({ Component, pageProps }) {
           <FooterAd />
         </SSRProvider>
       </ApolloProvider>
-    </>
+    </LocaleContext.Provider>
   )
 }
 
