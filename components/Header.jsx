@@ -28,6 +28,9 @@ function LangSelector () {
         <option value="en">🇺🇸 English</option>
         <option value="es">🇪🇸 Español</option>
         <option value="de">🇩🇪 Deutsch</option>
+        <option value="pt-pt">🇵🇹 Português</option>
+        {/* <option value="pt-br">🇧🇷 Português</option> */}
+        <option value="it">🇮🇹 Italiano</option>
       </select>
     </Col>
   )
