@@ -2,8 +2,6 @@ import { gql, useMutation } from '@apollo/client'
 import { Container, Col, Row, Modal, Form, Button } from 'react-bootstrap'
 import { DateTime } from 'luxon'
 import Image from 'next/image'
-import AvatarEditor from 'react-avatar-editor'
-import Dropzone from 'react-dropzone'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { initializeApollo } from '@/lib/ApolloClient'
@@ -126,8 +124,6 @@ const userMutation = gql`
 
 function EditProfile (props) {
   const { showProfile, setProfile } = props
-
-  const [image, setImage] = useState()
   const { user, refetch } = useUser()
   const [mutateUser, { loading: loadingUser }] = useMutation(userMutation)
 
@@ -149,50 +145,27 @@ function EditProfile (props) {
       })
   }
 
-  const handleDrop = dropped => setImage(dropped[0])
-
   return (
     <>
       <Modal show={showProfile} centered onHide={() => setProfile(false)}>
-        <Modal.Body className='m-3' >
+        <Modal.Body className='m-3'>
           <Form onSubmit={handleUpdateUser}>
             <Row>
-              <Col>
-                <Dropzone
-                  onDrop={handleDrop}
-                  noClick
-                  noKeyboard
-                  style={{ width: '200px', height: '200px' }}
-                >
-                  {({ getRootProps, getInputProps }) => (
-                    <div {...getRootProps()}>
-                      <AvatarEditor width={200} height={200} image={image} scale={1.2} />
-                      <input {...getInputProps()} />
-                    </div>
-                  )}
-                </Dropzone>
-              </Col>
-              <Col>
-                <Row>
-                  <Form.Group as={Col} >
-                    <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
-                    <Form.Control type='text' name='username' defaultValue={user?.username} />
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group as={Col} >
-                    <Form.Label htmlFor='email' style={{ color: 'black' }}>Email:</Form.Label>
-                    <Form.Control type='text' name='email' defaultValue={user?.email} />
-                  </Form.Group>
-                </Row>
-                <Row className='mt-3'>
-                  <Form.Group as={Col} >
-                    <Form.Label htmlFor='password' style={{ color: 'black' }}>Password (empty to keep it unchanged):</Form.Label>
-                    <Form.Control type='password' name='password' />
-                  </Form.Group>
-                </Row>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
+                <Form.Control type='text' name='username' defaultValue={user?.username} />
+              </Form.Group>
 
-              </Col>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='email' style={{ color: 'black' }}>Email:</Form.Label>
+                <Form.Control type='text' name='email' defaultValue={user?.email} />
+              </Form.Group>
+            </Row>
+            <Row className='mt-3'>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='password' style={{ color: 'black' }}>Password (empty to keep it unchanged):</Form.Label>
+                <Form.Control type='password' name='password' />
+              </Form.Group>
             </Row>
             <Row className='mt-3'>
               <Form.Group as={Col} >
