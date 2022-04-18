@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Cancel running workflows
-        uses: everphone-gmbh/cancel-previous-workflows@v5
+        uses: everphone-gmbh/cancel-previous-workflows@master
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
