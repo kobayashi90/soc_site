@@ -15,9 +15,9 @@ jobs:
 
     steps:
       - name: Cancel running workflows
-          uses: everphone-gmbh/cancel-previous-workflows@v5
-          env:
-            GITHUB_TOKEN: ${{ github.token }}
+        uses: everphone-gmbh/cancel-previous-workflows@v5
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - uses: actions/checkout@v2
         with:
