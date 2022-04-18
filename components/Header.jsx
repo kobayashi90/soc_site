@@ -107,7 +107,7 @@ function LoginButton (props) {
     if (!show) setForgor(false)
   }, [show])
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     if (user) {
       client.query({ query: logoutQuery })
         .then(() => {
@@ -118,7 +118,7 @@ function LoginButton (props) {
     } else setShow(true)
   }
 
-  const submit = async e => {
+  const submit = e => {
     e.persist()
     e.preventDefault()
     const variables = serialize(e.target, { hash: true })
