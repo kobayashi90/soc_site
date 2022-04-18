@@ -16,9 +16,9 @@ import { ButtonLoader } from './Loader'
 import SubmitButton from './SubmitButton'
 import logo from '../public/img/assets/logo.png'
 import logoES from '../public/img/assets/logo_es.png'
-import useTranslation from './useTranslation'
+// import useTranslation from './useTranslation'
 
-function LangSelector () {
+/* function LangSelector () {
   const router = useRouter()
   const handleLocaleChange = event => router.push(router.route, router.asPath, { locale: event.target.value })
 
@@ -31,7 +31,7 @@ function LangSelector () {
       </select>
     </Col>
   )
-}
+} */
 
 function ForgorForm (props) {
   const { defaultValue = false } = props
@@ -101,7 +101,7 @@ function LoginButton (props) {
 
   const [showForgor, setForgor] = useState(false)
   const [show, setShow] = useState(false)
-  const t = useTranslation()
+  // const t = useTranslation()
 
   useEffect(() => {
     if (!show) setForgor(false)
@@ -152,7 +152,7 @@ function LoginButton (props) {
   return (
     <>
       <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
-        <Button onClick={handleLogin} variant="primary">{t[user ? 'Logout' : 'Login']}</Button>
+        <Button onClick={handleLogin} variant="primary">{/* t[ */user ? 'Logout' : 'Login'/* ] */}</Button>
       </Col>
       <Modal show={show} centered onHide={() => setShow(false)}>
         <Modal.Body className='m-3'>
@@ -201,7 +201,7 @@ function RegisterProfileButton (props) {
   const { user } = useUser()
   const [showRegister, setRegister] = useState(false)
   const [showForgor, setForgor] = useState(false)
-  const t = useTranslation()
+  // const t = useTranslation()
   const [mutateRegister, { loading: loadingRegister }] = useMutation(registerMutation)
 
   const submitRegister = e => {
@@ -252,10 +252,10 @@ function RegisterProfileButton (props) {
       <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
         {user
           ? (
-            <Link href={`/profile/${user.username}`}><a><Button variant="primary">{t.Profile}</Button></a></Link>
+            <Link href={`/profile/${user.username}`}><a><Button variant="primary">{/* t. */'Profile'}</Button></a></Link>
           )
           : (
-            <Button onClick={() => setRegister(true)} className='me-0' variant="primary">{t.Register}</Button>
+            <Button onClick={() => setRegister(true)} className='me-0' variant="primary">{/* t. */'Register'}</Button>
           )}
       </Col>
       <Modal show={showRegister} centered onHide={() => setRegister(false)}>
@@ -321,7 +321,7 @@ export default function Header () {
                 </Link>
               </Col>
 
-              <LangSelector />
+              {/* <LangSelector /> */}
               <RegisterProfileButton />
               <LoginButton />
             </Row>
@@ -363,13 +363,14 @@ export default function Header () {
 }
 
 function Dropdown ({ name, items = [] }) {
-  const t = useTranslation()
+  // const t = useTranslation()
+  const title = /* t[ */'name'/* ] */
 
   return (
-    <NavDropdown title={t[name]} className={classNames(styles.navLink, styles.dropMenu)}>
+    <NavDropdown title={title} className={classNames(styles.navLink, styles.dropMenu)}>
       {items.map(({ href, name }, i) => (
         <Link key={i} href={href} passHref>
-          <NavDropdown.Item>{t[name]}</NavDropdown.Item>
+          <NavDropdown.Item>{title}</NavDropdown.Item>
         </Link>
       ))}
     </NavDropdown>
@@ -377,14 +378,15 @@ function Dropdown ({ name, items = [] }) {
 }
 
 function NavLink (props) {
-  const { href, name, onClick, className } = props
-  const t = useTranslation()
+  const { href, /* name, */ onClick, className } = props
+  // const t = useTranslation()
+  const title = /* t[ */'name'/* ] */
 
   return onClick
-    ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{t[name]}</a>
+    ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{title}</a>
     : (
       <Link href={href} passHref>
-        <Nav.Link className={classNames(styles.navLink, className)}>{t[name]}</Nav.Link>
+        <Nav.Link className={classNames(styles.navLink, className)}>{title}</Nav.Link>
       </Link>
     )
 }

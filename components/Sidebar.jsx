@@ -12,7 +12,7 @@ import { skipAds } from './utils'
 import { useQuery } from '@apollo/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import useTranslation from './useTranslation'
+// import useTranslation from './useTranslation'
 
 function GetLucky () {
   const query = gql`
@@ -37,14 +37,14 @@ function GetLucky () {
 }
 
 export default function Sidebar ({ radio = false, index = false }) {
-  const t = useTranslation()
+  // const t = useTranslation()
 
   return (
     <Col md={3} className={classNames(styles.root, 'p-3 ml-md-auto d-flex flex-column col-md-3')}>
       {index && (
         <>
           <Row className='side-menu'>
-            <h1 className='mx-auto text-center my-2'><a href='#last-added'>{t['Last Added_header']}</a></h1>
+            <h1 className='mx-auto text-center my-2'><a href='#last-added'>{/* t[ */'Last Added_header'/* ] */}</a></h1>
           </Row>
         </>
       )}
@@ -101,7 +101,7 @@ export default function Sidebar ({ radio = false, index = false }) {
 }
 
 function AlbumCount () {
-  const t = useTranslation()
+  // const t = useTranslation()
   const query = gql`query {
     albumCount
     classes{
@@ -116,8 +116,8 @@ function AlbumCount () {
       {loading && <Loader className='mx-auto' size={100} />}
       {data && (
         <>
-          <h5 className='text-center text-uppercase' style={{ fontWeight: 700 }}>{t['Soundtrack Count']}: {data.albumCount}</h5>
-          {data.classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{t[`${name} Soundtracks`]}: {count}</h6>)}
+          <h5 className='text-center text-uppercase' style={{ fontWeight: 700 }}>{/* t[ */'Soundtrack Count'/* ] */}: {data.albumCount}</h5>
+          {data.classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{/* t[ */`${name} Soundtracks`/* ] */}: {count}</h6>)}
         </>
       )}
     </div>
@@ -125,7 +125,7 @@ function AlbumCount () {
 }
 
 function Highlight () {
-  const t = useTranslation()
+  // const t = useTranslation()
   const query = gql`query {
     highlight{
       id
@@ -141,7 +141,7 @@ function Highlight () {
       {loading && <Loader className='mx-auto' size={100} />}
       {id && (
         <>
-          <h4 className='text-center text-uppercase py-1' style={{ fontWeight: 700 }}>{t['Highlight Soundtrack']}</h4>
+          <h4 className='text-center text-uppercase py-1' style={{ fontWeight: 700 }}>{/* t[ */'Highlight Soundtrack'/* ] */}</h4>
           <AlbumBox id={id} title={title} placeholder={placeholder} xs={12} style={{ height: 'auto' }} />
         </>
       )}
