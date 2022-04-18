@@ -364,7 +364,7 @@ export default function Header () {
 
 function Dropdown ({ name, items = [] }) {
   // const t = useTranslation()
-  const title = /* t[ */'name'/* ] */
+  const title = /* t[ */name/* ] */
 
   return (
     <NavDropdown title={title} className={classNames(styles.navLink, styles.dropMenu)}>
@@ -378,9 +378,9 @@ function Dropdown ({ name, items = [] }) {
 }
 
 function NavLink (props) {
-  const { href, /* name, */ onClick, className } = props
+  const { href, name, onClick, className } = props
   // const t = useTranslation()
-  const title = /* t[ */'name'/* ] */
+  const title = /* t[ */name/* ] */
 
   return onClick
     ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{title}</a>
