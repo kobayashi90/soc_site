@@ -22,7 +22,7 @@ const categories = {
     type: 'album'
   },
   byArtist: {
-    query: 'searchAlbumByArtist(name: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate } }',
+    query: 'searchAlbumByArtist(name: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
     title: 'Albums (by artists)',
     subTitle: ({ classes, releaseDate }) => `${classes.map(c => c.name).join(' / ')} Album - ${releaseDate}`,
     type: 'album'
