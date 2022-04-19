@@ -10,54 +10,57 @@ import styles from '../styles/Search.module.scss'
 import { getImageUrl } from '../components/utils'
 import Loader from '../components/Loader'
 import { useEffect, useState } from 'react'
+import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const limit = 30
 const queryHeader = 'query Search($title: String!, $limit: Int!, $page: Int!)'
 
-const categories = {
-  byTitle: {
-    query: 'searchAlbum(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
-    title: 'Albums',
-    subTitle: ({ classes, releaseDate }) => `${classes.map(c => c.name).join(' / ')} Album - ${releaseDate}`,
-    type: 'album'
-  },
-  byArtist: {
-    query: 'searchAlbumByArtist(name: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
-    title: 'Albums (by artists)',
-    subTitle: ({ classes, releaseDate }) => `${classes.map(c => c.name).join(' / ')} Album - ${releaseDate}`,
-    type: 'album'
-  },
-  games: {
-    query: 'searchGame(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name, releaseDate, placeholder } }',
-    title: 'Games',
-    subTitle: ({ releaseDate }) => `Game - ${releaseDate}`,
-    type: 'game'
-  },
-  studios: {
-    query: 'searchStudio(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name } }',
-    title: 'Studios',
-    subTitle: () => 'Studio'
-  },
-  anims: {
-    query: 'searchAnimation(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, releaseDate, placeholder } }',
-    title: 'Animations',
-    subTitle: ({ releaseDate }) => `Animation - ${releaseDate}`,
-    type: 'anim'
-  },
-  series: {
-    query: 'searchSeries(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name, placeholder } }',
-    title: 'Series',
-    subTitle: () => 'Series',
-    type: 'series'
-  }
+export async function getServerSideProps (context) {
+  const { locale } = context
+  const localeStrings = await getTranslation(locale)
+
+  return { props: { localeStrings } }
 }
 
-const initialState = {}
-Object.keys(categories).forEach(name => { initialState[name] = false })
-
 export default function Search () {
+  const t = useTranslation()
   const router = useRouter()
   const search = router.query.q
+
+  const categories = {
+    byTitle: {
+      query: 'searchAlbum(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
+      title: t('Albums'),
+      type: 'album'
+    },
+    byArtist: {
+      query: 'searchAlbumByArtist(name: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
+      title: `${t('Albums')} (${('by artists')})`,
+      type: 'album'
+    },
+    games: {
+      query: 'searchGame(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name, releaseDate, placeholder } }',
+      title: t('Games'),
+      type: 'game'
+    },
+    studios: {
+      query: 'searchStudio(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name } }',
+      title: t('Studios')
+    },
+    anims: {
+      query: 'searchAnimation(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, releaseDate, placeholder } }',
+      title: t('Animations'),
+      type: 'anim'
+    },
+    series: {
+      query: 'searchSeries(name: $title, limit: $limit, page: $page){ count, items: rows { id: slug, title: name, placeholder } }',
+      title: t('Series'),
+      type: 'series'
+    }
+  }
+
+  const initialState = {}
+  Object.keys(categories).forEach(name => { initialState[name] = false })
 
   const query = gql`
   ${queryHeader}{
@@ -88,7 +91,7 @@ export default function Search () {
         <Container>
           <Row>
             <Col md={12} className='my-1 px-4 py-3' style={{ backgroundColor: '#33353e' }}>
-              <h2 className='searchTitle'>Search Results for: {router.query.q}</h2>
+              <h2 className='searchTitle'>{t('Search Results for')}: {router.query.q}</h2>
             </Col>
           </Row>
           {loading && (
@@ -110,7 +113,7 @@ export default function Search () {
 }
 
 function SearchSection (props) {
-  const { count: initialCount, title, subTitle, items: initialItems, type, search, category, query, setLoading } = props
+  const { count: initialCount, title, items: initialItems, type, search, category, query, setLoading } = props
   const [initialized, setInit] = useState(false)
   const [items, setItems] = useState(initialItems)
   const [page, setPage] = useState(0)
@@ -160,7 +163,7 @@ function SearchSection (props) {
           )}
         </Row>
         <Row>
-          {items.map((item) =>
+          {items.map(item =>
             <Link key={item.id} href={`/${type}/${item.id}`} passHref>
               <Col md={6}>
                 <Row className={classNames(styles.result, 'mx-1 d-flex flex-row mb-3')}>
@@ -171,7 +174,7 @@ function SearchSection (props) {
                   )}
                   <Col className='p-2 px-4 my-auto'>
                     <h2>{item.title}</h2>
-                    <p className='card-text mt-2'>{subTitle(item)}</p>
+                    {item.releaseDate && <p className='card-text mt-2'>{item.releaseDate}</p>}
                   </Col>
                 </Row>
               </Col>
