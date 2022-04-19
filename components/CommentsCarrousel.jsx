@@ -7,6 +7,7 @@ import Link from 'next/link'
 import useUser from './useUser'
 import { ButtonLoader } from './Loader'
 import styles from '../styles/Profile.module.scss'
+import useTranslation from './useTranslation'
 
 function SideButton (props) {
   const { side, onClick } = props
@@ -19,6 +20,7 @@ function SideButton (props) {
 }
 
 export default function CommentCarrousel (props) {
+  const t = useTranslation()
   const [currentIndex, setCurrentIndex] = useState(0)
   const timeoutRef = useRef(null)
 
@@ -41,7 +43,7 @@ export default function CommentCarrousel (props) {
         <Col className='blackblock m-2'>
           {current && (
             <Row>
-              <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />
+              {comments.length > 1 && <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />}
               <Col className='py-3' style={{ fontSize: '18px' }}>
                 {current.text}
                 <br />
@@ -50,7 +52,7 @@ export default function CommentCarrousel (props) {
                   {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`}><a className={styles.albumSpan}>{current.username}</a></Link></span>}
                 </div>
               </Col>
-              <SideButton side='right' onClick={plusIndex} />
+              {comments.length > 1 && <SideButton side='right' onClick={plusIndex} />}
             </Row>
           )}
           {ostId && (
@@ -60,7 +62,7 @@ export default function CommentCarrousel (props) {
                 : (
                   <Col xs='4'>
                     <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                      Login to leave a comment
+                      {t('Comment_Login')}
                     </Button>
                   </Col>
                 )}
@@ -75,6 +77,7 @@ export default function CommentCarrousel (props) {
 function CommentButtons (props) {
   const { ostId } = props
 
+  const t = useTranslation()
   const [show, setShow] = useState(false)
   const { user } = useUser()
 
@@ -124,12 +127,12 @@ function CommentButtons (props) {
             </Row>
             <Row className='mt-2'>
               <Form.Group as={Col}>
-                <Form.Check type="checkbox" label="Don't show on profile and hide username" name='anon' defaultChecked={selfComment ? selfComment.anon : false} />
+                <Form.Check type="checkbox" label={t('Comment_Anon')} name='anon' defaultChecked={selfComment ? selfComment.anon : false} />
               </Form.Group>
             </Row>
             <Row className='mt-2'>
               <Col className='mx-auto'>
-                <ButtonLoader loading={loadingComment} type='submit' color='primary' text='Save comment' />
+                <ButtonLoader loading={loadingComment} type='submit' color='primary' text={t('Save comment')} />
               </Col>
             </Row>
           </Form>
@@ -139,7 +142,7 @@ function CommentButtons (props) {
       {album && (
         <Col xs={3}>
           <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-            {selfComment ? 'Edit comment' : 'Add comment'}
+            {t(selfComment ? 'Edit comment' : 'Add comment')}
           </Button>
         </Col>
       )}
