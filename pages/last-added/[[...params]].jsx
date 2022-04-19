@@ -10,6 +10,7 @@ import classNames from 'classnames'
 
 import { getFullPageList, getPageList } from '@/components/utils'
 import { initializeApollo } from '@/lib/ApolloClient'
+import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const limit = 80
 const limitMD = 15
@@ -24,7 +25,8 @@ const limitXS = 5
   return { paths, fallback: 'blocking' }
 } */
 
-export async function /* getStaticProps */ getServerSideProps ({ params, req }) {
+export async function /* getStaticProps */ getServerSideProps (context) {
+  const { params, locale } = context
   const paramList = params?.params || []
   const page = paramList[0] || '1'
 
@@ -52,10 +54,14 @@ export async function /* getStaticProps */ getServerSideProps ({ params, req }) 
     `,
     variables: { limit, page: page - 1 }
   })
-  return { props: { ...data.searchAlbum/*, revalidate: 60 */ } }
+
+  const localeStrings = await getTranslation(locale)
+
+  return { props: { ...data.searchAlbum, localeStrings/*, revalidate: 60 */ } }
 }
 
 export default function LastAdded (props) {
+  const t = useTranslation()
   const router = useRouter()
   const { params = ['1'] } = router.query
   const [page] = params
@@ -112,7 +118,7 @@ export default function LastAdded (props) {
         <Row>
           <Col className='py-3'>
             <div>
-              <h1 className='text-center homeTitle' id='last-releases'>LAST ADDED</h1>
+              <h1 className='text-center homeTitle' id='last-releases'>{t('Last Added')}</h1>
             </div>
           </Col>
         </Row>
