@@ -57,7 +57,7 @@ function ForgorForm (props) {
       })
       .catch(err => {
         if (process.env.NODE_ENV === 'development') console.log(err)
-        toast.error(t('Failed_Recover', 'Failed to recover password'))
+        toast.error(t('Failed_Recover'))
       })
   }
 
@@ -65,7 +65,7 @@ function ForgorForm (props) {
     ? (
       <Row>
         <Col style={{ color: 'black' }}>
-          {t('Email_Sent', 'An email has been sent to the address linked to the account. Check your spam folder')}
+          {t('Email_Sent')}
         </Col>
       </Row>
     )
@@ -136,7 +136,7 @@ function LoginButton (props) {
 
           if (graphQLErrors && graphQLErrors.length > 0) {
             const { code } = graphQLErrors[0].extensions
-            if (code === 'BAD_USER_INPUT') message = t('Invalid_Login', 'Invalid username/email or password')
+            if (code === 'BAD_USER_INPUT') message = t('Invalid_Login')
           }
 
           console.error(error)
@@ -340,7 +340,7 @@ export default function Header () {
                 <RegisterProfileButton navMobile />
                 <LoginButton navMobile />
                 <NavLink href='/' name='Home' />
-                <NavLink href='/last-added' name='Last Added_header' placeholder='Last Added'/>
+                <NavLink href='/last-added' name='Last Added_header' />
                 <NavLink href='/album/list' name='Album List' />
                 <Dropdown name='Games' items={[
                   { name: 'Albums', href: '/game' },
@@ -382,9 +382,9 @@ function Dropdown ({ name, items = [] }) {
 }
 
 function NavLink (props) {
-  const { href, name, onClick, className, placeholder } = props
+  const { href, name, onClick, className } = props
   const t = useTranslation()
-  const title = t(name, placeholder)
+  const title = t(name)
 
   return onClick
     ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{title}</a>
