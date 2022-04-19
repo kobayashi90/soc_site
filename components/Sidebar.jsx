@@ -48,7 +48,7 @@ export default function Sidebar (props) {
       {index && (
         <>
           <Row className='side-menu'>
-            <h1 className='mx-auto text-center my-2'><a href='#last-added'>{t('Last Added_header')}</a></h1>
+            <h1 className='mx-auto text-center my-2'><a href='#last-added'>{t('Last Added_header', 'Last Added')}</a></h1>
           </Row>
         </>
       )}

@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 export default function useTranslation () {
   const locales = useContext(LocaleContext)
-  const t = key => locales[key] || key
+  const t = (key, placeholder) => locales[key] || placeholder || key
 
   return t
 }
