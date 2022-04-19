@@ -4,19 +4,13 @@ import { Container, Col, Row } from 'react-bootstrap'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { initializeApollo } from '@/lib/ApolloClient'
 import { getRandomInt } from '@/components/utils'
+import { getTranslation } from '@/components/useTranslation'
 
 const limit = 12
-const titles = [
-  'Cloud\'s secret mixtape',
-  'Best romantic dinner BGM',
-  '12 clicks till midnight',
-  'It\'s noisy outside, take one of these',
-  'We let our technicians pick these',
-  'Silksong is hidden behind one of these'
-]
 // const euphoriaIndex = titles.findIndex(t => t === 'Best romantic dinner BGM')
 
-export async function getServerSideProps ({ params, req }) {
+export async function getServerSideProps (context) {
+  const { locale } = context
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
@@ -31,8 +25,11 @@ export async function getServerSideProps ({ params, req }) {
     variables: { limit }
   })
 
-  const titleIndex = getRandomInt(0, titles.length - 1)
-  return { props: { rows: data.getRandomAlbum, title: titles[titleIndex] } }
+  const titleIndex = getRandomInt(0, 4)
+  const localeStrings = await getTranslation(locale)
+  const title = localeStrings[`holy12_${titleIndex}`]
+
+  return { props: { rows: data.getRandomAlbum, title } }
 }
 
 export default function Holy12 (props) {
