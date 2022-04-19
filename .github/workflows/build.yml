@@ -32,7 +32,9 @@ jobs:
 
       - name: Update locales
         run: |
-          git submodule update --remote --merge
+          cd locales
+          git pull
+          cd ..
           git add -A
           git diff-index --quiet HEAD || git commit -m 'Update locales'
 
