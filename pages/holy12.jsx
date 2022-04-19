@@ -25,7 +25,7 @@ export async function getServerSideProps (context) {
     variables: { limit }
   })
 
-  const titleIndex = getRandomInt(0, 4)
+  const titleIndex = getRandomInt(0, 5)
   const localeStrings = await getTranslation(locale)
   const title = localeStrings[`holy12_${titleIndex}`]
 
