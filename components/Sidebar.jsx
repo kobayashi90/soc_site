@@ -56,7 +56,11 @@ export default function Sidebar (props) {
         <GetLucky />
       </Row>
       <Row className='side-menu mb-3'>
-        <Link href='/holy12'><a><h1 className='mx-auto text-center my-2'>{t('Random Pull')}</h1></a></Link>
+        <h1 className='mx-auto text-center my-2'>
+          <Link href='/holy12'>
+            <a className='text-uppercase'>{t('Random Pull')}</a>
+          </Link>
+        </h1>
       </Row>
       <Row className='px-3'>
         <Col md={12} className={styles.socials}>
