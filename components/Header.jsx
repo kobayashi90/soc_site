@@ -368,15 +368,15 @@ export default function Header () {
   )
 }
 
-function Dropdown ({ name, items = [] }) {
+function Dropdown (props) {
+  const { name, items = [] } = props
   const t = useTranslation()
-  const title = t(name)
 
   return (
-    <NavDropdown title={title} className={classNames(styles.navLink, styles.dropMenu)}>
+    <NavDropdown title={t(name)} className={classNames(styles.navLink, styles.dropMenu)}>
       {items.map(({ href, name }, i) => (
         <Link key={i} href={href} passHref>
-          <NavDropdown.Item>{title}</NavDropdown.Item>
+          <NavDropdown.Item>{t(name)}</NavDropdown.Item>
         </Link>
       ))}
     </NavDropdown>
