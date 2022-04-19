@@ -4,8 +4,10 @@ import Link from 'next/link'
 
 import { initializeApollo } from '@/lib/ApolloClient'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
+import useTranslation, { getTranslation } from '@/components/useTranslation'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function /* getStaticProps */ getServerSideProps (context) {
+  const { locale } = context
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
@@ -25,22 +27,29 @@ export async function /* getStaticProps */ getServerSideProps () {
 
   })
 
-  return { props: { ...data.result }/*, revalidate: 60 */ }
+  const localeStrings = await getTranslation(locale)
+  return { props: { ...data.result, localeStrings }/*, revalidate: 60 */ }
 }
 
-function Button ({ name, href }) {
+function Button (props) {
+  const { name, href } = props
+  const t = useTranslation()
+
   return (
     <Col md={3} className='mt-3  flex-grow-1'>
       <Link href={href}><a>
         <h4 className='text-center blackButton d-flex align-items-center justify-content-center px-3 py-2'>
-          {name}
+          {t(name)}
         </h4>
       </a></Link>
     </Col>
   )
 }
 
-export default function GameHome ({ rows }) {
+export default function GameHome (props) {
+  const { rows } = props
+  const t = useTranslation()
+
   return (
     <Container>
       <Row>
@@ -51,7 +60,7 @@ export default function GameHome ({ rows }) {
         <Col md={12}>
           <Row className='p-3'>
             <Col md={12}>
-              <h1 className='text-center homeTitle' id='last-releases'>LATEST ANIMATION RELEASES</h1>
+              <h1 className='text-center homeTitle' id='last-releases'>{t('Latest Animation Releases')}</h1>
             </Col>
           </Row>
 

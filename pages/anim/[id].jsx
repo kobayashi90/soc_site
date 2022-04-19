@@ -10,6 +10,7 @@ import styles from '../../styles/Album.module.scss'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl } from '@/components/utils'
 import { initializeApollo } from '@/lib/ApolloClient'
+import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const query = gql`
 query animation ($id: ID) {
@@ -57,14 +58,17 @@ const { data } = await client.query({
   return { paths, fallback: 'blocking' }
 } */
 
-export async function /* getStaticProps */ getServerSideProps ({ params, req }) {
+export async function /* getStaticProps */ getServerSideProps (context) {
+  const { params, locale } = context
   const { id } = params
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
   const { animation } = data
 
   if (animation === null) return { redirect: { destination: '/404', permanent: false } }
-  return { props: { animation, imageUrl: fullImage(id, 50) }/*, revalidate: 60 */ }
+
+  const localeStrings = await getTranslation(locale)
+  return { props: { animation, imageUrl: fullImage(id, 50), localeStrings }/*, revalidate: 60 */ }
 }
 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'anim')}`
@@ -72,6 +76,8 @@ const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${
 export default function Page (props) {
   const { animation, imageUrl } = props
   const { id, title, subTitle, releaseDate, studios, albums = [], placeholder, headerColor } = animation
+
+  const t = useTranslation()
 
   return (
     <>
@@ -98,11 +104,11 @@ export default function Page (props) {
                 <table className={styles.table}>
                   <tbody>
                     <tr>
-                      <th className='width-row'>Release Date</th>
+                      <th className='width-row'>{t('Release Date')}</th>
                       <td>{new Date(releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                     </tr>
                     <tr>
-                      <th>Studios</th>
+                      <th>{t('Studios')}</th>
                       <td>
                         {studios.map(({ slug, name }, i) => (
                           <Fragment key={id}>
