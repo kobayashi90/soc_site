@@ -14,11 +14,6 @@ jobs:
       IRONCLAD: ${{ secrets.IRONCLAD }}
 
     steps:
-      - name: Cancel running workflows
-        uses: everphone-gmbh/cancel-previous-workflows@master
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
