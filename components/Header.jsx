@@ -38,6 +38,7 @@ function LangSelector () {
 
 function ForgorForm (props) {
   const { defaultValue = false } = props
+  const t = useTranslation()
   const forgorMutation = gql`
     mutation createForgorLink($key: String!){
       createForgorLink(key: $key)
@@ -56,7 +57,7 @@ function ForgorForm (props) {
       })
       .catch(err => {
         if (process.env.NODE_ENV === 'development') console.log(err)
-        toast.error('Failed to recover password')
+        toast.error(t('Failed_Recover'))
       })
   }
 
@@ -64,7 +65,7 @@ function ForgorForm (props) {
     ? (
       <Row>
         <Col style={{ color: 'black' }}>
-          An email has been sent to the address linked to the account. Check your spam folder
+          {t('Email_Sent')}
         </Col>
       </Row>
     )
@@ -72,13 +73,13 @@ function ForgorForm (props) {
       <Form onSubmit={handleForgor}>
         <Row>
           <Form.Group as={Col} >
-            <Form.Label htmlFor='username' style={{ color: 'black' }}>Username or email:</Form.Label>
+            <Form.Label htmlFor='username' style={{ color: 'black' }}>{t('Username or email')}:</Form.Label>
             <Form.Control required type='text' name='key' />
           </Form.Group>
         </Row>
         <Row className='mt-4'>
           <Col md={6} className='mx-auto'>
-            <ButtonLoader loading={loadingForgor} type='submit' className='w-100' color='primary' text='Recover password' />
+            <ButtonLoader loading={loadingForgor} type='submit' className='w-100' color='primary' text={t('Recover password')} />
           </Col>
         </Row>
       </Form>
@@ -135,7 +136,7 @@ function LoginButton (props) {
 
           if (graphQLErrors && graphQLErrors.length > 0) {
             const { code } = graphQLErrors[0].extensions
-            if (code === 'BAD_USER_INPUT') message = 'Invalid username/email or password'
+            if (code === 'BAD_USER_INPUT') message = t('Invalid_Login')
           }
 
           console.error(error)
@@ -165,23 +166,23 @@ function LoginButton (props) {
               <Form onSubmit={submit}>
                 <Row>
                   <Form.Group as={Col} >
-                    <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
+                    <Form.Label htmlFor='username' style={{ color: 'black' }}>{t('Username')}:</Form.Label>
                     <Form.Control required type='text' name='username' />
                   </Form.Group>
 
                   <Form.Group as={Col} >
-                    <Form.Label htmlFor='password' style={{ color: 'black' }}>Password:</Form.Label>
+                    <Form.Label htmlFor='password' style={{ color: 'black' }}>{t('Password')}:</Form.Label>
                     <Form.Control required type='password' name='password' />
                   </Form.Group>
                 </Row>
                 <Row className='mt-4'>
                   <Col md={4} className='mx-auto'>
-                    <SubmitButton loading={loadingLogin} type='submit' className='w-100' color='primary'>Login</SubmitButton>
+                    <SubmitButton loading={loadingLogin} type='submit' className='w-100' color='primary'>{t('Login')}</SubmitButton>
                   </Col>
                 </Row>
                 <Row className='mt-2'>
                   <Col md={6} className='mx-auto'>
-                    <Button onClick={() => setForgor(true)} className='w-100' color='primary'>Recover password</Button>
+                    <Button onClick={() => setForgor(true)} className='w-100' color='primary'>{t('Recover password')}</Button>
                   </Col>
                 </Row>
               </Form>
