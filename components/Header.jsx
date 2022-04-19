@@ -10,6 +10,7 @@ import serialize from 'form-serialize'
 import { useApolloClient, useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { toast } from 'react-toastify'
+import Cookies from 'universal-cookie'
 
 import useUser from './useUser'
 import { ButtonLoader } from './Loader'
@@ -18,9 +19,16 @@ import logo from '../public/img/assets/logo.png'
 import logoES from '../public/img/assets/logo_es.png'
 import useTranslation from './useTranslation'
 
+const cookies = new Cookies()
+
 function LangSelector () {
   const router = useRouter()
-  const handleLocaleChange = event => router.push(router.route, router.asPath, { locale: event.target.value })
+  const handleLocaleChange = event => {
+    const { value } = event.target
+
+    cookies.set('lang', value)
+    router.push(router.route, router.asPath, { locale: value })
+  }
 
   return (
     <Col xs='auto' className={classNames(styles.login, styles.blueBullet, 'ms-sm-auto mb-sm-5 py-2')}>

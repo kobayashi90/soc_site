@@ -23,6 +23,7 @@ import { useApollo } from '@/lib/ApolloClient'
 import useUser from '@/components/useUser'
 import { skipAds } from '@/components/utils'
 import Header from '@/components/Header'
+import Cookies from 'universal-cookie'
 // import SpookyGhosts from '../components/SpookyGhosts'
 
 Settings.defaultLocale = 'en-US'
@@ -59,11 +60,18 @@ function Analytics () {
 }
 
 export const LocaleContext = createContext()
+const cookies = new Cookies()
 
 export default function MyApp (context) {
   const { Component, pageProps } = context
   const { localeStrings = {} } = pageProps
   const client = useApollo()
+  const router = useRouter()
+
+  useEffect(() => {
+    const lang = cookies.get('lang')
+    if (lang) router.push(router.route, router.asPath, { locale: lang })
+  }, [])
 
   return (
     <LocaleContext.Provider value={localeStrings}>
