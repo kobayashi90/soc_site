@@ -1,4 +1,4 @@
-name: CI
+name: Update Locales
 
 on:
   workflow_dispatch:
