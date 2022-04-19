@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - uses: fregante/setup-git-user@v1
+      - name: Update locales
+        run: |
+          git submodule update --remote --merge
+          git add -A
+          git diff-index --quiet HEAD || git commit -m 'Update locales'
+          git push 
