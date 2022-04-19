@@ -4,6 +4,8 @@ import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 import Head from 'next/head'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 import styles from '../../styles/Album.module.scss'
 
@@ -11,10 +13,9 @@ import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl, PLACEHOLDER } from '@/components/utils'
 import Loader, { ButtonLoader } from '@/components/Loader'
-import { initializeApollo, isGithub } from '@/lib/ApolloClient'
+import { initializeApollo/* , isGithub */ } from '@/lib/ApolloClient'
 import CommentCarrousel from '@/components/CommentsCarrousel'
-import { toast } from 'react-toastify'
-import { useRouter } from 'next/router'
+import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const query = gql`
 query ($id: ID!) {
@@ -91,7 +92,7 @@ query downloads ($id: ID!) {
 }
 `
 
-export async function getStaticPaths () {
+/* export async function getStaticPaths () {
   if (isGithub) return { paths: [], fallback: 'blocking' }
 
   const client = initializeApollo()
@@ -114,20 +115,24 @@ export async function getStaticPaths () {
   }))
 
   return { paths, fallback: 'blocking' }
-}
+} */
 
-export async function getStaticProps ({ params, req }) {
+export async function /* getStaticProps */ getServerSideProps (context) {
+  const { params, locale } = context
   const { id } = params
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
 
   if (data.album === null || data.album.status !== 'show') return { redirect: { destination: '/404', permanent: false } }
 
+  const localeStrings = await getTranslation(locale)
+
   return {
     props: {
       id,
       album: data.album,
-      imageUrl: fullImage(data.album.id, 50)
+      imageUrl: fullImage(data.album.id, 50),
+      localeStrings
     }
   }
 }
@@ -145,6 +150,7 @@ const removeFavorite = favoriteTemplate('remove')
 export default function Page (props) {
   const { id, album, imageUrl } = props
 
+  const t = useTranslation()
   const router = useRouter()
   const { user } = useUser()
   const [loadingFavorite, setLoading] = useState(false)
@@ -165,7 +171,7 @@ export default function Page (props) {
     setLoading(true)
 
     client.mutate({ mutation: dataFavorite.album.isFavorite ? removeFavorite : addFavorite, variables: { ostId: id } })
-      .then(() => toast.success(`${dataFavorite.album.isFavorite ? 'Removed from' : 'Added to'} your favorites!`))
+      .then(() => toast.success(t(dataFavorite.album.isFavorite ? 'Favorite_Added' : 'Favorite_Removed')))
       .catch(err => {
         console.log(err)
         toast.error('Query failed')
@@ -201,13 +207,13 @@ export default function Page (props) {
                     <table className={styles.table}>
                       <tbody>
                         <tr>
-                          <th className='width-row'>Release Date</th>
+                          <th className='width-row'>{t('Release Date')}</th>
                           <td>{new Date(album.releaseDate).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                         </tr>
 
                         {album.artists.length > 0 && (
                           <tr>
-                            <th>Artists</th>
+                            <th>{t('Artists')}</th>
                             <td>
                               {album.artists.map(({ id, name }) => name).join(', ')}
                             </td>
@@ -215,23 +221,23 @@ export default function Page (props) {
                         )}
 
                         <tr>
-                          <th>Classification</th>
+                          <th>{t('Classification')}</th>
                           <td>
                             {[
-                              album.classes.map(({ name }) => `${name} Soundtrack`).join(' & '),
+                              album.classes.map(({ name }) => t(`${name} Soundtrack`)).join(' & '),
                               album.categories.map(({ name }) => name).join(', ')
                             ].filter(f => f !== '').join(' - ')}
                           </td>
                         </tr>
                         {album.label && (
                           <tr>
-                            <th>Published by</th>
+                            <th>{t('Published by')}</th>
                             <td><a className='btn btn-link p-0' href={`/publisher/${album.label}`}>{album.label}</a></td>
                           </tr>
                         )}
                         {album.platforms.length > 0 && (
                           <tr>
-                            <th>Platforms</th>
+                            <th>{t('Platforms')}</th>
                             <td>
                               {album.platforms.map(({ id, name }, i) => (
                                 <Fragment key={id}>
@@ -248,7 +254,7 @@ export default function Page (props) {
 
                         {album.games.length > 0 && (
                           <tr>
-                            <th>Games</th>
+                            <th>{t('Games')}</th>
                             <td>
                               {album.games.map(({ slug, name }, i) => (
                                 <Fragment key={slug}>
@@ -262,7 +268,7 @@ export default function Page (props) {
 
                         {album.animations.length > 0 && (
                           <tr>
-                            <th>Animations</th>
+                            <th>{t('Animations')}</th>
                             <td>
                               {album.animations.map(({ id, title }, i) => (
                                 <Fragment key={id}>
@@ -276,7 +282,7 @@ export default function Page (props) {
 
                         {album.favorites > 0 && (
                           <tr>
-                            <td>Favorite Score: {album.favorites}<span className='ms-1 fas fa-star'></span></td>
+                            <td>{t('Favorite Score')}: {album.favorites}<span className='ms-1 fas fa-star'></span></td>
                           </tr>
                         )}
                       </tbody>
@@ -294,7 +300,7 @@ export default function Page (props) {
                   <Col>
                     <ButtonLoader
                       loading={loadingFavorite} onClick={dataFavorite ? submitFavorite : null}
-                      className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }} text={dataFavorite ? (dataFavorite.album.isFavorite ? 'Remove from favorites' : 'Add to favorites') : 'Login to add to favorites'} />
+                      className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }} text={t(dataFavorite ? (dataFavorite.album.isFavorite ? 'Favorite_Remove' : 'Favorite_Add') : 'Favorite_Login')} />
                   </Col>
                 </Row>
               </Col>
@@ -306,7 +312,7 @@ export default function Page (props) {
                 {album.vgmdb && (
                   <Row>
                     <Col className='mb-2 ml-2'>
-                      <span>Check album at:</span>
+                      <span>{'Check album at'}:</span>
                       <a className='ms-2' target='_blank' rel='noopener noreferrer' href={album.vgmdb}>
                         <Image width={100} height={30} alt={'VGMdb'} src='/img/assets/vgmdblogo.png' />
                       </a>
@@ -317,7 +323,7 @@ export default function Page (props) {
                 {album.stores.length > 0 && (
                   <Row className='mt-2 px-3'>
                     <Col className={styles.stores} style={{ paddingLeft: '15px', paddingTop: '10px', paddingRight: '15px', paddingBottom: '10px' }}>
-                      <h1 className='text-center homeTitle' style={{ fontSize: '30px' }}>Buy The Original Soundtrack to support the artists</h1>
+                      <h1 className='text-center homeTitle' style={{ fontSize: '30px' }}>{t('Buy_Original')}</h1>
                       <hr className='style-white w-100 mt-0' />
                       <Row>
                         {album.stores.map(({ url, provider }, i) =>
@@ -358,7 +364,7 @@ export default function Page (props) {
                           </Row>
                           <Row className='mx-auto mb-3'>
                             <Col className='py-2'>
-                              <Button target="_blank" variant="secondary" className={styles.download} href={url}>Download</Button>
+                              <Button target="_blank" variant="secondary" className={styles.download} href={url}>{t('Download')}</Button>
                             </Col>
                             <Col className='py-2'>
                               <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
@@ -377,7 +383,7 @@ export default function Page (props) {
             {album.related.length > 0 && (
               <Row>
                 <Col>
-                  <div className='blackblock m-2'><h1 className='text-center ost-title'>RELATED SOUNDTRACKS</h1></div>
+                  <div className='blackblock m-2'><h1 className='text-center text-uppercase ost-title'>{t('Related Soundtracks')}</h1></div>
                 </Col>
                 <Row className='justify-content-center'>
                   <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={album.related} />
@@ -391,30 +397,35 @@ export default function Page (props) {
   )
 }
 
-function DirectButton ({ directUrl }) {
+function DirectButton (props) {
+  const { directUrl } = props
+  const t = useTranslation()
+
   const disabled = directUrl === '/unauthorized'
   const renderTooltip = (props) => (
     disabled
-      ? <Tooltip {...props} id={styles.tooltip}>Become a donator to access direct links!</Tooltip>
+      ? <Tooltip {...props} id={styles.tooltip}>{t('Become_Donator')}</Tooltip>
       : <div />
   )
 
   return (
     <OverlayTrigger placement='top' overlay={renderTooltip}>
-      <Button target="_blank" variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl} disabled={disabled}>Direct</Button>
+      <Button target="_blank" variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl} disabled={disabled}>{t('Direct')}</Button>
     </OverlayTrigger>
   )
 }
 
-function TrackList ({ discs }) {
+function TrackList (props) {
+  const { discs } = props
   const [current, setCurrent] = useState(0)
+  const t = useTranslation()
 
   return (
     <Col lg={6}>
       <div className='blackblock d-inline-block w-100'>
         <Row>
           <Col>
-            <h1 className={classNames('text-center', styles.title)}>TRACKLIST</h1>
+            <h1 className={classNames('text-center text-uppercase', styles.title)}>{t('Tracklist')}</h1>
           </Col>
         </Row>
         {discs.length > 1 && (
@@ -433,7 +444,7 @@ function TrackList ({ discs }) {
                     borderBottomWidth: current === number ? '0px' : '2px'
                   }}
                 >
-                  Disc {number + 1}
+                  {t('Disc')} {number + 1}
                 </div>
               </Col>
             ))}
