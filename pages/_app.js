@@ -70,7 +70,7 @@ export default function MyApp (context) {
 
   useEffect(() => {
     const lang = cookies.get('lang')
-    if (lang) router.push(router.route, router.asPath, { locale: lang })
+    if (lang && lang !== router.locale) router.push(router.route, router.asPath, { locale: lang })
   }, [])
 
   return (
