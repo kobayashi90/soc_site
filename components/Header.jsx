@@ -41,6 +41,7 @@ function LangSelector () {
         <option value="it">🇮🇹 Italiano</option>
         <option value="fr">🇫🇷 Français</option>
         <option value="ca">🇨🇦 Canadian</option>
+        <option value="id">🇮🇩 Indonesian</option>
       </select>
     </Col>
   )
