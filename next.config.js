@@ -29,7 +29,7 @@ module.exports = {
   swcMinify: true,
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'es', 'de', 'it', 'pt-br', 'pt-pt', 'fr', 'ca'],
+    locales: ['en', 'es', 'de', 'it', 'pt-br', 'pt-pt', 'fr', 'ca', 'id'],
     localeDetection: false
   }
 }
