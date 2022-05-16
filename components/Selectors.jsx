@@ -130,7 +130,7 @@ export function AlbumSelector (props) {
       rowsFn={rowsFn}
       startQuery={`
         query ($limit: Int){
-          searchAlbum(limit: $limit) {
+          searchAlbum(limit: $limit, status: ["show", "hidden", "coming"]) {
             rows {
               value: id
               label: title
@@ -140,7 +140,7 @@ export function AlbumSelector (props) {
       `}
       changeQuery={`
         query ($filter: String){
-          searchAlbum(title: $filter) {
+          searchAlbum(title: $filter, status: ["show", "hidden", "coming"]) {
             rows {
               value: id
               label: title
