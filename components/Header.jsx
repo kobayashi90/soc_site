@@ -7,8 +7,7 @@ import { Row, Col, Container, Button, Navbar, Nav, NavDropdown, Modal, Form } fr
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import serialize from 'form-serialize'
-import { useApolloClient, useMutation, useLazyQuery, useQuery } from '@apollo/client'
-import gql from 'graphql-tag'
+import { useApolloClient, useMutation, useLazyQuery, useQuery, gql } from '@apollo/client'
 import { toast } from 'react-toastify'
 import Cookies from 'universal-cookie'
 

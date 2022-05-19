@@ -1,4 +1,4 @@
-import { LocaleContext } from 'pages/_app'
+import { LocaleContext } from '../pages/_app'
 import { useContext } from 'react'
 
 import enBundle from '@/locales/en.json'
