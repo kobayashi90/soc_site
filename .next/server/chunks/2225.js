@@ -53,13 +53,10 @@ function SubmitButton(props) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ useUser)
 /* harmony export */ });
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(825);
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9114);
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9114);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_0__);
 
-
-const query = (graphql_tag__WEBPACK_IMPORTED_MODULE_0___default())`
+const query = _apollo_client__WEBPACK_IMPORTED_MODULE_0__.gql`
   query {
     me {
       username
@@ -76,7 +73,7 @@ const query = (graphql_tag__WEBPACK_IMPORTED_MODULE_0___default())`
   }
 `;
 function useUser() {
-    const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(query);
+    const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_0__.useQuery)(query);
     return {
         user: data?.me,
         refetch

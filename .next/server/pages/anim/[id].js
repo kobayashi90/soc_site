@@ -304,14 +304,6 @@ module.exports = require("form-serialize");
 
 /***/ }),
 
-/***/ 825:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("graphql-tag");
-
-/***/ }),
-
 /***/ 2748:
 /***/ ((module) => {
 

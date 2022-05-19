@@ -99,7 +99,7 @@ module.exports = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo.95bde540.png","height":1536,"width":2691,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAMAAACEE47CAAAAP1BMVEXBwsK8vb21t7fNzs6SkZG4urrW1tempqbExMWhoaF6e3uUlJWIiIjGyMju8fKcm5vExcWenZ2WlZWoqKewsLDhBbBuAAAAD3RSTlPttYKG16bg82Xgm2n7NhIRLCQvAAAACXBIWXMAADXUAAA11AFeZeUIAAAAK0lEQVQImQXBhwEAIAgDsKog4ALH/7eaIAO8eptQRNQ3CvTu4y6KZCZEwh8UOwEirxVlrgAAAABJRU5ErkJggg=="});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo.95bde540.png","height":1536,"width":2691,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAsElEQVR4nAGlAFr/Aba3t1AFBQWH/Pz8BPHy8pQ2MzORtri4KPLy8iJBRUi4Aba3t7YLCwtJCwsLAP/+/voTFBSc09PTX9vb2ws/QECfAePk5CXo5+fE9PT0Ff/+/v8LDAwC+/v7AOzs7NQkJSVvAcfHx8ni4uE2BAQEAO/v7wABAAEA+fr5ABUVFgAaGxusAbu8vIj6+vof+fj5DBAREC3z8/PH9PT0+AoKCiYDAwO1rTJTu/U0DBcAAAAASUVORK5CYII="});
 
 /***/ }),
 
@@ -110,7 +110,7 @@ module.exports = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo_es.033876d7.png","height":1444,"width":2595,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAMAAACEE47CAAAAPFBMVEWgn5++v7/U1NS7vLympqaLi4rBw8PBwsKampqfn5+6urrIyMmlpaWFhYW+v7/d4OG4ubmVlZTDxMS4ublCp4G/AAAAEXRSTlP+p+i4/Nd19uDs1YKG91gc0RwALwsAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAqSURBVAiZBcGHAQAgCAOwoiy34P+/moDM6pmyoZZZ3iIMRgSg6N7Ypd0PE14BEUrLexQAAAAASUVORK5CYII="});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo_es.033876d7.png","height":1444,"width":2595,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAYAAACzzX7wAAAAj0lEQVR4nAGEAHv/Aba4uJ0FBARbAwMDAPj4+adKSUhhpqamaOnp6FU1NjiBAby9vYcODQ1rAQEBDQEBAQANDQ3X6urqKdDQ0Po3ODirAc7Pz43n5uZy/v39APDx8f8KCgoBAAAAAAICAvoZGhqNAb29vtfu7u0DAQECCQcHBhz09fXa7+/v9xMSEiUPEBDXhLc4bJptQ/cAAAAASUVORK5CYII="});
 
 /***/ }),
 
@@ -124,8 +124,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(1969);
-/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(1969);
+/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1664);
@@ -142,20 +142,18 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9114);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(825);
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(1187);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(6153);
-/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(universal_cookie__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _useUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2446);
-/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(9738);
-/* harmony import */ var _SubmitButton__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(2628);
-/* harmony import */ var _public_img_assets_logo_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(7338);
-/* harmony import */ var _public_img_assets_logo_es_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(9694);
-/* harmony import */ var _useTranslation__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(6974);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_17__]);
-_useTranslation__WEBPACK_IMPORTED_MODULE_17__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1187);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(6153);
+/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(universal_cookie__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _useUser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2446);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(9738);
+/* harmony import */ var _SubmitButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(2628);
+/* harmony import */ var _public_img_assets_logo_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(7338);
+/* harmony import */ var _public_img_assets_logo_es_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(9694);
+/* harmony import */ var _useTranslation__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(6974);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_16__]);
+_useTranslation__WEBPACK_IMPORTED_MODULE_16__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -174,8 +172,7 @@ _useTranslation__WEBPACK_IMPORTED_MODULE_17__ = (__webpack_async_dependencies__.
 
 
 
-
-const cookies = new (universal_cookie__WEBPACK_IMPORTED_MODULE_11___default())();
+const cookies = new (universal_cookie__WEBPACK_IMPORTED_MODULE_10___default())();
 function LangSelector() {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
     const handleLocaleChange = (event)=>{
@@ -187,7 +184,7 @@ function LangSelector() {
     };
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
         xs: "auto",
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().login), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().blueBullet), "ms-sm-auto mb-sm-5 py-2"),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().login), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().blueBullet), "ms-sm-auto mb-sm-5 py-2"),
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
             onChange: handleLocaleChange,
             value: router.locale,
@@ -234,8 +231,8 @@ function LangSelector() {
 }
 function ForgorForm(props) {
     const { defaultValue =false  } = props;
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
-    const forgorMutation = (graphql_tag__WEBPACK_IMPORTED_MODULE_9___default())`
+    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
+    const forgorMutation = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
     mutation createForgorLink($key: String!){
       createForgorLink(key: $key)
     }
@@ -253,7 +250,7 @@ function ForgorForm(props) {
             setForgorMessage(true);
         }).catch((err)=>{
             if (false) {}
-            react_toastify__WEBPACK_IMPORTED_MODULE_10__.toast.error(t("Failed_Recover"));
+            react_toastify__WEBPACK_IMPORTED_MODULE_9__.toast.error(t("Failed_Recover"));
         });
     };
     return showForgorMessage ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
@@ -293,7 +290,7 @@ function ForgorForm(props) {
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                     md: 6,
                     className: "mx-auto",
-                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_13__/* .ButtonLoader */ .l, {
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_12__/* .ButtonLoader */ .l, {
                         loading: loadingForgor,
                         type: "submit",
                         className: "w-100",
@@ -307,22 +304,22 @@ function ForgorForm(props) {
 }
 function LoginButton(props) {
     const { navMobile =false  } = props;
-    const loginQuery = (graphql_tag__WEBPACK_IMPORTED_MODULE_9___default())`
+    const loginQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
     query Login($username: String!, $password: String!){
       login(username: $username, password: $password)
     }
   `;
-    const logoutQuery = (graphql_tag__WEBPACK_IMPORTED_MODULE_9___default())`
+    const logoutQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
     query {
       logout
     }
   `;
-    const { user , refetch  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
+    const { user , refetch  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.useApolloClient)();
     const [queryLogin, { loading: loadingLogin  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.useLazyQuery)(loginQuery);
     const { 0: showForgor , 1: setForgor  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
+    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         if (!show) setForgor(false);
     }, [
@@ -357,7 +354,7 @@ function LoginButton(props) {
                     if (code === "BAD_USER_INPUT") message = t("Invalid_Login");
                 }
                 console.error(error);
-                react_toastify__WEBPACK_IMPORTED_MODULE_10__.toast.error(message);
+                react_toastify__WEBPACK_IMPORTED_MODULE_9__.toast.error(message);
             } else {
                 refetch();
                 setShow(false);
@@ -376,7 +373,7 @@ function LoginButton(props) {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                 xs: "auto",
-                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
+                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
                     onClick: handleLogin,
                     variant: "primary",
@@ -442,7 +439,7 @@ function LoginButton(props) {
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                                     md: 4,
                                     className: "mx-auto",
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_SubmitButton__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_SubmitButton__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
                                         loading: loadingLogin,
                                         type: "submit",
                                         className: "w-100",
@@ -474,15 +471,15 @@ function LoginButton(props) {
 }
 function RegisterProfileButton(props) {
     const { navMobile =false  } = props;
-    const registerMutation = (graphql_tag__WEBPACK_IMPORTED_MODULE_9___default())`
+    const registerMutation = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
     mutation ($username: String!, $email: String!, $pfp: Upload) {
       registerUser(username: $username, email: $email, pfp: $pfp)
     }
   `;
-    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
+    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const { 0: showRegister , 1: setRegister  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { 0: showForgor , 1: setForgor  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
+    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     const [mutateRegister, { loading: loadingRegister  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.useMutation)(registerMutation);
     const submitRegister = (e)=>{
         e.persist();
@@ -504,7 +501,7 @@ function RegisterProfileButton(props) {
                 message = messageGQL;
             }
             console.error(error);
-            react_toastify__WEBPACK_IMPORTED_MODULE_10__.toast.error(message);
+            react_toastify__WEBPACK_IMPORTED_MODULE_9__.toast.error(message);
         // console.error('An unexpected error happened:', error)
         });
     };
@@ -529,7 +526,7 @@ function RegisterProfileButton(props) {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                 xs: "auto",
-                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
+                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
                 children: user ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                     href: `/profile/${user.username}`,
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
@@ -620,7 +617,7 @@ function RegisterProfileButton(props) {
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                                     md: 4,
                                     className: "mx-auto",
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_SubmitButton__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_SubmitButton__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
                                         loading: loadingRegister,
                                         type: "submit",
                                         className: "w-100",
@@ -638,8 +635,8 @@ function RegisterProfileButton(props) {
 }
 function Header() {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
-    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
-    const queryHeader = (graphql_tag__WEBPACK_IMPORTED_MODULE_9___default())`
+    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
+    const queryHeader = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
     query {
       config(name: "banner"){
         value
@@ -651,7 +648,7 @@ function Header() {
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("header", {
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().bannerBg),
+                    id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().bannerBg),
                     style: headerData ? {
                         backgroundImage: `url('/_next/image?w=3840&q=100&url=${`https://cdn.sittingonclouds.net/live/${headerData.config.value}.png`}`
                     } : {},
@@ -666,7 +663,7 @@ function Header() {
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_3___default()), {
                                                 alt: "SOC Logo",
-                                                src: router.locale === "es" ? _public_img_assets_logo_es_png__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z : _public_img_assets_logo_png__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z,
+                                                src: router.locale === "es" ? _public_img_assets_logo_es_png__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z : _public_img_assets_logo_png__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z,
                                                 height: 150,
                                                 width: 265
                                             })
@@ -777,10 +774,10 @@ function Header() {
 };
 function Dropdown(props) {
     const { name: name1 , items =[]  } = props;
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
+    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.NavDropdown, {
         title: t(name1),
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().navLink), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().dropMenu)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().dropMenu)),
         children: items.map(({ href , name  }, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                 href: href,
                 passHref: true,
@@ -793,17 +790,17 @@ function Dropdown(props) {
 }
 function NavLink(props) {
     const { href , name , onClick , className  } = props;
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
+    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     const title = t(name);
     return onClick ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
         onClick: onClick,
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().navLink), "nav-link", className),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), "nav-link", className),
         children: title
     }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
         href: href,
         passHref: true,
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Nav.Link, {
-            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().navLink), className),
+            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), className),
             children: title
         })
     });
@@ -830,7 +827,7 @@ function SearchBar() {
         open
     ]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().search),
+        id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().search),
         className: classnames__WEBPACK_IMPORTED_MODULE_5___default()({
             "w-100": open
         }),
@@ -870,12 +867,12 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */   "Z": () => (/* binding */ useTranslation),
 /* harmony export */   "i": () => (/* binding */ getTranslation)
 /* harmony export */ });
-/* harmony import */ var pages_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8484);
+/* harmony import */ var _pages_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8484);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _locales_en_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9748);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([pages_app__WEBPACK_IMPORTED_MODULE_0__]);
-pages_app__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_pages_app__WEBPACK_IMPORTED_MODULE_0__]);
+_pages_app__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -887,7 +884,7 @@ Object.keys(_locales_en_json__WEBPACK_IMPORTED_MODULE_2__).forEach((key)=>{
     };
 });
 function useTranslation() {
-    const locales = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(pages_app__WEBPACK_IMPORTED_MODULE_0__.LocaleContext);
+    const locales = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_pages_app__WEBPACK_IMPORTED_MODULE_0__.LocaleContext);
     const t = (key, placeholder)=>locales[key] || en[key]
     ;
     return t;

@@ -122,13 +122,6 @@ module.exports = require("form-serialize");
 
 /***/ }),
 
-/***/ 825:
-/***/ ((module) => {
-
-module.exports = require("graphql-tag");
-
-/***/ }),
-
 /***/ 2748:
 /***/ ((module) => {
 
