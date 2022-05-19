@@ -2,10 +2,7 @@
     "compilerOptions": {
       "baseUrl": ".",
       "paths": {
-        "@/lib/*": ["lib/*"],
         "@/components/*": ["components/*"],
-        "@/graphql/*": ["graphql/*"],
-        "@/config/*": ["config/*"],
         "@/locales/*": ["locales/*"]
       }
     }

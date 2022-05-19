@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 import { Container, Col, Row } from 'react-bootstrap'
 import Link from 'next/link'
 
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
 

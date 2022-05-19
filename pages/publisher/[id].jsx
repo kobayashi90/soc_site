@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 
 import Sidebar from '@/components/Sidebar'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 
 const query = gql`
   query publisher ($id: ID!) {

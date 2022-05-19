@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import classNames from 'classnames'
 
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 
 import AlbumBoxStyles from '../../styles/AlbumBoxes.module.scss'

@@ -13,7 +13,7 @@ import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl, PLACEHOLDER } from '@/components/utils'
 import Loader, { ButtonLoader } from '@/components/Loader'
-import { initializeApollo/* , isGithub */ } from '@/lib/ApolloClient'
+import { initializeApollo, isGithub } from '@/components/ApolloClient'
 import CommentCarrousel from '@/components/CommentsCarrousel'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
 
@@ -92,7 +92,7 @@ query downloads ($id: ID!) {
 }
 `
 
-/* export async function getStaticPaths () {
+export async function getStaticPaths () {
   if (isGithub) return { paths: [], fallback: 'blocking' }
 
   const client = initializeApollo()
@@ -115,9 +115,9 @@ query downloads ($id: ID!) {
   }))
 
   return { paths, fallback: 'blocking' }
-} */
+}
 
-export async function /* getStaticProps */ getServerSideProps (context) {
+export async function getStaticProps (context) {
   const { params, locale } = context
   const { id } = params
   const client = initializeApollo()

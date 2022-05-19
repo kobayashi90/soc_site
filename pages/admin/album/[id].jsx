@@ -3,12 +3,12 @@ import { gql, useMutation, useQuery } from '@apollo/client'
 import { Col, Row, Form, FormControl, Container } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import { withSessionSsr } from '@/lib/session'
+import { withSessionSsr } from '@/components/session'
 import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, DiscList, StoreDownloads, Downloads } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
 import useUser from '@/components/useUser'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { prepareForm } from '@/components/utils'
 
 const capitalize = (s) => {

@@ -6,7 +6,7 @@ import { DateTime } from 'luxon'
 import Image from 'next/image'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 
 const query = gql`

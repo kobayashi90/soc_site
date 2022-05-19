@@ -6,7 +6,7 @@ import Image from 'next/image'
 import ConfettiExplosion from 'react-confetti-explosion'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import CommentCarrousel from '@/components/CommentsCarrousel'
 import { ButtonLoader } from '@/components/Loader'
 import serialize from 'form-serialize'

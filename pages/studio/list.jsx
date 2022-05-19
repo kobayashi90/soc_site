@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap'
 import classname from 'classnames'
 import Link from 'next/link'
 
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import style from '../../styles/letter.module.scss'
 
 export async function /* getStaticProps */ getServerSideProps () {

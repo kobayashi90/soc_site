@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, Downloads, StoreDownloads, DiscList } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
-import { hasRolePage } from '@/lib/resolvers'
+import { hasRolePage } from '@/components/resolvers'
 import { prepareForm } from '@/components/utils'
 
 export const getServerSideProps = hasRolePage(['CREATE'])

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { Row, Col } from 'react-bootstrap'
 
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import Sidebar from '@/components/Sidebar'

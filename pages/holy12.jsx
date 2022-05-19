@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 import { Container, Col, Row } from 'react-bootstrap'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { getRandomInt } from '@/components/utils'
 import { getTranslation } from '@/components/useTranslation'
 

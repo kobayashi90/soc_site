@@ -9,7 +9,7 @@ import styles from '../../styles/Album.module.scss'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl } from '@/components/utils'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const query = gql`

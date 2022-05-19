@@ -19,7 +19,7 @@ import ReactGA from 'react-ga'
 import { Settings } from 'luxon'
 // import Script from 'next/script'
 
-import { useApollo } from '@/lib/ApolloClient'
+import { useApollo } from '@/components/ApolloClient'
 import useUser from '@/components/useUser'
 import { skipAds } from '@/components/utils'
 import Header from '@/components/Header'

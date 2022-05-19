@@ -4,7 +4,7 @@ import Sidebar from '@/components/Sidebar'
 import { DateTime } from 'luxon'
 import classname from 'classnames'
 import Link from 'next/link'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 
 import style from '../../styles/letter.module.scss'
 

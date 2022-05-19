@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { gql } from '@apollo/client'
 import { Row, Col, Button } from 'react-bootstrap'
 
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import classname from 'classnames'
 import Sidebar from '@/components/Sidebar'

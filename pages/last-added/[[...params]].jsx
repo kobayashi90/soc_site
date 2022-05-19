@@ -9,7 +9,7 @@ import React from 'react'
 import classNames from 'classnames'
 
 import { getFullPageList, getPageList } from '@/components/utils'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const limit = 80

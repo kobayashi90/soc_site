@@ -7,8 +7,6 @@ import { gql, useMutation } from '@apollo/client'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
-import db from '../lib/startDB'
-
 const bigNono = { redirect: { permanent: false, destination: '/500' } }
 const mutation = gql`
   mutation updatePass($key: String!, $pass: String!){
@@ -20,14 +18,14 @@ export async function getServerSideProps ({ query }) {
   const { key } = query
   if (!key) return bigNono
 
-  const row = await db.models.forgor.findByPk(key)
-  if (!row) return bigNono
+  // const row = await db.models.forgor.findByPk(key)
+  // if (!row) return bigNono
 
   const now = DateTime.now()
-  const expires = DateTime.fromJSDate(row.expires)
+  // const expires = DateTime.fromJSDate(row.expires)
 
-  if (now > expires) return bigNono
-  else return { props: { qKey: key } }
+  // if (now > expires) return bigNono
+  /* else */ return { props: { qKey: key } }
 }
 
 export default function Forgor ({ qKey }) {

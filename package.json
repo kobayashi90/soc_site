@@ -1,11 +1,10 @@
 {
-  "name": "soc_site_nextjs",
-  "version": "0.1.0",
-  "private": true,
+  "name": "soc_site",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 58991 -H 127.0.0.1",
+    "start": "next start -H 127.0.0.1",
     "lint": "next lint",
     "sequelize": "sequelize-cli"
   },
@@ -17,7 +16,6 @@
     "@graphql-tools/resolvers-composition": "^6.4.1",
     "apollo-server-micro": "^3.4.0",
     "apollo-upload-client": "^17.0.0",
-    "babel-plugin-import-directory": "^1.1.0",
     "babel-register": "^6.26.0",
     "bcrypt": "^5.0.1",
     "blurhash": "^1.1.4",

@@ -4,7 +4,7 @@ import classname from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 import style from '../../styles/letter.module.scss'
 

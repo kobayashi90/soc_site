@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import Sidebar from '@/components/Sidebar'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
 
 const colProps = { xs: 6, md: 3 }
@@ -36,13 +36,13 @@ query searchAlbum($limit: Int){
 }
 `
 
-export async function /* getStaticProps */ getServerSideProps (context) {
+export async function getStaticProps (context) {
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { limit } })
 
   const localeStrings = await getTranslation(context.locale)
 
-  return { props: { ...data, localeStrings }/*, revalidate: 60 */ }
+  return { props: { ...data, localeStrings } }
 }
 
 const BlackButton = ({ href, name }) => (

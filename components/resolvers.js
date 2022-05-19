@@ -1,11 +1,8 @@
-import { AuthenticationError, ForbiddenError } from 'apollo-server-micro'
+import { AuthenticationError, ForbiddenError } from 'apollo-server-errors'
 import path from 'path'
 
 import { withSessionSsr } from './session'
-import { getPerms } from './user'
-import db from './startDB'
-import { getPlaiceholder } from '@/lib/plaiceholder/plaiceholder.ts'
-import { getImgColor } from './utils'
+import { getImgColor, processImage } from './utils'
 
 export const isAuthed = next => (root, args, context, info) => {
   if (!context.user) throw new AuthenticationError()
@@ -23,11 +20,9 @@ const hasPerm = perm => next => async (root, args, context, info) => {
 export const hasRole = role => [isAuthed, hasPerm(role)]
 export const hasRolePage = allowedRoles => withSessionSsr(async (context) => {
   const { req } = context
-  const { username } = req.session
-  const user = username ? await db.models.user.findByPk(username) : null
-  const perms = await getPerms(user)
+  const { permissions } = req.session
 
-  if (!perms.some(p => allowedRoles.includes(p))) return { redirect: { destination: '/404', permanent: false } }
+  if (!permissions.some(p => allowedRoles.includes(p))) return { redirect: { destination: '/404', permanent: false } }
   return { props: {} }
 })
 
@@ -42,10 +37,7 @@ async function solvePlaceholder (parent, folder) {
   const pathString = path.join('/var/www/soc_img/img', folder)
   const fullPath = path.join(pathString, `${id}.png`)
 
-  const result = await getPlaiceholder(fullPath)
-  const { base64 } = result
-
-  parent.placeholder = base64
+  parent.placeholder = await processImage(fullPath)
   await parent.save()
 }
 

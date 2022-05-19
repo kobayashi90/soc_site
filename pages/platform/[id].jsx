@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 import { Row, Col } from 'react-bootstrap'
 import Sidebar from '@/components/Sidebar'
 import Link from 'next/link'
-import { initializeApollo } from '@/lib/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 
 export async function /* getStaticProps */ getServerSideProps ({ params }) {
   const { id } = params
