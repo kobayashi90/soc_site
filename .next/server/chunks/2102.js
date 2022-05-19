@@ -25,9 +25,9 @@ apollo_upload_client__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencie
 let apolloClient;
 const isSSR = "undefined" === "undefined";
 const isDev = "production" === "development";
-const localPort = isDev ? 4000 : 58991;
 const isGithub = process.env.GITHUB_ACTIONS;
-const uri = isGithub ? "https://sittingonclouds.net/api" : isSSR || isDev ? `http://localhost:${localPort}` : `${window.origin}/api`;
+const baseUri = isGithub ? "https://sittingonclouds.net" : isSSR || isDev ? "http://localhost:4000" : window.origin;
+const uri = `${baseUri}/graphql`;
 function createApolloClient() {
     return new _apollo_client__WEBPACK_IMPORTED_MODULE_1__.ApolloClient({
         ssrMode: isSSR,
