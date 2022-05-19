@@ -36,7 +36,7 @@ query searchAlbum($limit: Int){
 }
 `
 
-export async function getStaticProps (context) {
+export async function /* getStaticProps */ getServerSideProps (context) {
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { limit } })
 
