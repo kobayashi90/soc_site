@@ -7,8 +7,9 @@ const isSSR = typeof window === 'undefined'
 const isDev = process.env.NODE_ENV === 'development'
 
 export const isGithub = process.env.GITHUB_ACTIONS
-const baseUri = isGithub ? 'https://sittingonclouds.net/graphql' : (isSSR || isDev ? 'http://localhost:4000' : `${window.origin}/graphql`)
-const uri = `${baseUri}/graphql`
+const uri = isGithub
+  ? 'https://sittingonclouds.net/graphql'
+  : (isSSR || isDev || window.origin === 'http://localhost:3000' ? 'http://localhost:4000' : `${window.origin}/graphql`)
 
 function createApolloClient () {
   return new ApolloClient({
