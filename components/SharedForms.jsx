@@ -99,7 +99,7 @@ export function DiscList (props) {
     <>
       <Row>
         <Col>
-          <Button className='mr-2' color='primary' onClick={() => setKeys([...keys, keys[keys.length - 1] + 1])}>
+          <Button className='me-2' color='primary' onClick={() => setKeys([...keys, keys[keys.length - 1] + 1])}>
             Add Disc
           </Button>
           <Button color='primary' onClick={() => setKeys(clearKeys(keys, ['discInput']))}>Remove empty discs</Button>
@@ -136,7 +136,7 @@ export function StoreDownloads (props) {
     <>
       <Row>
         <Col>
-          <Button className='mr-2' color='primary' onClick={() => setKeys([...keys, keys[keys.length - 1] + 1])}>
+          <Button className='me-2' color='primary' onClick={() => setKeys([...keys, keys[keys.length - 1] + 1])}>
             Add Store link
           </Button>
           <Button color='primary' onClick={() => setKeys(clearKeys(keys, ['storeInput']))}>Remove empty links</Button>
@@ -218,7 +218,7 @@ function DownloadList (props) {
             </Col>
             <Col md='auto' className='mt-auto'>
               <Form.Group>
-                <Button className='mr-2' color='primary' onClick={() => addLink(i)}>
+                <Button className='me-2' color='primary' onClick={() => addLink(i)}>
                   Add Download Link
                 </Button>
               </Form.Group>
@@ -291,7 +291,7 @@ export function Downloads (props) {
       <DownloadList valueList={newValues} setValueList={setNewValues} length={length} prefix={defaultValues.length} />
       <Row>
         <Col>
-          <Button className='mr-2' color='primary' onClick={() => setNewValues([...newValues, { id: `n${newValues.length}`, links: [] }])} >Add Download Section</Button>
+          <Button className='me-2' color='primary' onClick={() => setNewValues([...newValues, { id: `n${newValues.length}`, links: [] }])} >Add Download Section</Button>
         </Col>
       </Row>
     </>

@@ -43,7 +43,7 @@ export default function Sidebar (props) {
   const t = useTranslation()
 
   return (
-    <Col md={3} className={classNames(styles.root, 'p-3 ml-md-auto d-flex flex-column col-md-3')}>
+    <Col md={3} className={classNames(styles.root, 'p-3 ms-md-auto d-flex flex-column col-md-3')}>
       {index && (
         <>
           <Row className='side-menu'>

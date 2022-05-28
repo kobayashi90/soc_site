@@ -189,7 +189,7 @@ function UserRow (props) {
           />
         </td>
         <td>
-          <Button className='mr-2' onClick={() => setDeleteModal(!deleteModal)}>Remove</Button>
+          <Button className='me-2' onClick={() => setDeleteModal(!deleteModal)}>Remove</Button>
         </td>
       </tr>
     </>
@@ -246,7 +246,7 @@ function RoleRow ({ name, permissions, permissionList }) {
         </td>
       ))}
       <td>
-        <Button className='mr-2' onClick={handleUpdate}>Save</Button>
+        <Button className='me-2' onClick={handleUpdate}>Save</Button>
         <Button onClick={handleDelete}>Remove</Button>
       </td>
     </tr>

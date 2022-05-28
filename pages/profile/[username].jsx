@@ -100,7 +100,7 @@ export default function Profile (props) {
             </Row>
             <Row className='my-1'>
               <Col className='d-flex justify-content-center'>
-                <span className='font-weight-bold me-1'>Floating for:</span>
+                <span className='fw-bold me-1'>Floating for:</span>
                 <span>{floatDuration.toHuman()}</span>
               </Col>
             </Row>

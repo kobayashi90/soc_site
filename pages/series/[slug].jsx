@@ -121,25 +121,29 @@ export default function SeriesDetail (props) {
       </Head>
 
       <Row className='mt-3'>
-        <Col xs={12} md={4} className='blackblock w-md-auto'>
-          <div className='p-1 position-relative w-100 h-100'>
-            <Image
-              layout='fill'
-              placeholder='blur' blurDataURL={seriesOne.placeholder}
-              alt={seriesOne.name} src={getImageUrl(slug, 'series')} />
+        <Col xs={12} md={4}>
+          <div className='logoBox blackblock p-2 position-relative w-100' style={{ height: '150px' }}>
+            <div className='position-relative w-100 h-100'>
+              <Image
+                layout='fill' objectFit={'contain'}
+                placeholder='blur' blurDataURL={seriesOne.placeholder}
+                alt={seriesOne.name} src={getImageUrl(slug, 'series')} />
+            </div>
           </div>
         </Col>
-        <Col md={8} className='blackblock my-0 d-flex justify-content-center flex-column'>
-          <Row>
-            <Col md={12}>
-              <h1 className='text-center ost-title'>{seriesOne.name}</h1>
-            </Col>
-          </Row>
-          <Row className='my-1'>
-            <Col className='d-flex justify-content-center'>
-              <span className='fw-bold me-2'>First Release:</span><span> {gameList[0].releaseDate} - <a className='btn btn-link p-0 link' href={`/game/${gameList[0].slug}`}>{gameList[0].name}</a></span>
-            </Col>
-          </Row>
+        <Col md={8} className='mt-3 mt-md-0 my-0 d-flex justify-content-center flex-column'>
+          <div className='blackblock'>
+            <Row>
+              <Col md={12}>
+                <h1 className='text-center ost-title'>{seriesOne.name}</h1>
+              </Col>
+            </Row>
+            <Row className='my-1'>
+              <Col className='d-flex justify-content-center'>
+                <span className='fw-bold me-2'>First Release:</span><span> {gameList[0].releaseDate} - <a className='btn btn-link p-0 link' href={`/game/${gameList[0].slug}`}>{gameList[0].name}</a></span>
+              </Col>
+            </Row>
+          </div>
         </Col>
       </Row>
 

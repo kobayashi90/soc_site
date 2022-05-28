@@ -311,7 +311,7 @@ export default function Page (props) {
               <Col lg={6} className='blackblock px-10px'>
                 {album.vgmdb && (
                   <Row>
-                    <Col className='mb-2 ml-2'>
+                    <Col className='mb-2 ms-2'>
                       <span>{'Check album at'}:</span>
                       <a className='ms-2' target='_blank' rel='noopener noreferrer' href={album.vgmdb}>
                         <Image width={100} height={30} alt={'VGMdb'} src='/img/assets/vgmdblogo.png' />
