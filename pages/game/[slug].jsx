@@ -87,13 +87,13 @@ export default function GameDetail (props) {
           </Row>
           <Row className='my-1'>
             <Col className='d-flex justify-content-center'>
-              <span className='font-weight-bold mr-2'>Release Date:</span>
+                <span className='fw-bold mr-2'>Release Date:</span>
               <span>{DateTime.fromISO(releaseDate).setLocale('en-us').toLocaleString({ day: 'numeric', month: 'short', year: 'numeric' })}</span>
             </Col>
           </Row>
           <Row className='my-1'>
             <Col className='d-flex justify-content-center'>
-              <span className='font-weight-bold mr-2'>Publishers:</span>
+                <span className='fw-bold mr-2'>Publishers:</span>
               <span>
                 {publishers.map(({ id, name }, i) => (
                   <Fragment key={id}>
@@ -106,7 +106,7 @@ export default function GameDetail (props) {
           </Row>
           <Row className='my-1'>
             <Col className='d-flex justify-content-center'>
-              <span className='font-weight-bold mr-2'>Platforms:</span>
+                <span className='fw-bold mr-2'>Platforms:</span>
               <span>
                 {platforms.map(({ id, name }, i) => (
                   <Fragment key={id}>
@@ -119,7 +119,7 @@ export default function GameDetail (props) {
           </Row>
           <Row className='my-1'>
             <Col className='d-flex justify-content-center'>
-              <span className='font-weight-bold mr-2'>Series:</span>
+                <span className='fw-bold mr-2'>Series:</span>
               <span>
                 {series.map(({ slug, name }, i) => (
                   <Fragment key={slug}>
