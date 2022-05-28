@@ -3,7 +3,7 @@ import { gql, useMutation } from '@apollo/client'
 import { Container, Col, Row, Modal, Form, Button } from 'react-bootstrap'
 import { DateTime } from 'luxon'
 import Image from 'next/image'
-import ConfettiExplosion from 'react-confetti-explosion'
+// import ConfettiExplosion from 'react-confetti-explosion'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { initializeApollo } from '@/components/ApolloClient'
@@ -51,7 +51,7 @@ export async function getServerSideProps (context) {
   return { props: { userProfile: user } }
 }
 
-function Explosion (props) {
+/* function Explosion (props) {
   const { username } = props
   const [isExploding] = useState(username === 'ChitoWarlock')
 
@@ -60,7 +60,7 @@ function Explosion (props) {
       {isExploding && <ConfettiExplosion floorHeight={2000} floorWidth={2000} particleCount={250} />}
     </div>
   )
-}
+} */
 
 export default function Profile (props) {
   const { user } = useUser()
@@ -84,12 +84,12 @@ export default function Profile (props) {
       </Head>
       {user?.username === username && <EditProfile setProfile={setProfile} showProfile={showProfile} />}
       <Container>
-        <Explosion username={username} />
+        {/* <Explosion username={username} /> */}
         <Row className='mt-3'>
           <Col xs='auto' className='blackblock'>
             <div className='p-1 position-relative' style={{ height: '200px', width: '200px' }}>
               <Image style={{ borderRadius: '25px' }} layout='fill' alt={'placeholder'} src={imgUrl} blurDataURL={placeholder} />
-              {username === 'ChitoWarlock' && <img className='position-absolute' src='/img/assets/hat.png' style={{ height: '150px', width: '150px', top: '-70px', left: '25px', transform: 'rotate(10deg)' }}/>}
+              {/* <img className='position-absolute' src='/img/assets/hat.png' style={{ height: '150px', width: '150px', top: '-70px', left: '25px', transform: 'rotate(10deg)' }}/>} */}
             </div>
           </Col>
           <Col className='blackblock ms-3 my-0 d-flex justify-content-center flex-column'>
