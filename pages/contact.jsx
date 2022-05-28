@@ -14,7 +14,7 @@ export default function Contact () {
         </Row>
         <Row>
           <Col md={6} className='my-3 flex-grow-1'>
-            <h3 className='ml-0'>Requests</h3>
+            <h3 className='ms-0'>Requests</h3>
             <h2>How to Request</h2>
             <ul>
               <li>Join our <a href='https://discord.gg/x23SFbE'>Discord</a></li>
