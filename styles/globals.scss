@@ -103,6 +103,14 @@ nav {
   border-radius: 8px;
 }
 
+
+@media (min-width: 768px) { 
+  .logoBox {
+    height: 100% !important;
+  }
+}
+
+
 a {
   color: unset;
   text-decoration: none;
