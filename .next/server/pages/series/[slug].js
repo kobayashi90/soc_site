@@ -215,56 +215,65 @@ function SeriesDetail(props) {
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                         xs: 12,
                         md: 4,
-                        className: "blackblock w-md-auto",
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "p-1 position-relative w-100 h-100",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                layout: "fill",
-                                placeholder: "blur",
-                                blurDataURL: seriesOne.placeholder,
-                                alt: seriesOne.name,
-                                src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug1, "series")
+                            className: "logoBox blackblock p-2 position-relative w-100",
+                            style: {
+                                height: "150px"
+                            },
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "position-relative w-100 h-100",
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                    layout: "fill",
+                                    objectFit: "contain",
+                                    placeholder: "blur",
+                                    blurDataURL: seriesOne.placeholder,
+                                    alt: seriesOne.name,
+                                    src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug1, "series")
+                                })
                             })
                         })
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                         md: 8,
-                        className: "blackblock my-0 d-flex justify-content-center flex-column",
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                                    md: 12,
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                        className: "text-center ost-title",
-                                        children: seriesOne.name
+                        className: "mt-3 mt-md-0 my-0 d-flex justify-content-center flex-column",
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "blackblock",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                        md: 12,
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                            className: "text-center ost-title",
+                                            children: seriesOne.name
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                                    className: "my-1",
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                        className: "d-flex justify-content-center",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                className: "fw-bold me-2",
+                                                children: "First Release:"
+                                            }),
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                                children: [
+                                                    " ",
+                                                    gameList[0].releaseDate,
+                                                    " - ",
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                        className: "btn btn-link p-0 link",
+                                                        href: `/game/${gameList[0].slug}`,
+                                                        children: gameList[0].name
+                                                    })
+                                                ]
+                                            })
+                                        ]
                                     })
                                 })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                                className: "my-1",
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                                    className: "d-flex justify-content-center",
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            className: "fw-bold me-2",
-                                            children: "First Release:"
-                                        }),
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                            children: [
-                                                " ",
-                                                gameList[0].releaseDate,
-                                                " - ",
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                    className: "btn btn-link p-0 link",
-                                                    href: `/game/${gameList[0].slug}`,
-                                                    children: gameList[0].name
-                                                })
-                                            ]
-                                        })
-                                    ]
-                                })
-                            })
-                        ]
+                            ]
+                        })
                     })
                 ]
             }),

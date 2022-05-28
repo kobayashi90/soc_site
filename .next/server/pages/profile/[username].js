@@ -216,7 +216,7 @@ function Profile(props) {
                                             className: "d-flex justify-content-center",
                                             children: [
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                    className: "font-weight-bold me-1",
+                                                    className: "fw-bold me-1",
                                                     children: "Floating for:"
                                                 }),
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {

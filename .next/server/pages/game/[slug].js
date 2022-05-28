@@ -140,126 +140,135 @@ function GameDetail(props) {
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                         xs: 12,
                         md: 4,
-                        className: "blackblock w-md-auto",
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "p-1 position-relative w-100 h-100",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_6___default()), {
-                                layout: "fill",
-                                placeholder: "blur",
-                                alt: name1,
-                                src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug1, "game"),
-                                blurDataURL: placeholder
+                            className: "logoBox blackblock p-3 position-relative w-100",
+                            style: {
+                                height: "250px"
+                            },
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                className: "position-relative w-100 h-100",
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_6___default()), {
+                                    layout: "fill",
+                                    objectFit: "contain",
+                                    placeholder: "blur",
+                                    blurDataURL: placeholder,
+                                    alt: name1,
+                                    src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug1, "game")
+                                })
                             })
                         })
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                         md: 8,
-                        className: "blackblock my-0 d-flex justify-content-center flex-column",
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
-                                    md: 12,
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                        className: "text-center ost-title",
-                                        children: name1
+                        className: "mt-3 mt-md-0 my-0 d-flex justify-content-center flex-column",
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "blackblock",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
+                                        md: 12,
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                            className: "text-center ost-title",
+                                            children: name1
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                    className: "my-1",
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
+                                        className: "d-flex justify-content-center",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                className: "fw-bold me-2",
+                                                children: "Release Date:"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                children: luxon__WEBPACK_IMPORTED_MODULE_5__.DateTime.fromISO(releaseDate).setLocale("en-us").toLocaleString({
+                                                    day: "numeric",
+                                                    month: "short",
+                                                    year: "numeric"
+                                                })
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                    className: "my-1",
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
+                                        className: "d-flex justify-content-center",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                className: "fw-bold me-2",
+                                                children: "Publishers:"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                children: publishers.map(({ id , name  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                                className: "btn btn-link p-0 link",
+                                                                href: `/publisher/${id}`,
+                                                                children: name
+                                                            }),
+                                                            i !== publishers.length - 1 && ", "
+                                                        ]
+                                                    }, id)
+                                                )
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                    className: "my-1",
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
+                                        className: "d-flex justify-content-center",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                className: "fw-bold me-2",
+                                                children: "Platforms:"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                children: platforms.map(({ id , name  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                                className: "btn btn-link p-0 link",
+                                                                href: `/platform/${id}`,
+                                                                children: name
+                                                            }),
+                                                            i !== platforms.length - 1 && ", "
+                                                        ]
+                                                    }, id)
+                                                )
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                    className: "my-1",
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
+                                        className: "d-flex justify-content-center",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                className: "fw-bold me-2",
+                                                children: "Series:"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                children: series.map(({ slug , name  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                                className: "btn btn-link p-0 link",
+                                                                href: `/series/${slug}`,
+                                                                children: name
+                                                            }, slug),
+                                                            i !== series.length - 1 && ", "
+                                                        ]
+                                                    }, slug)
+                                                )
+                                            })
+                                        ]
                                     })
                                 })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
-                                className: "my-1",
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
-                                    className: "d-flex justify-content-center",
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            className: "font-weight-bold mr-2",
-                                            children: "Release Date:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            children: luxon__WEBPACK_IMPORTED_MODULE_5__.DateTime.fromISO(releaseDate).setLocale("en-us").toLocaleString({
-                                                day: "numeric",
-                                                month: "short",
-                                                year: "numeric"
-                                            })
-                                        })
-                                    ]
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
-                                className: "my-1",
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
-                                    className: "d-flex justify-content-center",
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            className: "font-weight-bold mr-2",
-                                            children: "Publishers:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            children: publishers.map(({ id , name  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-                                                    children: [
-                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                            className: "btn btn-link p-0 link",
-                                                            href: `/publisher/${id}`,
-                                                            children: name
-                                                        }),
-                                                        i !== publishers.length - 1 && ", "
-                                                    ]
-                                                }, id)
-                                            )
-                                        })
-                                    ]
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
-                                className: "my-1",
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
-                                    className: "d-flex justify-content-center",
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            className: "font-weight-bold mr-2",
-                                            children: "Platforms:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            children: platforms.map(({ id , name  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-                                                    children: [
-                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                            className: "btn btn-link p-0 link",
-                                                            href: `/platform/${id}`,
-                                                            children: name
-                                                        }),
-                                                        i !== platforms.length - 1 && ", "
-                                                    ]
-                                                }, id)
-                                            )
-                                        })
-                                    ]
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
-                                className: "my-1",
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
-                                    className: "d-flex justify-content-center",
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            className: "font-weight-bold mr-2",
-                                            children: "Series:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            children: series.map(({ slug , name  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-                                                    children: [
-                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                            className: "btn btn-link p-0 link",
-                                                            href: `/series/${slug}`,
-                                                            children: name
-                                                        }, slug),
-                                                        i !== series.length - 1 && ", "
-                                                    ]
-                                                }, slug)
-                                            )
-                                        })
-                                    ]
-                                })
-                            })
-                        ]
+                            ]
+                        })
                     })
                 ]
             }),

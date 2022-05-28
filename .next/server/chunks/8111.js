@@ -92,7 +92,7 @@ function Sidebar(props) {
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
         md: 3,
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default().root), "p-3 ml-md-auto d-flex flex-column col-md-3"),
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default().root), "p-3 ms-md-auto d-flex flex-column col-md-3"),
         children: [
             index && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {

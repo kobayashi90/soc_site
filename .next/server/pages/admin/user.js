@@ -277,7 +277,7 @@ function UserRow(props) {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Button, {
-                            className: "mr-2",
+                            className: "me-2",
                             onClick: ()=>setDeleteModal(!deleteModal)
                             ,
                             children: "Remove"
@@ -366,7 +366,7 @@ function RoleRow({ name , permissions: permissions1 , permissionList  }) {
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("td", {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Button, {
-                        className: "mr-2",
+                        className: "me-2",
                         onClick: handleUpdate,
                         children: "Save"
                     }),
