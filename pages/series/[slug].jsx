@@ -50,7 +50,7 @@ export const getServerSideProps = async ({ params, req }) => {
 function AlbumBox (props) {
   const { id, title, coming = false, placeholder } = props
   return (
-    <Col xs={6} className='py-0 px-2 mb-3'>
+    <Col xs={12} md={6} className='py-0 px-2 mb-3'>
       <div className={classNames(AlbumBoxStyles.albumBox, 'd-flex m-0 w-100 h-100')} style={{
         whiteSpace: 'nowrap',
         textAlign: 'center',
