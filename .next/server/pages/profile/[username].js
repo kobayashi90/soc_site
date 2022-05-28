@@ -26,28 +26,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5675);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_confetti_explosion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4945);
-/* harmony import */ var react_confetti_explosion__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_confetti_explosion__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6112);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2102);
-/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9139);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9738);
-/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(684);
-/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1187);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(2446);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(968);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_14__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_9__]);
-([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_9__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6112);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2102);
+/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9139);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9738);
+/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(684);
+/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1187);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2446);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(968);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_13__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__]);
+([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
 
 
 
-
+// import ConfettiExplosion from 'react-confetti-explosion'
 
 
 
@@ -82,7 +80,7 @@ const query = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
 async function getServerSideProps(context) {
     const { params  } = context;
     const { username  } = params;
-    const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__/* .initializeApollo */ ["in"])();
+    const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
         query,
         variables: {
@@ -102,24 +100,17 @@ async function getServerSideProps(context) {
         }
     };
 }
-function Explosion(props) {
-    const { username  } = props;
-    const { 0: isExploding  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(username === "ChitoWarlock");
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: "h-100 w-100",
-        style: {
-            position: "absolute",
-            pointerEvents: "none"
-        },
-        children: isExploding && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_confetti_explosion__WEBPACK_IMPORTED_MODULE_6___default()), {
-            floorHeight: 2000,
-            floorWidth: 2000,
-            particleCount: 250
-        })
-    });
-}
-function Profile(props) {
-    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)();
+/* function Explosion (props) {
+  const { username } = props
+  const [isExploding] = useState(username === 'ChitoWarlock')
+
+  return (
+    <div className='h-100 w-100' style={{ position: 'absolute', pointerEvents: 'none' }}>
+      {isExploding && <ConfettiExplosion floorHeight={2000} floorWidth={2000} particleCount={250} />}
+    </div>
+  )
+} */ function Profile(props) {
+    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
     const { userProfile  } = props;
     const { comments , favorites , imgUrl , placeholder , username  } = userProfile;
     const albumList = [
@@ -137,7 +128,7 @@ function Profile(props) {
     });
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_14___default()), {
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_13___default()), {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:url",
@@ -159,43 +150,27 @@ function Profile(props) {
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Container, {
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Explosion, {
-                        username: username
-                    }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
                         className: "mt-3",
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
                                 xs: "auto",
                                 className: "blackblock",
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                     className: "p-1 position-relative",
                                     style: {
                                         height: "200px",
                                         width: "200px"
                                     },
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                            style: {
-                                                borderRadius: "25px"
-                                            },
-                                            layout: "fill",
-                                            alt: "placeholder",
-                                            src: imgUrl,
-                                            blurDataURL: placeholder
-                                        }),
-                                        username === "ChitoWarlock" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                            className: "position-absolute",
-                                            src: "/img/assets/hat.png",
-                                            style: {
-                                                height: "150px",
-                                                width: "150px",
-                                                top: "-70px",
-                                                left: "25px",
-                                                transform: "rotate(10deg)"
-                                            }
-                                        })
-                                    ]
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                        style: {
+                                            borderRadius: "25px"
+                                        },
+                                        layout: "fill",
+                                        alt: "placeholder",
+                                        src: imgUrl,
+                                        blurDataURL: placeholder
+                                    })
                                 })
                             }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
@@ -242,7 +217,7 @@ function Profile(props) {
                             })
                         ]
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
                         comments: comments
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
@@ -262,7 +237,7 @@ function Profile(props) {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
                         className: "justify-content-center",
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__/* .AlbumBoxList */ .X, {
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_6__/* .AlbumBoxList */ .X, {
                             colProps: {
                                 md: 3,
                                 xs: 6
@@ -283,23 +258,23 @@ const userMutation = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
 `;
 function EditProfile(props) {
     const { showProfile , setProfile  } = props;
-    const { user , refetch  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z)();
+    const { user , refetch  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
     const [mutateUser, { loading: loadingUser  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(userMutation);
     const handleUpdateUser = (ev)=>{
         ev.preventDefault();
-        const variables = form_serialize__WEBPACK_IMPORTED_MODULE_11___default()(ev.target, {
+        const variables = form_serialize__WEBPACK_IMPORTED_MODULE_10___default()(ev.target, {
             hash: true
         });
         variables.pfp = ev.target.elements.pfp.files[0];
         mutateUser({
             variables
         }).then(()=>{
-            react_toastify__WEBPACK_IMPORTED_MODULE_12__.toast.success("User updated succesfully!");
+            react_toastify__WEBPACK_IMPORTED_MODULE_11__.toast.success("User updated succesfully!");
             refetch();
             setProfile(false);
         }).catch((err)=>{
             if (false) {}
-            react_toastify__WEBPACK_IMPORTED_MODULE_12__.toast.error("Failed to update user");
+            react_toastify__WEBPACK_IMPORTED_MODULE_11__.toast.error("Failed to update user");
         });
     };
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
@@ -394,7 +369,7 @@ function EditProfile(props) {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
                                 md: 6,
                                 className: "mx-auto",
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_10__/* .ButtonLoader */ .l, {
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_9__/* .ButtonLoader */ .l, {
                                     loading: loadingUser,
                                     type: "submit",
                                     className: "w-100",
@@ -615,13 +590,6 @@ module.exports = require("react-bootstrap");
 /***/ ((module) => {
 
 module.exports = require("react-bootstrap/SSRProvider");
-
-/***/ }),
-
-/***/ 4945:
-/***/ ((module) => {
-
-module.exports = require("react-confetti-explosion");
 
 /***/ }),
 

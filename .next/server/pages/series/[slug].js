@@ -113,7 +113,8 @@ const getServerSideProps = async ({ params , req  })=>{
 function AlbumBox(props) {
     const { id , title , coming =false , placeholder  } = props;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-        xs: 6,
+        xs: 12,
+        md: 6,
         className: "py-0 px-2 mb-3",
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
             className: classnames__WEBPACK_IMPORTED_MODULE_7___default()((_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumBox), "d-flex m-0 w-100 h-100"),
