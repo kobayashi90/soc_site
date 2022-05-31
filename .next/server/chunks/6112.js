@@ -86,14 +86,14 @@ function AlbumBox(props) {
         })
     });
 };
-function AlbumBoxList(props1) {
-    const { items , type , width , height , style , colProps ={}  } = props1;
-    return items.map((props)=>/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+function AlbumBoxList(props) {
+    const { items , type , width , height , style , colProps ={}  } = props;
+    return items.map((albumProps)=>/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
             ...colProps,
-            key: props.id,
+            key: albumProps.id,
             className: classnames__WEBPACK_IMPORTED_MODULE_3___default()((_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_7___default().albumBoxContainer), (_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_7___default())[type], "px-1 mb-2")
         }, /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AlbumBox, {
-            ...props,
+            ...albumProps,
             style: style,
             type: type,
             width: width,

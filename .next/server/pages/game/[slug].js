@@ -63,7 +63,7 @@ const query = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
           slug
           name
         }
-        albums {
+        albums (order: ["title"]) {
           id
           title
           releaseDate
@@ -100,9 +100,6 @@ const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0
 function GameDetail(props) {
     const { game , imageUrl  } = props;
     const { slug: slug1 , name: name1 , releaseDate , publishers , platforms , series , albums , placeholder , headerColor  } = game;
-    const albumList = [
-        ...albums
-    ];
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Container, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
@@ -282,8 +279,7 @@ function GameDetail(props) {
                         md: 3,
                         xs: 6
                     },
-                    items: albumList.sort((a, b)=>a.title > b.title
-                    )
+                    items: albums
                 })
             })
         ]

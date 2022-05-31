@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/FV_k_317E2iS769dU7CUr/_buildManifest.js",
-    "static/FV_k_317E2iS769dU7CUr/_ssgManifest.js",
-    "static/FV_k_317E2iS769dU7CUr/_middlewareManifest.js"
+    "static/A7W5QoRKnorsebrFs9e_j/_buildManifest.js",
+    "static/A7W5QoRKnorsebrFs9e_j/_ssgManifest.js",
+    "static/A7W5QoRKnorsebrFs9e_j/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -133,7 +133,7 @@
       "static/chunks/framework-4fadf02ee0c3c13f.js",
       "static/chunks/main-9c6d3b72cf3538e0.js",
       "static/css/7fb912d5acca5425.css",
-      "static/chunks/pages/game/[slug]-17ffac8d2eb2e4aa.js"
+      "static/chunks/pages/game/[slug]-29ae256056918481.js"
     ],
     "/game/list": [
       "static/chunks/webpack-d3ddf4bd5080698d.js",
