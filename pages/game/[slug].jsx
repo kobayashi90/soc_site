@@ -29,7 +29,7 @@ const query = gql`
           slug
           name
         }
-        albums {
+        albums (order: ["title"]) {
           id
           title
           releaseDate
@@ -55,7 +55,6 @@ const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${
 export default function GameDetail (props) {
   const { game, imageUrl } = props
   const { slug, name, releaseDate, publishers, platforms, series, albums, placeholder, headerColor } = game
-  const albumList = [...albums]
 
   return (
     <Container>
@@ -140,7 +139,7 @@ export default function GameDetail (props) {
 
       <hr className='style2 style-white' />
       <Row className='justify-content-center'>
-        <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={albumList.sort((a, b) => a.title > b.title)} />
+        <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={albums} />
       </Row>
 
     </Container>
