@@ -11,7 +11,6 @@
   "/anim/[id]": "pages/anim/[id].js",
   "/anim": "pages/anim.js",
   "/anim/list": "pages/anim/list.js",
-  "/api/revalidate": "pages/api/revalidate.js",
   "/forgor": "pages/forgor.js",
   "/game/[slug]": "pages/game/[slug].js",
   "/game": "pages/game.js",
