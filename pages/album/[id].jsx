@@ -426,16 +426,20 @@ function DirectButton (props) {
   const { directUrl } = props
   const t = useTranslation()
 
-  const disabled = directUrl === '/unauthorized'
+  const disabled = directUrl === 'false'
   const renderTooltip = (props) => (
     disabled
       ? <Tooltip {...props} id={styles.tooltip}>{t('Become_Donator')}</Tooltip>
       : <div />
   )
 
+  const ButtonRender = disabled
+    ? <Button variant="secondary" className={classNames(styles.download, styles.direct)} disabled={disabled}>{t('Direct')}</Button>
+    : <Button target="_blank" variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl}>{t('Direct')}</Button>
+
   return (
     <OverlayTrigger placement='top' overlay={renderTooltip}>
-      <Button target="_blank" variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl} disabled={disabled}>{t('Direct')}</Button>
+      {ButtonRender}
     </OverlayTrigger>
   )
 }
