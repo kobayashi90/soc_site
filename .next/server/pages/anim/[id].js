@@ -256,7 +256,7 @@ function Page(props) {
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__/* .AlbumBoxList */ .X, {
                                                 colProps: {
                                                     xs: 6,
-                                                    md: 2
+                                                    md: 3
                                                 },
                                                 items: albums,
                                                 style: {
