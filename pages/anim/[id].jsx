@@ -25,7 +25,7 @@ query animation ($id: ID) {
       slug 
       name
     }
-    albums {
+    albums (order: ["title"]) {
       id
       title
       createdAt
