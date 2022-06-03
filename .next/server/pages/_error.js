@@ -34,7 +34,7 @@ function _getInitialProps({ res , err  }) {
 }
 class Error extends _react.default.Component {
     render() {
-        const { statusCode  } = this.props;
+        const { statusCode , withDarkMode =true  } = this.props;
         const title = this.props.title || statusCodes[statusCode] || "An unexpected error has occurred";
         return /*#__PURE__*/ _react.default.createElement("div", {
             style: styles.error
@@ -45,12 +45,13 @@ class Error extends _react.default.Component {
                 .next-error-h1 {
                   border-right: 1px solid rgba(0, 0, 0, .3);
                 }
-                @media (prefers-color-scheme: dark) {
+                
+                ${withDarkMode ? `@media (prefers-color-scheme: dark) {
                   body { color: #fff; background: #000; }
                   .next-error-h1 {
                     border-right: 1px solid rgba(255, 255, 255, .3);
                   }
-                }`
+                }` : ""}`
             }
         }), statusCode ? /*#__PURE__*/ _react.default.createElement("h1", {
             className: "next-error-h1",

@@ -288,8 +288,7 @@ function AddAlbum(props) {
                                         ].map((label)=>({
                                                 label,
                                                 value: label.toLowerCase()
-                                            })
-                                        )
+                                            }))
                                     })
                                 ]
                             })
@@ -347,8 +346,7 @@ function AddAlbum(props) {
                                             options: classes.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
-                                                })
-                                            ),
+                                                })),
                                             onChange: (values)=>{
                                                 if (values && values.length === 1) setClasses(values[0].label);
                                                 else setClasses("");
@@ -371,8 +369,7 @@ function AddAlbum(props) {
                                             options: categories.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
-                                                })
-                                            )
+                                                }))
                                         })
                                     ]
                                 })
@@ -565,6 +562,20 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 

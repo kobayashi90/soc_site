@@ -67,16 +67,14 @@ function getPolyfillScripts(context, props) {
     // polyfills.js has to be rendered as nomodule without async
     // It also has to be the first script to load
     const { assetPrefix , buildManifest , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin ,  } = context;
-    return buildManifest.polyfillFiles.filter((polyfill)=>polyfill.endsWith(".js") && !polyfill.endsWith(".module.js")
-    ).map((polyfill)=>/*#__PURE__*/ _react.default.createElement("script", {
+    return buildManifest.polyfillFiles.filter((polyfill)=>polyfill.endsWith(".js") && !polyfill.endsWith(".module.js")).map((polyfill)=>/*#__PURE__*/ _react.default.createElement("script", {
             key: polyfill,
             defer: !disableOptimizedLoading,
             nonce: props.nonce,
             crossOrigin: props.crossOrigin || crossOrigin,
             noModule: true,
             src: `${assetPrefix}/_next/${polyfill}${devOnlyCacheBusterQueryString}`
-        })
-    );
+        }));
 }
 function hasComponentProps(child) {
     return !!child && !!child.props;
@@ -146,8 +144,7 @@ function getPreNextWorkerScripts(context, props) {
 function getPreNextScripts(context, props) {
     const { scriptLoader , disableOptimizedLoading , crossOrigin  } = context;
     const webWorkerScripts = getPreNextWorkerScripts(context, props);
-    const beforeInteractiveScripts = (scriptLoader.beforeInteractive || []).filter((script)=>script.src
-    ).map((file, index)=>{
+    const beforeInteractiveScripts = (scriptLoader.beforeInteractive || []).filter((script)=>script.src).map((file, index)=>{
         const { strategy , ...scriptProps } = file;
         var _defer;
         return /*#__PURE__*/ _react.default.createElement("script", Object.assign({}, scriptProps, {
@@ -177,10 +174,8 @@ function getDynamicChunks(context, props, files) {
 function getScripts(context, props, files) {
     var ref;
     const { assetPrefix , buildManifest , isDevelopment , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin ,  } = context;
-    const normalScripts = files.allFiles.filter((file)=>file.endsWith(".js")
-    );
-    const lowPriorityScripts = (ref = buildManifest.lowPriorityFiles) === null || ref === void 0 ? void 0 : ref.filter((file)=>file.endsWith(".js")
-    );
+    const normalScripts = files.allFiles.filter((file)=>file.endsWith(".js"));
+    const lowPriorityScripts = (ref = buildManifest.lowPriorityFiles) === null || ref === void 0 ? void 0 : ref.filter((file)=>file.endsWith(".js"));
     return [
         ...normalScripts,
         ...lowPriorityScripts
@@ -207,9 +202,12 @@ class Document extends _react.Component {
     }
 }
 exports["default"] = Document;
-Document.__next_internal_document = function InternalFunctionDocument() {
+// Add a special property to the built-in `Document` component so later we can
+// identify if a user customized `Document` is used or not.
+const InternalFunctionDocument = function InternalFunctionDocument() {
     return /*#__PURE__*/ _react.default.createElement(Html, null, /*#__PURE__*/ _react.default.createElement(Head, null), /*#__PURE__*/ _react.default.createElement("body", null, /*#__PURE__*/ _react.default.createElement(Main, null), /*#__PURE__*/ _react.default.createElement(NextScript, null)));
 };
+Document[_constants.NEXT_BUILTIN_DOCUMENT] = InternalFunctionDocument;
 function Html(props) {
     const { inAmpMode , docComponentsRendered , locale  } = (0, _react).useContext(_htmlContext.HtmlContext);
     docComponentsRendered.Html = true;
@@ -231,8 +229,7 @@ function AmpStyles({ styles  }) {
         // @ts-ignore Property 'props' does not exist on type ReactElement
         styles.props.children.forEach((child)=>{
             if (Array.isArray(child)) {
-                child.forEach((el)=>hasStyles(el) && curStyles.push(el)
-                );
+                child.forEach((el)=>hasStyles(el) && curStyles.push(el));
             } else if (hasStyles(child)) {
                 curStyles.push(child);
             }
@@ -241,26 +238,22 @@ function AmpStyles({ styles  }) {
     /* Add custom styles before AMP styles to prevent accidental overrides */ return /*#__PURE__*/ _react.default.createElement("style", {
         "amp-custom": "",
         dangerouslySetInnerHTML: {
-            __html: curStyles.map((style)=>style.props.dangerouslySetInnerHTML.__html
-            ).join("").replace(/\/\*# sourceMappingURL=.*\*\//g, "").replace(/\/\*@ sourceURL=.*?\*\//g, "")
+            __html: curStyles.map((style)=>style.props.dangerouslySetInnerHTML.__html).join("").replace(/\/\*# sourceMappingURL=.*\*\//g, "").replace(/\/\*@ sourceURL=.*?\*\//g, "")
         }
     });
 }
 class Head extends _react.Component {
     getCssLinks(files) {
         const { assetPrefix , devOnlyCacheBusterQueryString , dynamicImports , crossOrigin , optimizeCss , optimizeFonts ,  } = this.context;
-        const cssFiles = files.allFiles.filter((f)=>f.endsWith(".css")
-        );
+        const cssFiles = files.allFiles.filter((f)=>f.endsWith(".css"));
         const sharedFiles = new Set(files.sharedFiles);
         // Unmanaged files are CSS files that will be handled directly by the
         // webpack runtime (`mini-css-extract-plugin`).
         let unmangedFiles = new Set([]);
-        let dynamicCssFiles = Array.from(new Set(dynamicImports.filter((file)=>file.endsWith(".css")
-        )));
+        let dynamicCssFiles = Array.from(new Set(dynamicImports.filter((file)=>file.endsWith(".css"))));
         if (dynamicCssFiles.length) {
             const existing = new Set(cssFiles);
-            dynamicCssFiles = dynamicCssFiles.filter((f)=>!(existing.has(f) || sharedFiles.has(f))
-            );
+            dynamicCssFiles = dynamicCssFiles.filter((f)=>!(existing.has(f) || sharedFiles.has(f)));
             unmangedFiles = new Set(dynamicCssFiles);
             cssFiles.push(...dynamicCssFiles);
         }
@@ -323,8 +316,7 @@ class Head extends _react.Component {
                     href: file.src,
                     as: "script",
                     crossOrigin: this.props.crossOrigin || crossOrigin
-                })
-            ),
+                })),
             ...preloadFiles.map((file)=>/*#__PURE__*/ _react.default.createElement("link", {
                     key: file,
                     nonce: this.props.nonce,
@@ -332,16 +324,14 @@ class Head extends _react.Component {
                     href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
                     as: "script",
                     crossOrigin: this.props.crossOrigin || crossOrigin
-                })
-            ), 
+                })), 
         ];
     }
     getBeforeInteractiveInlineScripts() {
         const { scriptLoader  } = this.context;
         const { nonce , crossOrigin  } = this.props;
-        return (scriptLoader.beforeInteractive || []).filter((script)=>!script.src && (script.dangerouslySetInnerHTML || script.children)
-        ).map((file, index)=>{
-            const { strategy , children , dangerouslySetInnerHTML , ...scriptProps } = file;
+        return (scriptLoader.beforeInteractive || []).filter((script)=>!script.src && (script.dangerouslySetInnerHTML || script.children)).map((file, index)=>{
+            const { strategy , children , dangerouslySetInnerHTML , src , ...scriptProps } = file;
             let html = "";
             if (dangerouslySetInnerHTML && dangerouslySetInnerHTML.__html) {
                 html = dangerouslySetInnerHTML.__html;
@@ -485,7 +475,7 @@ class Head extends _react.Component {
         });
         const files = getDocumentFiles(this.context.buildManifest, this.context.__NEXT_DATA__.page, inAmpMode);
         var _nonce, _nonce1;
-        return /*#__PURE__*/ _react.default.createElement("head", Object.assign({}, this.props), this.context.isDevelopment && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("style", {
+        return /*#__PURE__*/ _react.default.createElement("head", Object.assign({}, getHeadHTMLProps(this.props)), this.context.isDevelopment && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("style", {
             "data-next-hide-fouc": true,
             "data-ampdevmode": inAmpMode ? "true" : undefined,
             dangerouslySetInnerHTML: {
@@ -564,10 +554,14 @@ class NextScript extends _react.Component {
         return getPolyfillScripts(this.context, this.props);
     }
     static getInlineScriptSource(context) {
-        const { __NEXT_DATA__  } = context;
+        const { __NEXT_DATA__ , largePageDataBytes  } = context;
         try {
             const data = JSON.stringify(__NEXT_DATA__);
-            if (false) {}
+            const bytes = Buffer.from(data).byteLength;
+            const prettyBytes = (__webpack_require__(5955)/* ["default"] */ .Z);
+            if (largePageDataBytes && bytes > largePageDataBytes) {
+                console.warn(`Warning: data for page "${__NEXT_DATA__.page}" is ${prettyBytes(bytes)} which exceeds the threshold of ${prettyBytes(largePageDataBytes)}, this amount of data can reduce performance.\nSee more info here: https://nextjs.org/docs/messages/large-page-data`);
+            }
             return (0, _htmlescape).htmlEscapeJsonString(data);
         } catch (err) {
             if ((0, _isError).default(err) && err.message.indexOf("circular structure") !== -1) {
@@ -604,8 +598,7 @@ class NextScript extends _react.Component {
                     nonce: this.props.nonce,
                     crossOrigin: this.props.crossOrigin || crossOrigin,
                     "data-ampdevmode": true
-                })
-            ));
+                })));
         }
         if (false) {}
         const files = getDocumentFiles(this.context.buildManifest, this.context.__NEXT_DATA__.page, inAmpMode);
@@ -614,8 +607,7 @@ class NextScript extends _react.Component {
                 src: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
                 nonce: this.props.nonce,
                 crossOrigin: this.props.crossOrigin || crossOrigin
-            })
-        ) : null, disableRuntimeJS ? null : /*#__PURE__*/ _react.default.createElement("script", {
+            })) : null, disableRuntimeJS ? null : /*#__PURE__*/ _react.default.createElement("script", {
             id: "__NEXT_DATA__",
             type: "application/json",
             nonce: this.props.nonce,
@@ -631,8 +623,86 @@ NextScript.contextType = _htmlContext.HtmlContext;
 NextScript.safariNomoduleFix = '!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();';
 function getAmpPath(ampPath, asPath) {
     return ampPath || `${asPath}${asPath.includes("?") ? "&" : "?"}amp=1`;
+}
+function getHeadHTMLProps(props) {
+    const { crossOrigin , nonce , ...restProps } = props;
+    // This assignment is necessary for additional type checking to avoid unsupported attributes in <head>
+    const headProps = restProps;
+    return headProps;
 } //# sourceMappingURL=_document.js.map
 
+
+/***/ }),
+
+/***/ 5955:
+/***/ ((__unused_webpack_module, exports) => {
+
+var __webpack_unused_export__;
+
+__webpack_unused_export__ = ({
+    value: true
+});
+exports.Z = prettyBytes;
+function prettyBytes(number, options) {
+    if (!Number.isFinite(number)) {
+        throw new TypeError(`Expected a finite number, got ${typeof number}: ${number}`);
+    }
+    options = Object.assign({}, options);
+    if (options.signed && number === 0) {
+        return ' 0 B';
+    }
+    const isNegative = number < 0;
+    const prefix = isNegative ? '-' : options.signed ? '+' : '';
+    if (isNegative) {
+        number = -number;
+    }
+    if (number < 1) {
+        const numberString = toLocaleString(number, options.locale);
+        return prefix + numberString + ' B';
+    }
+    const exponent = Math.min(Math.floor(Math.log10(number) / 3), UNITS.length - 1);
+    number = Number((number / Math.pow(1000, exponent)).toPrecision(3));
+    const numberString = toLocaleString(number, options.locale);
+    const unit = UNITS[exponent];
+    return prefix + numberString + ' ' + unit;
+}
+/*
+MIT License
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/ const UNITS = [
+    'B',
+    'kB',
+    'MB',
+    'GB',
+    'TB',
+    'PB',
+    'EB',
+    'ZB',
+    'YB'
+];
+/*
+Formats the given number using `Number#toLocaleString`.
+- If locale is a string, the value is expected to be a locale-key (for example: `de`).
+- If locale is true, the system default locale is used for translation.
+- If no value for locale is specified, the number is returned unmodified.
+*/ const toLocaleString = (number, locale)=>{
+    let result = number;
+    if (typeof locale === 'string') {
+        result = number.toLocaleString(locale);
+    } else if (locale === true) {
+        result = number.toLocaleString();
+    }
+    return result;
+};
+
+//# sourceMappingURL=pretty-bytes.js.map
 
 /***/ }),
 

@@ -29,15 +29,11 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-const getImageUrl = (id, type = "album")=>`https://cdn.sittingonclouds.net/${type}/${id}.png`
-;
-const skipAds = (user)=>user && user.permissions.includes("SKIP_ADS")
-;
+const getImageUrl = (id, type = "album")=>`https://cdn.sittingonclouds.net/${type}/${id}.png`;
+const skipAds = (user)=>user && user.permissions.includes("SKIP_ADS");
 const getFullPageList = (count, limit)=>[
         ...Array(Math.ceil(count / limit))
-    ].map((v, i)=>i + 1
-    )
-;
+    ].map((v, i)=>i + 1);
 const getPageList = (fullPageList, pageLimit, page)=>{
     const pageList = [
         []
@@ -46,8 +42,7 @@ const getPageList = (fullPageList, pageLimit, page)=>{
         pageList[pageList.length - 1].push(n);
         if (n % pageLimit === 0) pageList.push([]);
     });
-    const currentListIndex = pageList.findIndex((l)=>l.includes(parseInt(page))
-    );
+    const currentListIndex = pageList.findIndex((l)=>l.includes(parseInt(page)));
     const currentList = pageList[currentListIndex];
     return {
         pageList,
@@ -57,27 +52,22 @@ const getPageList = (fullPageList, pageLimit, page)=>{
 };
 function clearKeys(keys, baseIds) {
     const remove = keys.reduce((acum, key)=>{
-        const values = baseIds.map((baseId)=>document.getElementById(`${baseId}${key}`).value
-        );
-        if (values.every((value)=>!value
-        )) acum.push(key);
+        const values = baseIds.map((baseId)=>document.getElementById(`${baseId}${key}`).value);
+        if (values.every((value)=>!value)) acum.push(key);
         return acum;
     }, []);
-    return keys.filter((k)=>!remove.includes(k)
-    );
+    return keys.filter((k)=>!remove.includes(k));
 }
 const slugify = (text)=>slugify__WEBPACK_IMPORTED_MODULE_0___default()(text, {
         lower: true,
         strict: true
-    })
-;
+    });
 const prepareForm = (e1)=>{
     const data = form_serialize__WEBPACK_IMPORTED_MODULE_1___default()(e1.target, {
         hash: true
     });
     data.releaseDate = new Date(data.releaseDate).toISOString().substring(0, 10);
-    if (data.artists) data.artists = data.artists.split(",").map((e)=>e.trim()
-    );
+    if (data.artists) data.artists = data.artists.split(",").map((e)=>e.trim());
     data.discs = data.discs.map((d, i)=>{
         const payload = d;
         payload.number = i;

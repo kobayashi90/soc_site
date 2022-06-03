@@ -332,8 +332,7 @@ function LoginButton(props) {
             }).then(()=>{
                 refetch();
                 setShow(false);
-            }).catch((error)=>console.error("An unexpected error happened:", error)
-            );
+            }).catch((error)=>console.error("An unexpected error happened:", error));
         } else setShow(true);
     };
     const submit = (e)=>{
@@ -359,8 +358,7 @@ function LoginButton(props) {
                 refetch();
                 setShow(false);
             }
-        }).catch((error)=>console.error("An unexpected error happened:", error)
-        );
+        }).catch((error)=>console.error("An unexpected error happened:", error));
     };
     if (navMobile) {
         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NavLink, {
@@ -383,8 +381,7 @@ function LoginButton(props) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal, {
                 show: show,
                 centered: true,
-                onHide: ()=>setShow(false)
-                ,
+                onHide: ()=>setShow(false),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal.Body, {
                     className: "m-3",
                     children: showForgor ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(ForgorForm, {}) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form, {
@@ -454,8 +451,7 @@ function LoginButton(props) {
                                     md: 6,
                                     className: "mx-auto",
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
-                                        onClick: ()=>setForgor(true)
-                                        ,
+                                        onClick: ()=>setForgor(true),
                                         className: "w-100",
                                         color: "primary",
                                         children: t("Recover password")
@@ -516,8 +512,7 @@ function RegisterProfileButton(props) {
             name: "Profile",
             className: "d-block d-sm-none"
         }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NavLink, {
-            onClick: ()=>setRegister(true)
-            ,
+            onClick: ()=>setRegister(true),
             name: "Register",
             className: "d-block d-sm-none"
         });
@@ -536,8 +531,7 @@ function RegisterProfileButton(props) {
                         })
                     })
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
-                    onClick: ()=>setRegister(true)
-                    ,
+                    onClick: ()=>setRegister(true),
                     className: "me-0",
                     variant: "primary",
                     children: t("Register")
@@ -546,8 +540,7 @@ function RegisterProfileButton(props) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal, {
                 show: showRegister,
                 centered: true,
-                onHide: ()=>setRegister(false)
-                ,
+                onHide: ()=>setRegister(false),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal.Body, {
                     className: "m-3",
                     children: showForgor ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(ForgorForm, {
@@ -759,8 +752,7 @@ function Header() {
                                         user && user.pages.map((p)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NavLink, {
                                                 href: p.url,
                                                 name: p.name
-                                            }, p.url)
-                                        )
+                                            }, p.url))
                                     ]
                                 })
                             }),
@@ -784,8 +776,7 @@ function Dropdown(props) {
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.NavDropdown.Item, {
                     children: t(name)
                 })
-            }, i)
-        )
+            }, i))
     });
 }
 function NavLink(props) {
@@ -834,8 +825,7 @@ function SearchBar() {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                 ref: ref,
-                onBlur: ()=>setOpen(false)
-                ,
+                onBlur: ()=>setOpen(false),
                 onKeyDown: onKeyDownHandler,
                 type: "text",
                 style: {
@@ -885,8 +875,7 @@ Object.keys(_locales_en_json__WEBPACK_IMPORTED_MODULE_2__).forEach((key)=>{
 });
 function useTranslation() {
     const locales = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_pages_app__WEBPACK_IMPORTED_MODULE_0__.LocaleContext);
-    const t = (key, placeholder)=>locales[key] || en[key]
-    ;
+    const t = (key, placeholder)=>locales[key] || en[key];
     return t;
 };
 async function getTranslation(locale = "en", ns = []) {
@@ -995,8 +984,7 @@ function Analytics() {
                 "www.sittingonclouds.com",
                 "www.sittingonclouds.org",
                 "www.sittingonclouds.ru"
-            ].filter((url)=>url !== window.location.host
-            );
+            ].filter((url)=>url !== window.location.host);
             console.log("Link domains: ", domains);
             react_ga__WEBPACK_IMPORTED_MODULE_9___default().initialize("UA-106185794-1", {
                 gaOptions: {

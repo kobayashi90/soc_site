@@ -2,6 +2,147 @@ exports.id = 1664;
 exports.ids = [1664];
 exports.modules = {
 
+/***/ 3468:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.addBasePath = addBasePath;
+var _addPathPrefix = __webpack_require__(1751);
+var _normalizeTrailingSlash = __webpack_require__(2700);
+const basePath =  false || "";
+function addBasePath(path, required) {
+    if (false) {}
+    return (0, _normalizeTrailingSlash).normalizePathTrailingSlash((0, _addPathPrefix).addPathPrefix(path, basePath));
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=add-base-path.js.map
+
+
+/***/ }),
+
+/***/ 4465:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.addLocale = void 0;
+var _normalizeTrailingSlash = __webpack_require__(2700);
+const addLocale = (path, ...args)=>{
+    if (true) {
+        return (0, _normalizeTrailingSlash).normalizePathTrailingSlash((__webpack_require__(3431).addLocale)(path, ...args));
+    }
+    return path;
+};
+exports.addLocale = addLocale;
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=add-locale.js.map
+
+
+/***/ }),
+
+/***/ 4643:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.detectDomainLocale = void 0;
+const detectDomainLocale = (...args)=>{
+    if (true) {
+        return (__webpack_require__(3539).detectDomainLocale)(...args);
+    }
+};
+exports.detectDomainLocale = detectDomainLocale;
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=detect-domain-locale.js.map
+
+
+/***/ }),
+
+/***/ 227:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.getDomainLocale = getDomainLocale;
+const basePath =  false || "";
+function getDomainLocale(path, locale, locales, domainLocales) {
+    if (true) {
+        const normalizeLocalePath = (__webpack_require__(2554).normalizeLocalePath);
+        const detectDomainLocale = (__webpack_require__(4643).detectDomainLocale);
+        const target = locale || normalizeLocalePath(path, locales).detectedLocale;
+        const domain = detectDomainLocale(domainLocales, undefined, target);
+        if (domain) {
+            const proto = `http${domain.http ? "" : "s"}://`;
+            const finalLocale = target === domain.defaultLocale ? "" : `/${target}`;
+            return `${proto}${domain.domain}${basePath}${finalLocale}${path}`;
+        }
+        return false;
+    } else {}
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=get-domain-locale.js.map
+
+
+/***/ }),
+
+/***/ 928:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.hasBasePath = hasBasePath;
+var _pathHasPrefix = __webpack_require__(4567);
+const basePath =  false || "";
+function hasBasePath(path) {
+    return (0, _pathHasPrefix).pathHasPrefix(path, basePath);
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=has-base-path.js.map
+
+
+/***/ }),
+
 /***/ 1551:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -13,8 +154,12 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var _react = _interopRequireDefault(__webpack_require__(6689));
 var _router = __webpack_require__(1003);
-var _router1 = __webpack_require__(880);
+var _addLocale = __webpack_require__(4465);
+var _routerContext = __webpack_require__(4964);
+var _appRouterContext = __webpack_require__(3280);
 var _useIntersection = __webpack_require__(9246);
+var _getDomainLocale = __webpack_require__(227);
+var _addBasePath = __webpack_require__(3468);
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         default: obj
@@ -47,6 +192,8 @@ function _objectWithoutPropertiesLoose(source, excluded) {
     }
     return target;
 }
+// @ts-ignore useTransition exist
+const hasUseTransition = typeof _react.default.useTransition !== "undefined";
 const prefetched = {};
 function prefetch(router, href, as, options) {
     if (true) return;
@@ -66,7 +213,7 @@ function isModifiedEvent(event) {
     const { target  } = event.currentTarget;
     return target && target !== "_self" || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.nativeEvent && event.nativeEvent.which === 2;
 }
-function linkClicked(e, router, href, as, replace, shallow, scroll, locale) {
+function linkClicked(e, router, href, as, replace, shallow, scroll, locale, startTransition) {
     const { nodeName  } = e.currentTarget;
     // anchors inside an svg have a lowercase nodeName
     const isAnchorNodeName = nodeName.toUpperCase() === "A";
@@ -75,18 +222,24 @@ function linkClicked(e, router, href, as, replace, shallow, scroll, locale) {
         return;
     }
     e.preventDefault();
-    // replace state instead of push if prop is present
-    router[replace ? "replace" : "push"](href, as, {
-        shallow,
-        locale,
-        scroll
-    });
+    const navigate = ()=>{
+        // replace state instead of push if prop is present
+        router[replace ? "replace" : "push"](href, as, {
+            shallow,
+            locale,
+            scroll
+        });
+    };
+    if (startTransition) {
+        startTransition(navigate);
+    } else {
+        navigate();
+    }
 }
-const Link = /*#__PURE__*/ _react.default.forwardRef((props, forwardedRef)=>{
-    const { legacyBehavior =Boolean(false) !== true ,  } = props;
+const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(props, forwardedRef) {
     if (false) {}
     let children;
-    const { href: hrefProp , as: asProp , children: childrenProp , prefetch: prefetchProp , passHref , replace , shallow , scroll , locale , onClick , onMouseEnter  } = props, restProps = _objectWithoutProperties(props, [
+    const { href: hrefProp , as: asProp , children: childrenProp , prefetch: prefetchProp , passHref , replace , shallow , scroll , locale , onClick , onMouseEnter , legacyBehavior =Boolean(false) !== true  } = props, restProps = _objectWithoutProperties(props, [
         "href",
         "as",
         "children",
@@ -97,14 +250,22 @@ const Link = /*#__PURE__*/ _react.default.forwardRef((props, forwardedRef)=>{
         "scroll",
         "locale",
         "onClick",
-        "onMouseEnter"
+        "onMouseEnter",
+        "legacyBehavior"
     ]);
     children = childrenProp;
     if (legacyBehavior && typeof children === "string") {
         children = /*#__PURE__*/ _react.default.createElement("a", null, children);
     }
     const p = prefetchProp !== false;
-    const router = (0, _router1).useRouter();
+    const [, /* isPending */ startTransition] = hasUseTransition ? // @ts-ignore useTransition exists
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    _react.default.useTransition() : [];
+    let router = _react.default.useContext(_routerContext.RouterContext);
+    const appRouter = _react.default.useContext(_appRouterContext.AppRouterContext);
+    if (appRouter) {
+        router = appRouter;
+    }
     const { href , as  } = _react.default.useMemo(()=>{
         const [resolvedHref, resolvedAs] = (0, _router).resolveHref(router, hrefProp, true);
         return {
@@ -178,7 +339,7 @@ const Link = /*#__PURE__*/ _react.default.forwardRef((props, forwardedRef)=>{
                 child.props.onClick(e);
             }
             if (!e.defaultPrevented) {
-                linkClicked(e, router, href, as, replace, shallow, scroll, locale);
+                linkClicked(e, router, href, as, replace, shallow, scroll, locale, appRouter ? startTransition : undefined);
             }
         },
         onMouseEnter: (e)=>{
@@ -201,17 +362,108 @@ const Link = /*#__PURE__*/ _react.default.forwardRef((props, forwardedRef)=>{
         const curLocale = typeof locale !== "undefined" ? locale : router && router.locale;
         // we only render domain locales if we are currently on a domain locale
         // so that locale links are still visitable in development/preview envs
-        const localeDomain = router && router.isLocaleDomain && (0, _router).getDomainLocale(as, curLocale, router && router.locales, router && router.domainLocales);
-        childProps.href = localeDomain || (0, _router).addBasePath((0, _router).addLocale(as, curLocale, router && router.defaultLocale));
+        const localeDomain = router && router.isLocaleDomain && (0, _getDomainLocale).getDomainLocale(as, curLocale, router.locales, router.domainLocales);
+        childProps.href = localeDomain || (0, _addBasePath).addBasePath((0, _addLocale).addLocale(as, curLocale, router && router.defaultLocale));
     }
     return legacyBehavior ? /*#__PURE__*/ _react.default.cloneElement(child, childProps) : /*#__PURE__*/ _react.default.createElement("a", Object.assign({}, restProps, childProps), children);
 });
 var _default = Link;
 exports["default"] = _default;
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
 } //# sourceMappingURL=link.js.map
+
+
+/***/ }),
+
+/***/ 2554:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.normalizeLocalePath = void 0;
+const normalizeLocalePath = (pathname, locales)=>{
+    if (true) {
+        return (__webpack_require__(4014).normalizeLocalePath)(pathname, locales);
+    }
+    return {
+        pathname,
+        detectedLocale: undefined
+    };
+};
+exports.normalizeLocalePath = normalizeLocalePath;
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=normalize-locale-path.js.map
+
+
+/***/ }),
+
+/***/ 2813:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.removeBasePath = removeBasePath;
+var _hasBasePath = __webpack_require__(928);
+const basePath =  false || "";
+function removeBasePath(path) {
+    if (false) {}
+    path = path.slice(basePath.length);
+    if (!path.startsWith("/")) path = `/${path}`;
+    return path;
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=remove-base-path.js.map
+
+
+/***/ }),
+
+/***/ 6876:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+exports.removeLocale = removeLocale;
+var _parsePath = __webpack_require__(8854);
+function removeLocale(path, locale) {
+    if (true) {
+        const { pathname  } = (0, _parsePath).parsePath(path);
+        const pathLower = pathname.toLowerCase();
+        const localeLower = locale === null || locale === void 0 ? void 0 : locale.toLowerCase();
+        return locale && (pathLower.startsWith(`/${localeLower}/`) || pathLower === `/${localeLower}`) ? `${pathname.length === locale.length + 1 ? `/` : ``}${path.slice(locale.length + 1)}` : path;
+    }
+    return path;
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=remove-locale.js.map
 
 
 /***/ }),
@@ -230,6 +482,7 @@ exports.getClientBuildManifest = getClientBuildManifest;
 exports.getMiddlewareManifest = getMiddlewareManifest;
 exports.createRouteLoader = createRouteLoader;
 var _getAssetPathFromRoute = _interopRequireDefault(__webpack_require__(9565));
+var _trustedTypes = __webpack_require__(5407);
 var _requestIdleCallback = __webpack_require__(4686);
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -258,8 +511,7 @@ function withFuture(key, map, generator) {
         future: prom
     });
     return generator ? generator() // eslint-disable-next-line no-sequences
-    .then((value)=>(resolver(value), value)
-    ).catch((err)=>{
+    .then((value)=>(resolver(value), value)).catch((err)=>{
         map.delete(key);
         throw err;
     }) : prom;
@@ -309,8 +561,7 @@ function appendScript(src, script) {
         // 1. Setup success/failure hooks in case the browser synchronously
         //    executes when `src` is set.
         script.onload = resolve;
-        script.onerror = ()=>reject(markAssetError(new Error(`Failed to load script: ${src}`)))
-        ;
+        script.onerror = ()=>reject(markAssetError(new Error(`Failed to load script: ${src}`)));
         // 2. Configure the cross-origin attribute before setting `src` in case the
         //    browser begins to fetch.
         script.crossOrigin = undefined;
@@ -340,8 +591,7 @@ function resolvePromiseWithTimeout(p, ms, err) {
                     if (!cancelled) {
                         reject(err);
                     }
-                }, ms)
-            );
+                }, ms));
         }
     });
 }
@@ -378,13 +628,10 @@ function getFilesForRoute(assetPrefix, route) {
         if (!(route in manifest)) {
             throw markAssetError(new Error(`Failed to lookup route: ${route}`));
         }
-        const allFiles = manifest[route].map((entry)=>assetPrefix + "/_next/" + encodeURI(entry)
-        );
+        const allFiles = manifest[route].map((entry)=>assetPrefix + "/_next/" + encodeURI(entry));
         return {
-            scripts: allFiles.filter((v)=>v.endsWith(".js")
-            ),
-            css: allFiles.filter((v)=>v.endsWith(".css")
-            )
+            scripts: allFiles.filter((v)=>v.endsWith(".js")).map((v)=>(0, _trustedTypes).__unsafeCreateTrustedScriptURL(v)),
+            css: allFiles.filter((v)=>v.endsWith(".css"))
         };
     });
 }
@@ -398,7 +645,7 @@ function createRouteLoader(assetPrefix) {
         // disposed and readded. Executing scripts twice has no functional
         // differences
         if (true) {
-            let prom = loadedScripts.get(src);
+            let prom = loadedScripts.get(src.toString());
             if (prom) {
                 return prom;
             }
@@ -406,7 +653,7 @@ function createRouteLoader(assetPrefix) {
             if (document.querySelector(`script[src^="${src}"]`)) {
                 return Promise.resolve();
             }
-            loadedScripts.set(src, prom = appendScript(src));
+            loadedScripts.set(src.toString(), prom = appendScript(src));
             return prom;
         } else {}
     }
@@ -422,8 +669,7 @@ function createRouteLoader(assetPrefix) {
             return res.text().then((text)=>({
                     href: href,
                     content: text
-                })
-            );
+                }));
         }).catch((err)=>{
             throw markAssetError(err);
         }));
@@ -434,15 +680,12 @@ function createRouteLoader(assetPrefix) {
             return withFuture(route, entrypoints);
         },
         onEntrypoint (route, execute) {
-            (execute ? Promise.resolve().then(()=>execute()
-            ).then((exports)=>({
+            (execute ? Promise.resolve().then(()=>execute()).then((exports)=>({
                     component: exports && exports.default || exports,
                     exports: exports
-                })
-            , (err)=>({
+                }), (err)=>({
                     error: err
-                })
-            ) : Promise.resolve(undefined)).then((input)=>{
+                })) : Promise.resolve(undefined)).then((input)=>{
                 const old = entrypoints.get(route);
                 if (old && "resolve" in old) {
                     if (input) {
@@ -475,8 +718,7 @@ function createRouteLoader(assetPrefix) {
                     return this.whenEntrypoint(route).then((entrypoint)=>({
                             entrypoint,
                             styles: res[1]
-                        })
-                    );
+                        }));
                 }), MS_MAX_IDLE_DELAY, markAssetError(new Error(`Route did not complete loading: ${route}`))).then(({ entrypoint , styles  })=>{
                     const res = Object.assign({
                         styles: styles
@@ -503,16 +745,16 @@ function createRouteLoader(assetPrefix) {
                 // Don't prefetch if using 2G or if Save-Data is enabled.
                 if (cn.saveData || /2g/.test(cn.effectiveType)) return Promise.resolve();
             }
-            return getFilesForRoute(assetPrefix, route).then((output)=>Promise.all(canPrefetch ? output.scripts.map((script)=>prefetchViaDom(script, "script")
-                ) : [])
-            ).then(()=>{
-                (0, _requestIdleCallback).requestIdleCallback(()=>this.loadRoute(route, true).catch(()=>{})
-                );
+            return getFilesForRoute(assetPrefix, route).then((output)=>Promise.all(canPrefetch ? output.scripts.map((script)=>prefetchViaDom(script.toString(), "script")) : [])).then(()=>{
+                (0, _requestIdleCallback).requestIdleCallback(()=>this.loadRoute(route, true).catch(()=>{}));
             }).catch(()=>{});
         }
     };
 }
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
 } //# sourceMappingURL=route-loader.js.map
@@ -520,199 +762,37 @@ if (typeof exports.default === "function" || typeof exports.default === "object"
 
 /***/ }),
 
-/***/ 880:
-/***/ ((module, exports, __webpack_require__) => {
+/***/ 5407:
+/***/ ((module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
-Object.defineProperty(exports, "Router", ({
-    enumerable: true,
-    get: function() {
-        return _router.default;
-    }
-}));
-Object.defineProperty(exports, "withRouter", ({
-    enumerable: true,
-    get: function() {
-        return _withRouter.default;
-    }
-}));
-exports.useRouter = useRouter;
-exports.createRouter = createRouter;
-exports.makePublicRouterInstance = makePublicRouterInstance;
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(6689));
-var _router = _interopRequireDefault(__webpack_require__(1003));
-var _routerContext = __webpack_require__(4964);
-var _isError = _interopRequireDefault(__webpack_require__(676));
-var _withRouter = _interopRequireDefault(__webpack_require__(9977));
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
+exports.__unsafeCreateTrustedScriptURL = __unsafeCreateTrustedScriptURL;
+/**
+ * Stores the Trusted Types Policy. Starts as undefined and can be set to null
+ * if Trusted Types is not supported in the browser.
+ */ let policy;
+/**
+ * Getter for the Trusted Types Policy. If it is undefined, it is instantiated
+ * here or set to null if Trusted Types is not supported in the browser.
+ */ function getPolicy() {
+    if (typeof policy === "undefined" && "undefined" !== "undefined") { var ref; }
+    return policy;
 }
-const singletonRouter = {
-    router: null,
-    readyCallbacks: [],
-    ready (cb) {
-        if (this.router) return cb();
-        if (false) {}
-    }
-};
-// Create public properties and methods of the router in the singletonRouter
-const urlPropertyFields = [
-    "pathname",
-    "route",
-    "query",
-    "asPath",
-    "components",
-    "isFallback",
-    "basePath",
-    "locale",
-    "locales",
-    "defaultLocale",
-    "isReady",
-    "isPreview",
-    "isLocaleDomain",
-    "domainLocales", 
-];
-const routerEvents = [
-    "routeChangeStart",
-    "beforeHistoryChange",
-    "routeChangeComplete",
-    "routeChangeError",
-    "hashChangeStart",
-    "hashChangeComplete", 
-];
-const coreMethodFields = [
-    "push",
-    "replace",
-    "reload",
-    "back",
-    "prefetch",
-    "beforePopState", 
-];
-// Events is a static property on the router, the router doesn't have to be initialized to use it
-Object.defineProperty(singletonRouter, "events", {
-    get () {
-        return _router.default.events;
-    }
-});
-urlPropertyFields.forEach((field)=>{
-    // Here we need to use Object.defineProperty because we need to return
-    // the property assigned to the actual router
-    // The value might get changed as we change routes and this is the
-    // proper way to access it
-    Object.defineProperty(singletonRouter, field, {
-        get () {
-            const router = getRouter();
-            return router[field];
-        }
+function __unsafeCreateTrustedScriptURL(url) {
+    var ref;
+    return ((ref = getPolicy()) === null || ref === void 0 ? void 0 : ref.createScriptURL(url)) || url;
+}
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
     });
-});
-coreMethodFields.forEach((field)=>{
-    singletonRouter[field] = (...args)=>{
-        const router = getRouter();
-        return router[field](...args);
-    };
-});
-routerEvents.forEach((event)=>{
-    singletonRouter.ready(()=>{
-        _router.default.events.on(event, (...args)=>{
-            const eventField = `on${event.charAt(0).toUpperCase()}${event.substring(1)}`;
-            const _singletonRouter = singletonRouter;
-            if (_singletonRouter[eventField]) {
-                try {
-                    _singletonRouter[eventField](...args);
-                } catch (err) {
-                    console.error(`Error when running the Router event: ${eventField}`);
-                    console.error((0, _isError).default(err) ? `${err.message}\n${err.stack}` : err + "");
-                }
-            }
-        });
-    });
-});
-function getRouter() {
-    if (!singletonRouter.router) {
-        const message = "No router instance found.\n" + 'You should only use "next/router" on the client side of your app.\n';
-        throw new Error(message);
-    }
-    return singletonRouter.router;
-}
-var _default = singletonRouter;
-exports["default"] = _default;
-function useRouter() {
-    return _react.default.useContext(_routerContext.RouterContext);
-}
-function createRouter(...args) {
-    singletonRouter.router = new _router.default(...args);
-    singletonRouter.readyCallbacks.forEach((cb)=>cb()
-    );
-    singletonRouter.readyCallbacks = [];
-    return singletonRouter.router;
-}
-function makePublicRouterInstance(router) {
-    const scopedRouter = router;
-    const instance = {};
-    for (const property of urlPropertyFields){
-        if (typeof scopedRouter[property] === "object") {
-            instance[property] = Object.assign(Array.isArray(scopedRouter[property]) ? [] : {}, scopedRouter[property]) // makes sure query is not stateful
-            ;
-            continue;
-        }
-        instance[property] = scopedRouter[property];
-    }
-    // Events is a static property on the router, the router doesn't have to be initialized to use it
-    instance.events = _router.default.events;
-    coreMethodFields.forEach((field)=>{
-        instance[field] = (...args)=>{
-            return scopedRouter[field](...args);
-        };
-    });
-    return instance;
-}
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
     Object.assign(exports.default, exports);
     module.exports = exports.default;
-} //# sourceMappingURL=router.js.map
-
-
-/***/ }),
-
-/***/ 9977:
-/***/ ((module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports["default"] = withRouter;
-var _react = _interopRequireDefault(__webpack_require__(6689));
-var _router = __webpack_require__(880);
-function withRouter(ComposedComponent) {
-    function WithRouterWrapper(props) {
-        return /*#__PURE__*/ _react.default.createElement(ComposedComponent, Object.assign({
-            router: (0, _router).useRouter()
-        }, props));
-    }
-    WithRouterWrapper.getInitialProps = ComposedComponent.getInitialProps;
-    WithRouterWrapper.origGetInitialProps = ComposedComponent.origGetInitialProps;
-    if (false) {}
-    return WithRouterWrapper;
-}
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
-    Object.assign(exports.default, exports);
-    module.exports = exports.default;
-} //# sourceMappingURL=with-router.js.map
+} //# sourceMappingURL=trusted-types.js.map
 
 
 /***/ }),
@@ -725,17 +805,13 @@ if (typeof exports.default === "function" || typeof exports.default === "object"
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
-exports.getDomainLocale = getDomainLocale;
-exports.addLocale = addLocale;
-exports.delLocale = delLocale;
-exports.hasBasePath = hasBasePath;
-exports.addBasePath = addBasePath;
-exports.delBasePath = delBasePath;
 exports.isLocalURL = isLocalURL;
 exports.interpolateAs = interpolateAs;
 exports.resolveHref = resolveHref;
+exports.createKey = createKey;
 exports["default"] = void 0;
 var _normalizeTrailingSlash = __webpack_require__(2700);
+var _removeTrailingSlash = __webpack_require__(3297);
 var _routeLoader = __webpack_require__(2497);
 var _script = __webpack_require__(3573);
 var _isError = _interopRequireWildcard(__webpack_require__(676));
@@ -749,8 +825,14 @@ var _querystring = __webpack_require__(979);
 var _resolveRewrites = _interopRequireDefault(__webpack_require__(6052));
 var _routeMatcher = __webpack_require__(4226);
 var _routeRegex = __webpack_require__(5052);
-var _getMiddlewareRegex = __webpack_require__(4365);
 var _formatUrl = __webpack_require__(3938);
+var _detectDomainLocale = __webpack_require__(4643);
+var _parsePath = __webpack_require__(8854);
+var _addLocale = __webpack_require__(4465);
+var _removeLocale = __webpack_require__(6876);
+var _removeBasePath = __webpack_require__(2813);
+var _addBasePath = __webpack_require__(3468);
+var _hasBasePath = __webpack_require__(928);
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         default: obj
@@ -777,87 +859,19 @@ function _interopRequireWildcard(obj) {
         return newObj;
     }
 }
-let detectDomainLocale;
-if (true) {
-    detectDomainLocale = (__webpack_require__(3539).detectDomainLocale);
-}
-const basePath =  false || "";
 function buildCancellationError() {
     return Object.assign(new Error("Route Cancelled"), {
         cancelled: true
     });
 }
-function addPathPrefix(path, prefix) {
-    if (!path.startsWith("/") || !prefix) {
-        return path;
-    }
-    const pathname = pathNoQueryHash(path);
-    return (0, _normalizeTrailingSlash).normalizePathTrailingSlash(`${prefix}${pathname}`) + path.slice(pathname.length);
-}
-function hasPathPrefix(path, prefix) {
-    path = pathNoQueryHash(path);
-    return path === prefix || path.startsWith(prefix + "/");
-}
-function getDomainLocale(path, locale, locales, domainLocales) {
-    if (true) {
-        locale = locale || (0, _normalizeLocalePath).normalizeLocalePath(path, locales).detectedLocale;
-        const detectedDomain = detectDomainLocale(domainLocales, undefined, locale);
-        if (detectedDomain) {
-            return `http${detectedDomain.http ? "" : "s"}://${detectedDomain.domain}${basePath || ""}${locale === detectedDomain.defaultLocale ? "" : `/${locale}`}${path}`;
-        }
-        return false;
-    } else {}
-}
-function addLocale(path, locale, defaultLocale) {
-    if (true) {
-        if (locale && locale !== defaultLocale) {
-            const pathname = pathNoQueryHash(path);
-            const pathLower = pathname.toLowerCase();
-            const localeLower = locale.toLowerCase();
-            if (!hasPathPrefix(pathLower, "/" + localeLower) && !hasPathPrefix(pathLower, "/api")) {
-                return addPathPrefix(path, "/" + locale);
-            }
-        }
-    }
-    return path;
-}
-function delLocale(path, locale) {
-    if (true) {
-        const pathname = pathNoQueryHash(path);
-        const pathLower = pathname.toLowerCase();
-        const localeLower = locale && locale.toLowerCase();
-        return locale && (pathLower.startsWith("/" + localeLower + "/") || pathLower === "/" + localeLower) ? (pathname.length === locale.length + 1 ? "/" : "") + path.slice(locale.length + 1) : path;
-    }
-    return path;
-}
-function pathNoQueryHash(path) {
-    const queryIndex = path.indexOf("?");
-    const hashIndex = path.indexOf("#");
-    if (queryIndex > -1 || hashIndex > -1) {
-        path = path.substring(0, queryIndex > -1 ? queryIndex : hashIndex);
-    }
-    return path;
-}
-function hasBasePath(path) {
-    return hasPathPrefix(path, basePath);
-}
-function addBasePath(path) {
-    // we only add the basepath on relative urls
-    return addPathPrefix(path, basePath);
-}
-function delBasePath(path) {
-    path = path.slice(basePath.length);
-    if (!path.startsWith("/")) path = `/${path}`;
-    return path;
-}
 function isLocalURL(url) {
     // prevent a hydration mismatch on href for url with anchor refs
-    if (url.startsWith("/") || url.startsWith("#") || url.startsWith("?")) return true;
+    if (!(0, _utils).isAbsoluteUrl(url)) return true;
     try {
         // absolute urls can be local if they are on the same origin
         const locationOrigin = (0, _utils).getLocationOrigin();
         const resolved = new URL(url, locationOrigin);
-        return resolved.origin === locationOrigin && hasBasePath(resolved.pathname);
+        return resolved.origin === locationOrigin && (0, _hasBasePath).hasBasePath(resolved.pathname);
     } catch (_) {
         return false;
     }
@@ -885,8 +899,7 @@ function interpolateAs(route, asPathname, query) {
         return (optional || param in dynamicMatches) && (interpolatedRoute = interpolatedRoute.replace(replaced, repeat ? value.map(// path delimiter escaped since they are being inserted
         // into the URL and we expect URL encoded segments
         // when parsing dynamic route params
-        (segment)=>encodeURIComponent(segment)
-        ).join("/") : encodeURIComponent(value)) || "/");
+        (segment)=>encodeURIComponent(segment)).join("/") : encodeURIComponent(value)) || "/");
     })) {
         interpolatedRoute = "" // did not satisfy all requirements
         ;
@@ -973,15 +986,15 @@ function prepareUrlAs(router, url, as) {
     const asHadOrigin = resolvedAs && resolvedAs.startsWith(origin);
     resolvedHref = stripOrigin(resolvedHref);
     resolvedAs = resolvedAs ? stripOrigin(resolvedAs) : resolvedAs;
-    const preparedUrl = hrefHadOrigin ? resolvedHref : addBasePath(resolvedHref);
+    const preparedUrl = hrefHadOrigin ? resolvedHref : (0, _addBasePath).addBasePath(resolvedHref);
     const preparedAs = as ? stripOrigin(resolveHref(router, as)) : resolvedAs || resolvedHref;
     return {
         url: preparedUrl,
-        as: asHadOrigin ? preparedAs : addBasePath(preparedAs)
+        as: asHadOrigin ? preparedAs : (0, _addBasePath).addBasePath(preparedAs)
     };
 }
 function resolveDynamicRoute(pathname, pages) {
-    const cleanPathname = (0, _normalizeTrailingSlash).removePathTrailingSlash((0, _denormalizePagePath).denormalizePagePath(pathname));
+    const cleanPathname = (0, _removeTrailingSlash).removeTrailingSlash((0, _denormalizePagePath).denormalizePagePath(pathname));
     if (cleanPathname === "/404" || cleanPathname === "/_error") {
         return pathname;
     }
@@ -995,7 +1008,7 @@ function resolveDynamicRoute(pathname, pages) {
             }
         });
     }
-    return (0, _normalizeTrailingSlash).removePathTrailingSlash(pathname);
+    return (0, _removeTrailingSlash).removeTrailingSlash(pathname);
 }
 const manualScrollRestoration = (/* unused pure expression or super */ null && ( false && 0));
 const SSG_DATA_NOT_FOUND = Symbol("SSG_DATA_NOT_FOUND");
@@ -1012,7 +1025,11 @@ function fetchRetry(url, attempts, opts) {
         // > receiving cookies, always supply the `credentials: 'same-origin'`
         // > option instead of relying on the default.
         // https://github.com/github/fetch#caveats
-        credentials: "same-origin"
+        credentials: "same-origin",
+        method: opts.method || "GET",
+        headers: opts.isPrefetch ? {
+            purpose: "prefetch"
+        } : {}
     }).then((res)=>{
         if (!res.ok) {
             if (attempts > 1 && res.status >= 500) {
@@ -1030,33 +1047,49 @@ function fetchRetry(url, attempts, opts) {
             }
             throw new Error(`Failed to load static props`);
         }
-        return opts.text ? res.text() : res.json();
+        if (opts.method !== "HEAD") {
+            return opts.text ? res.text() : res.json();
+        }
     });
 }
-function fetchNextData(dataHref, isServerRender, text, inflightCache, persistCache) {
+const backgroundCache = {};
+function fetchNextData(dataHref, isServerRender, text, inflightCache, persistCache, isPrefetch) {
     const { href: cacheKey  } = new URL(dataHref, window.location.href);
+    const getData = (background = false)=>fetchRetry(dataHref, isServerRender ? 3 : 1, {
+            text,
+            isPrefetch,
+            method: background ? "HEAD" : "GET"
+        }).catch((err)=>{
+            // We should only trigger a server-side transition if this was caused
+            // on a client-side transition. Otherwise, we'd get into an infinite
+            // loop.
+            if (!isServerRender) {
+                (0, _routeLoader).markAssetError(err);
+            }
+            throw err;
+        }).then((data)=>{
+            if (!persistCache || "production" !== "production") {
+                delete inflightCache[cacheKey];
+            }
+            return data;
+        }).catch((err)=>{
+            delete inflightCache[cacheKey];
+            throw err;
+        });
     if (inflightCache[cacheKey] !== undefined) {
+        // we kick off a HEAD request in the background
+        // when a non-prefetch request is made to signal revalidation
+        if (!isPrefetch && persistCache && !backgroundCache[cacheKey]) {
+            backgroundCache[cacheKey] = getData(true).catch(()=>{}).then(()=>{
+                delete backgroundCache[cacheKey];
+            });
+        }
         return inflightCache[cacheKey];
     }
-    return inflightCache[cacheKey] = fetchRetry(dataHref, isServerRender ? 3 : 1, {
-        text
-    }).catch((err)=>{
-        // We should only trigger a server-side transition if this was caused
-        // on a client-side transition. Otherwise, we'd get into an infinite
-        // loop.
-        if (!isServerRender) {
-            (0, _routeLoader).markAssetError(err);
-        }
-        throw err;
-    }).then((data)=>{
-        if (!persistCache || "production" !== "production") {
-            delete inflightCache[cacheKey];
-        }
-        return data;
-    }).catch((err)=>{
-        delete inflightCache[cacheKey];
-        throw err;
-    });
+    return inflightCache[cacheKey] = getData();
+}
+function createKey() {
+    return Math.random().toString(36).slice(2, 10);
 }
 class Router {
     constructor(pathname1, query1, as1, { initialProps , pageLoader , App , wrapApp , Component , err , subscription , isFallback , locale , locales , defaultLocale , domainLocales , isPreview , isRsc  }){
@@ -1066,8 +1099,11 @@ class Router {
         this.sdr = {};
         // In-flight middleware preflight requests
         this.sde = {};
-        this._idx = 0;
+        this.isFirstPopStateEvent = true;
+        this._key = createKey();
         this.onPopState = (e)=>{
+            const { isFirstPopStateEvent  } = this;
+            this.isFirstPopStateEvent = false;
             const state = e.state;
             if (!state) {
                 // We get state as undefined for two reasons.
@@ -1081,7 +1117,7 @@ class Router {
                 // So, doing the following for (1) does no harm.
                 const { pathname , query  } = this;
                 this.changeState("replaceState", (0, _formatUrl).formatWithValidation({
-                    pathname: addBasePath(pathname),
+                    pathname: (0, _addBasePath).addBasePath(pathname),
                     query
                 }), (0, _utils).getURL());
                 return;
@@ -1089,14 +1125,18 @@ class Router {
             if (!state.__N) {
                 return;
             }
+            // Safari fires popstateevent when reopening the browser.
+            if (isFirstPopStateEvent && this.locale === state.options.locale && state.as === this.asPath) {
+                return;
+            }
             let forcedScroll;
-            const { url , as , options , idx  } = state;
+            const { url , as , options , key  } = state;
             if (false) {}
-            this._idx = idx;
+            this._key = key;
             const { pathname  } = (0, _parseRelativeUrl).parseRelativeUrl(url);
             // Make sure we don't re-render on initial load,
             // can be caused by navigating back from an external site
-            if (this.isSsr && as === addBasePath(this.asPath) && pathname === addBasePath(this.pathname)) {
+            if (this.isSsr && as === (0, _addBasePath).addBasePath(this.asPath) && pathname === (0, _addBasePath).addBasePath(this.pathname)) {
                 return;
             }
             // If the downstream application returns falsy, return.
@@ -1110,7 +1150,7 @@ class Router {
             }), forcedScroll);
         };
         // represents the current component key
-        const route = (0, _normalizeTrailingSlash).removePathTrailingSlash(pathname1);
+        const route = (0, _removeTrailingSlash).removeTrailingSlash(pathname1);
         // set up the component cache (by route keys)
         this.components = {};
         // We should not keep the cache, if there's an error
@@ -1138,7 +1178,7 @@ class Router {
         // if auto prerendered and dynamic route wait to update asPath
         // until after mount to prevent hydration mismatch
         const autoExportDynamic = (0, _isDynamic).isDynamicRoute(pathname1) && self.__NEXT_DATA__.autoExport;
-        this.basePath = basePath;
+        this.basePath =  false || "";
         this.sub = subscription;
         this.clc = null;
         this._wrapApp = wrapApp;
@@ -1151,7 +1191,7 @@ class Router {
             this.locales = locales;
             this.defaultLocale = defaultLocale;
             this.domainLocales = domainLocales;
-            this.isLocaleDomain = !!detectDomainLocale(domainLocales, self.location.hostname);
+            this.isLocaleDomain = !!(0, _detectDomainLocale).detectDomainLocale(domainLocales, self.location.hostname);
         }
         this.state = {
             route,
@@ -1196,7 +1236,7 @@ class Router {
             window.location.href = url;
             return false;
         }
-        const shouldResolveHref = options._h || options._shouldResolveHref || pathNoQueryHash(url) === pathNoQueryHash(as);
+        const shouldResolveHref = options._h || options._shouldResolveHref || (0, _parsePath).parsePath(url).pathname === (0, _parsePath).parsePath(as).pathname;
         const nextState = {
             ...this.state
         };
@@ -1211,13 +1251,13 @@ class Router {
             if (typeof options.locale === "undefined") {
                 options.locale = nextState.locale;
             }
-            const parsedAs = (0, _parseRelativeUrl).parseRelativeUrl(hasBasePath(as) ? delBasePath(as) : as);
+            const parsedAs = (0, _parseRelativeUrl).parseRelativeUrl((0, _hasBasePath).hasBasePath(as) ? (0, _removeBasePath).removeBasePath(as) : as);
             const localePathResult = (0, _normalizeLocalePath).normalizeLocalePath(parsedAs.pathname, this.locales);
             if (localePathResult.detectedLocale) {
                 nextState.locale = localePathResult.detectedLocale;
-                parsedAs.pathname = addBasePath(parsedAs.pathname);
+                parsedAs.pathname = (0, _addBasePath).addBasePath(parsedAs.pathname);
                 as = (0, _formatUrl).formatWithValidation(parsedAs);
-                url = addBasePath((0, _normalizeLocalePath).normalizeLocalePath(hasBasePath(url) ? delBasePath(url) : url, this.locales).pathname);
+                url = (0, _addBasePath).addBasePath((0, _normalizeLocalePath).normalizeLocalePath((0, _hasBasePath).hasBasePath(url) ? (0, _removeBasePath).removeBasePath(url) : url, this.locales).pathname);
             }
             let didNavigate = false;
             // we need to wrap this in the env check again since regenerator runtime
@@ -1226,22 +1266,22 @@ class Router {
                 var ref;
                 // if the locale isn't configured hard navigate to show 404 page
                 if (!((ref = this.locales) === null || ref === void 0 ? void 0 : ref.includes(nextState.locale))) {
-                    parsedAs.pathname = addLocale(parsedAs.pathname, nextState.locale);
+                    parsedAs.pathname = (0, _addLocale).addLocale(parsedAs.pathname, nextState.locale);
                     window.location.href = (0, _formatUrl).formatWithValidation(parsedAs);
                     // this was previously a return but was removed in favor
                     // of better dead code elimination with regenerator runtime
                     didNavigate = true;
                 }
             }
-            const detectedDomain = detectDomainLocale(this.domainLocales, undefined, nextState.locale);
+            const detectedDomain = (0, _detectDomainLocale).detectDomainLocale(this.domainLocales, undefined, nextState.locale);
             // we need to wrap this in the env check again since regenerator runtime
             // moves this on its own due to the return
             if (true) {
                 // if we are navigating to a domain locale ensure we redirect to the
                 // correct domain
                 if (!didNavigate && detectedDomain && this.isLocaleDomain && self.location.hostname !== detectedDomain.domain) {
-                    const asNoBasePath = delBasePath(as);
-                    window.location.href = `http${detectedDomain.http ? "" : "s"}://${detectedDomain.domain}${addBasePath(`${nextState.locale === detectedDomain.defaultLocale ? "" : `/${nextState.locale}`}${asNoBasePath === "/" ? "" : asNoBasePath}` || "/")}`;
+                    const asNoBasePath = (0, _removeBasePath).removeBasePath(as);
+                    window.location.href = `http${detectedDomain.http ? "" : "s"}://${detectedDomain.domain}${(0, _addBasePath).addBasePath(`${nextState.locale === detectedDomain.defaultLocale ? "" : `/${nextState.locale}`}${asNoBasePath === "/" ? "" : asNoBasePath}` || "/")}`;
                     // this was previously a return but was removed in favor
                     // of better dead code elimination with regenerator runtime
                     didNavigate = true;
@@ -1265,8 +1305,8 @@ class Router {
         if (this._inFlightRoute) {
             this.abortComponentLoad(this._inFlightRoute, routeProps);
         }
-        as = addBasePath(addLocale(hasBasePath(as) ? delBasePath(as) : as, options.locale, this.defaultLocale));
-        const cleanedAs = delLocale(hasBasePath(as) ? delBasePath(as) : as, nextState.locale);
+        as = (0, _addBasePath).addBasePath((0, _addLocale).addLocale((0, _hasBasePath).hasBasePath(as) ? (0, _removeBasePath).removeBasePath(as) : as, options.locale, this.defaultLocale));
+        const cleanedAs = (0, _removeLocale).removeLocale((0, _hasBasePath).hasBasePath(as) ? (0, _removeBasePath).removeBasePath(as) : as, nextState.locale);
         this._inFlightRoute = as;
         let localeChange = prevLocale !== nextState.locale;
         // If the url change is only related to a hash change
@@ -1285,7 +1325,14 @@ class Router {
             if (scroll) {
                 this.scrollToHash(cleanedAs);
             }
-            this.set(nextState, this.components[nextState.route], null);
+            try {
+                await this.set(nextState, this.components[nextState.route], null);
+            } catch (err) {
+                if ((0, _isError).default(err) && err.cancelled) {
+                    Router.events.emit("routeChangeError", err, cleanedAs, routeProps);
+                }
+                throw err;
+            }
             Router.events.emit("hashChangeComplete", as, routeProps);
             return true;
         }
@@ -1321,14 +1368,14 @@ class Router {
         // url and as should always be prefixed with basePath by this
         // point by either next/link or router.push/replace so strip the
         // basePath from the pathname to match the pages dir 1-to-1
-        pathname = pathname ? (0, _normalizeTrailingSlash).removePathTrailingSlash(delBasePath(pathname)) : pathname;
+        pathname = pathname ? (0, _removeTrailingSlash).removeTrailingSlash((0, _removeBasePath).removeBasePath(pathname)) : pathname;
         if (shouldResolveHref && pathname !== "/_error") {
             options._shouldResolveHref = true;
             if (false) {} else {
                 parsed.pathname = resolveDynamicRoute(pathname, pages);
                 if (parsed.pathname !== pathname) {
                     pathname = parsed.pathname;
-                    parsed.pathname = addBasePath(pathname);
+                    parsed.pathname = (0, _addBasePath).addBasePath(pathname);
                     url = (0, _formatUrl).formatWithValidation(parsed);
                 }
             }
@@ -1338,12 +1385,12 @@ class Router {
             window.location.href = as;
             return false;
         }
-        resolvedAs = delLocale(delBasePath(resolvedAs), nextState.locale);
+        resolvedAs = (0, _removeLocale).removeLocale((0, _removeBasePath).removeBasePath(resolvedAs), nextState.locale);
         /**
      * If the route update was triggered for client-side hydration and
      * the rendered route is not dynamic do not check the preflight
      * request as it is not necessary.
-     */ if ((!options.shallow || options._h === 1) && (options._h !== 1 || (0, _isDynamic).isDynamicRoute((0, _normalizeTrailingSlash).removePathTrailingSlash(pathname)))) {
+     */ if ((!options.shallow || options._h === 1) && (options._h !== 1 || (0, _isDynamic).isDynamicRoute((0, _removeTrailingSlash).removeTrailingSlash(pathname)))) {
             const effect = await this._preflightRequest({
                 as,
                 cache: "production" === "production",
@@ -1372,7 +1419,7 @@ class Router {
                 return new Promise(()=>{});
             }
         }
-        const route = (0, _normalizeTrailingSlash).removePathTrailingSlash(pathname);
+        const route = (0, _removeTrailingSlash).removeTrailingSlash(pathname);
         if ((0, _isDynamic).isDynamicRoute(route)) {
             const parsedAs = (0, _parseRelativeUrl).parseRelativeUrl(resolvedAs);
             const asPathname = parsedAs.pathname;
@@ -1381,8 +1428,7 @@ class Router {
             const shouldInterpolate = route === asPathname;
             const interpolatedAs = shouldInterpolate ? interpolateAs(route, asPathname, query) : {};
             if (!routeMatch || shouldInterpolate && !interpolatedAs.result) {
-                const missingParams = Object.keys(routeRegex.groups).filter((param)=>!query[param]
-                );
+                const missingParams = Object.keys(routeRegex.groups).filter((param)=>!query[param]);
                 if (missingParams.length > 0) {
                     if (false) {}
                     throw new Error((shouldInterpolate ? `The provided \`href\` (${url}) value is missing query values (${missingParams.join(", ")}) to be interpolated properly. ` : `The provided \`as\` value (${asPathname}) is incompatible with the \`href\` value (${route}). `) + `Read more: https://nextjs.org/docs/messages/${shouldInterpolate ? "href-interpolation-failed" : "incompatible-href-as"}`);
@@ -1412,6 +1458,8 @@ class Router {
             // handle redirect on client-transition
             if ((__N_SSG || __N_SSP) && props) {
                 if (props.pageProps && props.pageProps.__N_REDIRECT) {
+                    // Use the destination from redirect without adding locale
+                    options.locale = false;
                     const destination = props.pageProps.__N_REDIRECT;
                     // check if destination is internal (resolves to a page) and attempt
                     // client-navigation if it is falling back to hard navigation if
@@ -1476,6 +1524,11 @@ class Router {
                 }
             }
             Router.events.emit("routeChangeComplete", as, routeProps);
+            // A hash mark # is the optional last part of a URL
+            const hashRegex = /#.+$/;
+            if (shouldScroll && hashRegex.test(as)) {
+                this.scrollToHash(as);
+            }
             return true;
         } catch (err1) {
             if ((0, _isError).default(err1) && err1.cancelled) {
@@ -1493,7 +1546,7 @@ class Router {
                 as,
                 options,
                 __N: true,
-                idx: this._idx = method !== "pushState" ? this._idx : this._idx + 1
+                key: this._key = method !== "pushState" ? this._key : createKey()
             }, // Passing the empty string here should be safe against future changes to the method.
             // https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState
             "", as);
@@ -1565,8 +1618,7 @@ class Router {
                     __N_SSG: res.mod.__N_SSG,
                     __N_SSP: res.mod.__N_SSP,
                     __N_RSC: !!res.mod.__next_rsc__
-                })
-            );
+                }));
             const { Component , __N_SSG , __N_SSP , __N_RSC  } = routeInfo;
             if (false) {}
             let dataHref;
@@ -1587,19 +1639,17 @@ class Router {
                     locale
                 });
             }
-            const props = await this._getData(()=>(__N_SSG || __N_SSP || __N_RSC) && !useStreamedFlightData ? fetchNextData(dataHref, this.isSsr, false, __N_SSG ? this.sdc : this.sdr, !!__N_SSG && !isPreview) : this.getInitialProps(Component, {
+            const props = await this._getData(()=>(__N_SSG || __N_SSP || __N_RSC) && !useStreamedFlightData ? fetchNextData(dataHref, this.isSsr, false, __N_SSG ? this.sdc : this.sdr, !!__N_SSG && !isPreview, false) : this.getInitialProps(Component, {
                     pathname,
                     query,
                     asPath: as,
                     locale,
                     locales: this.locales,
                     defaultLocale: this.defaultLocale
-                })
-            );
+                }));
             if (__N_RSC) {
                 if (useStreamedFlightData) {
-                    const { data  } = await this._getData(()=>this._getFlightData(dataHref)
-                    );
+                    const { data  } = await this._getData(()=>this._getFlightData(dataHref));
                     props.pageProps = Object.assign(props.pageProps, {
                         __flight__: data
                     });
@@ -1653,15 +1703,17 @@ class Router {
             window.scrollTo(0, 0);
             return;
         }
+        // Decode hash to make non-latin anchor works.
+        const rawHash = decodeURIComponent(hash);
         // First we check if the element by id is found
-        const idEl = document.getElementById(hash);
+        const idEl = document.getElementById(rawHash);
         if (idEl) {
             idEl.scrollIntoView();
             return;
         }
         // If there's no element with the id, we check the `name` property
         // To mirror browsers
-        const nameEl = document.getElementsByName(hash)[0];
+        const nameEl = document.getElementsByName(rawHash)[0];
         if (nameEl) {
             nameEl.scrollIntoView();
         }
@@ -1702,7 +1754,7 @@ class Router {
         // Prefetch is not supported in development mode because it would trigger on-demand-entries
         if (false) {}
         const effects = await this._preflightRequest({
-            as: addBasePath(asPath),
+            as: (0, _addBasePath).addBasePath(asPath),
             cache: true,
             pages,
             pathname,
@@ -1720,7 +1772,7 @@ class Router {
             resolvedAs = effects.asPath;
             url = (0, _formatUrl).formatWithValidation(parsed);
         }
-        const route = (0, _normalizeTrailingSlash).removePathTrailingSlash(pathname);
+        const route = (0, _removeTrailingSlash).removeTrailingSlash(pathname);
         await Promise.all([
             this.pageLoader._isSsg(route).then((isSsg)=>{
                 return isSsg ? fetchNextData(this.pageLoader.getDataHref({
@@ -1728,7 +1780,7 @@ class Router {
                     asPath: resolvedAs,
                     ssg: true,
                     locale: typeof options.locale !== "undefined" ? options.locale : this.locale
-                }), false, false, this.sdc, true) : false;
+                }), false, false, this.sdc, !this.isPreview, true) : false;
             }),
             this.pageLoader[options.priority ? "loadPage" : "prefetch"](route), 
         ]);
@@ -1777,25 +1829,27 @@ class Router {
     }
     _getFlightData(dataHref) {
         // Do not cache RSC flight response since it's not a static resource
-        return fetchNextData(dataHref, true, true, this.sdc, false).then((serialized)=>{
+        return fetchNextData(dataHref, true, true, this.sdc, false, false).then((serialized)=>{
             return {
                 data: serialized
             };
         });
     }
     async _preflightRequest(options) {
-        const asPathname = pathNoQueryHash(options.as);
-        const cleanedAs = delLocale(hasBasePath(asPathname) ? delBasePath(asPathname) : asPathname, options.locale);
+        const { pathname: asPathname  } = (0, _parsePath).parsePath(options.as);
+        const cleanedAs = (0, _removeLocale).removeLocale((0, _hasBasePath).hasBasePath(asPathname) ? (0, _removeBasePath).removeBasePath(asPathname) : asPathname, options.locale);
         const fns = await this.pageLoader.getMiddlewareList();
         const requiresPreflight = fns.some(([middleware, isSSR])=>{
-            return (0, _routeMatcher).getRouteMatcher((0, _getMiddlewareRegex).getMiddlewareRegex(middleware, !isSSR))(cleanedAs);
+            return (0, _routeMatcher).getRouteMatcher((0, _routeRegex).getMiddlewareRegex(middleware, {
+                catchAll: !isSSR
+            }))(cleanedAs);
         });
         if (!requiresPreflight) {
             return {
                 type: "next"
             };
         }
-        const preflightHref = addLocale(options.as, options.locale);
+        const preflightHref = (0, _addLocale).addLocale(options.as, options.locale);
         let preflight;
         try {
             preflight = await this._getPreflightData({
@@ -1819,8 +1873,8 @@ class Router {
                     destination: options.as
                 };
             }
-            const parsed = (0, _parseRelativeUrl).parseRelativeUrl((0, _normalizeLocalePath).normalizeLocalePath(hasBasePath(preflight.rewrite) ? delBasePath(preflight.rewrite) : preflight.rewrite, this.locales).pathname);
-            const fsPathname = (0, _normalizeTrailingSlash).removePathTrailingSlash(parsed.pathname);
+            const parsed = (0, _parseRelativeUrl).parseRelativeUrl((0, _normalizeLocalePath).normalizeLocalePath((0, _hasBasePath).hasBasePath(preflight.rewrite) ? (0, _removeBasePath).removeBasePath(preflight.rewrite) : preflight.rewrite, this.locales).pathname);
+            const fsPathname = (0, _removeTrailingSlash).removeTrailingSlash(parsed.pathname);
             let matchedPage;
             let resolvedHref;
             if (options.pages.includes(fsPathname)) {
@@ -1842,7 +1896,7 @@ class Router {
         }
         if (preflight.redirect) {
             if (preflight.redirect.startsWith("/")) {
-                const cleanRedirect = (0, _normalizeTrailingSlash).removePathTrailingSlash((0, _normalizeLocalePath).normalizeLocalePath(hasBasePath(preflight.redirect) ? delBasePath(preflight.redirect) : preflight.redirect, this.locales).pathname);
+                const cleanRedirect = (0, _removeTrailingSlash).removeTrailingSlash((0, _normalizeLocalePath).normalizeLocalePath((0, _hasBasePath).hasBasePath(preflight.redirect) ? (0, _removeBasePath).removeBasePath(preflight.redirect) : preflight.redirect, this.locales).pathname);
                 const { url: newUrl , as: newAs  } = prepareUrlAs(this, cleanRedirect, cleanRedirect);
                 return {
                     type: "redirect",

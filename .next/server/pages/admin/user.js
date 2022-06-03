@@ -121,8 +121,7 @@ function AdminUser() {
                                                     ...props,
                                                     roleList: data.roles,
                                                     refetch: refetch
-                                                }, props.username)
-                                            )
+                                                }, props.username))
                                         })
                                     ]
                                 })
@@ -146,8 +145,7 @@ function AdminUser() {
                                         }),
                                         data && data.permissions.map((p, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
                                                 children: p
-                                            }, i)
-                                        ),
+                                            }, i)),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {})
                                     ]
                                 })
@@ -156,8 +154,7 @@ function AdminUser() {
                                 children: data && data.roles.map((props)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(RoleRow, {
                                         ...props,
                                         permissionList: data.permissions
-                                    }, props.name)
-                                )
+                                    }, props.name))
                             })
                         ]
                     })
@@ -184,8 +181,7 @@ function UserRow(props) {
         update({
             variables: {
                 username,
-                roles: roles.map((r)=>r.value
-                )
+                roles: roles.map((r)=>r.value)
             }
         }).then((results)=>{
             react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.success("Updated user succesfully!");
@@ -207,16 +203,14 @@ function UserRow(props) {
         }).catch((err)=>{
             console.log(err);
             react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error(`Failed to delete user "${username}"`);
-        }).finally(()=>setDeleteModal(!deleteModal)
-        );
+        }).finally(()=>setDeleteModal(!deleteModal));
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Modal, {
                 centered: true,
                 show: deleteModal,
-                toggle: ()=>setDeleteModal(!deleteModal)
-                ,
+                toggle: ()=>setDeleteModal(!deleteModal),
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Modal.Body, {
                     className: "m-3",
                     style: {
@@ -243,8 +237,7 @@ function UserRow(props) {
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Button, {
                                         color: "primary",
                                         className: "mx-2",
-                                        onClick: ()=>setDeleteModal(!deleteModal)
-                                        ,
+                                        onClick: ()=>setDeleteModal(!deleteModal),
                                         children: "No"
                                     })
                                 ]
@@ -261,25 +254,21 @@ function UserRow(props) {
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
                             loading: loading,
-                            onChange: (result)=>handleUpdate(result)
-                            ,
+                            onChange: (result)=>handleUpdate(result),
                             defaultValue: roles1.map(({ name  })=>({
                                     label: name,
                                     value: name
-                                })
-                            ),
+                                })),
                             options: roleList.map(({ name  })=>({
                                     label: name,
                                     value: name
-                                })
-                            )
+                                }))
                         })
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Button, {
                             className: "me-2",
-                            onClick: ()=>setDeleteModal(!deleteModal)
-                            ,
+                            onClick: ()=>setDeleteModal(!deleteModal),
                             children: "Remove"
                         })
                     })
@@ -290,9 +279,7 @@ function UserRow(props) {
 }
 function RoleRow({ name , permissions: permissions1 , permissionList  }) {
     const nameRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-    const permRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(()=>Array(permissionList.length).fill().map(()=>/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)()
-        )
-    , [
+    const permRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(()=>Array(permissionList.length).fill().map(()=>/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)()), [
         permissionList
     ]);
     const [deleteRole] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(_apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
@@ -361,8 +348,7 @@ function RoleRow({ name , permissions: permissions1 , permissionList  }) {
                         className: "m-auto",
                         defaultChecked: permissions1.includes(p)
                     })
-                }, p)
-            ),
+                }, p)),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("td", {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Button, {
@@ -492,6 +478,20 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 

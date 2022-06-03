@@ -185,16 +185,14 @@ function OstTable() {
             }).catch((err)=>{
                 console.log(err);
                 react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error(`Failed to delete OST "${title1}" (${id1})`);
-            }).finally(()=>setModalData(!modal)
-            );
+            }).finally(()=>setModalData(!modal));
         }
         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
                     centered: true,
                     show: modal,
-                    onHide: ()=>setModal(false)
-                    ,
+                    onHide: ()=>setModal(false),
                     children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.ModalBody, {
                         className: "m-3",
                         style: {
@@ -221,8 +219,7 @@ function OstTable() {
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
                                             color: "primary",
                                             className: "mx-2",
-                                            onClick: ()=>setModalData(!modal)
-                                            ,
+                                            onClick: ()=>setModalData(!modal),
                                             children: "No"
                                         })
                                     ]
@@ -276,8 +273,7 @@ function OstTable() {
                                 })
                             })
                         ]
-                    }, id)
-                )
+                    }, id))
             ]
         });
     }
@@ -314,8 +310,7 @@ function OstTable() {
                                 }, "nav-link"),
                                 children: e
                             })
-                        }, e)
-                    ),
+                        }, e)),
                     currentListIndex !== pageList.length - 1 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
@@ -343,8 +338,7 @@ function OstTable() {
     ].map((label)=>({
             label,
             value: label.toLowerCase()
-        })
-    );
+        }));
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form, {
         className: "site-form blackblock mt-5",
         children: [
@@ -393,9 +387,7 @@ function OstTable() {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_9__/* .SimpleSelector */ .d7, {
-                            onChange: (e)=>setStatus(e.map((v)=>v.value
-                                ))
-                            ,
+                            onChange: (e)=>setStatus(e.map((v)=>v.value)),
                             required: true,
                             name: "status",
                             defaultValue: statusOptions,
@@ -582,6 +574,13 @@ module.exports = require("moment");
 
 /***/ }),
 
+/***/ 3280:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/app-router-context.js");
+
+/***/ }),
+
 /***/ 2796:
 /***/ ((module) => {
 
@@ -652,6 +651,20 @@ module.exports = require("next/dist/shared/lib/router-context.js");
 
 /***/ }),
 
+/***/ 3431:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-locale.js");
+
+/***/ }),
+
+/***/ 1751:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -666,17 +679,17 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 /***/ }),
 
-/***/ 4365:
-/***/ ((module) => {
-
-module.exports = require("next/dist/shared/lib/router/utils/get-middleware-regex.js");
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/is-dynamic.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
@@ -687,10 +700,24 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.j
 
 /***/ }),
 
+/***/ 4567:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix.js");
+
+/***/ }),
+
 /***/ 979:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/querystring.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 

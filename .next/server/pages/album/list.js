@@ -100,8 +100,7 @@ function AlbumList({ albums , letters  }) {
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
                                         children: letter
                                     })
-                                }, letter)
-                            )
+                                }, letter))
                         })
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -121,8 +120,7 @@ function AlbumList({ albums , letters  }) {
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                         className: "my-4 d-flex flex-column",
-                                        children: albums[letter].sort((a, b)=>a.title > b.title
-                                        ).map(({ id , title , releaseDate , classes  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                        children: albums[letter].sort((a, b)=>a.title > b.title).map(({ id , title , releaseDate , classes  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
                                                     href: `/album/${id}`,
                                                     children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", {
@@ -132,18 +130,15 @@ function AlbumList({ albums , letters  }) {
                                                             " (",
                                                             luxon__WEBPACK_IMPORTED_MODULE_4__.DateTime.fromISO(releaseDate).year,
                                                             ") (",
-                                                            classes.map((c)=>c.name
-                                                            ).join(" / "),
+                                                            classes.map((c)=>c.name).join(" / "),
                                                             ")"
                                                         ]
                                                     })
                                                 })
-                                            }, id)
-                                        )
+                                            }, id))
                                     })
                                 ]
-                            }, letter)
-                        )
+                            }, letter))
                     })
                 ]
             }),
@@ -186,6 +181,14 @@ module.exports = require("form-serialize");
 
 "use strict";
 module.exports = require("luxon");
+
+/***/ }),
+
+/***/ 3280:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/app-router-context.js");
 
 /***/ }),
 
@@ -269,6 +272,22 @@ module.exports = require("next/dist/shared/lib/router-context.js");
 
 /***/ }),
 
+/***/ 3431:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/add-locale.js");
+
+/***/ }),
+
+/***/ 1751:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -285,19 +304,19 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 /***/ }),
 
-/***/ 4365:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("next/dist/shared/lib/router/utils/get-middleware-regex.js");
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/is-dynamic.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
@@ -309,11 +328,27 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.j
 
 /***/ }),
 
+/***/ 4567:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix.js");
+
+/***/ }),
+
 /***/ 979:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/querystring.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 
@@ -444,7 +479,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,7119,6112,8111], () => (__webpack_exec__(6019)));
+var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,4155,7119,6112,8111], () => (__webpack_exec__(6019)));
 module.exports = __webpack_exports__;
 
 })();

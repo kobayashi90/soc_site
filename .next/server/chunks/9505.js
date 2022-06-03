@@ -126,11 +126,13 @@ function updateElements(type, components) {
         var ref;
         return (ref = t.parentNode) === null || ref === void 0 ? void 0 : ref.removeChild(t);
     });
-    newTags.forEach((t)=>headEl.insertBefore(t, headCountEl)
-    );
+    newTags.forEach((t)=>headEl.insertBefore(t, headCountEl));
     headCountEl.content = (headCount - oldTags.length + newTags.length).toString();
 }
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
 } //# sourceMappingURL=head-manager.js.map
@@ -295,8 +297,7 @@ function handleClientScriptLoad(props) {
     const { strategy ="afterInteractive"  } = props;
     if (strategy === "lazyOnload") {
         window.addEventListener("load", ()=>{
-            (0, _requestIdleCallback).requestIdleCallback(()=>loadScript(props)
-            );
+            (0, _requestIdleCallback).requestIdleCallback(()=>loadScript(props));
         });
     } else {
         loadScript(props);
@@ -304,12 +305,10 @@ function handleClientScriptLoad(props) {
 }
 function loadLazyScript(props) {
     if (document.readyState === "complete") {
-        (0, _requestIdleCallback).requestIdleCallback(()=>loadScript(props)
-        );
+        (0, _requestIdleCallback).requestIdleCallback(()=>loadScript(props));
     } else {
         window.addEventListener("load", ()=>{
-            (0, _requestIdleCallback).requestIdleCallback(()=>loadScript(props)
-            );
+            (0, _requestIdleCallback).requestIdleCallback(()=>loadScript(props));
         });
     }
 }
@@ -367,7 +366,10 @@ function Script(props) {
 }
 var _default = Script;
 exports["default"] = _default;
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
 } //# sourceMappingURL=script.js.map

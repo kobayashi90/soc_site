@@ -106,8 +106,7 @@ function PublisherDetail(props) {
                                     id: slug,
                                     title: name,
                                     placeholder
-                                })
-                            )
+                                }))
                         })
                     })
                 ]
@@ -147,6 +146,13 @@ module.exports = require("form-serialize");
 /***/ ((module) => {
 
 module.exports = require("luxon");
+
+/***/ }),
+
+/***/ 3280:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/app-router-context.js");
 
 /***/ }),
 
@@ -220,6 +226,20 @@ module.exports = require("next/dist/shared/lib/router-context.js");
 
 /***/ }),
 
+/***/ 3431:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-locale.js");
+
+/***/ }),
+
+/***/ 1751:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -234,17 +254,17 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 /***/ }),
 
-/***/ 4365:
-/***/ ((module) => {
-
-module.exports = require("next/dist/shared/lib/router/utils/get-middleware-regex.js");
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/is-dynamic.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
@@ -255,10 +275,24 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.j
 
 /***/ }),
 
+/***/ 4567:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix.js");
+
+/***/ }),
+
 /***/ 979:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/querystring.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 
@@ -374,7 +408,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,7119,6112,8111], () => (__webpack_exec__(6087)));
+var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,4155,7119,6112,8111], () => (__webpack_exec__(6087)));
 module.exports = __webpack_exports__;
 
 })();

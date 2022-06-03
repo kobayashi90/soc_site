@@ -19,7 +19,7 @@ var _imageConfigContext = __webpack_require__(744);
 var _utils = __webpack_require__(9232);
 var _normalizeTrailingSlash = __webpack_require__(2700);
 function Image(_param) {
-    var { src , sizes , unoptimized =false , priority =false , loading , lazyRoot =null , lazyBoundary ="200px" , className , quality , width , height , style , objectFit , objectPosition , onLoadingComplete , placeholder ="empty" , blurDataURL  } = _param, all = _objectWithoutProperties(_param, [
+    var { src , sizes , unoptimized =false , priority =false , loading , lazyRoot =null , lazyBoundary , className , quality , width , height , style , objectFit , objectPosition , onLoadingComplete , placeholder ="empty" , blurDataURL  } = _param, all = _objectWithoutProperties(_param, [
         "src",
         "sizes",
         "unoptimized",
@@ -44,10 +44,8 @@ function Image(_param) {
         const allSizes = [
             ...c.deviceSizes,
             ...c.imageSizes
-        ].sort((a, b)=>a - b
-        );
-        const deviceSizes = c.deviceSizes.sort((a, b)=>a - b
-        );
+        ].sort((a, b)=>a - b);
+        const deviceSizes = c.deviceSizes.sort((a, b)=>a - b);
         return _objectSpread({}, c, {
             allSizes,
             deviceSizes
@@ -110,10 +108,10 @@ function Image(_param) {
     const [blurComplete, setBlurComplete] = (0, _react).useState(false);
     const [setIntersection, isIntersected, resetIntersected] = (0, _useIntersection).useIntersection({
         rootRef: lazyRoot,
-        rootMargin: lazyBoundary,
+        rootMargin: lazyBoundary || "200px",
         disabled: !isLazy
     });
-    const isVisible = !isLazy || isIntersected;
+    const isVisible = !isLazy || isIntersected || layout === "raw";
     const wrapperStyle = {
         boxSizing: "border-box",
         display: "block",
@@ -268,7 +266,8 @@ function Image(_param) {
         onLoadingCompleteRef,
         setBlurComplete,
         setIntersection,
-        isVisible
+        isVisible,
+        noscriptSizes: sizes
     }, rest);
     return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, layout === "raw" ? /*#__PURE__*/ _react.default.createElement(ImageElement, Object.assign({}, imgElementArgs)) : /*#__PURE__*/ _react.default.createElement("span", {
         style: wrapperStyle
@@ -381,8 +380,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
     }
     return target;
 }
-var ref;
-const experimentalLayoutRaw = (ref = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false}) === null || ref === void 0 ? void 0 : ref.experimentalLayoutRaw;
+const { experimentalLayoutRaw =false , experimentalRemotePatterns =[]  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false} || {};
 const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false};
 const loadedImageURLs = new Set();
 const allImgs = new Map();
@@ -446,8 +444,7 @@ function getWidths({ deviceSizes , allSizes  }, width, layout, sizes) {
         if (percentSizes.length) {
             const smallestRatio = Math.min(...percentSizes) * 0.01;
             return {
-                widths: allSizes.filter((s)=>s >= deviceSizes[0] * smallestRatio
-                ),
+                widths: allSizes.filter((s)=>s >= deviceSizes[0] * smallestRatio),
                 kind: "w"
             };
         }
@@ -473,9 +470,7 @@ function getWidths({ deviceSizes , allSizes  }, width, layout, sizes) {
         [
             width,
             width * 2 /*, width * 3*/ 
-        ].map((w)=>allSizes.find((p)=>p >= w
-            ) || allSizes[allSizes.length - 1]
-        )), 
+        ].map((w)=>allSizes.find((p)=>p >= w) || allSizes[allSizes.length - 1])), 
     ];
     return {
         widths,
@@ -499,8 +494,7 @@ function generateImgAttrs({ config , src , unoptimized , layout , width , qualit
                 src,
                 quality,
                 width: w
-            })} ${kind === "w" ? w : i + 1}${kind}`
-        ).join(", "),
+            })} ${kind === "w" ? w : i + 1}${kind}`).join(", "),
         // It's intended to keep `src` the last attribute because React updates
         // attributes in order. If we keep `src` the first one, Safari will
         // immediately start to fetch `src`, before `sizes` and `srcSet` are even
@@ -525,8 +519,8 @@ function getInt(x) {
     return undefined;
 }
 function defaultImageLoader(loaderProps) {
-    var ref2;
-    const loaderKey = ((ref2 = loaderProps.config) === null || ref2 === void 0 ? void 0 : ref2.loader) || "default";
+    var ref;
+    const loaderKey = ((ref = loaderProps.config) === null || ref === void 0 ? void 0 : ref.loader) || "default";
     const load = loaders.get(loaderKey);
     if (load) {
         return load(loaderProps);
@@ -563,11 +557,11 @@ function handleLoading(img, src, layout, placeholder, onLoadingCompleteRef, setB
                 naturalHeight
             });
         }
-        if (false) { var ref3; }
+        if (false) { var ref; }
     });
 }
 const ImageElement = (_param)=>{
-    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible  } = _param, rest = _objectWithoutProperties(_param, [
+    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading ="lazy" , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible , noscriptSizes  } = _param, rest = _objectWithoutProperties(_param, [
         "imgAttributes",
         "heightInt",
         "widthInt",
@@ -588,7 +582,8 @@ const ImageElement = (_param)=>{
         "setIntersection",
         "onLoad",
         "onError",
-        "isVisible"
+        "isVisible",
+        "noscriptSizes"
     ]);
     return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("img", Object.assign({}, rest, imgAttributes, layout === "raw" ? {
         height: heightInt,
@@ -597,6 +592,8 @@ const ImageElement = (_param)=>{
         decoding: "async",
         "data-nimg": layout,
         className: className,
+        // @ts-ignore - TODO: upgrade to `@types/react@17`
+        loading: layout === "raw" ? loading : undefined,
         style: _objectSpread({}, imgStyle, blurStyle),
         ref: (0, _react).useCallback((img)=>{
             setIntersection(img);
@@ -634,7 +631,7 @@ const ImageElement = (_param)=>{
         layout,
         width: widthInt,
         quality: qualityInt,
-        sizes: imgAttributes.sizes,
+        sizes: noscriptSizes,
         loader
     }), layout === "raw" ? {
         height: heightInt,
@@ -645,7 +642,7 @@ const ImageElement = (_param)=>{
         style: imgStyle,
         className: className,
         // @ts-ignore - TODO: upgrade to `@types/react@17`
-        loading: loading || "lazy"
+        loading: loading
     }))));
 };
 function normalizeSrc(src) {
@@ -689,7 +686,10 @@ function defaultLoader({ config , src , width , quality  }) {
     }
     return `${(0, _normalizeTrailingSlash).normalizePathTrailingSlash(config.path)}?url=${encodeURIComponent(src)}&w=${width}&q=${quality || 75}`;
 }
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
 } //# sourceMappingURL=image.js.map

@@ -91,8 +91,7 @@ function GameList({ letters , studios  }) {
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
                                     children: letter
                                 })
-                            }, letter)
-                        )
+                            }, letter))
                     })
                 }),
                 letters.map((letter)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -117,12 +116,10 @@ function GameList({ letters , studios  }) {
                                                 children: name
                                             })
                                         })
-                                    }, slug)
-                                )
+                                    }, slug))
                             })
                         ]
-                    }, letter)
-                )
+                    }, letter))
             ]
         })
     });
@@ -146,6 +143,14 @@ module.exports = require("@apollo/client");
 
 "use strict";
 module.exports = require("classnames");
+
+/***/ }),
+
+/***/ 3280:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/app-router-context.js");
 
 /***/ }),
 
@@ -205,6 +210,22 @@ module.exports = require("next/dist/shared/lib/router-context.js");
 
 /***/ }),
 
+/***/ 3431:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/add-locale.js");
+
+/***/ }),
+
+/***/ 1751:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -221,19 +242,19 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 /***/ }),
 
-/***/ 4365:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("next/dist/shared/lib/router/utils/get-middleware-regex.js");
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/is-dynamic.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
@@ -245,11 +266,27 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.j
 
 /***/ }),
 
+/***/ 4567:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix.js");
+
+/***/ }),
+
 /***/ 979:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/querystring.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 

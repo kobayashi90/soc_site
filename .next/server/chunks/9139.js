@@ -74,8 +74,7 @@ function CommentCarrousel(props) {
     const { ostId , comments =[]  } = props;
     const current = comments[currentIndex];
     const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)();
-    const plusIndex = ()=>setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1)
-    ;
+    const plusIndex = ()=>setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1);
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         timeoutRef.current = setTimeout(plusIndex, 10 * 1000);
@@ -185,8 +184,7 @@ function CommentButtons(props) {
             variables: {
                 ostId
             }
-        })
-    , [
+        }), [
         user,
         fetchComment,
         ostId
@@ -202,8 +200,7 @@ function CommentButtons(props) {
         };
         updateComment({
             variables
-        }).then(()=>setShow(false)
-        );
+        }).then(()=>setShow(false));
         ev.preventDefault();
     }
     const album = data?.album;
@@ -213,8 +210,7 @@ function CommentButtons(props) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal, {
                 show: show,
                 centered: true,
-                onHide: ()=>setShow(false)
-                ,
+                onHide: ()=>setShow(false),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.Body, {
                     className: "m-3",
                     children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form, {
@@ -266,8 +262,7 @@ function CommentButtons(props) {
             album && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                 xs: 3,
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Button, {
-                    onClick: ()=>user ? setShow(true) : null
-                    ,
+                    onClick: ()=>user ? setShow(true) : null,
                     className: "w-100 rounded-3",
                     variant: "outline-light",
                     style: {

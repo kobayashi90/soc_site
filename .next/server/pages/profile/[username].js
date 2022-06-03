@@ -205,8 +205,7 @@ async function getServerSideProps(context) {
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
                                             className: "d-flex justify-content-center",
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Button, {
-                                                onClick: ()=>setProfile(true)
-                                                ,
+                                                onClick: ()=>setProfile(true),
                                                 className: "rounded-3",
                                                 variant: "outline-light",
                                                 children: "Edit Account"
@@ -242,8 +241,7 @@ async function getServerSideProps(context) {
                                 md: 3,
                                 xs: 6
                             },
-                            items: albumList.sort((a, b)=>a.title > b.title
-                            )
+                            items: albumList.sort((a, b)=>a.title > b.title)
                         })
                     })
                 ]
@@ -281,8 +279,7 @@ function EditProfile(props) {
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Modal, {
             show: showProfile,
             centered: true,
-            onHide: ()=>setProfile(false)
-            ,
+            onHide: ()=>setProfile(false),
             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Modal.Body, {
                 className: "m-3",
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form, {
@@ -418,6 +415,13 @@ module.exports = require("luxon");
 
 /***/ }),
 
+/***/ 3280:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/app-router-context.js");
+
+/***/ }),
+
 /***/ 2796:
 /***/ ((module) => {
 
@@ -488,6 +492,20 @@ module.exports = require("next/dist/shared/lib/router-context.js");
 
 /***/ }),
 
+/***/ 3431:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-locale.js");
+
+/***/ }),
+
+/***/ 1751:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -502,17 +520,17 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 /***/ }),
 
-/***/ 4365:
-/***/ ((module) => {
-
-module.exports = require("next/dist/shared/lib/router/utils/get-middleware-regex.js");
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/is-dynamic.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
@@ -523,10 +541,24 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.j
 
 /***/ }),
 
+/***/ 4567:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix.js");
+
+/***/ }),
+
 /***/ 979:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/querystring.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 
@@ -642,7 +674,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,7119,6112,9139], () => (__webpack_exec__(8389)));
+var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,4155,7119,6112,9139], () => (__webpack_exec__(8389)));
 module.exports = __webpack_exports__;
 
 })();

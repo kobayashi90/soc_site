@@ -1,26 +1,11 @@
+"use strict";
 exports.id = 6112;
 exports.ids = [6112];
 exports.modules = {
 
-/***/ 4155:
-/***/ ((module) => {
-
-// Exports
-module.exports = {
-	"albumBoxContainer": "AlbumBoxes_albumBoxContainer___5OUW",
-	"anim": "AlbumBoxes_anim__Xn34t",
-	"albumBox": "AlbumBoxes_albumBox__qjbi0",
-	"img": "AlbumBoxes_img__gFWAG",
-	"coming": "AlbumBoxes_coming__jiMAE"
-};
-
-
-/***/ }),
-
 /***/ 6112:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "X": () => (/* binding */ AlbumBoxList),
 /* harmony export */   "Z": () => (/* binding */ AlbumBox)
@@ -71,8 +56,7 @@ function AlbumBox(props) {
                     children: coming ? "Coming Soon" : title
                 })
             ]
-        })
-    ;
+        });
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
         className: classnames__WEBPACK_IMPORTED_MODULE_3___default()((_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_7___default().albumBox), {
             [(_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_7___default().coming)]: coming
@@ -98,8 +82,7 @@ function AlbumBoxList(props) {
             type: type,
             width: width,
             height: height
-        }))
-    );
+        })));
 }
 
 

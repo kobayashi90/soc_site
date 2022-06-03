@@ -911,8 +911,7 @@ function EditPublisher() {
                                     className: "my-auto mx-1",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                         type: "button",
-                                        onClick: ()=>handleSubmitForm(mutateUpdate, "Edited")
-                                        ,
+                                        onClick: ()=>handleSubmitForm(mutateUpdate, "Edited"),
                                         loading: loadingUpdate,
                                         children: "Save Changes"
                                     })
@@ -922,8 +921,7 @@ function EditPublisher() {
                                     className: "my-auto mx-1",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                         type: "button",
-                                        onClick: ()=>handleSubmitForm(mutateDelete, "Deleted")
-                                        ,
+                                        onClick: ()=>handleSubmitForm(mutateDelete, "Deleted"),
                                         loading: loadingDelete,
                                         children: "Delete Publisher"
                                     })
@@ -1036,8 +1034,7 @@ function EditPlatform() {
                                                         variables: {
                                                             key: row.value
                                                         }
-                                                    })
-                                                ,
+                                                    }),
                                                 loading: loadingInfo
                                             })
                                         ]
@@ -1075,8 +1072,7 @@ function EditPlatform() {
                                                         selected: data && data.platform.type === c.name,
                                                         value: c.name,
                                                         children: c.name
-                                                    }, c.name)
-                                                )
+                                                    }, c.name))
                                             })
                                         ]
                                     })
@@ -1090,8 +1086,7 @@ function EditPlatform() {
                                     className: "my-auto mx-1",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                         type: "button",
-                                        onClick: ()=>handleSubmitForm(mutateUpdate, "Edited")
-                                        ,
+                                        onClick: ()=>handleSubmitForm(mutateUpdate, "Edited"),
                                         loading: loadingUpdate,
                                         children: "Save Changes"
                                     })
@@ -1101,8 +1096,7 @@ function EditPlatform() {
                                     className: "my-auto mx-1",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                         type: "button",
-                                        onClick: ()=>handleSubmitForm(mutateDelete, "Deleted")
-                                        ,
+                                        onClick: ()=>handleSubmitForm(mutateDelete, "Deleted"),
                                         loading: loadingDelete,
                                         children: "Delete Platform"
                                     })
@@ -1210,8 +1204,7 @@ function EditSeries() {
                                                     variables: {
                                                         slug: row.value
                                                     }
-                                                })
-                                            ,
+                                                }),
                                             loading: loadingInfo
                                         })
                                     ]
@@ -1258,8 +1251,7 @@ function EditSeries() {
                                 className: "my-auto mx-1",
                                 children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                     type: "button",
-                                    onClick: ()=>handleSubmitForm(mutateUpdate, "Edited")
-                                    ,
+                                    onClick: ()=>handleSubmitForm(mutateUpdate, "Edited"),
                                     loading: loadingUpdate,
                                     children: "Save Changes"
                                 })
@@ -1269,8 +1261,7 @@ function EditSeries() {
                                 className: "my-auto mx-1",
                                 children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                     type: "button",
-                                    onClick: ()=>handleSubmitForm(mutateDelete, "Deleted")
-                                    ,
+                                    onClick: ()=>handleSubmitForm(mutateDelete, "Deleted"),
                                     loading: loadingDelete,
                                     children: "Delete Series"
                                 })
@@ -1393,8 +1384,7 @@ function EditGame() {
                                                     variables: {
                                                         slug: row.value
                                                     }
-                                                })
-                                            ,
+                                                }),
                                             loading: loading
                                         })
                                     ]
@@ -1509,8 +1499,7 @@ function EditGame() {
                                 className: "my-auto mx-1",
                                 children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                     type: "button",
-                                    onClick: ()=>handleSubmitForm(mutateUpdate, "Edited")
-                                    ,
+                                    onClick: ()=>handleSubmitForm(mutateUpdate, "Edited"),
                                     loading: loadingUpdate,
                                     children: "Save Changes"
                                 })
@@ -1520,8 +1509,7 @@ function EditGame() {
                                 className: "my-auto mx-1",
                                 children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                     type: "button",
-                                    onClick: ()=>handleSubmitForm(mutateDelete, "Deleted")
-                                    ,
+                                    onClick: ()=>handleSubmitForm(mutateDelete, "Deleted"),
                                     loading: loadingDelete,
                                     children: "Delete Game"
                                 })
@@ -1637,8 +1625,7 @@ function EditStudio() {
                                     className: "my-auto mx-1",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                         type: "button",
-                                        onClick: ()=>handleSubmitForm(mutateUpdate, "Edited")
-                                        ,
+                                        onClick: ()=>handleSubmitForm(mutateUpdate, "Edited"),
                                         loading: loadingUpdate,
                                         children: "Save Changes"
                                     })
@@ -1648,8 +1635,7 @@ function EditStudio() {
                                     className: "my-auto mx-1",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                         type: "button",
-                                        onClick: ()=>handleSubmitForm(mutateDelete, "Deleted")
-                                        ,
+                                        onClick: ()=>handleSubmitForm(mutateDelete, "Deleted"),
                                         loading: loadingDelete,
                                         children: "Delete Studio"
                                     })
@@ -1765,8 +1751,7 @@ function EditAnimation_AddAnimation() {
                                                     variables: {
                                                         id: row.value
                                                     }
-                                                })
-                                            ,
+                                                }),
                                             loading: loadingInfo
                                         })
                                     ]
@@ -1861,8 +1846,7 @@ function EditAnimation_AddAnimation() {
                                 className: "my-auto mx-1",
                                 children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                     type: "button",
-                                    onClick: ()=>handleSubmitForm(mutateUpdate, "Edited")
-                                    ,
+                                    onClick: ()=>handleSubmitForm(mutateUpdate, "Edited"),
                                     loading: loadingUpdate,
                                     children: "Save Changes"
                                 })
@@ -1872,8 +1856,7 @@ function EditAnimation_AddAnimation() {
                                 className: "my-auto mx-1",
                                 children: /*#__PURE__*/ jsx_runtime_.jsx(SubmitButton/* default */.Z, {
                                     type: "button",
-                                    onClick: ()=>handleSubmitForm(mutateDelete, "Deleted")
-                                    ,
+                                    onClick: ()=>handleSubmitForm(mutateDelete, "Deleted"),
                                     loading: loadingDelete,
                                     children: "Delete Animation"
                                 })
@@ -2076,8 +2059,7 @@ function SharedForms() {
 }
 function DiscList(props) {
     const defaults = props.defaults || [];
-    const { 0: keys , 1: setKeys  } = (0,external_react_.useState)(props.defaults ? defaults.map((d, i)=>i
-    ) : [
+    const { 0: keys , 1: setKeys  } = (0,external_react_.useState)(props.defaults ? defaults.map((d, i)=>i) : [
         0
     ]);
     (0,external_react_.useEffect)(()=>{
@@ -2098,16 +2080,14 @@ function DiscList(props) {
                             onClick: ()=>setKeys([
                                     ...keys,
                                     keys[keys.length - 1] + 1
-                                ])
-                            ,
+                                ]),
                             children: "Add Disc"
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
                             color: "primary",
                             onClick: ()=>setKeys((0,utils/* clearKeys */.z5)(keys, [
                                     "discInput"
-                                ]))
-                            ,
+                                ])),
                             children: "Remove empty discs"
                         })
                     ]
@@ -2141,16 +2121,14 @@ function DiscList(props) {
                                 })
                             })
                         })
-                    }, key)
-                )
+                    }, key))
             })
         ]
     });
 }
 function StoreDownloads(props) {
     const defaults = props.defaults || [];
-    const { 0: keys , 1: setKeys  } = (0,external_react_.useState)(props.defaults ? defaults.map((d, i)=>i
-    ) : [
+    const { 0: keys , 1: setKeys  } = (0,external_react_.useState)(props.defaults ? defaults.map((d, i)=>i) : [
         0
     ]);
     (0,external_react_.useEffect)(()=>{
@@ -2171,16 +2149,14 @@ function StoreDownloads(props) {
                             onClick: ()=>setKeys([
                                     ...keys,
                                     keys[keys.length - 1] + 1
-                                ])
-                            ,
+                                ]),
                             children: "Add Store link"
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
                             color: "primary",
                             onClick: ()=>setKeys((0,utils/* clearKeys */.z5)(keys, [
                                     "storeInput"
-                                ]))
-                            ,
+                                ])),
                             children: "Remove empty links"
                         })
                     ]
@@ -2203,8 +2179,7 @@ function StoreDownloads(props) {
                                             /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* SimpleSelector */.d7, {
                                                 isSingle: true,
                                                 name: `stores[${i}][provider]`,
-                                                defaultValue: defaults[key] ? providers.find((e)=>e.value === defaults[key].provider
-                                                ) : providers[0],
+                                                defaultValue: defaults[key] ? providers.find((e)=>e.value === defaults[key].provider) : providers[0],
                                                 options: providers
                                             })
                                         ]
@@ -2229,8 +2204,7 @@ function StoreDownloads(props) {
                                 })
                             ]
                         })
-                    }, key)
-                )
+                    }, key))
             })
         ]
     });
@@ -2306,8 +2280,7 @@ function DownloadList(props) {
                                 children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Form.Group, {
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
                                         color: "primary",
-                                        onClick: ()=>removeItem(i)
-                                        ,
+                                        onClick: ()=>removeItem(i),
                                         disabled: length === 1,
                                         children: "Remove category"
                                     })
@@ -2320,8 +2293,7 @@ function DownloadList(props) {
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
                                         className: "me-2",
                                         color: "primary",
-                                        onClick: ()=>addLink(i)
-                                        ,
+                                        onClick: ()=>addLink(i),
                                         children: "Add Download Link"
                                     })
                                 })
@@ -2363,8 +2335,7 @@ function DownloadList(props) {
                                                         }),
                                                         /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* SimpleSelector */.d7, {
                                                             isSingle: true,
-                                                            defaultValue: providersDownload.find((p)=>p.value === link.provider
-                                                            ),
+                                                            defaultValue: providersDownload.find((p)=>p.value === link.provider),
                                                             name: `downloads[${i + prefix}][links][${i2}][provider]`,
                                                             options: providersDownload
                                                         })
@@ -2412,19 +2383,16 @@ function DownloadList(props) {
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Form.Group, {
                                         children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
                                             color: "primary",
-                                            onClick: ()=>removeLink(i, i2)
-                                            ,
+                                            onClick: ()=>removeLink(i, i2),
                                             children: "Remove link"
                                         })
                                     })
                                 })
                             ]
-                        }, link.id)
-                    )
+                        }, link.id))
                 ]
             })
-        }, cat.id)
-    );
+        }, cat.id));
 }
 function Downloads(props) {
     const { defaults =[]  } = props;
@@ -2455,8 +2423,7 @@ function Downloads(props) {
                                     id: `n${newValues.length}`,
                                     links: []
                                 }
-                            ])
-                        ,
+                            ]),
                         children: "Add Download Section"
                     })
                 })

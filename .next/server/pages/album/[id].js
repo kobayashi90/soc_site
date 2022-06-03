@@ -198,14 +198,12 @@ query downloads ($id: ID!) {
         }
     };
 }
-const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_11__/* .getImageUrl */ .Jn)(id)}`
-;
+const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_11__/* .getImageUrl */ .Jn)(id)}`;
 const favoriteTemplate = (query1)=>_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
   mutation ($ostId: String!) {
     ${query1}Favorite(ostId: $ostId)
   }
-`
-;
+`;
 const addFavorite = favoriteTemplate("add");
 const removeFavorite = favoriteTemplate("remove");
 function Page(props) {
@@ -225,8 +223,7 @@ function Page(props) {
     const { data: dataFavorite , refetch: refetchFavorite  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(getFavorite);
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetchFavorite({
             ostId: id1
-        })
-    , [
+        }), [
         user,
         id1,
         refetchFavorite
@@ -238,8 +235,7 @@ function Page(props) {
             variables: {
                 ostId: id1
             }
-        }).then(()=>react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t(dataFavorite.album.isFavorite ? "Favorite_Added" : "Favorite_Removed"))
-        ).catch((err)=>{
+        }).then(()=>react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t(dataFavorite.album.isFavorite ? "Favorite_Added" : "Favorite_Removed"))).catch((err)=>{
             console.log(err);
             react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.error("Query failed");
         }).finally(()=>{
@@ -278,8 +274,7 @@ function Page(props) {
                             }, "title"),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                                 property: "og:description",
-                                content: album.subTitle || album.artists.map((a)=>a.name
-                                ).join(" - ")
+                                content: album.subTitle || album.artists.map((a)=>a.name).join(" - ")
                             }, "desc"),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                                 property: "og:image",
@@ -349,8 +344,7 @@ function Page(props) {
                                                                                     children: t("Artists")
                                                                                 }),
                                                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
-                                                                                    children: album.artists.map(({ id , name  })=>name
-                                                                                    ).join(", ")
+                                                                                    children: album.artists.map(({ id , name  })=>name).join(", ")
                                                                                 })
                                                                             ]
                                                                         }),
@@ -361,12 +355,9 @@ function Page(props) {
                                                                                 }),
                                                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                                                                                     children: [
-                                                                                        album.classes.map(({ name  })=>t(`${name} Soundtrack`)
-                                                                                        ).join(" & "),
-                                                                                        album.categories.map(({ name  })=>name
-                                                                                        ).join(", ")
-                                                                                    ].filter((f)=>f !== ""
-                                                                                    ).join(" - ")
+                                                                                        album.classes.map(({ name  })=>t(`${name} Soundtrack`)).join(" & "),
+                                                                                        album.categories.map(({ name  })=>name).join(", ")
+                                                                                    ].filter((f)=>f !== "").join(" - ")
                                                                                 })
                                                                             ]
                                                                         }),
@@ -405,8 +396,7 @@ function Page(props) {
                                                                                                 }),
                                                                                                 i !== album.platforms.length - 1 && ", "
                                                                                             ]
-                                                                                        }, id)
-                                                                                    )
+                                                                                        }, id))
                                                                                 })
                                                                             ]
                                                                         }),
@@ -425,8 +415,7 @@ function Page(props) {
                                                                                                 }),
                                                                                                 i !== album.games.length - 1 && ", "
                                                                                             ]
-                                                                                        }, slug)
-                                                                                    )
+                                                                                        }, slug))
                                                                                 })
                                                                             ]
                                                                         }),
@@ -445,8 +434,7 @@ function Page(props) {
                                                                                                 }),
                                                                                                 i !== album.animations.length - 1 && ", "
                                                                                             ]
-                                                                                        }, id)
-                                                                                    )
+                                                                                        }, id))
                                                                                 })
                                                                             ]
                                                                         }),
@@ -566,8 +554,7 @@ function Page(props) {
                                                                                 src: `/img/provider/${provider}.jpg`
                                                                             })
                                                                         })
-                                                                    }, i)
-                                                                )
+                                                                    }, i))
                                                             })
                                                         ]
                                                     })
@@ -628,8 +615,7 @@ function DownloadList(props) {
     });
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetch({
             id
-        })
-    , [
+        }), [
         user,
         id,
         refetch
@@ -714,8 +700,7 @@ function DirectButton(props1) {
             ...props,
             id: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().tooltip),
             children: t("Become_Donator")
-        }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {})
-    ;
+        }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {});
     const ButtonRender = disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         variant: "secondary",
         className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().direct)),
@@ -761,8 +746,7 @@ function TrackList(props) {
                                 "pe-0": i < discs.length - 1
                             }),
                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                onClick: ()=>setCurrent(number)
-                                ,
+                                onClick: ()=>setCurrent(number),
                                 className: "py-2",
                                 style: {
                                     cursor: current === number ? "" : "pointer",
@@ -778,8 +762,7 @@ function TrackList(props) {
                                     number + 1
                                 ]
                             })
-                        }, number)
-                    )
+                        }, number))
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
@@ -867,6 +850,14 @@ module.exports = require("luxon");
 
 /***/ }),
 
+/***/ 3280:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/app-router-context.js");
+
+/***/ }),
+
 /***/ 2796:
 /***/ ((module) => {
 
@@ -947,6 +938,22 @@ module.exports = require("next/dist/shared/lib/router-context.js");
 
 /***/ }),
 
+/***/ 3431:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/add-locale.js");
+
+/***/ }),
+
+/***/ 1751:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -963,19 +970,19 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 /***/ }),
 
-/***/ 4365:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("next/dist/shared/lib/router/utils/get-middleware-regex.js");
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/is-dynamic.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
@@ -987,11 +994,27 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.j
 
 /***/ }),
 
+/***/ 4567:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix.js");
+
+/***/ }),
+
 /***/ 979:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/querystring.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 
@@ -1122,7 +1145,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,7119,6112,9139], () => (__webpack_exec__(5541)));
+var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,5675,2102,599,9738,2225,4155,7119,6112,9139], () => (__webpack_exec__(5541)));
 module.exports = __webpack_exports__;
 
 })();

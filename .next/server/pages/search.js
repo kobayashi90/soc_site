@@ -123,10 +123,8 @@ function Search() {
     const setLoading = (name, value)=>setLoadingState({
             ...loadingState,
             [name]: value
-        })
-    ;
-    const loading = initialLoad || Object.values(loadingState).some((c)=>c.loading
-    );
+        });
+    const loading = initialLoad || Object.values(loadingState).some((c)=>c.loading);
     (0,react__WEBPACK_IMPORTED_MODULE_10__.useEffect)(()=>{
         if (search) getInitial();
     }, [
@@ -169,8 +167,7 @@ function Search() {
                             ...value,
                             ...data[name],
                             setLoading: setLoading
-                        }, name)
-                    )
+                        }, name))
                 ]
             })
         })
@@ -235,14 +232,12 @@ function SearchSection(props) {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Nav, {
                             children: Array.from(Array(Math.ceil(count / limit)), (x, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Nav.Link, {
                                     disabled: page === i,
-                                    onClick: ()=>setPage(i)
-                                    ,
+                                    onClick: ()=>setPage(i),
                                     className: "py-0 px-2",
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
                                         children: i + 1
                                     })
-                                }, i)
-                            )
+                                }, i))
                         })
                     })
                 ]
@@ -284,8 +279,7 @@ function SearchSection(props) {
                                 ]
                             })
                         })
-                    }, item.id)
-                )
+                    }, item.id))
             })
         ]
     }) : null;
@@ -321,6 +315,13 @@ module.exports = require("form-serialize");
 /***/ ((module) => {
 
 module.exports = require("luxon");
+
+/***/ }),
+
+/***/ 3280:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/app-router-context.js");
 
 /***/ }),
 
@@ -394,6 +395,20 @@ module.exports = require("next/dist/shared/lib/router-context.js");
 
 /***/ }),
 
+/***/ 3431:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-locale.js");
+
+/***/ }),
+
+/***/ 1751:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -408,17 +423,17 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 /***/ }),
 
-/***/ 4365:
-/***/ ((module) => {
-
-module.exports = require("next/dist/shared/lib/router/utils/get-middleware-regex.js");
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/is-dynamic.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
@@ -429,10 +444,24 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.j
 
 /***/ }),
 
+/***/ 4567:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix.js");
+
+/***/ }),
+
 /***/ 979:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/querystring.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 

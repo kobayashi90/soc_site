@@ -4,20 +4,28 @@ exports.ids = [1397];
 exports.modules = {
 
 /***/ 2700:
-/***/ ((module, exports) => {
+/***/ ((module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
-exports.removePathTrailingSlash = removePathTrailingSlash;
 exports.normalizePathTrailingSlash = void 0;
-function removePathTrailingSlash(path) {
-    return path.endsWith("/") && path !== "/" ? path.slice(0, -1) : path;
-}
-const normalizePathTrailingSlash =  false ? 0 : removePathTrailingSlash;
+var _removeTrailingSlash = __webpack_require__(3297);
+var _parsePath = __webpack_require__(8854);
+const normalizePathTrailingSlash = (path)=>{
+    if (!path.startsWith("/")) {
+        return path;
+    }
+    const { pathname , query , hash  } = (0, _parsePath).parsePath(path);
+    if (false) {}
+    return `${(0, _removeTrailingSlash).removeTrailingSlash(pathname)}${query}${hash}`;
+};
 exports.normalizePathTrailingSlash = normalizePathTrailingSlash;
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
 } //# sourceMappingURL=normalize-trailing-slash.js.map
@@ -48,8 +56,7 @@ function useIntersection({ rootRef , rootMargin , disabled  }) {
         }
         if (isDisabled || visible) return;
         if (el && el.tagName) {
-            unobserve.current = observe(el, (isVisible)=>isVisible && setVisible(isVisible)
-            , {
+            unobserve.current = observe(el, (isVisible)=>isVisible && setVisible(isVisible), {
                 root,
                 rootMargin
             });
@@ -66,10 +73,8 @@ function useIntersection({ rootRef , rootMargin , disabled  }) {
     (0, _react).useEffect(()=>{
         if (!hasIntersectionObserver) {
             if (!visible) {
-                const idleCallback = (0, _requestIdleCallback).requestIdleCallback(()=>setVisible(true)
-                );
-                return ()=>(0, _requestIdleCallback).cancelIdleCallback(idleCallback)
-                ;
+                const idleCallback = (0, _requestIdleCallback).requestIdleCallback(()=>setVisible(true));
+                return ()=>(0, _requestIdleCallback).cancelIdleCallback(idleCallback);
             }
         }
     }, [
@@ -97,8 +102,7 @@ function observe(element, callback, options) {
         if (elements.size === 0) {
             observer.disconnect();
             observers.delete(id);
-            let index = idList.findIndex((obj)=>obj.root === id.root && obj.margin === id.margin
-            );
+            let index = idList.findIndex((obj)=>obj.root === id.root && obj.margin === id.margin);
             if (index > -1) {
                 idList.splice(index, 1);
             }
@@ -112,8 +116,7 @@ function createObserver(options) {
         root: options.root || null,
         margin: options.rootMargin || ""
     };
-    let existing = idList.find((obj)=>obj.root === id.root && obj.margin === id.margin
-    );
+    let existing = idList.find((obj)=>obj.root === id.root && obj.margin === id.margin);
     let instance;
     if (existing) {
         instance = observers.get(existing);
@@ -141,7 +144,10 @@ function createObserver(options) {
     });
     return instance;
 }
-if (typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) {
+if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+    Object.defineProperty(exports.default, "__esModule", {
+        value: true
+    });
     Object.assign(exports.default, exports);
     module.exports = exports.default;
 } //# sourceMappingURL=use-intersection.js.map

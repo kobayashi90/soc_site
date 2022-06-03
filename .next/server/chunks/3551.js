@@ -26,26 +26,21 @@ _session__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (
 const isAuthed = (next)=>(root, args, context, info)=>{
         if (!context.user) throw new AuthenticationError();
         return next(root, args, context, info);
-    }
-;
+    };
 const hasPerm = (perm)=>(next)=>async (root, args, context, info)=>{
             const roles = await context.user.getRoles();
-            const permissions = roles.map((r)=>r.permissions
-            ).flat();
+            const permissions = roles.map((r)=>r.permissions).flat();
             if (!permissions.includes(perm)) throw new ForbiddenError();
             return next(root, args, context, info);
-        }
-;
+        };
 const hasRole = (role)=>[
         isAuthed,
         hasPerm(role)
-    ]
-;
+    ];
 const hasRolePage = (allowedRoles)=>(0,_session__WEBPACK_IMPORTED_MODULE_2__/* .withSessionSsr */ .f)(async (context)=>{
         const { req  } = context;
         const { permissions  } = req.session;
-        if (!permissions.some((p)=>allowedRoles.includes(p)
-        )) return {
+        if (!permissions.some((p)=>allowedRoles.includes(p))) return {
             redirect: {
                 destination: "/404",
                 permanent: false
@@ -54,8 +49,7 @@ const hasRolePage = (allowedRoles)=>(0,_session__WEBPACK_IMPORTED_MODULE_2__/* .
         return {
             props: {}
         };
-    })
-;
+    });
 const placeholder = (parent, folder)=>{
     if (!parent.placeholder) solvePlaceholder(parent, folder);
     return parent.placeholder;
@@ -67,8 +61,7 @@ async function solvePlaceholder(parent, folder) {
     parent.placeholder = await processImage(fullPath);
     await parent.save();
 }
-const headerColor = async (parent, folder)=>parent.headerColor || await solveHeaderColor(parent, folder) || "#ffffff"
-;
+const headerColor = async (parent, folder)=>parent.headerColor || await solveHeaderColor(parent, folder) || "#ffffff";
 async function solveHeaderColor(parent, folder) {
     const color = await getImgColor(`${folder}/${parent.slug || parent.id}`);
     parent.headerColor = color;

@@ -81,8 +81,7 @@ function Forgor({ qKey  }) {
     const p1 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const p2 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const { 0: isInvalid , 1: setInvalid  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-    const checkInvalid = ()=>setInvalid(p1?.current?.value !== p2?.current?.value)
-    ;
+    const checkInvalid = ()=>setInvalid(p1?.current?.value !== p2?.current?.value);
     const submit = (ev)=>{
         ev.preventDefault();
         mutate({
@@ -209,6 +208,20 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 

@@ -268,8 +268,7 @@ function AlbumCount() {
                                 ": ",
                                 count
                             ]
-                        }, i)
-                    )
+                        }, i))
                 ]
             })
         ]

@@ -47,8 +47,7 @@ function initializeApollo(initialState = null) {
     return _apolloClient;
 }
 function useApollo(initialState) {
-    const store = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>initializeApollo(initialState)
-    , [
+    const store = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(()=>initializeApollo(initialState), [
         initialState
     ]);
     return store;

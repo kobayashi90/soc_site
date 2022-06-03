@@ -231,8 +231,7 @@ function EditOstForm({ id , album , classes , categories  }) {
     });
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>refetch({
             id
-        })
-    , [
+        }), [
         user,
         id,
         refetch
@@ -365,8 +364,7 @@ function EditOstForm({ id , album , classes , categories  }) {
                                         ].map((label)=>({
                                                 label,
                                                 value: label.toLowerCase()
-                                            })
-                                        )
+                                            }))
                                     })
                                 ]
                             })
@@ -407,8 +405,7 @@ function EditOstForm({ id , album , classes , categories  }) {
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
                                             name: "artists",
                                             as: "textarea",
-                                            defaultValue: album.artists.map((a)=>a.name
-                                            ).join(",")
+                                            defaultValue: album.artists.map((a)=>a.name).join(",")
                                         })
                                     ]
                                 })
@@ -638,6 +635,20 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 8854:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 
