@@ -709,24 +709,29 @@ function DownloadList(props) {
 function DirectButton(props1) {
     const { directUrl  } = props1;
     const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
-    const disabled = directUrl === "/unauthorized";
+    const disabled = directUrl === "false";
     const renderTooltip = (props)=>disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Tooltip, {
             ...props,
             id: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().tooltip),
             children: t("Become_Donator")
         }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {})
     ;
+    const ButtonRender = disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        variant: "secondary",
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().direct)),
+        disabled: disabled,
+        children: t("Direct")
+    }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        target: "_blank",
+        variant: "secondary",
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().direct)),
+        href: directUrl,
+        children: t("Direct")
+    });
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.OverlayTrigger, {
         placement: "top",
         overlay: renderTooltip,
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
-            target: "_blank",
-            variant: "secondary",
-            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().direct)),
-            href: directUrl,
-            disabled: disabled,
-            children: t("Direct")
-        })
+        children: ButtonRender
     });
 }
 function TrackList(props) {
