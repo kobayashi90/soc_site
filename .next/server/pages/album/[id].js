@@ -214,11 +214,6 @@ function Page(props) {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const { 0: loadingFavorite , 1: setLoading  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
-    const { data , loading , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(queryDownload, {
-        variables: {
-            id: id1
-        }
-    });
     const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useApolloClient)();
     const getFavorite = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
   query ($ostId: ID!) {
@@ -228,14 +223,6 @@ function Page(props) {
   }
 `;
     const { data: dataFavorite , refetch: refetchFavorite  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(getFavorite);
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetch({
-            id: id1
-        })
-    , [
-        user,
-        id1,
-        refetch
-    ]);
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetchFavorite({
             ostId: id1
         })
@@ -588,69 +575,11 @@ function Page(props) {
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                                                     className: "style-white w-100"
                                                 }),
-                                                loading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
-                                                            className: "mx-auto"
-                                                        })
-                                                    })
-                                                }),
-                                                data?.downloads.map(({ links , title , provider: provider1  }, di)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-                                                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                            children: [
-                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-                                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                                        md: 12,
-                                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
-                                                                            className: "text-center download-txt mb-0",
-                                                                            children: title
-                                                                        })
-                                                                    })
-                                                                }),
-                                                                links.map(({ id , url , custom , provider , directUrl  })=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-                                                                        children: [
-                                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-                                                                                className: "mt-2",
-                                                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                                                    md: 12,
-                                                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h5", {
-                                                                                        className: "text-center",
-                                                                                        children: provider
-                                                                                    })
-                                                                                })
-                                                                            }),
-                                                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-                                                                                className: "mx-auto mb-3",
-                                                                                children: [
-                                                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                                                        className: "py-2",
-                                                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
-                                                                                            target: "_blank",
-                                                                                            variant: "secondary",
-                                                                                            className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().download),
-                                                                                            href: url,
-                                                                                            children: t("Download")
-                                                                                        })
-                                                                                    }),
-                                                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                                                        className: "py-2",
-                                                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DirectButton, {
-                                                                                            target: "_blank",
-                                                                                            directUrl: directUrl
-                                                                                        })
-                                                                                    })
-                                                                                ]
-                                                                            })
-                                                                        ]
-                                                                    }, id)
-                                                                ),
-                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
-                                                                    className: "style-white w-100"
-                                                                })
-                                                            ]
-                                                        })
-                                                    }, di)
-                                                )
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DownloadList, {
+                                                    id: id1,
+                                                    user: user,
+                                                    t: t
+                                                })
                                             ]
                                         })
                                     ]
@@ -690,6 +619,93 @@ function Page(props) {
         ]
     });
 };
+function DownloadList(props) {
+    const { id , user , t  } = props;
+    const { data , loading , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(queryDownload, {
+        variables: {
+            id
+        }
+    });
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetch({
+            id
+        })
+    , [
+        user,
+        id,
+        refetch
+    ]);
+    if (loading) {
+        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
+                    className: "mx-auto"
+                })
+            })
+        });
+    }
+    const { downloads =[]  } = data;
+    return downloads.map((download, di)=>{
+        const { links , title  } = download;
+        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                            md: 12,
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
+                                className: "text-center download-txt mb-0",
+                                children: title
+                            })
+                        })
+                    }),
+                    links.map((link)=>{
+                        const { id: linkId , url , provider , directUrl  } = link;
+                        return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                                    className: "mt-2",
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                        md: 12,
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h5", {
+                                            className: "text-center",
+                                            children: provider
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                                    className: "mx-auto mb-3",
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                            xs: 6,
+                                            className: " mx-auto py-2",
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+                                                target: "_blank",
+                                                variant: "secondary",
+                                                className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_16___default().download),
+                                                href: url,
+                                                children: t("Download")
+                                            })
+                                        }),
+                                        directUrl && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                            className: "py-2",
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DirectButton, {
+                                                target: "_blank",
+                                                directUrl: directUrl
+                                            })
+                                        })
+                                    ]
+                                })
+                            ]
+                        }, linkId);
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
+                        className: "style-white w-100"
+                    })
+                ]
+            })
+        }, di);
+    });
+}
 function DirectButton(props1) {
     const { directUrl  } = props1;
     const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
