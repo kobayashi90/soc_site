@@ -154,7 +154,6 @@ export default function Page (props) {
   const router = useRouter()
   const { user } = useUser()
   const [loadingFavorite, setLoading] = useState(false)
-  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
   const client = useApolloClient()
   const getFavorite = gql`
   query ($ostId: ID!) {
@@ -164,7 +163,6 @@ export default function Page (props) {
   }
 `
   const { data: dataFavorite, refetch: refetchFavorite } = useQuery(getFavorite)
-  useEffect(() => refetch({ id }), [user, id, refetch])
   useEffect(() => refetchFavorite({ ostId: id }), [user, id, refetchFavorite])
 
   function submitFavorite () {
@@ -342,39 +340,7 @@ export default function Page (props) {
                   </Row>)}
                 <hr className='style-white w-100' />
 
-                {loading && (
-                  <Row>
-                    <Col>
-                      <Loader className='mx-auto'/>
-                    </Col>
-                  </Row>
-                )}
-                {data?.downloads.map(({ links, title, provider }, di) => (
-                  <Row key={di}>
-                    <Col>
-                      <Row>
-                        <Col md={12}>
-                          <h2 className='text-center download-txt mb-0'>{title}</h2>
-                        </Col>
-                      </Row>
-                      {links.map(({ id, url, custom, provider, directUrl }) => (
-                        <Fragment key={id}>
-                          <Row className='mt-2'>
-                            <Col md={12}><h5 className='text-center'>{provider}</h5></Col>
-                          </Row>
-                          <Row className='mx-auto mb-3'>
-                            <Col className='py-2'>
-                              <Button target="_blank" variant="secondary" className={styles.download} href={url}>{t('Download')}</Button>
-                            </Col>
-                            <Col className='py-2'>
-                              <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
-                            </Col>
-                          </Row>
-                        </Fragment>
-                      ))}
-                      <hr className='style-white w-100' />
-                    </Col>
-                  </Row>)) }
+                <DownloadList id={id} user={user} t={t} />
               </Col>
             </Row>
 
@@ -394,6 +360,65 @@ export default function Page (props) {
         </Col>
       </Row>
     </>
+  )
+}
+
+function DownloadList (props) {
+  const { id, user, t } = props
+  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
+
+  useEffect(() => refetch({ id }), [user, id, refetch])
+
+  if (loading) {
+    return (
+      <Row>
+        <Col>
+          <Loader className='mx-auto'/>
+        </Col>
+      </Row>
+    )
+  }
+
+  const { downloads = [] } = data
+
+  return (
+    downloads.map((download, di) => {
+      const { links, title } = download
+
+      return (
+        <Row key={di}>
+          <Col>
+            <Row>
+              <Col md={12}>
+                <h2 className='text-center download-txt mb-0'>{title}</h2>
+              </Col>
+            </Row>
+            {links.map(link => {
+              const { id: linkId, url, provider, directUrl } = link
+
+              return (
+                <Fragment key={linkId}>
+                  <Row className='mt-2'>
+                    <Col md={12}><h5 className='text-center'>{provider}</h5></Col>
+                  </Row>
+                  <Row className='mx-auto mb-3'>
+                    <Col xs={6} className=' mx-auto py-2'>
+                      <Button target="_blank" variant="secondary" className={styles.download} href={url}>{t('Download')}</Button>
+                    </Col>
+                    {directUrl && (
+                      <Col className='py-2'>
+                        <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
+                      </Col>
+                    )}
+                  </Row>
+                </Fragment>
+              )
+            })}
+            <hr className='style-white w-100' />
+          </Col>
+        </Row>
+      )
+    })
   )
 }
 
