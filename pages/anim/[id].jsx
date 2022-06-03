@@ -123,7 +123,7 @@ export default function Page (props) {
               </Col>
               <Col>
                 <Row>
-                  <AlbumBoxList colProps={{ xs: 6, md: 2 }} items={albums} style={{ height: 'fit-content' }} />
+                  <AlbumBoxList colProps={{ xs: 6, md: 3 }} items={albums} style={{ height: 'fit-content' }} />
                 </Row>
               </Col>
             </Row>
