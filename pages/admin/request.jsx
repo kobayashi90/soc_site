@@ -212,7 +212,7 @@ function RequestTable (props) {
   function Rows () {
     return (
       data.requests
-        .filter(({ title, link }) => title.toLowerCase().includes(search) || link.toLowerCase() === search)
+        .filter(({ title, link }) => title?.toLowerCase().includes(search) || link?.toLowerCase() === search)
         .map(request => {
           const { id, title, link, user, userID, donator, reason, comments } = request
 
