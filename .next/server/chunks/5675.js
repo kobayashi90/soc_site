@@ -561,7 +561,7 @@ function handleLoading(img, src, layout, placeholder, onLoadingCompleteRef, setB
     });
 }
 const ImageElement = (_param)=>{
-    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading ="lazy" , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible , noscriptSizes  } = _param, rest = _objectWithoutProperties(_param, [
+    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible , noscriptSizes  } = _param, rest = _objectWithoutProperties(_param, [
         "imgAttributes",
         "heightInt",
         "widthInt",
@@ -585,6 +585,7 @@ const ImageElement = (_param)=>{
         "isVisible",
         "noscriptSizes"
     ]);
+    loading = isLazy ? "lazy" : loading;
     return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("img", Object.assign({}, rest, imgAttributes, layout === "raw" ? {
         height: heightInt,
         width: widthInt

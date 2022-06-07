@@ -70,13 +70,13 @@ function Loader(props) {
     });
 };
 const ButtonLoader = (props)=>{
-    const { loading , text  } = props;
+    const { loading , text , children  } = props;
     return /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
         ...props,
         children: loading ? /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
             ...oval/* default */.Z,
             alt: "loading"
-        }) : text
+        }) : text || children
     });
 };
 
