@@ -391,7 +391,7 @@ function RequestTable(props) {
         react_toastify__WEBPACK_IMPORTED_MODULE_8__.toast.error("Failed to fetch requests");
     }
     function Rows() {
-        return data.requests.filter(({ title , link  })=>title.toLowerCase().includes(search) || link.toLowerCase() === search).map((request)=>{
+        return data.requests.filter(({ title , link  })=>title?.toLowerCase().includes(search) || link?.toLowerCase() === search).map((request)=>{
             const { id , title , link , user , userID , donator , reason , comments  } = request;
             return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
                 style: {
