@@ -16,8 +16,8 @@ export default function Loader (props) {
 }
 
 export const ButtonLoader = props => {
-  const { loading, text } = props
+  const { loading, text, children } = props
   return (
-    <Button {...props}>{loading ? <Image {...loader} alt='loading' /> : text}</Button>
+    <Button {...props}>{loading ? <Image {...loader} alt='loading' /> : text || children}</Button>
   )
 }
