@@ -220,6 +220,13 @@ module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix.js")
 
 /***/ }),
 
+/***/ 299:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/format-next-pathname-info.js");
+
+/***/ }),
+
 /***/ 3938:
 /***/ ((module) => {
 
@@ -231,6 +238,13 @@ module.exports = require("next/dist/shared/lib/router/utils/format-url.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-route.js");
+
+/***/ }),
+
+/***/ 5789:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/get-next-pathname-info.js");
 
 /***/ }),
 

@@ -322,24 +322,27 @@ function PublisherSelector(props) {
     });
 }
 function PlatformSelector(props) {
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(BaseSelector, {
+    const { classes =[]  } = props;
+    const query = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
+    query ($classes: [String]!){
+      searchPlatformsByClasses(classes: $classes) {
+        id
+        name
+      }
+    }
+  `;
+    const { data ={}  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useQuery)(query, {
+        variables: {
+            classes
+        }
+    });
+    const { searchPlatformsByClasses: results = []  } = data;
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SimpleSelector, {
         ...props,
-        startQuery: `
-        query ($limit: Int!){
-          recentPlatforms(limit: $limit, type: "${props.type}") {
-            value: id
-            label: name
-          }
-        }
-      `,
-        changeQuery: `
-        query ($filter: String){
-          searchPlatformsByName(name: $filter, type: "${props.type}") {
-            value: id
-            label: name
-          }
-        }
-      `
+        options: results.map((r)=>({
+                label: r.name,
+                value: r.id
+            }))
     });
 }
 

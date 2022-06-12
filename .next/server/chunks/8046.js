@@ -392,7 +392,9 @@ function AddGame() {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* PlatformSelector */.J3, {
-                                            type: "Game",
+                                            classes: [
+                                                "Game"
+                                            ],
                                             name: "platforms"
                                         })
                                     ]
@@ -979,8 +981,8 @@ const EditPlatform_mutationDelete = client_.gql`
     
 `;
 function EditPlatform() {
-    const { data: classData  } = (0,client_.useQuery)(queryClasses);
-    const classes = classData ? classData.classes : [];
+    const { data: classData = {}  } = (0,client_.useQuery)(queryClasses);
+    const { classes =[]  } = classData;
     const formRef = (0,external_react_.useRef)(null);
     const [mutateUpdate, { loading: loadingUpdate  }] = (0,client_.useMutation)(EditPlatform_mutationUpdate);
     const [mutateDelete, { loading: loadingDelete  }] = (0,client_.useMutation)(EditPlatform_mutationDelete);
@@ -1026,6 +1028,7 @@ function EditPlatform() {
                                                 children: "Platform:"
                                             }),
                                             /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* PlatformSelector */.J3, {
+                                                classes: classes.map((c)=>c.name),
                                                 isSingle: true,
                                                 type: "",
                                                 required: true,
@@ -1465,7 +1468,9 @@ function EditGame() {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* PlatformSelector */.J3, {
-                                            type: "Game",
+                                            classes: [
+                                                "Game"
+                                            ],
                                             name: "platforms",
                                             defaultValue: data && data.game.platforms
                                         })

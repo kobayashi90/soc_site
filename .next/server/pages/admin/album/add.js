@@ -164,13 +164,12 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
     }
   `;
 function AddAlbum(props) {
-    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("");
-    const { data: classData  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(queryClasses);
+    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+    const { data: classData = {}  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(queryClasses);
+    const { classes =[] , categories =[]  } = classData;
     const [addMutation, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(mutation, {
         refetchQueries: "searchAlbum"
     });
-    const classes = classData ? classData.classes : [];
-    const categories = classData ? classData.categories : [];
     async function handleSubmitForm(e) {
         e.persist();
         e.preventDefault();
@@ -341,16 +340,17 @@ function AddAlbum(props) {
                                             children: "Classification:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .SimpleSelector */ .d7, {
+                                            defaultValue: currentClasses.map((c)=>({
+                                                    value: c,
+                                                    label: c
+                                                })),
                                             required: true,
                                             name: "classes",
                                             options: classes.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
                                                 })),
-                                            onChange: (values)=>{
-                                                if (values && values.length === 1) setClasses(values[0].label);
-                                                else setClasses("");
-                                            }
+                                            onChange: (values)=>setClasses(values.map((v)=>v.value))
                                         })
                                     ]
                                 })
@@ -441,7 +441,7 @@ function AddAlbum(props) {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .PlatformSelector */ .J3, {
-                                            type: currentClasses,
+                                            classes: currentClasses,
                                             name: "platforms"
                                         })
                                     ]

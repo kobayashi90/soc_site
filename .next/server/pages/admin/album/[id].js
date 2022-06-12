@@ -222,7 +222,7 @@ function EditOst(props) {
 };
 function EditOstForm({ id , album , classes , categories  }) {
     const [mutate, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(mutation);
-    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useQuery)(queryDownload, {
         variables: {
@@ -512,9 +512,10 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .PlatformSelector */ .J3, {
-                                            type: currentClasses,
+                                            classes: currentClasses,
                                             defaultValue: album.platforms,
-                                            name: "platforms"
+                                            name: "platforms",
+                                            onChange: (values)=>setClasses(values.map((v)=>v.value))
                                         })
                                     ]
                                 })

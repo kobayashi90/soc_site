@@ -14,44 +14,39 @@ exports["default"] = initHeadManager;
 exports.isEqualNode = isEqualNode;
 exports.DOMAttributeNames = void 0;
 function initHeadManager() {
-    let updatePromise = null;
     return {
         mountedInstances: new Set(),
         updateHead: (head)=>{
-            const promise = updatePromise = Promise.resolve().then(()=>{
-                if (promise !== updatePromise) return;
-                updatePromise = null;
-                const tags = {};
-                head.forEach((h)=>{
-                    if (// it won't be inlined. In this case revert to the original behavior
-                    h.type === "link" && h.props["data-optimized-fonts"]) {
-                        if (document.querySelector(`style[data-href="${h.props["data-href"]}"]`)) {
-                            return;
-                        } else {
-                            h.props.href = h.props["data-href"];
-                            h.props["data-href"] = undefined;
-                        }
+            const tags = {};
+            head.forEach((h)=>{
+                if (// it won't be inlined. In this case revert to the original behavior
+                h.type === "link" && h.props["data-optimized-fonts"]) {
+                    if (document.querySelector(`style[data-href="${h.props["data-href"]}"]`)) {
+                        return;
+                    } else {
+                        h.props.href = h.props["data-href"];
+                        h.props["data-href"] = undefined;
                     }
-                    const components = tags[h.type] || [];
-                    components.push(h);
-                    tags[h.type] = components;
-                });
-                const titleComponent = tags.title ? tags.title[0] : null;
-                let title = "";
-                if (titleComponent) {
-                    const { children  } = titleComponent.props;
-                    title = typeof children === "string" ? children : Array.isArray(children) ? children.join("") : "";
                 }
-                if (title !== document.title) document.title = title;
-                [
-                    "meta",
-                    "base",
-                    "link",
-                    "style",
-                    "script"
-                ].forEach((type)=>{
-                    updateElements(type, tags[type] || []);
-                });
+                const components = tags[h.type] || [];
+                components.push(h);
+                tags[h.type] = components;
+            });
+            const titleComponent = tags.title ? tags.title[0] : null;
+            let title = "";
+            if (titleComponent) {
+                const { children  } = titleComponent.props;
+                title = typeof children === "string" ? children : Array.isArray(children) ? children.join("") : "";
+            }
+            if (title !== document.title) document.title = title;
+            [
+                "meta",
+                "base",
+                "link",
+                "style",
+                "script"
+            ].forEach((type)=>{
+                updateElements(type, tags[type] || []);
             });
         }
     };
