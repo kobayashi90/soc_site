@@ -173,7 +173,7 @@ export default function EditOst (props) {
 
 function EditOstForm ({ id, album, classes, categories }) {
   const [mutate, { loading }] = useMutation(mutation)
-  const [currentClasses, setClasses] = useState('')
+  const [currentClasses, setClasses] = useState([])
 
   const { user } = useUser()
   const { data, refetch } = useQuery(queryDownload, { variables: { id } })
@@ -297,7 +297,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector type={currentClasses} defaultValue={album.platforms} name='platforms' />
+              <PlatformSelector classes={currentClasses} defaultValue={album.platforms} name='platforms' onChange={values => setClasses(values.map(v => v.value))} />
             </Form.Group>
           </Col>
 

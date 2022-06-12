@@ -44,8 +44,8 @@ const mutationDelete = gql`
 `
 
 export default function EditPlatform () {
-  const { data: classData } = useQuery(queryClasses)
-  const classes = classData ? classData.classes : []
+  const { data: classData = {} } = useQuery(queryClasses)
+  const { classes = [] } = classData
 
   const formRef = useRef(null)
   const [mutateUpdate, { loading: loadingUpdate }] = useMutation(mutationUpdate)
@@ -74,7 +74,7 @@ export default function EditPlatform () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='key'>Platform:</Form.Label>
-                <PlatformSelector isSingle type='' required name='key' onChange={row => getPlatform({ variables: { key: row.value } })} loading={loadingInfo} />
+                <PlatformSelector classes={classes.map(c => c.name)} isSingle type='' required name='key' onChange={row => getPlatform({ variables: { key: row.value } })} loading={loadingInfo} />
               </Form.Group>
             </Col>
             <Col md={4}>

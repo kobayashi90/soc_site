@@ -294,25 +294,22 @@ export function PublisherSelector (props) {
 }
 
 export function PlatformSelector (props) {
+  const { classes = [] } = props
+  const query = gql`
+    query ($classes: [String]!){
+      searchPlatformsByClasses(classes: $classes) {
+        id
+        name
+      }
+    }
+  `
+  const { data = {} } = useQuery(query, { variables: { classes } })
+  const { searchPlatformsByClasses: results = [] } = data
+
   return (
-    <BaseSelector
+    <SimpleSelector
       {...props}
-      startQuery={`
-        query ($limit: Int!){
-          recentPlatforms(limit: $limit, type: "${props.type}") {
-            value: id
-            label: name
-          }
-        }
-      `}
-      changeQuery={`
-        query ($filter: String){
-          searchPlatformsByName(name: $filter, type: "${props.type}") {
-            value: id
-            label: name
-          }
-        }
-      `}
+      options={results.map(r => ({ label: r.name, value: r.id }))}
     />
   )
 }

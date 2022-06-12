@@ -84,13 +84,11 @@ const mutation = gql`
   `
 
 function AddAlbum (props) {
-  const [currentClasses, setClasses] = useState('')
-  const { data: classData } = useQuery(queryClasses)
+  const [currentClasses, setClasses] = useState([])
 
+  const { data: classData = {} } = useQuery(queryClasses)
+  const { classes = [], categories = [] } = classData
   const [addMutation, { loading }] = useMutation(mutation, { refetchQueries: 'searchAlbum' })
-
-  const classes = classData ? classData.classes : []
-  const categories = classData ? classData.categories : []
 
   async function handleSubmitForm (e) {
     e.persist()
@@ -165,11 +163,9 @@ function AddAlbum (props) {
             <Form.Group>
               <Form.Label htmlFor='classes'>Classification:</Form.Label>
               <SimpleSelector
+                defaultValue={currentClasses.map(c => ({ value: c, label: c }))}
                 required name='classes' options={classes.map(c => ({ value: c.name, label: c.name }))}
-                onChange={values => {
-                  if (values && values.length === 1) setClasses(values[0].label)
-                  else setClasses('')
-                }}
+                onChange={values => setClasses(values.map(v => v.value))}
               />
             </Form.Group>
           </Col>
@@ -208,7 +204,7 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector type={currentClasses} name='platforms' />
+              <PlatformSelector classes={currentClasses} name='platforms' />
             </Form.Group>
           </Col>
           <Col md={4}>
