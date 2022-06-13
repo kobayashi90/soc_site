@@ -19,15 +19,12 @@ function SideButton (props) {
   )
 }
 
-export default function CommentCarrousel (props) {
-  const t = useTranslation()
+export function BasicCommentCarrousel (props) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const timeoutRef = useRef(null)
 
-  const { ostId, comments = [] } = props
+  const { comments = [] } = props
   const current = comments[currentIndex]
-
-  const { user } = useUser()
 
   const plusIndex = () => setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1)
 
@@ -41,79 +38,80 @@ export default function CommentCarrousel (props) {
 
       <Row>
         <Col className='blackblock m-2'>
-          {current && (
-            <Row>
-              {comments.length > 1 && <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />}
-              <Col className='py-3' style={{ fontSize: '18px' }}>
-                {current.text}
-                <br />
-                <div className='mt-2'>
-                  {current.album && <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span>}
-                  {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`}><a className={styles.albumSpan}>{current.username}</a></Link></span>}
-                </div>
-              </Col>
-              {comments.length > 1 && <SideButton side='right' onClick={plusIndex} />}
-            </Row>
-          )}
-          {ostId && (
-            <Row className='mt-3 justify-content-center'>
-              {user
-                ? <CommentButtons ostId={ostId} />
-                : (
-                  <Col xs='4'>
-                    <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                      {t('Comment_Login')}
-                    </Button>
-                  </Col>
-                )}
-            </Row>
-          )}
+          <Row>
+            {comments.length > 1 && <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />}
+            <Col className='py-3' style={{ fontSize: '18px' }}>
+              {current.text}
+              <br />
+              <div className='mt-2'>
+                {current.album && <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span>}
+                {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`}><a className={styles.albumSpan}>{current.username}</a></Link></span>}
+              </div>
+            </Col>
+            {comments.length > 1 && <SideButton side='right' onClick={plusIndex} />}
+          </Row>
         </Col>
       </Row>
     </>
   )
 }
 
-function CommentButtons (props) {
-  const { ostId } = props
+const getComment = gql`
+  query ($ostId: ID!) {
+    album(id: $ostId){
+      comments {
+        text
+        username
+      }
+      selfComment {
+        text
+        anon
+      }
+    }
+  }
+`
+
+const mutateComment = gql`
+  mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
+    updateComment(text: $text, anon: $anon, ostId: $ostId)
+  }
+`
+
+export default function CommentCarrousel (props) {
+  const { ostId, comments: initialComments = [] } = props
 
   const t = useTranslation()
   const [show, setShow] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const timeoutRef = useRef(null)
   const { user } = useUser()
 
-  const getComment = gql`
-    query ($ostId: ID!) {
-      album(id: $ostId){
-        selfComment {
-          text
-          anon
-        }
-      }
-    }
-  `
-  const [fetchComment, { data }] = useLazyQuery(getComment)
-
-  const mutateComment = gql`
-    mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
-      updateComment(text: $text, anon: $anon, ostId: $ostId)
-    }
-  `
+  const [fetchComment, { data, refetch }] = useLazyQuery(getComment)
   const [updateComment, { loading: loadingComment }] = useMutation(mutateComment)
 
+  const { comments, selfComment } = data?.album || { comments: initialComments }
+
   useEffect(() => fetchComment({ variables: { ostId } }), [user, fetchComment, ostId])
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    timeoutRef.current = setTimeout(plusIndex, 10 * 1000)
+  }, [currentIndex])
 
   function submit (ev) {
     let variables = serialize(ev.target, { hash: true })
     variables = { ...variables, anon: variables.anon === 'on', ostId }
 
     updateComment({ variables })
-      .then(() => setShow(false))
+      .then(() => {
+        refetch()
+        setShow(false)
+      })
 
     ev.preventDefault()
   }
 
-  const album = data?.album
-  const selfComment = album?.selfComment
+  const current = comments[currentIndex]
+  const plusIndex = () => setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1)
 
   return (
     <>
@@ -139,13 +137,44 @@ function CommentButtons (props) {
         </Modal.Body>
       </Modal>
 
-      {album && (
-        <Col xs={3}>
-          <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-            {t(selfComment ? 'Edit comment' : 'Add comment')}
-          </Button>
+      <Row>
+        <Col className='blackblock m-2'>
+          {current && (
+            <Row>
+              {comments.length > 1 && <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />}
+              <Col className='py-3' style={{ fontSize: '18px' }}>
+                {current.text}
+                <br />
+                <div className='mt-2'>
+                  {current.album && <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span>}
+                  {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`}><a className={styles.albumSpan}>{current.username}</a></Link></span>}
+                </div>
+              </Col>
+              {comments.length > 1 && <SideButton side='right' onClick={plusIndex} />}
+            </Row>
+          )}
+
+          {ostId && (
+            <Row className='mt-3 justify-content-center'>
+              {user
+                ? (
+                  <Col xs={3}>
+                    <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                      {t(selfComment ? 'Edit comment' : 'Add comment')}
+                    </Button>
+                  </Col>
+                )
+                : (
+                  <Col xs='4'>
+                    <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                      {t('Comment_Login')}
+                    </Button>
+                  </Col>
+                )}
+            </Row>
+          )}
         </Col>
-      )}
+      </Row>
     </>
   )
 }
