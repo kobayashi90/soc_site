@@ -875,7 +875,7 @@ Object.keys(_locales_en_json__WEBPACK_IMPORTED_MODULE_2__).forEach((key)=>{
 });
 function useTranslation() {
     const locales = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_pages_app__WEBPACK_IMPORTED_MODULE_0__.LocaleContext);
-    const t = (key, placeholder)=>locales[key] || en[key];
+    const t = (key, placeholder)=>locales[key] || en[key] || key;
     return t;
 };
 async function getTranslation(locale = "en", ns = []) {
@@ -939,6 +939,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(universal_cookie__WEBPACK_IMPORTED_MODULE_15__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__]);
 ([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
