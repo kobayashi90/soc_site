@@ -126,7 +126,9 @@ const mutationRating = gql`
 `
 
 function StarCounter (props) {
-  const { score, users, ostId } = props
+  const { score: initialScore, users: initialUsers, ostId } = props
+  const initial = { avgRating: { score: initialScore, users: initialUsers } }
+
   const [scoreHover, setHover] = useState()
   const { user } = useUser()
 
@@ -134,13 +136,19 @@ function StarCounter (props) {
     query ($ostId: ID!) {
       album(id: $ostId){
         selfScore
+        avgRating {
+          score
+          users
+        }
       }
     }
   `
-  const [fetchUserScore, { data }] = useLazyQuery(getScore)
-  useEffect(() => fetchUserScore({ variables: { ostId } }), [user, ostId])
+  const [fetchUserScore, { data, refetch }] = useLazyQuery(getScore)
+  useEffect(() => fetchUserScore({ variables: { ostId } }), [user])
 
-  const selfScore = data?.album?.selfScore
+  const { avgRating, selfScore } = data?.album || initial
+  const { score, users } = avgRating
+
   const max = 5
   const stars = []
 
@@ -157,7 +165,10 @@ function StarCounter (props) {
 
     function saveRating () {
       client.mutate({ mutation: mutationRating, variables: { ostId, score: value } })
-        .then(() => toast.success(t('Rating saved!')))
+        .then(() => {
+          toast.success(t('Rating saved!'))
+          refetch()
+        })
         .catch(err => {
           console.log(err)
           toast.error(t('Failed to save rating'))
@@ -180,7 +191,6 @@ function StarCounter (props) {
 
   return (
     <>
-
       {stars}
       <span className='ms-2'>({score} by {users} users)</span>
     </>

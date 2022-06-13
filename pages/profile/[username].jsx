@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { initializeApollo } from '@/components/ApolloClient'
-import CommentCarrousel from '@/components/CommentsCarrousel'
+import { BasicCommentCarrousel } from '@/components/CommentsCarrousel'
 import { ButtonLoader } from '@/components/Loader'
 import serialize from 'form-serialize'
 import { toast } from 'react-toastify'
@@ -114,7 +114,7 @@ export default function Profile (props) {
           </Col>
         </Row>
 
-        <CommentCarrousel comments={comments} />
+        <BasicCommentCarrousel comments={comments} />
 
         <hr className='style2 style-white' />
         <Row>
