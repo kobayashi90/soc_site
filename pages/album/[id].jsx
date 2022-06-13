@@ -263,8 +263,14 @@ export default function Page (props) {
 
   return (
     <>
-      <div className={styles.content} style={{ backgroundSize: 'contain', backgroundImage: `url("${fullImage(album.id, 90)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))` }} />
-      <Row>
+      <Row style={{
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'top center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundBlendMode: 'overlay',
+        backgroundImage: `url("${fullImage(album.id, 100)}"), linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8))`
+      }}>
         <Head>
           <title>{album.title}</title>
           <meta key='color' name="theme-color" content={album.headerColor}></meta>
