@@ -10,7 +10,7 @@ Object.keys(enBundle).forEach(key => {
 
 export default function useTranslation () {
   const locales = useContext(LocaleContext)
-  const t = (key, placeholder) => locales[key] || en[key]
+  const t = (key, placeholder) => locales[key] || en[key] || key
 
   return t
 }

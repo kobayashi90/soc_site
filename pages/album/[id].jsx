@@ -1,4 +1,4 @@
-import { gql, useApolloClient, useQuery } from '@apollo/client'
+import { gql, useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
 import styles from '../../styles/Album.module.scss'
+import starStyles from '../../styles/Stars.module.scss'
 
 import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
@@ -68,10 +69,11 @@ query ($id: ID!) {
       text
       username
     }
-    selfComment {
-      text
-    }
     favorites
+    avgRating {
+      score
+      users
+    }
   }
 }
 `
@@ -116,6 +118,73 @@ query downloads ($id: ID!) {
 
   return { paths, fallback: 'blocking' }
 } */
+
+const mutationRating = gql`
+  mutation ($ostId: ID!, $score: Int!){
+    rateAlbum(ostId: $ostId, score: $score)
+  }
+`
+
+function StarCounter (props) {
+  const { score, users, ostId } = props
+  const [scoreHover, setHover] = useState(0)
+  const { user } = useUser()
+
+  const getScore = gql`
+    query ($ostId: ID!) {
+      album(id: $ostId){
+        selfScore
+      }
+    }
+  `
+  const [fetchUserScore, { data }] = useLazyQuery(getScore)
+  useEffect(() => fetchUserScore({ variables: { ostId } }), [user, ostId])
+
+  const selfScore = data?.album?.selfScore
+  const max = 5
+  const stars = []
+
+  function Star (props) {
+    const { value } = props
+
+    const t = useTranslation()
+    const client = useApolloClient()
+
+    const isHover = scoreHover >= value
+    const starClass = score >= value || isHover ? 'fas fa-star' : (score >= value - 0.5 ? 'fas fa-star-half' : 'far fa-star')
+    const className = classNames(starClass, starStyles.star, { [starStyles.hover]: selfScore >= value || isHover, 'ps-1': value > 1 })
+
+    function saveRating () {
+      client.mutate({ mutation: mutationRating, variables: { ostId, score: value } })
+        .then(() => toast.success(t('Rating saved!')))
+        .catch(err => {
+          console.log(err)
+          toast.error(t('Failed to save rating'))
+        })
+    }
+
+    return <span
+      key={value} className={className}
+      onClick={saveRating}
+      onMouseOver={() => setHover(value)}
+      onMouseOut={() => setHover(0)}
+    />
+  }
+
+  let current = 1
+  while (current <= max) {
+    stars.push(<Star key={current} value={current} />)
+    current++
+  }
+
+  return (
+    <>
+
+      {stars}
+      <span className='ms-2'>({score} by {users} users)</span>
+    </>
+  )
+}
 
 export async function /* getStaticProps */ getServerSideProps (context) {
   const { params, locale } = context
@@ -278,11 +347,11 @@ export default function Page (props) {
                           </tr>
                         )}
 
-                        {album.favorites > 0 && (
-                          <tr>
-                            <td>{t('Favorite Score')}: {album.favorites}<span className='ms-1 fas fa-star'></span></td>
-                          </tr>
-                        )}
+                        <tr>
+                          <th>Avg. Rating: </th>
+                          <td><StarCounter ostId={album.id} {...album.avgRating} /></td>
+                        </tr>
+
                       </tbody>
                     </table>
                   </Col>
