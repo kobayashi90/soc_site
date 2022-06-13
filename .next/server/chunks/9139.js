@@ -19,6 +19,7 @@ module.exports = {
 "use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "T": () => (/* binding */ BasicCommentCarrousel),
 /* harmony export */   "Z": () => (/* binding */ CommentCarrousel)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
@@ -67,13 +68,11 @@ function SideButton(props) {
         })
     });
 }
-function CommentCarrousel(props) {
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)();
+function BasicCommentCarrousel(props) {
     const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
     const timeoutRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
-    const { ostId , comments =[]  } = props;
+    const { comments =[]  } = props;
     const current = comments[currentIndex];
-    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)();
     const plusIndex = ()=>setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1);
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -83,103 +82,94 @@ function CommentCarrousel(props) {
     ]);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                 className: "blackblock m-2",
-                children: [
-                    current && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                        children: [
-                            comments.length > 1 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
-                                side: "left",
-                                onClick: ()=>setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)
-                            }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                                className: "py-3",
-                                style: {
-                                    fontSize: "18px"
-                                },
-                                children: [
-                                    current.text,
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("br", {}),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        className: "mt-2",
-                                        children: [
-                                            current.album && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                children: [
-                                                    " - ",
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                                        href: `/album/${current.album.id}`,
-                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
-                                                            children: current.album.title
-                                                        })
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                    children: [
+                        comments.length > 1 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
+                            side: "left",
+                            onClick: ()=>setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                            className: "py-3",
+                            style: {
+                                fontSize: "18px"
+                            },
+                            children: [
+                                current.text,
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("br", {}),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    className: "mt-2",
+                                    children: [
+                                        current.album && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                            children: [
+                                                " - ",
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                    href: `/album/${current.album.id}`,
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                        className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                        children: current.album.title
                                                     })
-                                                ]
-                                            }),
-                                            !current.album && current.username && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
-                                                children: [
-                                                    " - ",
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                                        href: `/profile/${current.username}`,
-                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
-                                                            children: current.username
-                                                        })
+                                                })
+                                            ]
+                                        }),
+                                        !current.album && current.username && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                            children: [
+                                                " - ",
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                    href: `/profile/${current.username}`,
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                        className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                        children: current.username
                                                     })
-                                                ]
-                                            })
-                                        ]
-                                    })
-                                ]
-                            }),
-                            comments.length > 1 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
-                                side: "right",
-                                onClick: plusIndex
-                            })
-                        ]
-                    }),
-                    ostId && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                        className: "mt-3 justify-content-center",
-                        children: user ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(CommentButtons, {
-                            ostId: ostId
-                        }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                            xs: "4",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Button, {
-                                className: "w-100 rounded-3",
-                                variant: "outline-light",
-                                style: {
-                                    fontSize: "18px"
-                                },
-                                children: t("Comment_Login")
-                            })
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                })
+                            ]
+                        }),
+                        comments.length > 1 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
+                            side: "right",
+                            onClick: plusIndex
                         })
-                    })
-                ]
+                    ]
+                })
             })
         })
     });
-};
-function CommentButtons(props) {
-    const { ostId  } = props;
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)();
-    const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
-    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)();
-    const getComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
-    query ($ostId: ID!) {
-      album(id: $ostId){
-        selfComment {
-          text
-          anon
-        }
+}
+const getComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
+  query ($ostId: ID!) {
+    album(id: $ostId){
+      comments {
+        text
+        username
+      }
+      selfComment {
+        text
+        anon
       }
     }
-  `;
-    const [fetchComment, { data  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(getComment);
-    const mutateComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
-    mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
-      updateComment(text: $text, anon: $anon, ostId: $ostId)
-    }
-  `;
+  }
+`;
+const mutateComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
+  mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
+    updateComment(text: $text, anon: $anon, ostId: $ostId)
+  }
+`;
+function CommentCarrousel(props) {
+    const { ostId , comments: initialComments = []  } = props;
+    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)();
+    const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
+    const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
+    const timeoutRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
+    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)();
+    const [fetchComment, { data , refetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(getComment);
     const [updateComment, { loading: loadingComment  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(mutateComment);
+    const { comments , selfComment  } = data?.album || {
+        comments: initialComments
+    };
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>fetchComment({
             variables: {
                 ostId
@@ -188,6 +178,12 @@ function CommentButtons(props) {
         user,
         fetchComment,
         ostId
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(plusIndex, 10 * 1000);
+    }, [
+        currentIndex
     ]);
     function submit(ev) {
         let variables = form_serialize__WEBPACK_IMPORTED_MODULE_4___default()(ev.target, {
@@ -200,11 +196,14 @@ function CommentButtons(props) {
         };
         updateComment({
             variables
-        }).then(()=>setShow(false));
+        }).then(()=>{
+            refetch();
+            setShow(false);
+        });
         ev.preventDefault();
     }
-    const album = data?.album;
-    const selfComment = album?.selfComment;
+    const current = comments[currentIndex];
+    const plusIndex = ()=>setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal, {
@@ -259,21 +258,92 @@ function CommentButtons(props) {
                     })
                 })
             }),
-            album && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                xs: 3,
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Button, {
-                    onClick: ()=>user ? setShow(true) : null,
-                    className: "w-100 rounded-3",
-                    variant: "outline-light",
-                    style: {
-                        fontSize: "18px"
-                    },
-                    children: t(selfComment ? "Edit comment" : "Add comment")
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                    className: "blackblock m-2",
+                    children: [
+                        current && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                            children: [
+                                comments.length > 1 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
+                                    side: "left",
+                                    onClick: ()=>setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                    className: "py-3",
+                                    style: {
+                                        fontSize: "18px"
+                                    },
+                                    children: [
+                                        current.text,
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("br", {}),
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "mt-2",
+                                            children: [
+                                                current.album && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                                    children: [
+                                                        " - ",
+                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                            href: `/album/${current.album.id}`,
+                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                                className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                                children: current.album.title
+                                                            })
+                                                        })
+                                                    ]
+                                                }),
+                                                !current.album && current.username && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                                    children: [
+                                                        " - ",
+                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                            href: `/profile/${current.username}`,
+                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                                className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                                children: current.username
+                                                            })
+                                                        })
+                                                    ]
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                comments.length > 1 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
+                                    side: "right",
+                                    onClick: plusIndex
+                                })
+                            ]
+                        }),
+                        ostId && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                            className: "mt-3 justify-content-center",
+                            children: user ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                xs: 3,
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Button, {
+                                    onClick: ()=>user ? setShow(true) : null,
+                                    className: "w-100 rounded-3",
+                                    variant: "outline-light",
+                                    style: {
+                                        fontSize: "18px"
+                                    },
+                                    children: t(selfComment ? "Edit comment" : "Add comment")
+                                })
+                            }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                xs: "4",
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Button, {
+                                    className: "w-100 rounded-3",
+                                    variant: "outline-light",
+                                    style: {
+                                        fontSize: "18px"
+                                    },
+                                    children: t("Comment_Login")
+                                })
+                            })
+                        })
+                    ]
                 })
             })
         ]
     });
-}
+};
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });

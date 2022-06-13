@@ -194,26 +194,36 @@ query downloads ($id: ID!) {
   }
 `;
 function StarCounter(props1) {
-    const { score , users , ostId  } = props1;
+    const { score: initialScore , users: initialUsers , ostId  } = props1;
+    const initial = {
+        avgRating: {
+            score: initialScore,
+            users: initialUsers
+        }
+    };
     const { 0: scoreHover , 1: setHover  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const getScore = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
     query ($ostId: ID!) {
       album(id: $ostId){
         selfScore
+        avgRating {
+          score
+          users
+        }
       }
     }
   `;
-    const [fetchUserScore, { data  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useLazyQuery)(getScore);
+    const [fetchUserScore, { data , refetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useLazyQuery)(getScore);
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>fetchUserScore({
             variables: {
                 ostId
             }
         }), [
-        user,
-        ostId
+        user
     ]);
-    const selfScore = data?.album?.selfScore;
+    const { avgRating , selfScore  } = data?.album || initial;
+    const { score , users  } = avgRating;
     const max = 5;
     const stars = [];
     function Star(props) {
@@ -233,7 +243,10 @@ function StarCounter(props1) {
                     ostId,
                     score: value
                 }
-            }).then(()=>react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t("Rating saved!"))).catch((err)=>{
+            }).then(()=>{
+                react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t("Rating saved!"));
+                refetch();
+            }).catch((err)=>{
                 console.log(err);
                 react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.error(t("Failed to save rating"));
             });

@@ -7,6 +7,7 @@ exports.modules = {
 
 // Exports
 module.exports = {
+	"a": "Search_a__nDmgQ",
 	"result": "Search_result__EgNgJ",
 	"cover": "Search_cover__7Boi4",
 	"spin": "Search_spin__km_on"
