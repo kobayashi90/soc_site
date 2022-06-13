@@ -127,7 +127,7 @@ const mutationRating = gql`
 
 function StarCounter (props) {
   const { score, users, ostId } = props
-  const [scoreHover, setHover] = useState(0)
+  const [scoreHover, setHover] = useState()
   const { user } = useUser()
 
   const getScore = gql`
@@ -150,9 +150,10 @@ function StarCounter (props) {
     const t = useTranslation()
     const client = useApolloClient()
 
-    const isHover = scoreHover >= value
-    const starClass = score >= value || isHover ? 'fas fa-star' : (score >= value - 0.5 ? 'fas fa-star-half' : 'far fa-star')
-    const className = classNames(starClass, starStyles.star, { [starStyles.hover]: selfScore >= value || isHover, 'ps-1': value > 1 })
+    const starClass = score >= value || (scoreHover || selfScore) >= value ? 'fas fa-star' : (score >= value - 0.5 ? 'fas fa-star-half' : 'far fa-star')
+    const goldClass = scoreHover ? scoreHover >= value : selfScore >= value
+
+    const className = classNames(starClass, starStyles.star, { [starStyles.gold]: goldClass, 'ps-1': value > 1 })
 
     function saveRating () {
       client.mutate({ mutation: mutationRating, variables: { ostId, score: value } })
@@ -167,7 +168,7 @@ function StarCounter (props) {
       key={value} className={className}
       onClick={saveRating}
       onMouseOver={() => setHover(value)}
-      onMouseOut={() => setHover(0)}
+      onMouseOut={() => setHover()}
     />
   }
 
