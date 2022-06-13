@@ -348,7 +348,7 @@ export default function Page (props) {
                         )}
 
                         <tr>
-                          <th>Avg. Rating: </th>
+                          <th>{t('Avg. Rating')}: </th>
                           <td><StarCounter ostId={album.id} {...album.avgRating} /></td>
                         </tr>
 
