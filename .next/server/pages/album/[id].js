@@ -26,7 +26,7 @@ module.exports = {
 // Exports
 module.exports = {
 	"star": "Stars_star__yQXT9",
-	"hover": "Stars_hover__5NucA"
+	"gold": "Stars_gold__v_Nx7"
 };
 
 
@@ -195,7 +195,7 @@ query downloads ($id: ID!) {
 `;
 function StarCounter(props1) {
     const { score , users , ostId  } = props1;
-    const { 0: scoreHover , 1: setHover  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(0);
+    const { 0: scoreHover , 1: setHover  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const getScore = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
     query ($ostId: ID!) {
@@ -220,10 +220,10 @@ function StarCounter(props1) {
         const { value  } = props;
         const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
         const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useApolloClient)();
-        const isHover = scoreHover >= value;
-        const starClass = score >= value || isHover ? "fas fa-star" : score >= value - 0.5 ? "fas fa-star-half" : "far fa-star";
+        const starClass = score >= value || (scoreHover || selfScore) >= value ? "fas fa-star" : score >= value - 0.5 ? "fas fa-star-half" : "far fa-star";
+        const goldClass = scoreHover ? scoreHover >= value : selfScore >= value;
         const className = classnames__WEBPACK_IMPORTED_MODULE_5___default()(starClass, (_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16___default().star), {
-            [(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16___default().hover)]: selfScore >= value || isHover,
+            [(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16___default().gold)]: goldClass,
             "ps-1": value > 1
         });
         function saveRating() {
@@ -242,7 +242,7 @@ function StarCounter(props1) {
             className: className,
             onClick: saveRating,
             onMouseOver: ()=>setHover(value),
-            onMouseOut: ()=>setHover(0)
+            onMouseOut: ()=>setHover()
         }, value);
     }
     let current = 1;
