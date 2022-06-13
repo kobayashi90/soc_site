@@ -1059,7 +1059,7 @@ function fetchRetry(url, attempts, options) {
     });
 }
 const backgroundCache = {};
-function fetchNextData({ dataHref , inflightCache , isPrefetch , hasMiddleware , isServerRender , parseJSON , persistCache  }) {
+function fetchNextData({ dataHref , inflightCache , isPrefetch , hasMiddleware , isServerRender , parseJSON , persistCache , isBackground  }) {
     const { href: cacheKey  } = new URL(dataHref, window.location.href);
     var ref1;
     const getData = (params)=>{
@@ -1151,18 +1151,11 @@ function fetchNextData({ dataHref , inflightCache , isPrefetch , hasMiddleware ,
         });
     };
     if (inflightCache[cacheKey] !== undefined) {
-        // we kick off a HEAD request in the background
-        // when a non-prefetch request is made to signal revalidation
-        if (!isPrefetch && persistCache && !backgroundCache[cacheKey]) {
-            backgroundCache[cacheKey] = getData({
-                method: "HEAD"
-            }).catch(()=>{}).then(()=>{
-                delete backgroundCache[cacheKey];
-            });
-        }
         return inflightCache[cacheKey];
     }
-    return inflightCache[cacheKey] = getData();
+    return inflightCache[cacheKey] = getData(isBackground ? {
+        method: "HEAD"
+    } : {});
 }
 function tryToParseAsJSON(text) {
     try {
@@ -1702,24 +1695,25 @@ class Router {
                 return existingInfo;
             }
             let cachedRouteInfo = existingInfo && !("initial" in existingInfo) && "production" !== "development" ? existingInfo : undefined;
-            const data = await withMiddlewareEffects({
-                fetchData: ()=>fetchNextData({
-                        dataHref: this.pageLoader.getDataHref({
-                            href: (0, _formatUrl).formatWithValidation({
-                                pathname,
-                                query
-                            }),
-                            skipInterpolation: true,
-                            asPath: resolvedAs,
-                            locale
-                        }),
-                        hasMiddleware: true,
-                        isServerRender: this.isSsr,
-                        parseJSON: true,
-                        inflightCache: this.sdc,
-                        persistCache: !isPreview,
-                        isPrefetch: false
+            const fetchNextDataParams = {
+                dataHref: this.pageLoader.getDataHref({
+                    href: (0, _formatUrl).formatWithValidation({
+                        pathname,
+                        query
                     }),
+                    skipInterpolation: true,
+                    asPath: resolvedAs,
+                    locale
+                }),
+                hasMiddleware: true,
+                isServerRender: this.isSsr,
+                parseJSON: true,
+                inflightCache: this.sdc,
+                persistCache: !isPreview,
+                isPrefetch: false
+            };
+            const data = await withMiddlewareEffects({
+                fetchData: ()=>fetchNextData(fetchNextDataParams),
                 asPath: resolvedAs,
                 locale: locale,
                 router: this
@@ -1749,12 +1743,6 @@ class Router {
                     __N_SSP: res.mod.__N_SSP,
                     __N_RSC: !!res.mod.__next_rsc__
                 }));
-            // TODO: we only bust the data cache for SSP routes
-            // although middleware can skip cache per request with
-            // x-middleware-cache: no-cache
-            if (routeInfo.__N_SSP && (data === null || data === void 0 ? void 0 : data.dataHref)) {
-                delete this.sdc[data === null || data === void 0 ? void 0 : data.dataHref];
-            }
             if (false) {}
             /**
        * For server components, non-SSR pages will have statically optimized
@@ -1776,7 +1764,7 @@ class Router {
                         isServerRender: this.isSsr,
                         parseJSON: true,
                         inflightCache: this.sdc,
-                        persistCache: !!routeInfo.__N_SSG && !isPreview,
+                        persistCache: !isPreview,
                         isPrefetch: false
                     });
                     return {
@@ -1795,6 +1783,22 @@ class Router {
                     })
                 };
             });
+            // Only bust the data cache for SSP routes although
+            // middleware can skip cache per request with
+            // x-middleware-cache: no-cache as well
+            if (routeInfo.__N_SSP && fetchNextDataParams.dataHref) {
+                const cacheKey = new URL(fetchNextDataParams.dataHref, window.location.href).href;
+                delete this.sdc[cacheKey];
+            }
+            // we kick off a HEAD request in the background
+            // when a non-prefetch request is made to signal revalidation
+            if (!this.isPreview && routeInfo.__N_SSG && "production" !== "development") {
+                fetchNextData(Object.assign({}, fetchNextDataParams, {
+                    isBackground: true,
+                    persistCache: false,
+                    inflightCache: backgroundCache
+                })).catch(()=>{});
+            }
             if (routeInfo.__N_RSC) {
                 props.pageProps = Object.assign(props.pageProps, {
                     __flight__: useStreamedFlightData ? (await this._getData(()=>this._getFlightData((0, _formatUrl).formatWithValidation({
@@ -1915,8 +1919,8 @@ class Router {
                     isServerRender: this.isSsr,
                     parseJSON: true,
                     inflightCache: this.sdc,
-                    persistCache: false,
-                    isPrefetch: false
+                    persistCache: !this.isPreview,
+                    isPrefetch: true
                 }),
             asPath: asPath,
             locale: locale,
