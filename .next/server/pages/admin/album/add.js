@@ -170,6 +170,7 @@ const vgmQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
     vgmdb(search: $search){
       vgmdbUrl
       name
+      subTitle
       releaseDate
       categories
       classifications
@@ -190,6 +191,7 @@ function AddAlbum(props) {
     const titleRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const releaseRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const vgmdbRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
+    const subTitleRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const [addMutation, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(mutation, {
         refetchQueries: "searchAlbum"
     });
@@ -217,10 +219,11 @@ function AddAlbum(props) {
         });
         if (data?.vgmdb) {
             const { vgmdb  } = data;
-            const { vgmdbUrl , name , releaseDate , categories , classifications , tracklist  } = vgmdb;
+            const { vgmdbUrl , name , subTitle , releaseDate , categories , classifications , tracklist  } = vgmdb;
             releaseRef.current.value = releaseDate;
             vgmdbRef.current.value = vgmdbUrl;
             titleRef.current.value = name;
+            subTitleRef.current.value = subTitle;
             setClasses(categories);
             setClassifications(classifications);
             setVgmTracklist(tracklist);
@@ -265,6 +268,7 @@ function AddAlbum(props) {
                                             children: "Sub Title:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
+                                            ref: subTitleRef,
                                             as: "textarea",
                                             name: "subTitle"
                                         })
