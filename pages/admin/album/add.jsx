@@ -89,6 +89,7 @@ const vgmQuery = gql`
     vgmdb(search: $search){
       vgmdbUrl
       name
+      subTitle
       releaseDate
       categories
       classifications
@@ -113,6 +114,7 @@ function AddAlbum (props) {
   const titleRef = useRef(null)
   const releaseRef = useRef(null)
   const vgmdbRef = useRef(null)
+  const subTitleRef = useRef(null)
 
   const [addMutation, { loading }] = useMutation(mutation, { refetchQueries: 'searchAlbum' })
 
@@ -136,11 +138,13 @@ function AddAlbum (props) {
 
     if (data?.vgmdb) {
       const { vgmdb } = data
-      const { vgmdbUrl, name, releaseDate, categories, classifications, tracklist } = vgmdb
+      const { vgmdbUrl, name, subTitle, releaseDate, categories, classifications, tracklist } = vgmdb
 
       releaseRef.current.value = releaseDate
       vgmdbRef.current.value = vgmdbUrl
       titleRef.current.value = name
+      subTitleRef.current.value = subTitle
+
       setClasses(categories)
       setClassifications(classifications)
       setVgmTracklist(tracklist)
@@ -161,7 +165,7 @@ function AddAlbum (props) {
           <Col md={3}>
             <Form.Group>
               <Form.Label htmlFor='subTitle'>Sub Title:</Form.Label>
-              <FormControl as='textarea' name='subTitle' />
+              <FormControl ref={subTitleRef} as='textarea' name='subTitle' />
             </Form.Group>
           </Col>
           <Col md={3}>
