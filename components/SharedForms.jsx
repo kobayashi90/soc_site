@@ -88,12 +88,16 @@ export function SharedForms () {
 }
 
 export function DiscList (props) {
-  const defaults = props.defaults || []
-  const [keys, setKeys] = useState(props.defaults ? defaults.map((d, i) => i) : [0])
+  const { defaults = [0] } = props
+  const [keys, setKeys] = useState(defaults)
 
   useEffect(() => {
     if (keys.length === 0) setKeys([0])
   }, [keys])
+
+  useEffect(() => {
+    setKeys(defaults.map((d, i) => i))
+  }, [defaults.length])
 
   return (
     <>

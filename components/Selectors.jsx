@@ -106,6 +106,14 @@ export function SimpleSelector (props) {
 
   const value = isSingle ? (selected ? [selected] : []) : selected
 
+  useEffect(() => {
+    if (isSingle && defaultValue !== selected) {
+      setSelected(defaultValue)
+    } else if (!isSingle && defaultValue.length !== selected.length) {
+      setSelected(defaultValue)
+    }
+  }, [defaultValue, isSingle])
+
   return (
     <>
       <div ref={stubElement} style={{ display: 'none' }} />
