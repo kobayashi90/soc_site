@@ -333,6 +333,7 @@ function PublisherSelector(props) {
 }
 function PlatformSelector(props) {
     const { classes =[]  } = props;
+    const { 0: selected , 1: setSelected  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const query = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
     query ($classes: [String]!){
       searchPlatformsByClasses(classes: $classes) {
@@ -349,6 +350,8 @@ function PlatformSelector(props) {
     const { searchPlatformsByClasses: results = []  } = data;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SimpleSelector, {
         ...props,
+        onChange: (result)=>setSelected(result),
+        defaultValue: selected,
         options: results.map((r)=>({
                 label: r.name,
                 value: r.id
