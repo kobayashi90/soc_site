@@ -479,7 +479,6 @@ Object.defineProperty(exports, "__esModule", ({
 exports.markAssetError = markAssetError;
 exports.isAssetError = isAssetError;
 exports.getClientBuildManifest = getClientBuildManifest;
-exports.getMiddlewareManifest = getMiddlewareManifest;
 exports.createRouteLoader = createRouteLoader;
 var _getAssetPathFromRoute = _interopRequireDefault(__webpack_require__(9565));
 var _trustedTypes = __webpack_require__(5407);
@@ -608,19 +607,6 @@ function getClientBuildManifest() {
         };
     });
     return resolvePromiseWithTimeout(onBuildManifest, MS_MAX_IDLE_DELAY, markAssetError(new Error("Failed to load client build manifest")));
-}
-function getMiddlewareManifest() {
-    if (self.__MIDDLEWARE_MANIFEST) {
-        return Promise.resolve(self.__MIDDLEWARE_MANIFEST);
-    }
-    const onMiddlewareManifest = new Promise((resolve)=>{
-        const cb = self.__MIDDLEWARE_MANIFEST_CB;
-        self.__MIDDLEWARE_MANIFEST_CB = ()=>{
-            resolve(self.__MIDDLEWARE_MANIFEST);
-            cb && cb();
-        };
-    });
-    return resolvePromiseWithTimeout(onMiddlewareManifest, MS_MAX_IDLE_DELAY, markAssetError(new Error("Failed to load client middleware manifest")));
 }
 function getFilesForRoute(assetPrefix, route) {
     if (false) {}
@@ -865,28 +851,6 @@ function buildCancellationError() {
     return Object.assign(new Error("Route Cancelled"), {
         cancelled: true
     });
-}
-function compareRouterStates(a, b) {
-    const stateKeys = Object.keys(a);
-    if (stateKeys.length !== Object.keys(b).length) return false;
-    for(let i = stateKeys.length; i--;){
-        const key = stateKeys[i];
-        if (key === "query") {
-            const queryKeys = Object.keys(a.query);
-            if (queryKeys.length !== Object.keys(b.query).length) {
-                return false;
-            }
-            for(let j = queryKeys.length; j--;){
-                const queryKey = queryKeys[j];
-                if (!b.query.hasOwnProperty(queryKey) || a.query[queryKey] !== b.query[queryKey]) {
-                    return false;
-                }
-            }
-        } else if (!b.hasOwnProperty(key) || a[key] !== b[key]) {
-            return false;
-        }
-    }
-    return true;
 }
 function isLocalURL(url) {
     // prevent a hydration mismatch on href for url with anchor refs
@@ -1465,7 +1429,7 @@ class Router {
             return false;
         }
         resolvedAs = (0, _removeLocale).removeLocale((0, _removeBasePath).removeBasePath(resolvedAs), nextState.locale);
-        const route = (0, _removeTrailingSlash).removeTrailingSlash(pathname);
+        let route = (0, _removeTrailingSlash).removeTrailingSlash(pathname);
         if (!isMiddlewareMatch && (0, _isDynamic).isDynamicRoute(route)) {
             const parsedAs = (0, _parseRelativeUrl).parseRelativeUrl(resolvedAs);
             const asPathname = parsedAs.pathname;
@@ -1502,6 +1466,9 @@ class Router {
                 locale: nextState.locale,
                 isPreview: nextState.isPreview
             });
+            if ("route" in routeInfo) {
+                pathname = routeInfo.route || route;
+            }
             // If the routeInfo brings a redirect we simply apply it.
             if ("type" in routeInfo) {
                 if (routeInfo.type === "redirect-internal") {
@@ -1579,42 +1546,31 @@ class Router {
                 x: 0,
                 y: 0
             } : null;
-            const nextScroll = forcedScroll !== null && forcedScroll !== void 0 ? forcedScroll : resetScroll;
-            const mergedNextState = {
+            await this.set({
                 ...nextState,
                 route,
                 pathname,
                 query,
                 asPath: cleanedAs,
                 isFallback: false
-            };
-            // for query updates we can skip it if the state is unchanged and we don't
-            // need to scroll
-            // https://github.com/vercel/next.js/issues/37139
-            const canSkipUpdating = options._h && !nextScroll && compareRouterStates(mergedNextState, this.state);
-            if (!canSkipUpdating) {
-                await this.set(mergedNextState, routeInfo, nextScroll).catch((e)=>{
-                    if (e.cancelled) error = error || e;
-                    else throw e;
-                });
-                if (error) {
-                    Router.events.emit("routeChangeError", error, cleanedAs, routeProps);
-                    throw error;
+            }, routeInfo, forcedScroll !== null && forcedScroll !== void 0 ? forcedScroll : resetScroll).catch((e)=>{
+                if (e.cancelled) error = error || e;
+                else throw e;
+            });
+            if (error) {
+                Router.events.emit("routeChangeError", error, cleanedAs, routeProps);
+                throw error;
+            }
+            if (true) {
+                if (nextState.locale) {
+                    document.documentElement.lang = nextState.locale;
                 }
-                if (true) {
-                    if (nextState.locale) {
-                        document.documentElement.lang = nextState.locale;
-                    }
-                }
-                Router.events.emit("routeChangeComplete", as, routeProps);
-                // A hash mark # is the optional last part of a URL
-                const hashRegex = /#.+$/;
-                if (shouldScroll && hashRegex.test(as)) {
-                    this.scrollToHash(as);
-                }
-            } else {
-                // Still send the event to notify the inital load.
-                Router.events.emit("routeChangeComplete", as, routeProps);
+            }
+            Router.events.emit("routeChangeComplete", as, routeProps);
+            // A hash mark # is the optional last part of a URL
+            const hashRegex = /#.+$/;
+            if (shouldScroll && hashRegex.test(as)) {
+                this.scrollToHash(as);
             }
             return true;
         } catch (err1) {
@@ -1811,6 +1767,7 @@ class Router {
                 });
             }
             routeInfo.props = props;
+            routeInfo.route = route;
             this.components[route] = routeInfo;
             return routeInfo;
         } catch (err) {
@@ -2062,14 +2019,12 @@ class Router {
 exports["default"] = Router;
 Router.events = (0, _mitt).default();
 function matchesMiddleware(options) {
-    return Promise.resolve(options.router.pageLoader.getMiddlewareList()).then((fns)=>{
+    return Promise.resolve(options.router.pageLoader.getMiddlewareList()).then((items)=>{
         const { pathname: asPathname  } = (0, _parsePath).parsePath(options.asPath);
         const cleanedAs = (0, _removeLocale).removeLocale((0, _hasBasePath).hasBasePath(asPathname) ? (0, _removeBasePath).removeBasePath(asPathname) : asPathname, options.locale);
-        return fns.some(([middleware, isSSR])=>{
-            return (0, _routeMatcher).getRouteMatcher((0, _routeRegex).getMiddlewareRegex(middleware, {
-                catchAll: !isSSR
-            }))(cleanedAs);
-        });
+        return !!(items === null || items === void 0 ? void 0 : items.some(([regex])=>{
+            return new RegExp(regex).test(cleanedAs);
+        }));
     });
 }
 function withMiddlewareEffects(options) {
@@ -2100,7 +2055,13 @@ function getMiddlewareData(source, response, options) {
         },
         trailingSlash: Boolean(false)
     };
-    const rewriteTarget = response.headers.get("x-nextjs-matched-path");
+    // TODO: ensure x-nextjs-matched-path is always present instead of both
+    // variants
+    let rewriteTarget = response.headers.get("x-nextjs-matched-path");
+    const matchedPath = response.headers.get("x-matched-path");
+    if (!rewriteTarget && !(matchedPath === null || matchedPath === void 0 ? void 0 : matchedPath.includes("__next_data_catchall"))) {
+        rewriteTarget = matchedPath;
+    }
     if (rewriteTarget) {
         if (rewriteTarget.startsWith("/")) {
             const parsedRewriteTarget = (0, _parseRelativeUrl).parseRelativeUrl(rewriteTarget);

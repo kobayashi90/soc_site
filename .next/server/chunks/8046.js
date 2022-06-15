@@ -2063,16 +2063,21 @@ function SharedForms() {
     });
 }
 function DiscList(props) {
-    const defaults = props.defaults || [];
-    const { 0: keys , 1: setKeys  } = (0,external_react_.useState)(props.defaults ? defaults.map((d, i)=>i) : [
+    const { defaults =[
         0
-    ]);
+    ]  } = props;
+    const { 0: keys , 1: setKeys  } = (0,external_react_.useState)(defaults);
     (0,external_react_.useEffect)(()=>{
         if (keys.length === 0) setKeys([
             0
         ]);
     }, [
         keys
+    ]);
+    (0,external_react_.useEffect)(()=>{
+        setKeys(defaults.map((d, i)=>i));
+    }, [
+        defaults.length
     ]);
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [

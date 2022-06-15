@@ -149,6 +149,16 @@ function SimpleSelector(props) {
     const value = isSingle ? selected ? [
         selected
     ] : [] : selected;
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        if (isSingle && defaultValue !== selected) {
+            setSelected(defaultValue);
+        } else if (!isSingle && defaultValue.length !== selected.length) {
+            setSelected(defaultValue);
+        }
+    }, [
+        defaultValue,
+        isSingle
+    ]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {

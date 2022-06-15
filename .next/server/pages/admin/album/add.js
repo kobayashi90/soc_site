@@ -73,8 +73,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2628);
 /* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3551);
 /* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(599);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9738);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_8__]);
 _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -163,10 +165,31 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
       }
     }
   `;
+const vgmQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
+  query ($search: String!){
+    vgmdb(search: $search){
+      vgmdbUrl
+      name
+      releaseDate
+      categories
+      classifications
+      tracklist {
+        number
+        body
+      }
+    }
+  }
+`;
 function AddAlbum(props) {
     const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+    const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+    const { 0: vgmTracklist , 1: setVgmTracklist  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)();
     const { data: classData = {}  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(queryClasses);
-    const { classes =[] , categories =[]  } = classData;
+    const [getVgmdb, { loading: loadingFetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(vgmQuery);
+    const { classes =[] , categories: categories1 = []  } = classData;
+    const titleRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
+    const releaseRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
+    const vgmdbRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const [addMutation, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(mutation, {
         refetchQueries: "searchAlbum"
     });
@@ -185,6 +208,23 @@ function AddAlbum(props) {
                 autoclose: false
             });
         });
+    }
+    async function fetchInfo() {
+        const { data  } = await getVgmdb({
+            variables: {
+                search: vgmdbRef.current.value
+            }
+        });
+        if (data?.vgmdb) {
+            const { vgmdb  } = data;
+            const { vgmdbUrl , name , releaseDate , categories , classifications , tracklist  } = vgmdb;
+            releaseRef.current.value = releaseDate;
+            vgmdbRef.current.value = vgmdbUrl;
+            titleRef.current.value = name;
+            setClasses(categories);
+            setClassifications(classifications);
+            setVgmTracklist(tracklist);
+        }
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
@@ -208,6 +248,7 @@ function AddAlbum(props) {
                                             children: "Title:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
+                                            ref: titleRef,
                                             required: true,
                                             type: "text",
                                             name: "title"
@@ -239,6 +280,7 @@ function AddAlbum(props) {
                                             children: "Release Date:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
+                                            ref: releaseRef,
                                             required: true,
                                             type: "date",
                                             name: "releaseDate"
@@ -293,22 +335,72 @@ function AddAlbum(props) {
                             })
                         })
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                            md: 12,
-                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
-                                        htmlFor: "title",
-                                        children: "Description:"
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
-                                        as: "textarea",
-                                        name: "description"
-                                    })
-                                ]
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                        className: "mb-3",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                md: 6,
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
+                                            htmlFor: "title",
+                                            children: "Description:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
+                                            as: "textarea",
+                                            name: "description"
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                md: 6,
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
+                                            htmlFor: "cover",
+                                            children: "Cover:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
+                                            required: true,
+                                            name: "cover",
+                                            type: "file",
+                                            accept: "image/*"
+                                        })
+                                    ]
+                                })
                             })
-                        })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                md: 6,
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
+                                            htmlFor: "vgmdb",
+                                            children: "VGMdb:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
+                                            ref: vgmdbRef,
+                                            name: "vgmdb",
+                                            type: "text"
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                className: "mt-auto",
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_10__/* .ButtonLoader */ .l, {
+                                    color: "primary",
+                                    loading: loadingFetch,
+                                    onClick: fetchInfo,
+                                    children: "Fetch info"
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {})
+                        ]
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                         className: "style2 style-white"
@@ -340,12 +432,12 @@ function AddAlbum(props) {
                                             children: "Classification:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .SimpleSelector */ .d7, {
+                                            required: true,
+                                            name: "classes",
                                             defaultValue: currentClasses.map((c)=>({
                                                     value: c,
                                                     label: c
                                                 })),
-                                            required: true,
-                                            name: "classes",
                                             options: classes.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
@@ -366,46 +458,15 @@ function AddAlbum(props) {
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .SimpleSelector */ .d7, {
                                             required: true,
                                             name: "categories",
-                                            options: categories.map((c)=>({
+                                            defaultValue: currentClassifications.map((c)=>({
+                                                    value: c,
+                                                    label: c
+                                                })),
+                                            options: categories1.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
-                                                }))
-                                        })
-                                    ]
-                                })
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                                md: 6,
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
-                                            htmlFor: "vgmdb",
-                                            children: "VGMdb:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
-                                            name: "vgmdb",
-                                            type: "text"
-                                        })
-                                    ]
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                                md: 6,
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
-                                            htmlFor: "cover",
-                                            children: "Cover:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.FormControl, {
-                                            required: true,
-                                            name: "cover",
-                                            type: "file",
-                                            accept: "image/*"
+                                                })),
+                                            onChange: (values)=>setClassifications(values.map((v)=>v.value))
                                         })
                                     ]
                                 })
@@ -485,7 +546,9 @@ function AddAlbum(props) {
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                         className: "style2 style-white"
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_SharedForms__WEBPACK_IMPORTED_MODULE_6__/* .DiscList */ .r8, {}),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_SharedForms__WEBPACK_IMPORTED_MODULE_6__/* .DiscList */ .r8, {
+                        defaults: vgmTracklist
+                    }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                         className: "style2 style-white"
                     }),
@@ -649,7 +712,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,7014,599,589,3551,8046], () => (__webpack_exec__(7287)));
+var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,7014,599,9738,589,3551,8046], () => (__webpack_exec__(7287)));
 module.exports = __webpack_exports__;
 
 })();
