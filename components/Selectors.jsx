@@ -303,6 +303,8 @@ export function PublisherSelector (props) {
 
 export function PlatformSelector (props) {
   const { classes = [] } = props
+  const [selected, setSelected] = useState([])
+
   const query = gql`
     query ($classes: [String]!){
       searchPlatformsByClasses(classes: $classes) {
@@ -317,6 +319,8 @@ export function PlatformSelector (props) {
   return (
     <SimpleSelector
       {...props}
+      onChange={result => setSelected(result)}
+      defaultValue={selected}
       options={results.map(r => ({ label: r.name, value: r.id }))}
     />
   )
