@@ -189,7 +189,7 @@ function EditProfile (props) {
             </Row>
             <Row className='mt-4'>
               <Col md={6} className='mx-auto'>
-                <ButtonLoader loading={loadingUser} type='submit' className='w-100' color='primary' text='Update User'></ButtonLoader>
+                <ButtonLoader loading={loadingUser} type='submit' className='w-100' color='primary'>Update User</ButtonLoader>
               </Col>
             </Row>
           </Form>

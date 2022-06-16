@@ -89,7 +89,7 @@ function ForgorForm (props) {
         </Row>
         <Row className='mt-4'>
           <Col md={6} className='mx-auto'>
-            <ButtonLoader loading={loadingForgor} type='submit' className='w-100' color='primary' text={t('Recover password')} />
+            <ButtonLoader loading={loadingForgor} type='submit' className='w-100' color='primary'>{t('Recover password')}</ButtonLoader>
           </Col>
         </Row>
       </Form>

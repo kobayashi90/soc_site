@@ -384,7 +384,9 @@ export default function Page (props) {
                   <Col>
                     <ButtonLoader
                       loading={loadingFavorite} onClick={dataFavorite ? submitFavorite : null}
-                      className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }} text={t(dataFavorite ? (dataFavorite.album.isFavorite ? 'Favorite_Remove' : 'Favorite_Add') : 'Favorite_Login')} />
+                      className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                      {t(dataFavorite ? (dataFavorite.album.isFavorite ? 'Favorite_Remove' : 'Favorite_Add') : 'Favorite_Login')}
+                    </ButtonLoader>
                   </Col>
                 </Row>
               </Col>
