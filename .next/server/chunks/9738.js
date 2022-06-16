@@ -71,13 +71,40 @@ function Loader(props) {
     });
 };
 const ButtonLoader = (props)=>{
-    const { loading , text , children  } = props;
-    return /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
+    const { loading , children  } = props;
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_react_bootstrap_.Button, {
+        style: {
+            position: "relative"
+        },
         ...props,
-        children: loading ? /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
-            ...oval/* default */.Z,
-            alt: "loading"
-        }) : text || children
+        children: [
+            loading && /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "h-100 w-100",
+                style: {
+                    position: "absolute",
+                    top: 0,
+                    left: 0
+                },
+                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "h-100 w-100",
+                    style: {
+                        position: "relative"
+                    },
+                    children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
+                        layout: "fill",
+                        objectFit: "contain",
+                        ...oval/* default */.Z,
+                        alt: "loading"
+                    })
+                })
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                style: {
+                    visibility: loading ? "hidden" : "visible"
+                },
+                children: children
+            })
+        ]
     });
 };
 

@@ -587,7 +587,7 @@ function Page(props) {
                                                         style: {
                                                             fontSize: "18px"
                                                         },
-                                                        text: t(dataFavorite ? dataFavorite.album.isFavorite ? "Favorite_Remove" : "Favorite_Add" : "Favorite_Login")
+                                                        children: t(dataFavorite ? dataFavorite.album.isFavorite ? "Favorite_Remove" : "Favorite_Add" : "Favorite_Login")
                                                     })
                                                 })
                                             })

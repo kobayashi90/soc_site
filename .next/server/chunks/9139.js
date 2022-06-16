@@ -251,7 +251,7 @@ function CommentCarrousel(props) {
                                         loading: loadingComment,
                                         type: "submit",
                                         color: "primary",
-                                        text: t("Save comment")
+                                        children: t("Save comment")
                                     })
                                 })
                             })

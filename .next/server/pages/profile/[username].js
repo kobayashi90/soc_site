@@ -371,7 +371,7 @@ function EditProfile(props) {
                                     type: "submit",
                                     className: "w-100",
                                     color: "primary",
-                                    text: "Update User"
+                                    children: "Update User"
                                 })
                             })
                         })

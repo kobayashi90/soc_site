@@ -295,7 +295,7 @@ function ForgorForm(props) {
                         type: "submit",
                         className: "w-100",
                         color: "primary",
-                        text: t("Recover password")
+                        children: t("Recover password")
                     })
                 })
             })
