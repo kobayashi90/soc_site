@@ -1466,8 +1466,26 @@ class Router {
                 locale: nextState.locale,
                 isPreview: nextState.isPreview
             });
-            if ("route" in routeInfo) {
+            if ("route" in routeInfo && routeInfo.route !== route) {
                 pathname = routeInfo.route || route;
+                query = Object.assign({}, routeInfo.query || {}, query);
+                if ((0, _isDynamic).isDynamicRoute(pathname)) {
+                    const prefixedAs = routeInfo.resolvedAs || (0, _addBasePath).addBasePath((0, _addLocale).addLocale(as, nextState.locale), true);
+                    let rewriteAs = prefixedAs;
+                    if ((0, _hasBasePath).hasBasePath(rewriteAs)) {
+                        rewriteAs = (0, _removeBasePath).removeBasePath(rewriteAs);
+                    }
+                    if (true) {
+                        const localeResult = (0, _normalizeLocalePath).normalizeLocalePath(rewriteAs, this.locales);
+                        nextState.locale = localeResult.detectedLocale || nextState.locale;
+                        rewriteAs = localeResult.pathname;
+                    }
+                    const routeRegex = (0, _routeRegex).getRouteRegex(pathname);
+                    const routeMatch = (0, _routeMatcher).getRouteMatcher(routeRegex)(rewriteAs);
+                    if (routeMatch) {
+                        Object.assign(query, routeMatch);
+                    }
+                }
             }
             // If the routeInfo brings a redirect we simply apply it.
             if ("type" in routeInfo) {
@@ -1538,8 +1556,9 @@ class Router {
                 // when updating query information
                 props.pageProps.statusCode = 500;
             }
+            var _route;
             // shallow routing is only allowed for same page URL changes.
-            const isValidShallowRoute = options.shallow && nextState.route === route;
+            const isValidShallowRoute = options.shallow && nextState.route === ((_route = routeInfo.route) !== null && _route !== void 0 ? _route : route);
             var _scroll;
             const shouldScroll = (_scroll = options.scroll) !== null && _scroll !== void 0 ? _scroll : !isValidShallowRoute;
             const resetScroll = shouldScroll ? {
@@ -1643,7 +1662,13 @@ class Router {
             return this.handleRouteInfoError((0, _isError).default(routeInfoErr) ? routeInfoErr : new Error(routeInfoErr + ""), pathname, query, as, routeProps, true);
         }
     }
-    async getRouteInfo({ route , pathname , query , as , resolvedAs , routeProps , locale , isPreview  }) {
+    async getRouteInfo({ route: requestedRoute , pathname , query , as , resolvedAs , routeProps , locale , isPreview  }) {
+        /**
+     * This `route` binding can change if there's a rewrite
+     * so we keep a reference to the original requested route
+     * so we can store the cache for it and avoid re-requesting every time
+     * for shallow routing purposes.
+     */ let route = requestedRoute;
         try {
             var ref, ref4, ref5;
             let existingInfo = this.components[route];
@@ -1688,7 +1713,17 @@ class Router {
                 // Check again the cache with the new destination.
                 existingInfo = this.components[route];
                 if (routeProps.shallow && existingInfo && this.route === route) {
-                    return existingInfo;
+                    // If we have a match with the current route due to rewrite,
+                    // we can copy the existing information to the rewritten one.
+                    // Then, we return the information along with the matched route.
+                    this.components[requestedRoute] = {
+                        ...existingInfo,
+                        route
+                    };
+                    return {
+                        ...existingInfo,
+                        route
+                    };
                 }
                 cachedRouteInfo = existingInfo && !("initial" in existingInfo) && "production" !== "development" ? existingInfo : undefined;
             }
@@ -1768,7 +1803,17 @@ class Router {
             }
             routeInfo.props = props;
             routeInfo.route = route;
+            routeInfo.query = query;
+            routeInfo.resolvedAs = resolvedAs;
             this.components[route] = routeInfo;
+            // If the route was rewritten in the process of fetching data,
+            // we update the cache to allow hitting the same data for shallow requests.
+            if (route !== requestedRoute) {
+                this.components[requestedRoute] = {
+                    ...routeInfo,
+                    route
+                };
+            }
             return routeInfo;
         } catch (err) {
             return this.handleRouteInfoError((0, _isError).getProperError(err), pathname, query, as, routeProps);
@@ -2055,9 +2100,8 @@ function getMiddlewareData(source, response, options) {
         },
         trailingSlash: Boolean(false)
     };
-    // TODO: ensure x-nextjs-matched-path is always present instead of both
-    // variants
-    let rewriteTarget = response.headers.get("x-nextjs-matched-path");
+    const rewriteHeader = response.headers.get("x-nextjs-rewrite");
+    let rewriteTarget = rewriteHeader || response.headers.get("x-nextjs-matched-path");
     const matchedPath = response.headers.get("x-matched-path");
     if (!rewriteTarget && !(matchedPath === null || matchedPath === void 0 ? void 0 : matchedPath.includes("__next_data_catchall"))) {
         rewriteTarget = matchedPath;
@@ -2069,13 +2113,26 @@ function getMiddlewareData(source, response, options) {
                 nextConfig,
                 parseData: true
             });
-            parsedRewriteTarget.pathname = pathnameInfo.pathname;
             const fsPathname = (0, _removeTrailingSlash).removeTrailingSlash(pathnameInfo.pathname);
-            return Promise.resolve(options.router.pageLoader.getPageList()).then((pages)=>({
+            return Promise.all([
+                options.router.pageLoader.getPageList(),
+                (0, _routeLoader).getClientBuildManifest(), 
+            ]).then(([pages, { __rewrites: rewrites  }])=>{
+                let as = parsedRewriteTarget.pathname;
+                if ((0, _isDynamic).isDynamicRoute(as) || !rewriteHeader && pages.includes((0, _normalizeLocalePath).normalizeLocalePath((0, _removeBasePath).removeBasePath(as), options.router.locales).pathname)) {
+                    const parsedSource = (0, _getNextPathnameInfo).getNextPathnameInfo((0, _parseRelativeUrl).parseRelativeUrl(source).pathname, {
+                        parseData: true
+                    });
+                    as = (0, _addBasePath).addBasePath(parsedSource.pathname);
+                }
+                if (false) {}
+                const resolvedHref = !pages.includes(fsPathname) ? resolveDynamicRoute((0, _normalizeLocalePath).normalizeLocalePath((0, _removeBasePath).removeBasePath(parsedRewriteTarget.pathname), options.router.locales).pathname, pages) : fsPathname;
+                return {
                     type: "rewrite",
                     parsedAs: parsedRewriteTarget,
-                    resolvedHref: !pages.includes(fsPathname) ? resolveDynamicRoute(fsPathname, pages) : fsPathname
-                }));
+                    resolvedHref
+                };
+            });
         }
         const src = (0, _parsePath).parsePath(source);
         const pathname = (0, _formatNextPathnameInfo).formatNextPathnameInfo({
