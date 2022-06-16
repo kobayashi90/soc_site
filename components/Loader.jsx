@@ -16,8 +16,19 @@ export default function Loader (props) {
 }
 
 export const ButtonLoader = props => {
-  const { loading, text, children } = props
+  const { loading, children } = props
+
   return (
-    <Button {...props}>{loading ? <Image {...loader} alt='loading' /> : text || children}</Button>
+    <Button style={{ position: 'relative' }} {...props}>
+      {loading && (
+        <div className='h-100 w-100' style={{ position: 'absolute', top: 0, left: 0 }}>
+          <div className='h-100 w-100' style={{ position: 'relative' }}>
+            <Image layout='fill' objectFit={'contain'} {...loader} alt='loading' />
+          </div>
+        </div>
+      )}
+
+      <div style={{ visibility: loading ? 'hidden' : 'visible' }}>{children}</div>
+    </Button>
   )
 }

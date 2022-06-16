@@ -131,7 +131,7 @@ export default function CommentCarrousel (props) {
             </Row>
             <Row className='mt-2'>
               <Col className='mx-auto'>
-                <ButtonLoader loading={loadingComment} type='submit' color='primary' text={t('Save comment')} />
+                <ButtonLoader loading={loadingComment} type='submit' color='primary'>{t('Save comment')}</ButtonLoader>
               </Col>
             </Row>
           </Form>
