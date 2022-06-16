@@ -33,9 +33,10 @@ export function BasicCommentCarrousel (props) {
     timeoutRef.current = setTimeout(plusIndex, 10 * 1000)
   }, [currentIndex])
 
+  if (comments.length === 0) return null
+
   return (
     <>
-
       <Row>
         <Col className='blackblock m-2'>
           <Row>
