@@ -1,9 +1,9 @@
 import { Col, Row, Form, FormControl } from 'react-bootstrap'
-import { useRef, useState } from 'react'
-import { gql, useQuery, useMutation, useLazyQuery } from '@apollo/client'
+import { useRef, useState, useEffect } from 'react'
+import { gql, useQuery, useMutation, useLazyQuery, useApolloClient } from '@apollo/client'
 import { toast } from 'react-toastify'
 
-import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
+import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector, RequestSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, Downloads, StoreDownloads, DiscList } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
 import { hasRolePage } from '@/components/resolvers'
@@ -112,6 +112,7 @@ function AddAlbum (props) {
 
   const { classes = [], categories = [] } = classData
 
+  const formRef = useRef(null)
   const titleRef = useRef(null)
   const releaseRef = useRef(null)
   const vgmdbRef = useRef(null)
@@ -291,15 +292,71 @@ function AddAlbum (props) {
         <hr className='style2 style-white' />
         <StoreDownloads />
         <hr className='style2 style-white' />
-
         <Downloads />
+        <hr className='style2 style-white' />
+        <RequestCheck element={vgmdbRef.current} />
+        <hr className='style2 style-white' />
 
-        <Row>
-          <Col className='m-auto'>
+        <Row className='mb-2'>
+          <Col xs='auto' className='pe-0'>
             <SubmitButton loading={loading} type='submit' color='primary'>Add Album</SubmitButton>
           </Col>
         </Row>
       </Form>
+    </>
+  )
+}
+
+const requestQuery = gql`
+  query ($link: String!) {
+    request(link: $link) {
+      value: id
+      label: title
+      state
+    }
+  }
+`
+
+function RequestCheck (props) {
+  const { element } = props
+
+  const client = useApolloClient()
+  const [defaultValue, setDefaultValue] = useState()
+  const [selected, setSelected] = useState()
+
+  useEffect(() => {
+    if (!element) return
+
+    element.addEventListener('input', () => {
+      client.query({ query: requestQuery, variables: { link: element.value } })
+        .then(({ data }) => {
+          if (data.request) {
+            setDefaultValue(data.request)
+            setSelected(data.request)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          toast.error(err.message, { autoclose: false })
+        })
+    })
+  }, [element])
+
+  return (
+    <>
+      <Row>
+        <Form.Group as={Col}>
+          <Form.Label htmlFor='request'>Request:</Form.Label>
+        </Form.Group>
+      </Row>
+      <Row>
+        <Col>
+          <RequestSelector isSingle name='request' defaultValue={defaultValue} onChange={setSelected} />
+        </Col>
+        <Col className='d-flex align-items-center ps-0'>
+          {selected && <span className="">{selected.state === 'complete' ? 'Request found!  Already complete tho ¯\\_(ツ)_/¯' : 'Request found!'}</span>}
+        </Col>
+      </Row>
     </>
   )
 }

@@ -70,6 +70,13 @@ export function BaseSelector (props) {
     setOptions([...currentOptions, ...searchOptions])
   }, [dataInitial, data])
 
+  /* useEffect(() => {
+    if (!defaultValue) return
+
+    if (defaultValue !== selected) setSelected(defaultValue)
+    else if (defaultValue.length !== selected.length) setSelected(defaultValue)
+  }, [defaultValue]) */
+
   return (
     <>
       <div ref={stubElement} style={{ display: 'none' }} />
@@ -322,6 +329,30 @@ export function PlatformSelector (props) {
       onChange={result => setSelected(result)}
       defaultValue={selected}
       options={results.map(r => ({ label: r.name, value: r.id }))}
+    />
+  )
+}
+
+export function RequestSelector (props) {
+  return (
+    <BaseSelector
+      {...props}
+      startQuery={`
+        query {
+          searchRequests (state: ["pending"], donator: [false]) {
+            value: id
+            label: title
+          }
+        }`
+      }
+      changeQuery={`
+        query ($filter: String) {
+          searchRequests (state: ["pending", "hold"], filter: $filter) {
+            value: id
+            label: title
+          }
+        }`
+      }
     />
   )
 }
