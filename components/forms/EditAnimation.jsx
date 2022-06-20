@@ -76,7 +76,14 @@ export default function AddAnimation () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='name'>Animation:</Form.Label>
-              <AnimSelector isSingle name='id' onChange={row => getAnim({ variables: { id: row.value } })} loading={loadingInfo} />
+              <AnimSelector
+                options={{
+                  isSingle: true,
+                  name: 'id',
+                  loading: loadingInfo,
+                  onChange: row => getAnim({ variables: { id: row.value } })
+                }}
+              />
             </Form.Group>
           </Col>
           <Col md={4}>
@@ -103,7 +110,7 @@ export default function AddAnimation () {
             <Col>
               <Form.Group>
                 <Form.Label htmlFor='studios'>Studios:</Form.Label>
-                <StudioSelector name='studios' defaultValue={data.animation.studios} />
+                <StudioSelector options={{ name: 'studios', defaultValue: data.animation.studios }} />
               </Form.Group>
             </Col>
           )}

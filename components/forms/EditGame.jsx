@@ -84,7 +84,15 @@ export default function EditGame () {
           <Col>
             <Form.Group>
               <Form.Label htmlFor='slug'>Game:</Form.Label>
-              <GameSelector isSingle required name='slug' onChange={row => getGame({ variables: { slug: row.value } })} loading={loading} />
+              <GameSelector
+                options={{
+                  isSingle: true,
+                  required: true,
+                  name: 'slug',
+                  loading,
+                  onChange: row => getGame({ variables: { slug: row.value } })
+                }}
+              />
             </Form.Group>
           </Col>
 
@@ -106,19 +114,19 @@ export default function EditGame () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='series'>Series:</Form.Label>
-                <SeriesSelector loading={loading} name='series' defaultValue={data && data.game.series} />
+                <SeriesSelector options={{ loading, name: 'series', defaultValue: data?.game.series }} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='publishers'>Publishers:</Form.Label>
-                <PublisherSelector loading={loading} name='publishers' defaultValue={data && data.game.publishers} />
+                <PublisherSelector options={{ loading: loading, name: 'publishers', defaultValue: data?.game.publishers }} />
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-                <PlatformSelector classes={['Game']} name='platforms' defaultValue={data && data.game.platforms} />
+                <PlatformSelector classes={['Game']} options={{ name: 'platforms', defaultValue: data?.game.platforms }} />
               </Form.Group>
             </Col>
           </Row>

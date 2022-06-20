@@ -1,81 +1,69 @@
 import { useEffect, useState, useRef } from 'react'
-import { gql, useQuery, useLazyQuery } from '@apollo/client'
-import { toast } from 'react-toastify'
+import { gql, useApolloClient } from '@apollo/client'
 import { MultiSelect } from 'react-multi-select-component'
 
+const limit = 10
 const valueRenderer = (selected, _options) => {
   return selected.length
     ? selected.map(({ label }) => label).join(', ')
     : 'Select...'
 }
-const runError = err => {
-  if (!err) return
-
-  console.log(err)
-  toast.error('Selector: Failed to fetch server info')
-}
 
 function HiddenInputs (props) {
-  const { isSingle = false, selected = isSingle ? {} : [], required = false, name = '' } = props
+  const { isSingle = false, value = [], required = false, name } = props
 
   return isSingle
     ? (
-      <input value={selected.value} name={name} required={required} hidden readOnly />
+      <input value={value[0] ? value[0].value : ''} name={name} required={required} hidden readOnly />
     )
     : (
-      selected.map(s => <input key={s.value} value={s.value} name={`${name}[]`} hidden readOnly />)
+      value.map(s => <input key={s.value} value={s.value} name={name ? `${name}[]` : undefined} hidden readOnly />)
     )
 }
 
 export function BaseSelector (props) {
-  const { isSingle = false, required = false, onChange, loading: loadingProp = false } = props
-  const { startQuery, changeQuery, defaultValue = isSingle ? undefined : [], name = '' } = props
-  const { rowsFn } = props
+  const { startQuery, changeQuery, rowsFn, options: selectorOptions = {} } = props
+  const { defaultValue, isSingle = false, required = false, loading: loadingProp = false, name, onChange } = selectorOptions
 
-  const [options, setOptions] = useState(defaultValue || [])
-  const [selected, setSelected] = useState(defaultValue)
+  const client = useApolloClient()
   const stubElement = useRef(null)
-  const value = isSingle ? (selected ? [selected] : []) : selected
+  const [options, setOptions] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [value, setValue] = useState(defaultValue || [])
+
+  const filterOptions = async (_, filter) => {
+    setLoading(true)
+    const { data } = await client.query({ query: filter.length === 0 && startQuery ? startQuery : changeQuery, variables: { filter, limit } })
+    setOptions(getOptions(data))
+    setLoading(false)
+
+    return _
+  }
+  const getOptions = data => data ? (rowsFn ? rowsFn(data[Object.keys(data)[0]]) : data[Object.keys(data)[0]]) : []
+  const onChangeFn = (items = []) => {
+    const result = isSingle ? items.slice(-1) : items
+
+    if (onChange) onChange(isSingle ? result[0] : result)
+    setValue(result)
+  }
 
   useEffect(() => {
     const form = stubElement.current.closest('form')
-    form?.addEventListener('reset', () => setSelected(defaultValue))
+    form?.addEventListener('reset', () => setValue(defaultValue || []))
   }, [])
 
-  const { data: dataInitial, error: initialError, loading: loadingInitial } = useQuery(gql`${startQuery}`, { variables: { limit: 10 } })
-  const [getQuery, { data, error, loading }] = useLazyQuery(gql`${changeQuery}`)
-
-  const getOptions = data => data ? (rowsFn ? rowsFn(data[Object.keys(data)[0]]) : data[Object.keys(data)[0]]) : []
-  const filterOptions = (_, filter) => {
-    if (filter.length > 0) getQuery({ variables: { filter } })
-    return _
-  }
-
-  const onChangeFn = (items = []) => {
-    const result = isSingle ? items[items.length - 1] : items
-
-    if (onChange) onChange(result)
-    setSelected(result)
-  }
-
-  useEffect(() => runError(initialError), [initialError])
-  useEffect(() => runError(error), [error])
+  useEffect(() => {
+    if (startQuery) {
+      setLoading(true)
+      client.query({ query: startQuery, variables: { limit } })
+        .then(({ data }) => setOptions(getOptions(data)))
+        .finally(() => setLoading(false))
+    }
+  }, [])
 
   useEffect(() => {
-    if (!dataInitial && !data) return
-
-    const searchOptions = data ? getOptions(data) : getOptions(dataInitial)
-    const currentOptions = value.filter(o => !searchOptions.includes(o.value))
-
-    setOptions([...currentOptions, ...searchOptions])
-  }, [dataInitial, data])
-
-  /* useEffect(() => {
-    if (!defaultValue) return
-
-    if (defaultValue !== selected) setSelected(defaultValue)
-    else if (defaultValue.length !== selected.length) setSelected(defaultValue)
-  }, [defaultValue]) */
+    if (defaultValue) setValue(isSingle ? [defaultValue] : defaultValue)
+  }, [defaultValue])
 
   return (
     <>
@@ -85,10 +73,10 @@ export function BaseSelector (props) {
         filterOptions={filterOptions}
         onChange={onChangeFn}
         hasSelectAll={!isSingle}
-        isLoading={loading || loadingInitial || loadingProp}
+        isLoading={loading || loadingProp}
         value={value} options={options}
       />
-      <HiddenInputs isSingle={isSingle} required={required} selected={selected} name={name} />
+      <HiddenInputs isSingle={isSingle} required={required} value={value} name={name} />
     </>
   )
 }
@@ -137,13 +125,11 @@ export function SimpleSelector (props) {
 }
 
 export function AlbumSelector (props) {
-  const rowsFn = data => data.rows
-
   return (
     <BaseSelector
       {...props}
-      rowsFn={rowsFn}
-      startQuery={`
+      rowsFn={data => data.rows}
+      startQuery={gql`
         query ($limit: Int){
           searchAlbum(limit: $limit, status: ["show", "hidden", "coming"]) {
             rows {
@@ -153,7 +139,7 @@ export function AlbumSelector (props) {
           }
         }
       `}
-      changeQuery={`
+      changeQuery={gql`
         query ($filter: String){
           searchAlbum(title: $filter, status: ["show", "hidden", "coming"]) {
             rows {
@@ -168,13 +154,11 @@ export function AlbumSelector (props) {
 }
 
 export function StudioSelector (props) {
-  const rowsFn = data => data.rows
-
   return (
     <BaseSelector
       {...props}
-      rowsFn={rowsFn}
-      startQuery={`
+      rowsFn={data => data.rows}
+      startQuery={gql`
         query ($limit: Int){
           searchStudio(limit: $limit) {
             rows {
@@ -184,7 +168,7 @@ export function StudioSelector (props) {
           }
         }
       `}
-      changeQuery={`
+      changeQuery={gql`
         query ($filter: String){
           searchStudio(name: $filter) {
             rows {
@@ -199,13 +183,11 @@ export function StudioSelector (props) {
 }
 
 export function GameSelector (props) {
-  const rowsFn = data => data.rows
-
   return (
     <BaseSelector
       {...props}
-      rowsFn={rowsFn}
-      startQuery={`
+      rowsFn={data => data.rows}
+      startQuery={gql`
         query ($limit: Int){
           searchGame (limit: $limit) {
             rows{
@@ -215,7 +197,7 @@ export function GameSelector (props) {
           }
         }
       `}
-      changeQuery={`
+      changeQuery={gql`
         query ($filter: String){
           searchGame(name: $filter) {
             rows {
@@ -230,13 +212,11 @@ export function GameSelector (props) {
 }
 
 export function AnimSelector (props) {
-  const rowsFn = data => data.rows
-
   return (
     <BaseSelector
       {...props}
-      rowsFn={rowsFn}
-      startQuery={`
+      rowsFn={data => data.rows}
+      startQuery={gql`
         query ($limit: Int!){
           searchAnimation(limit: $limit, order: "createdAt", mode: "DESC") {
             rows{
@@ -246,8 +226,8 @@ export function AnimSelector (props) {
           }
         }
       `}
-      changeQuery={`
-        query SearchAnimation($filter: String){
+      changeQuery={gql`
+        query ($filter: String){
           searchAnimation(title: $filter) {
             rows {
               value: id
@@ -264,16 +244,16 @@ export function SeriesSelector (props) {
   return (
     <BaseSelector
       {...props}
-      startQuery={`
-        query RecentSeries($limit: Int!){
+      startQuery={gql`
+        query ($limit: Int!){
           recentSeries(limit: $limit) {
             value: slug
             label: name
           }
         }
       `}
-      changeQuery={`
-        query SearchSeries($filter: String){
+      changeQuery={gql`
+        query ($filter: String){
           searchSeriesByName(name: $filter) {
             value: slug
             label: name
@@ -288,7 +268,7 @@ export function PublisherSelector (props) {
   return (
     <BaseSelector
       {...props}
-      startQuery={`
+      startQuery={gql`
         query ($limit: Int!){
           recentPublishers(limit: $limit) {
             value: id
@@ -296,7 +276,7 @@ export function PublisherSelector (props) {
           }
         }`
       }
-      changeQuery={`
+      changeQuery={gql`
         query ($filter: String){
           searchPublishersByName(name: $filter) {
             value: id
@@ -310,25 +290,19 @@ export function PublisherSelector (props) {
 
 export function PlatformSelector (props) {
   const { classes = [] } = props
-  const [selected, setSelected] = useState([])
-
-  const query = gql`
-    query ($classes: [String]!){
-      searchPlatformsByClasses(classes: $classes) {
-        id
-        name
-      }
-    }
-  `
-  const { data = {} } = useQuery(query, { variables: { classes } })
-  const { searchPlatformsByClasses: results = [] } = data
+  const mapClasses = `[${classes.map(c => `"${c}"`).join(',')}]`
 
   return (
-    <SimpleSelector
+    <BaseSelector
       {...props}
-      onChange={result => setSelected(result)}
-      defaultValue={selected}
-      options={results.map(r => ({ label: r.name, value: r.id }))}
+      changeQuery={gql`
+        query {
+          searchPlatformsByClasses(classes: ${mapClasses}) {
+            value: id
+            label: name
+          }
+        }
+      `}
     />
   )
 }
@@ -337,7 +311,7 @@ export function RequestSelector (props) {
   return (
     <BaseSelector
       {...props}
-      startQuery={`
+      startQuery={gql`
         query {
           searchRequests (state: ["pending"], donator: [false]) {
             value: id
@@ -345,7 +319,7 @@ export function RequestSelector (props) {
           }
         }`
       }
-      changeQuery={`
+      changeQuery={gql`
         query ($filter: String) {
           searchRequests (state: ["pending", "hold"], filter: $filter) {
             value: id

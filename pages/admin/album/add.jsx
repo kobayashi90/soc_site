@@ -112,7 +112,6 @@ function AddAlbum (props) {
 
   const { classes = [], categories = [] } = classData
 
-  const formRef = useRef(null)
   const titleRef = useRef(null)
   const releaseRef = useRef(null)
   const vgmdbRef = useRef(null)
@@ -260,19 +259,19 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='games'>Games:</Form.Label>
-              <GameSelector name='games' />
+              <GameSelector options={{ name: 'games' }} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector classes={currentClasses} name='platforms' />
+              <PlatformSelector classes={currentClasses} options={{ name: 'platforms' }} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='animations'>Animations:</Form.Label>
-              <AnimSelector name='animations' />
+              <AnimSelector options={{ name: 'animations' }} />
             </Form.Group>
           </Col>
         </Row>
@@ -283,7 +282,7 @@ function AddAlbum (props) {
           <Col md={12}>
             <Form.Group>
               <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
-              <AlbumSelector name='related' />
+              <AlbumSelector options={{ name: 'related' }} />
             </Form.Group>
           </Col>
         </Row>

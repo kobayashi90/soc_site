@@ -173,7 +173,7 @@ export default function EditOst (props) {
 
 function EditOstForm ({ id, album, classes, categories }) {
   const [mutate, { loading }] = useMutation(mutation)
-  const [currentClasses, setClasses] = useState([])
+  const [currentClasses, setClasses] = useState(album.classes)
 
   const { user } = useUser()
   const { data, refetch } = useQuery(queryDownload, { variables: { id } })
@@ -254,7 +254,7 @@ function EditOstForm ({ id, album, classes, categories }) {
               <SimpleSelector
                 defaultValue={album.classes}
                 required name='classes' options={classes}
-                onChange={values => setClasses(values && values.length === 1 ? values[0].label : '')}
+                onChange={values => setClasses(values)}
               />
             </Form.Group>
           </Col>
@@ -291,20 +291,20 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='games'>Games:</Form.Label>
-              <GameSelector defaultValue={album.games} name='games' />
+              <GameSelector options={{ defaultValue: album.games, name: 'games' }} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector classes={currentClasses} defaultValue={album.platforms} name='platforms' onChange={values => setClasses(values.map(v => v.value))} />
+              <PlatformSelector classes={currentClasses.map(c => c.value)} options={{ defaultValue: album.platforms, name: 'platforms' }} />
             </Form.Group>
           </Col>
 
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='animations'>Animations:</Form.Label>
-              <AnimSelector defaultValue={album.animations} name='animations' />
+              <AnimSelector options={{ defaultValue: album.animations, name: 'animations' }} />
             </Form.Group>
           </Col>
         </Row>
@@ -313,7 +313,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={12}>
             <Form.Group>
               <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
-              <AlbumSelector defaultValue={album.related} name='related' />
+              <AlbumSelector options={{ defaultValue: album.related, name: 'related' }} />
             </Form.Group>
           </Col>
         </Row>
