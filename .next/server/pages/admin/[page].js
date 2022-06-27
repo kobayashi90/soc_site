@@ -5,7 +5,7 @@ exports.id = 9885;
 exports.ids = [9885];
 exports.modules = {
 
-/***/ 1736:
+/***/ 9042:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -32,10 +32,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1664);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9675);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9738);
-/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3551);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(599);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(7352);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5043);
+/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(9324);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1331);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_11__]);
 _components_resolvers__WEBPACK_IMPORTED_MODULE_11__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -173,18 +173,18 @@ function OstTable() {
         const { 0: modal , 1: setModal  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
         const { 0: modalData , 1: setModalData  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({});
         const { searchAlbum  } = data;
-        const { id: id1 , title: title1  } = modalData;
+        const { id , title  } = modalData;
         function handleDelete() {
             deleteOst({
                 variables: {
-                    id: id1
+                    id
                 }
             }).then((results)=>{
-                react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.success(`Deleted OST "${title1}" (${id1}) succesfully`);
+                react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.success(`Deleted OST "${title}" (${id}) succesfully`);
                 refetch();
             }).catch((err)=>{
                 console.log(err);
-                react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error(`Failed to delete OST "${title1}" (${id1})`);
+                react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error(`Failed to delete OST "${title}" (${id})`);
             }).finally(()=>setModalData(!modal));
         }
         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
@@ -201,7 +201,7 @@ function OstTable() {
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                    children: `Delete the OST "${title1}" (ID: ${id1})?`
+                                    children: `Delete the OST "${title}" (ID: ${id})?`
                                 })
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
@@ -482,12 +482,12 @@ function Highlight() {
                 children: "Highlight OST:"
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_9__/* .AlbumSelector */ .Q$, {
-                isSingle: true,
-                defaultValue: data && [
-                    data.highlight
-                ],
-                onChange: handleHighlight,
-                loading: loading
+                options: {
+                    isSingle: true,
+                    defaultValue: data?.highlight,
+                    onChange: handleHighlight,
+                    loading
+                }
             })
         ]
     });
@@ -707,7 +707,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 1292:
+/***/ 5874:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -812,7 +812,7 @@ module.exports = require("slugify");
 
 /***/ }),
 
-/***/ 1454:
+/***/ 5822:
 /***/ ((module) => {
 
 module.exports = import("iron-session");;
@@ -833,7 +833,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,9505,1664,7014,599,9738,589,3551], () => (__webpack_exec__(1736)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,2952,1664,9463,1331,5043,9665,9324], () => (__webpack_exec__(9042)));
 module.exports = __webpack_exports__;
 
 })();

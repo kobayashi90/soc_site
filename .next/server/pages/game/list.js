@@ -4,7 +4,7 @@ exports.id = 5999;
 exports.ids = [5999];
 exports.modules = {
 
-/***/ 932:
+/***/ 5376:
 /***/ ((module) => {
 
 // Exports
@@ -15,7 +15,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 7697:
+/***/ 1045:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -35,8 +35,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1664);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2102);
-/* harmony import */ var _styles_letter_module_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(932);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1454);
+/* harmony import */ var _styles_letter_module_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5376);
 /* harmony import */ var _styles_letter_module_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_letter_module_scss__WEBPACK_IMPORTED_MODULE_6__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_5__]);
 _components_ApolloClient__WEBPACK_IMPORTED_MODULE_5__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
@@ -274,7 +274,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 1292:
+/***/ 5874:
 /***/ ((module) => {
 
 "use strict";
@@ -377,7 +377,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,9505,1664,2102], () => (__webpack_exec__(7697)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,2952,1664,1454], () => (__webpack_exec__(1045)));
 module.exports = __webpack_exports__;
 
 })();

@@ -2,7 +2,7 @@ exports.id = 5675;
 exports.ids = [5675];
 exports.modules = {
 
-/***/ 9749:
+/***/ 8045:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -14,12 +14,12 @@ exports["default"] = Image;
 var _react = _interopRequireWildcard(__webpack_require__(6689));
 var _head = _interopRequireDefault(__webpack_require__(4957));
 var _imageConfig = __webpack_require__(5843);
-var _useIntersection = __webpack_require__(9246);
+var _useIntersection = __webpack_require__(7190);
 var _imageConfigContext = __webpack_require__(744);
 var _utils = __webpack_require__(9232);
-var _normalizeTrailingSlash = __webpack_require__(2700);
+var _normalizeTrailingSlash = __webpack_require__(2392);
 function Image(_param) {
-    var { src , sizes , unoptimized =false , priority =false , loading , lazyRoot =null , lazyBoundary , className , quality , width , height , style , objectFit , objectPosition , onLoadingComplete , placeholder ="empty" , blurDataURL  } = _param, all = _objectWithoutProperties(_param, [
+    var { src , sizes , unoptimized =false , priority =false , loading , lazyRoot =null , lazyBoundary , className , quality , width , height , style , objectFit , objectPosition , onLoadingComplete , placeholder ="empty" , blurDataURL  } = _param, all = _objectWithoutPropertiesLoose(_param, [
         "src",
         "sizes",
         "unoptimized",
@@ -46,7 +46,7 @@ function Image(_param) {
             ...c.imageSizes
         ].sort((a, b)=>a - b);
         const deviceSizes = c.deviceSizes.sort((a, b)=>a - b);
-        return _objectSpread({}, c, {
+        return _extends({}, c, {
             allSizes,
             deviceSizes
         });
@@ -67,7 +67,7 @@ function Image(_param) {
             const customImageLoader = rest.loader;
             var _tmp;
             _tmp = (obj)=>{
-                const { config: _  } = obj, opts = _objectWithoutProperties(obj, [
+                const { config: _  } = obj, opts = _objectWithoutPropertiesLoose(obj, [
                     "config"
                 ]);
                 // The config object is internal only so we must
@@ -105,6 +105,9 @@ function Image(_param) {
         isLazy = false;
     }
     if (false) {}
+    if (experimentalUnoptimized) {
+        unoptimized = true;
+    }
     const [blurComplete, setBlurComplete] = (0, _react).useState(false);
     const [setIntersection, isIntersected, resetIntersected] = (0, _useIntersection).useIntersection({
         rootRef: lazyRoot,
@@ -160,12 +163,16 @@ function Image(_param) {
     if (false) {}
     if (false) {}
     const imgStyle = Object.assign({}, style, layout === "raw" ? {} : layoutStyle);
-    const blurStyle = placeholder === "blur" && !blurComplete ? {
-        filter: "blur(20px)",
+    const svgBlurPlaceholder = `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' xmlns%3Axlink='http%3A//www.w3.org/1999/xlink' viewBox='0 0 ${widthInt} ${heightInt}'%3E%3Cfilter id='b' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='50'%3E%3C/feGaussianBlur%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='1 1'%3E%3C/feFuncA%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Cimage filter='url(%23b)' x='0' y='0' height='100%25' width='100%25' href='${blurDataURL}'%3E%3C/image%3E%3C/svg%3E");`;
+    const blurStyle = placeholder === "blur" && !blurComplete ? _extends({
         backgroundSize: objectFit || "cover",
-        backgroundImage: `url("${blurDataURL}")`,
         backgroundPosition: objectPosition || "0% 0%"
-    } : {};
+    }, layout === "raw" && (blurDataURL == null ? void 0 : blurDataURL.startsWith("data:image")) ? {
+        backgroundImage: svgBlurPlaceholder
+    } : {
+        filter: "blur(20px)",
+        backgroundImage: `url("${blurDataURL}")`
+    }) : {};
     if (layout === "fill") {
         // <Image src="i.png" layout="fill" />
         wrapperStyle.display = "block";
@@ -247,7 +254,7 @@ function Image(_param) {
         resetIntersected,
         src
     ]);
-    const imgElementArgs = _objectSpread({
+    const imgElementArgs = _extends({
         isLazy,
         imgAttributes,
         heightInt,
@@ -299,74 +306,63 @@ function Image(_param) {
         href: imgAttributes.srcSet ? undefined : imgAttributes.src
     }, linkProps))) : null);
 }
-function _defineProperty(obj, key, value) {
-    if (key in obj) {
-        Object.defineProperty(obj, key, {
-            value: value,
-            enumerable: true,
-            configurable: true,
-            writable: true
-        });
-    } else {
-        obj[key] = value;
-    }
-    return obj;
+function _extends() {
+    _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source){
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
 }
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         default: obj
     };
 }
+function _getRequireWildcardCache() {
+    if (typeof WeakMap !== "function") return null;
+    var cache = new WeakMap();
+    _getRequireWildcardCache = function() {
+        return cache;
+    };
+    return cache;
+}
 function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
         return obj;
-    } else {
-        var newObj = {};
-        if (obj != null) {
-            for(var key in obj){
-                if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                    var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};
-                    if (desc.get || desc.set) {
-                        Object.defineProperty(newObj, key, desc);
-                    } else {
-                        newObj[key] = obj[key];
-                    }
-                }
+    }
+    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
+        return {
+            default: obj
+        };
+    }
+    var cache = _getRequireWildcardCache();
+    if (cache && cache.has(obj)) {
+        return cache.get(obj);
+    }
+    var newObj = {};
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj){
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+            if (desc && (desc.get || desc.set)) {
+                Object.defineProperty(newObj, key, desc);
+            } else {
+                newObj[key] = obj[key];
             }
         }
-        newObj.default = obj;
-        return newObj;
     }
-}
-function _objectSpread(target) {
-    for(var i = 1; i < arguments.length; i++){
-        var source = arguments[i] != null ? arguments[i] : {};
-        var ownKeys = Object.keys(source);
-        if (typeof Object.getOwnPropertySymbols === "function") {
-            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-            }));
-        }
-        ownKeys.forEach(function(key) {
-            _defineProperty(target, key, source[key]);
-        });
+    newObj.default = obj;
+    if (cache) {
+        cache.set(obj, newObj);
     }
-    return target;
-}
-function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
+    return newObj;
 }
 function _objectWithoutPropertiesLoose(source, excluded) {
     if (source == null) return {};
@@ -380,7 +376,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
     }
     return target;
 }
-const { experimentalLayoutRaw =false , experimentalRemotePatterns =[]  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false} || {};
+const { experimentalLayoutRaw =false , experimentalRemotePatterns =[] , experimentalUnoptimized ,  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false} || {};
 const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false};
 const loadedImageURLs = new Set();
 const allImgs = new Map();
@@ -520,7 +516,7 @@ function getInt(x) {
 }
 function defaultImageLoader(loaderProps) {
     var ref;
-    const loaderKey = ((ref = loaderProps.config) === null || ref === void 0 ? void 0 : ref.loader) || "default";
+    const loaderKey = ((ref = loaderProps.config) == null ? void 0 : ref.loader) || "default";
     const load = loaders.get(loaderKey);
     if (load) {
         return load(loaderProps);
@@ -548,7 +544,7 @@ function handleLoading(img, src, layout, placeholder, onLoadingCompleteRef, setB
         if (placeholder === "blur") {
             setBlurComplete(true);
         }
-        if (onLoadingCompleteRef === null || onLoadingCompleteRef === void 0 ? void 0 : onLoadingCompleteRef.current) {
+        if (onLoadingCompleteRef == null ? void 0 : onLoadingCompleteRef.current) {
             const { naturalWidth , naturalHeight  } = img;
             // Pass back read-only primitive values but not the
             // underlying DOM element because it could be misused.
@@ -561,7 +557,7 @@ function handleLoading(img, src, layout, placeholder, onLoadingCompleteRef, setB
     });
 }
 const ImageElement = (_param)=>{
-    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible , noscriptSizes  } = _param, rest = _objectWithoutProperties(_param, [
+    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible , noscriptSizes  } = _param, rest = _objectWithoutPropertiesLoose(_param, [
         "imgAttributes",
         "heightInt",
         "widthInt",
@@ -595,10 +591,10 @@ const ImageElement = (_param)=>{
         className: className,
         // @ts-ignore - TODO: upgrade to `@types/react@17`
         loading: layout === "raw" ? loading : undefined,
-        style: _objectSpread({}, imgStyle, blurStyle),
+        style: _extends({}, imgStyle, blurStyle),
         ref: (0, _react).useCallback((img)=>{
             setIntersection(img);
-            if (img === null || img === void 0 ? void 0 : img.complete) {
+            if (img == null ? void 0 : img.complete) {
                 handleLoading(img, srcString, layout, placeholder, onLoadingCompleteRef, setBlurComplete);
             }
         }, [
@@ -701,7 +697,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 /***/ 5675:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__(9749)
+module.exports = __webpack_require__(8045)
 
 
 /***/ })

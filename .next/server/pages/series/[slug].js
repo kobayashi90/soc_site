@@ -5,7 +5,7 @@ exports.id = 9861;
 exports.ids = [9861];
 exports.modules = {
 
-/***/ 7153:
+/***/ 3946:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -30,9 +30,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2102);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(599);
-/* harmony import */ var _styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(4155);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1454);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1331);
+/* harmony import */ var _styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5841);
 /* harmony import */ var _styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_styles_AlbumBoxes_module_scss__WEBPACK_IMPORTED_MODULE_10__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__]);
 _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
@@ -145,7 +145,7 @@ function AlbumBox(props) {
 }
 const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(id, "series")}`;
 function SeriesDetail(props) {
-    const { slug: slug1 , seriesOne , imageUrl  } = props;
+    const { slug , seriesOne , imageUrl  } = props;
     const { headerColor  } = seriesOne;
     const gameList = [
         ...seriesOne.games
@@ -175,7 +175,7 @@ function SeriesDetail(props) {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:url",
-                        content: `/series/${slug1}`
+                        content: `/series/${slug}`
                     }, "url"),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "theme-color",
@@ -210,7 +210,7 @@ function SeriesDetail(props) {
                                     placeholder: "blur",
                                     blurDataURL: seriesOne.placeholder,
                                     alt: seriesOne.name,
-                                    src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug1, "series")
+                                    src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug, "series")
                                 })
                             })
                         })
@@ -483,7 +483,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 1292:
+/***/ 5874:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -588,7 +588,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,9505,1664,599,2102,4155], () => (__webpack_exec__(7153)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,2952,1664,1331,1454,5841], () => (__webpack_exec__(3946)));
 module.exports = __webpack_exports__;
 
 })();

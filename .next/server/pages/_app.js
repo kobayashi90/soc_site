@@ -166,7 +166,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 1292:
+/***/ 5874:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -306,7 +306,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,9505,1664,599,2102,9738,2225,7119], () => (__webpack_exec__(8484)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,2952,1664,1331,1454,5043,923,3398], () => (__webpack_exec__(8510)));
 module.exports = __webpack_exports__;
 
 })();

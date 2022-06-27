@@ -5,7 +5,7 @@ exports.id = 4518;
 exports.ids = [4518];
 exports.modules = {
 
-/***/ 9601:
+/***/ 7426:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -26,9 +26,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(684);
 /* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9675);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9738);
-/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3551);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7352);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5043);
+/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9324);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_8__]);
 _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -165,7 +165,7 @@ function AdminUser() {
     });
 };
 function UserRow(props) {
-    const { username , roles: roles1 , roleList , refetch  } = props;
+    const { username , roles , roleList , refetch  } = props;
     const [update, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(_apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
   mutation updateUserRoles($username: String!, $roles: [String]!){
     updateUserRoles(username: $username, roles: $roles)
@@ -255,7 +255,7 @@ function UserRow(props) {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
                             loading: loading,
                             onChange: (result)=>handleUpdate(result),
-                            defaultValue: roles1.map(({ name  })=>({
+                            defaultValue: roles.map(({ name  })=>({
                                     label: name,
                                     value: name
                                 })),
@@ -277,7 +277,7 @@ function UserRow(props) {
         ]
     });
 }
-function RoleRow({ name , permissions: permissions1 , permissionList  }) {
+function RoleRow({ name , permissions , permissionList  }) {
     const nameRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const permRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(()=>Array(permissionList.length).fill().map(()=>/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)()), [
         permissionList
@@ -346,7 +346,7 @@ function RoleRow({ name , permissions: permissions1 , permissionList  }) {
                         ref: permRefs[i],
                         type: "checkbox",
                         className: "m-auto",
-                        defaultChecked: permissions1.includes(p)
+                        defaultChecked: permissions.includes(p)
                     })
                 }, p)),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("td", {
@@ -544,7 +544,7 @@ module.exports = require("slugify");
 
 /***/ }),
 
-/***/ 1454:
+/***/ 5822:
 /***/ ((module) => {
 
 module.exports = import("iron-session");;
@@ -565,7 +565,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,7014,599,9738,589,3551], () => (__webpack_exec__(9601)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,9463,1331,5043,9665,9324], () => (__webpack_exec__(7426)));
 module.exports = __webpack_exports__;
 
 })();

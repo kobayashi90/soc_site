@@ -5,7 +5,7 @@ exports.id = 660;
 exports.ids = [660];
 exports.modules = {
 
-/***/ 7081:
+/***/ 3105:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -20,34 +20,64 @@ var _constants = __webpack_require__(6724);
 var _getPageFiles = __webpack_require__(4140);
 var _utils = __webpack_require__(6368);
 var _htmlescape = __webpack_require__(9716);
-var _script = _interopRequireDefault(__webpack_require__(3573));
+var _script = _interopRequireDefault(__webpack_require__(699));
 var _isError = _interopRequireDefault(__webpack_require__(676));
 var _htmlContext = __webpack_require__(8743);
+class Document extends _react.Component {
+    /**
+   * `getInitialProps` hook returns the context object with the addition of `renderPage`.
+   * `renderPage` callback executes `React` rendering logic synchronously to support server-rendering wrappers
+   */ static getInitialProps(ctx) {
+        return ctx.defaultGetInitialProps(ctx);
+    }
+    render() {
+        return /*#__PURE__*/ _react.default.createElement(Html, null, /*#__PURE__*/ _react.default.createElement(Head, null), /*#__PURE__*/ _react.default.createElement("body", null, /*#__PURE__*/ _react.default.createElement(Main, null), /*#__PURE__*/ _react.default.createElement(NextScript, null)));
+    }
+}
+exports["default"] = Document;
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         default: obj
     };
 }
+function _getRequireWildcardCache() {
+    if (typeof WeakMap !== "function") return null;
+    var cache = new WeakMap();
+    _getRequireWildcardCache = function() {
+        return cache;
+    };
+    return cache;
+}
 function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
         return obj;
-    } else {
-        var newObj = {};
-        if (obj != null) {
-            for(var key in obj){
-                if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                    var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};
-                    if (desc.get || desc.set) {
-                        Object.defineProperty(newObj, key, desc);
-                    } else {
-                        newObj[key] = obj[key];
-                    }
-                }
+    }
+    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
+        return {
+            default: obj
+        };
+    }
+    var cache = _getRequireWildcardCache();
+    if (cache && cache.has(obj)) {
+        return cache.get(obj);
+    }
+    var newObj = {};
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj){
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+            if (desc && (desc.get || desc.set)) {
+                Object.defineProperty(newObj, key, desc);
+            } else {
+                newObj[key] = obj[key];
             }
         }
-        newObj.default = obj;
-        return newObj;
     }
+    newObj.default = obj;
+    if (cache) {
+        cache.set(obj, newObj);
+    }
+    return newObj;
 }
 function getDocumentFiles(buildManifest, pathname, inAmpMode) {
     const sharedFiles = (0, _getPageFiles).getPageFiles(buildManifest, "/_app");
@@ -91,7 +121,7 @@ function getPreNextWorkerScripts(context, props) {
         // Check to see if the user has defined their own Partytown configuration
         const userDefinedConfig = children.find((child)=>{
             var ref, ref1;
-            return hasComponentProps(child) && (child === null || child === void 0 ? void 0 : (ref = child.props) === null || ref === void 0 ? void 0 : (ref1 = ref.dangerouslySetInnerHTML) === null || ref1 === void 0 ? void 0 : ref1.__html.length) && "data-partytown-config" in child.props;
+            return hasComponentProps(child) && (child == null ? void 0 : (ref = child.props) == null ? void 0 : (ref1 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref1.__html.length) && "data-partytown-config" in child.props;
         });
         return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !userDefinedConfig && /*#__PURE__*/ _react.default.createElement("script", {
             "data-partytown-config": "",
@@ -149,7 +179,7 @@ function getPreNextScripts(context, props) {
         var _defer;
         return /*#__PURE__*/ _react.default.createElement("script", Object.assign({}, scriptProps, {
             key: scriptProps.src || index,
-            defer: (_defer = scriptProps.defer) !== null && _defer !== void 0 ? _defer : !disableOptimizedLoading,
+            defer: (_defer = scriptProps.defer) != null ? _defer : !disableOptimizedLoading,
             nonce: props.nonce,
             "data-nscript": "beforeInteractive",
             crossOrigin: props.crossOrigin || crossOrigin
@@ -175,7 +205,7 @@ function getScripts(context, props, files) {
     var ref;
     const { assetPrefix , buildManifest , isDevelopment , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin ,  } = context;
     const normalScripts = files.allFiles.filter((file)=>file.endsWith(".js"));
-    const lowPriorityScripts = (ref = buildManifest.lowPriorityFiles) === null || ref === void 0 ? void 0 : ref.filter((file)=>file.endsWith(".js"));
+    const lowPriorityScripts = (ref = buildManifest.lowPriorityFiles) == null ? void 0 : ref.filter((file)=>file.endsWith(".js"));
     return [
         ...normalScripts,
         ...lowPriorityScripts
@@ -190,18 +220,6 @@ function getScripts(context, props, files) {
         });
     });
 }
-class Document extends _react.Component {
-    /**
-   * `getInitialProps` hook returns the context object with the addition of `renderPage`.
-   * `renderPage` callback executes `React` rendering logic synchronously to support server-rendering wrappers
-   */ static getInitialProps(ctx) {
-        return ctx.defaultGetInitialProps(ctx);
-    }
-    render() {
-        return /*#__PURE__*/ _react.default.createElement(Html, null, /*#__PURE__*/ _react.default.createElement(Head, null), /*#__PURE__*/ _react.default.createElement("body", null, /*#__PURE__*/ _react.default.createElement(Main, null), /*#__PURE__*/ _react.default.createElement(NextScript, null)));
-    }
-}
-exports["default"] = Document;
 // Add a special property to the built-in `Document` component so later we can
 // identify if a user customized `Document` is used or not.
 const InternalFunctionDocument = function InternalFunctionDocument() {
@@ -224,7 +242,7 @@ function AmpStyles({ styles  }) {
     if (styles.props && Array.isArray(styles.props.children)) {
         const hasStyles = (el)=>{
             var ref, ref2;
-            return el === null || el === void 0 ? void 0 : (ref = el.props) === null || ref === void 0 ? void 0 : (ref2 = ref.dangerouslySetInnerHTML) === null || ref2 === void 0 ? void 0 : ref2.__html;
+            return el == null ? void 0 : (ref = el.props) == null ? void 0 : (ref2 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref2.__html;
         };
         // @ts-ignore Property 'props' does not exist on type ReactElement
         styles.props.children.forEach((child)=>{
@@ -243,6 +261,7 @@ function AmpStyles({ styles  }) {
     });
 }
 class Head extends _react.Component {
+    static contextType = _htmlContext.HtmlContext;
     getCssLinks(files) {
         const { assetPrefix , devOnlyCacheBusterQueryString , dynamicImports , crossOrigin , optimizeCss , optimizeFonts ,  } = this.context;
         const cssFiles = files.allFiles.filter((f)=>f.endsWith(".css"));
@@ -391,9 +410,9 @@ class Head extends _react.Component {
     makeStylesheetInert(node) {
         return _react.default.Children.map(node, (c)=>{
             var ref5, ref3;
-            if ((c === null || c === void 0 ? void 0 : c.type) === "link" && (c === null || c === void 0 ? void 0 : (ref5 = c.props) === null || ref5 === void 0 ? void 0 : ref5.href) && _constants.OPTIMIZED_FONT_PROVIDERS.some(({ url  })=>{
+            if ((c == null ? void 0 : c.type) === "link" && (c == null ? void 0 : (ref5 = c.props) == null ? void 0 : ref5.href) && _constants.OPTIMIZED_FONT_PROVIDERS.some(({ url  })=>{
                 var ref, ref4;
-                return c === null || c === void 0 ? void 0 : (ref = c.props) === null || ref === void 0 ? void 0 : (ref4 = ref.href) === null || ref4 === void 0 ? void 0 : ref4.startsWith(url);
+                return c == null ? void 0 : (ref = c.props) == null ? void 0 : (ref4 = ref.href) == null ? void 0 : ref4.startsWith(url);
             })) {
                 const newProps = {
                     ...c.props || {},
@@ -401,12 +420,12 @@ class Head extends _react.Component {
                     href: undefined
                 };
                 return /*#__PURE__*/ _react.default.cloneElement(c, newProps);
-            } else if (c === null || c === void 0 ? void 0 : (ref3 = c.props) === null || ref3 === void 0 ? void 0 : ref3.children) {
-                const newProps = {
+            } else if (c == null ? void 0 : (ref3 = c.props) == null ? void 0 : ref3.children) {
+                const newProps1 = {
                     ...c.props || {},
                     children: this.makeStylesheetInert(c.props.children)
                 };
-                return /*#__PURE__*/ _react.default.cloneElement(c, newProps);
+                return /*#__PURE__*/ _react.default.cloneElement(c, newProps1);
             }
             return c;
         }).filter(Boolean);
@@ -522,9 +541,9 @@ class Head extends _react.Component {
             rel: "amphtml",
             href: canonicalBase + getAmpPath(ampPath, dangerousAsPath)
         }), this.getBeforeInteractiveInlineScripts(), !optimizeCss && this.getCssLinks(files), !optimizeCss && /*#__PURE__*/ _react.default.createElement("noscript", {
-            "data-n-css": (_nonce = this.props.nonce) !== null && _nonce !== void 0 ? _nonce : ""
+            "data-n-css": (_nonce = this.props.nonce) != null ? _nonce : ""
         }), !disableRuntimeJS && !disableJsPreload && this.getPreloadDynamicChunks(), !disableRuntimeJS && !disableJsPreload && this.getPreloadMainLinks(files), !disableOptimizedLoading && !disableRuntimeJS && this.getPolyfillScripts(), !disableOptimizedLoading && !disableRuntimeJS && this.getPreNextScripts(), !disableOptimizedLoading && !disableRuntimeJS && this.getDynamicChunks(files), !disableOptimizedLoading && !disableRuntimeJS && this.getScripts(files), optimizeCss && this.getCssLinks(files), optimizeCss && /*#__PURE__*/ _react.default.createElement("noscript", {
-            "data-n-css": (_nonce1 = this.props.nonce) !== null && _nonce1 !== void 0 ? _nonce1 : ""
+            "data-n-css": (_nonce1 = this.props.nonce) != null ? _nonce1 : ""
         }), this.context.isDevelopment && // ordering matches production
         // (by default, style-loader injects at the bottom of <head />)
         /*#__PURE__*/ _react.default.createElement("noscript", {
@@ -533,7 +552,6 @@ class Head extends _react.Component {
     }
 }
 exports.Head = Head;
-Head.contextType = _htmlContext.HtmlContext;
 function Main() {
     const { docComponentsRendered  } = (0, _react).useContext(_htmlContext.HtmlContext);
     docComponentsRendered.Main = true;
@@ -541,6 +559,7 @@ function Main() {
     return /*#__PURE__*/ _react.default.createElement("next-js-internal-body-render-target", null);
 }
 class NextScript extends _react.Component {
+    static contextType = _htmlContext.HtmlContext;
     getDynamicChunks(files) {
         return getDynamicChunks(this.context, this.props, files);
     }
@@ -619,7 +638,6 @@ class NextScript extends _react.Component {
     }
 }
 exports.NextScript = NextScript;
-NextScript.contextType = _htmlContext.HtmlContext;
 function getAmpPath(ampPath, asPath) {
     return ampPath || `${asPath}${asPath.includes("?") ? "&" : "?"}amp=1`;
 }
@@ -648,22 +666,22 @@ function prettyBytes(number, options) {
     }
     options = Object.assign({}, options);
     if (options.signed && number === 0) {
-        return ' 0 B';
+        return " 0 B";
     }
     const isNegative = number < 0;
-    const prefix = isNegative ? '-' : options.signed ? '+' : '';
+    const prefix = isNegative ? "-" : options.signed ? "+" : "";
     if (isNegative) {
         number = -number;
     }
     if (number < 1) {
         const numberString = toLocaleString(number, options.locale);
-        return prefix + numberString + ' B';
+        return prefix + numberString + " B";
     }
     const exponent = Math.min(Math.floor(Math.log10(number) / 3), UNITS.length - 1);
     number = Number((number / Math.pow(1000, exponent)).toPrecision(3));
     const numberString = toLocaleString(number, options.locale);
     const unit = UNITS[exponent];
-    return prefix + numberString + ' ' + unit;
+    return prefix + numberString + " " + unit;
 }
 /*
 MIT License
@@ -676,15 +694,15 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */ const UNITS = [
-    'B',
-    'kB',
-    'MB',
-    'GB',
-    'TB',
-    'PB',
-    'EB',
-    'ZB',
-    'YB'
+    "B",
+    "kB",
+    "MB",
+    "GB",
+    "TB",
+    "PB",
+    "EB",
+    "ZB",
+    "YB"
 ];
 /*
 Formats the given number using `Number#toLocaleString`.
@@ -693,7 +711,7 @@ Formats the given number using `Number#toLocaleString`.
 - If no value for locale is specified, the number is returned unmodified.
 */ const toLocaleString = (number, locale)=>{
     let result = number;
-    if (typeof locale === 'string') {
+    if (typeof locale === "string") {
         result = number.toLocaleString(locale);
     } else if (locale === true) {
         result = number.toLocaleString();
@@ -768,7 +786,7 @@ module.exports = require("react");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,9505], () => (__webpack_exec__(7081)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,2952], () => (__webpack_exec__(3105)));
 module.exports = __webpack_exports__;
 
 })();

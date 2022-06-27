@@ -5,7 +5,7 @@ exports.id = 2532;
 exports.ids = [2532];
 exports.modules = {
 
-/***/ 5542:
+/***/ 1764:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -28,9 +28,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5675);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6112);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2102);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(599);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9578);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1454);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1331);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__]);
 _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -98,17 +98,17 @@ async function /* getStaticProps */ getServerSideProps({ params  }) {
 const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(id, "game")}`;
 function GameDetail(props) {
     const { game , imageUrl  } = props;
-    const { slug: slug1 , name: name1 , releaseDate , publishers , platforms , series , albums , placeholder , headerColor  } = game;
+    const { slug , name , releaseDate , publishers , platforms , series , albums , placeholder , headerColor  } = game;
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Container, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: name1
+                        children: name
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:url",
-                        content: `/game/${slug1}`
+                        content: `/game/${slug}`
                     }, "url"),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "theme-color",
@@ -116,7 +116,7 @@ function GameDetail(props) {
                     }, "color"),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:title",
-                        content: name1
+                        content: name
                     }, "title"),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:description",
@@ -146,8 +146,8 @@ function GameDetail(props) {
                                     objectFit: "contain",
                                     placeholder: "blur",
                                     blurDataURL: placeholder,
-                                    alt: name1,
-                                    src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug1, "game")
+                                    alt: name,
+                                    src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(slug, "game")
                                 })
                             })
                         })
@@ -163,7 +163,7 @@ function GameDetail(props) {
                                         md: 12,
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                                             className: "text-center ost-title",
-                                            children: name1
+                                            children: name
                                         })
                                     })
                                 }),
@@ -446,7 +446,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 1292:
+/***/ 5874:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -551,7 +551,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,9505,1664,599,2102,4155,6112], () => (__webpack_exec__(5542)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,2952,1664,1331,1454,5841,9578], () => (__webpack_exec__(1764)));
 module.exports = __webpack_exports__;
 
 })();

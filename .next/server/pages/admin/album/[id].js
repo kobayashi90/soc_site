@@ -5,7 +5,7 @@ exports.id = 2216;
 exports.ids = [2216];
 exports.modules = {
 
-/***/ 9884:
+/***/ 6947:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -24,15 +24,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1187);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_session__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9503);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9675);
-/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8046);
-/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2628);
-/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(2446);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2102);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(599);
+/* harmony import */ var _components_session__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1873);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7352);
+/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4978);
+/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(7065);
+/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1292);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(1454);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1331);
+/* harmony import */ var _components_RequestCheck__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(5994);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(5043);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_session__WEBPACK_IMPORTED_MODULE_5__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__]);
 ([_components_session__WEBPACK_IMPORTED_MODULE_5__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
+
 
 
 
@@ -171,7 +175,8 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
       $related: [ID],
       $stores: [StoreInput],
       $vgmdb: String,
-      $status: String!
+      $status: String!,
+      $request: ID
     ){
       updateAlbum(
         id: $id,
@@ -192,10 +197,28 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
         related: $related,
         stores: $stores,
         vgmdb: $vgmdb,
-        status: $status
+        status: $status,
+        request: $request
       ){ id }
     } 
   `;
+const vgmQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
+  query ($search: String!){
+    vgmdb(search: $search){
+      vgmdbUrl
+      name
+      subTitle
+      releaseDate
+      artists
+      categories
+      classifications
+      tracklist {
+        number
+        body
+      }
+    }
+  }
+`;
 function EditOst(props) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Container, {
         fluid: true,
@@ -221,8 +244,10 @@ function EditOst(props) {
     });
 };
 function EditOstForm({ id , album , classes , categories  }) {
+    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.classes || []);
+    const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.categories || []);
+    const { 0: vgmTracklist , 1: setVgmTracklist  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.discs || []);
     const [mutate, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(mutation);
-    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useQuery)(queryDownload, {
         variables: {
@@ -236,6 +261,12 @@ function EditOstForm({ id , album , classes , categories  }) {
         id,
         refetch
     ]);
+    const [getVgmdb, { loading: loadingFetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useLazyQuery)(vgmQuery);
+    const titleRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const releaseRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const vgmdbRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const subTitleRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const artistsRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     function handleSubmitForm(e) {
         e.persist();
         e.preventDefault();
@@ -252,6 +283,25 @@ function EditOstForm({ id , album , classes , categories  }) {
                 autoclose: false
             });
         });
+    }
+    async function fetchInfo() {
+        const { data  } = await getVgmdb({
+            variables: {
+                search: vgmdbRef.current.value
+            }
+        });
+        if (data?.vgmdb) {
+            const { vgmdb  } = data;
+            const { vgmdbUrl , name , subTitle , releaseDate , artists , categories , classifications , tracklist  } = vgmdb;
+            releaseRef.current.value = releaseDate;
+            vgmdbRef.current.value = vgmdbUrl;
+            titleRef.current.value = name;
+            subTitleRef.current.value = subTitle;
+            artistsRef.current.value = artists.join(",");
+            setClasses(categories);
+            setClassifications(classifications);
+            setVgmTracklist(tracklist);
+        }
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
@@ -281,6 +331,8 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Title:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
+                                            ref: titleRef,
+                                            h: true,
                                             required: true,
                                             type: "text",
                                             name: "title",
@@ -298,6 +350,7 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Sub Title:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
+                                            ref: subTitleRef,
                                             as: "textarea",
                                             name: "subTitle",
                                             defaultValue: album.subTitle
@@ -314,6 +367,7 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Release Date:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
+                                            ref: releaseRef,
                                             required: true,
                                             type: "date",
                                             name: "releaseDate",
@@ -370,97 +424,21 @@ function EditOstForm({ id , album , classes , categories  }) {
                             })
                         })
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
-                            md: 12,
-                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
-                                        htmlFor: "title",
-                                        children: "Description:"
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
-                                        as: "textarea",
-                                        name: "description",
-                                        defaultValue: album.description
-                                    })
-                                ]
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
-                        className: "style2 style-white"
-                    }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
                         className: "mb-3",
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
-                                md: 4,
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
-                                            htmlFor: "artists",
-                                            children: "Artists:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
-                                            name: "artists",
-                                            as: "textarea",
-                                            defaultValue: album.artists.map((a)=>a.name).join(",")
-                                        })
-                                    ]
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
-                                md: 4,
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
-                                            htmlFor: "classes",
-                                            children: "Classification:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
-                                            defaultValue: album.classes,
-                                            required: true,
-                                            name: "classes",
-                                            options: classes,
-                                            onChange: (values)=>setClasses(values && values.length === 1 ? values[0].label : "")
-                                        })
-                                    ]
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
-                                md: 4,
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
-                                            htmlFor: "categories",
-                                            children: "Categories:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
-                                            defaultValue: album.categories,
-                                            required: true,
-                                            name: "categories",
-                                            options: categories
-                                        })
-                                    ]
-                                })
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
                                 md: 6,
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
-                                            htmlFor: "vgmdb",
-                                            children: "VGMdb:"
+                                            htmlFor: "title",
+                                            children: "Description:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
-                                            defaultValue: album.vgmdb,
-                                            name: "vgmdb",
-                                            type: "text"
+                                            as: "textarea",
+                                            name: "description",
+                                            defaultValue: album.description
                                         })
                                     ]
                                 })
@@ -483,6 +461,98 @@ function EditOstForm({ id , album , classes , categories  }) {
                             })
                         ]
                     }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
+                                md: 6,
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
+                                            htmlFor: "vgmdb",
+                                            children: "VGMdb:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
+                                            ref: vgmdbRef,
+                                            defaultValue: album.vgmdb,
+                                            name: "vgmdb",
+                                            type: "text"
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
+                                className: "mt-auto",
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_13__/* .ButtonLoader */ .l, {
+                                    color: "primary",
+                                    loading: loadingFetch,
+                                    onClick: fetchInfo,
+                                    children: "Fetch info"
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {})
+                        ]
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
+                        className: "style2 style-white"
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
+                        className: "mb-3",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
+                                md: 4,
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
+                                            htmlFor: "artists",
+                                            children: "Artists:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.FormControl, {
+                                            ref: artistsRef,
+                                            name: "artists",
+                                            as: "textarea",
+                                            defaultValue: album.artists.map((a)=>a.name).join(",")
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
+                                md: 4,
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
+                                            htmlFor: "classes",
+                                            children: "Classification:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
+                                            defaultValue: album.classes,
+                                            required: true,
+                                            name: "classes",
+                                            options: classes,
+                                            onChange: (values)=>setClasses(values)
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
+                                md: 4,
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
+                                            htmlFor: "categories",
+                                            children: "Categories:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
+                                            required: true,
+                                            name: "categories",
+                                            defaultValue: currentClassifications,
+                                            options: categories,
+                                            onChange: (values)=>setClassifications(values)
+                                        })
+                                    ]
+                                })
+                            })
+                        ]
+                    }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                         className: "style2 style-white"
                     }),
@@ -497,8 +567,10 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Games:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .GameSelector */ .D_, {
-                                            defaultValue: album.games,
-                                            name: "games"
+                                            options: {
+                                                defaultValue: album.games,
+                                                name: "games"
+                                            }
                                         })
                                     ]
                                 })
@@ -512,10 +584,11 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .PlatformSelector */ .J3, {
-                                            classes: currentClasses,
-                                            defaultValue: album.platforms,
-                                            name: "platforms",
-                                            onChange: (values)=>setClasses(values.map((v)=>v.value))
+                                            classes: currentClasses.map((c)=>c.value),
+                                            options: {
+                                                defaultValue: album.platforms,
+                                                name: "platforms"
+                                            }
                                         })
                                     ]
                                 })
@@ -529,8 +602,10 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Animations:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .AnimSelector */ .S7, {
-                                            defaultValue: album.animations,
-                                            name: "animations"
+                                            options: {
+                                                defaultValue: album.animations,
+                                                name: "animations"
+                                            }
                                         })
                                     ]
                                 })
@@ -550,8 +625,10 @@ function EditOstForm({ id , album , classes , categories  }) {
                                         children: "Related OSTs:"
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .AlbumSelector */ .Q$, {
-                                        defaultValue: album.related,
-                                        name: "related"
+                                        options: {
+                                            defaultValue: album.related,
+                                            name: "related"
+                                        }
                                     })
                                 ]
                             })
@@ -561,13 +638,19 @@ function EditOstForm({ id , album , classes , categories  }) {
                         className: "style2 style-white"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_SharedForms__WEBPACK_IMPORTED_MODULE_7__/* .DiscList */ .r8, {
-                        defaults: album.discs
+                        defaults: vgmTracklist
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                         className: "style2 style-white"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_SharedForms__WEBPACK_IMPORTED_MODULE_7__/* .StoreDownloads */ .rL, {
                         defaults: album.stores
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
+                        className: "style2 style-white"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_RequestCheck__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
+                        element: vgmdbRef.current
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                         className: "style2 style-white"
@@ -709,7 +792,7 @@ module.exports = import("apollo-upload-client");;
 
 /***/ }),
 
-/***/ 1454:
+/***/ 5822:
 /***/ ((module) => {
 
 module.exports = import("iron-session");;
@@ -723,7 +806,7 @@ module.exports = import("iron-session");;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,7014,599,2102,2225,589,8046], () => (__webpack_exec__(9884)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,9463,1331,1454,5043,923,9665,683], () => (__webpack_exec__(6947)));
 module.exports = __webpack_exports__;
 
 })();

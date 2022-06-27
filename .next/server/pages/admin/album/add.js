@@ -5,7 +5,7 @@ exports.id = 2490;
 exports.ids = [2490];
 exports.modules = {
 
-/***/ 2628:
+/***/ 7065:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -17,7 +17,7 @@ exports.modules = {
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var svg_loaders_svg_smil_loaders_oval_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5630);
+/* harmony import */ var svg_loaders_svg_smil_loaders_oval_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9437);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5675);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_4__);
 
@@ -49,7 +49,7 @@ function SubmitButton(props) {
 
 /***/ }),
 
-/***/ 7287:
+/***/ 7777:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -68,14 +68,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1187);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9675);
-/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8046);
-/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2628);
-/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3551);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(599);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9738);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7352);
+/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4978);
+/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7065);
+/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9324);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1331);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5043);
+/* harmony import */ var _components_RequestCheck__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(5994);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_8__]);
 _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -138,7 +140,8 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
       $related: [ID],
       $stores: [StoreInput],
       $vgmdb: String,
-      $status: String!
+      $status: String!,
+      $request: ID
     ){
       createAlbum(
         title: $title,
@@ -158,7 +161,8 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
         related: $related,
         stores: $stores,
         vgmdb: $vgmdb,
-        status: $status
+        status: $status,
+        request: $request
       )
       {
         id
@@ -188,7 +192,7 @@ function AddAlbum(props) {
     const { 0: vgmTracklist , 1: setVgmTracklist  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)();
     const { data: classData = {}  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(queryClasses);
     const [getVgmdb, { loading: loadingFetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(vgmQuery);
-    const { classes =[] , categories: categories1 = []  } = classData;
+    const { classes =[] , categories =[]  } = classData;
     const titleRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const releaseRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const vgmdbRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
@@ -470,7 +474,7 @@ function AddAlbum(props) {
                                                     value: c,
                                                     label: c
                                                 })),
-                                            options: categories1.map((c)=>({
+                                            options: categories.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
                                                 })),
@@ -496,7 +500,9 @@ function AddAlbum(props) {
                                             children: "Games:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .GameSelector */ .D_, {
-                                            name: "games"
+                                            options: {
+                                                name: "games"
+                                            }
                                         })
                                     ]
                                 })
@@ -511,7 +517,9 @@ function AddAlbum(props) {
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .PlatformSelector */ .J3, {
                                             classes: currentClasses,
-                                            name: "platforms"
+                                            options: {
+                                                name: "platforms"
+                                            }
                                         })
                                     ]
                                 })
@@ -525,7 +533,9 @@ function AddAlbum(props) {
                                             children: "Animations:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .AnimSelector */ .S7, {
-                                            name: "animations"
+                                            options: {
+                                                name: "animations"
+                                            }
                                         })
                                     ]
                                 })
@@ -545,7 +555,9 @@ function AddAlbum(props) {
                                         children: "Related OSTs:"
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .AlbumSelector */ .Q$, {
-                                        name: "related"
+                                        options: {
+                                            name: "related"
+                                        }
                                     })
                                 ]
                             })
@@ -565,9 +577,20 @@ function AddAlbum(props) {
                         className: "style2 style-white"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_SharedForms__WEBPACK_IMPORTED_MODULE_6__/* .Downloads */ .ie, {}),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
+                        className: "style2 style-white"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_RequestCheck__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {
+                        element: vgmdbRef.current
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
+                        className: "style2 style-white"
+                    }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                        className: "mb-2",
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
-                            className: "m-auto",
+                            xs: "auto",
+                            className: "pe-0",
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_SubmitButton__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {
                                 loading: loading,
                                 type: "submit",
@@ -699,7 +722,7 @@ module.exports = require("slugify");
 
 /***/ }),
 
-/***/ 1454:
+/***/ 5822:
 /***/ ((module) => {
 
 module.exports = import("iron-session");;
@@ -720,7 +743,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,7014,599,9738,589,3551,8046], () => (__webpack_exec__(7287)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,9463,1331,5043,9665,9324,683], () => (__webpack_exec__(7777)));
 module.exports = __webpack_exports__;
 
 })();

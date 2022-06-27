@@ -4,7 +4,7 @@ exports.id = 3847;
 exports.ids = [3847,2888];
 exports.modules = {
 
-/***/ 7689:
+/***/ 4979:
 /***/ ((module) => {
 
 // Exports
@@ -20,7 +20,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 1525:
+/***/ 8275:
 /***/ ((module) => {
 
 // Exports
@@ -32,7 +32,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 5541:
+/***/ 6080:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -60,17 +60,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(7689);
+/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(4979);
 /* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(1525);
+/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(8275);
 /* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(2446);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(6112);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(599);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(9738);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(2102);
-/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(9139);
-/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6974);
+/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1292);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9578);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1331);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(5043);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(1454);
+/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(6658);
+/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(2729);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_15__]);
 ([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_15__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
@@ -193,8 +193,8 @@ query downloads ($id: ID!) {
     rateAlbum(ostId: $ostId, score: $score)
   }
 `;
-function StarCounter(props1) {
-    const { score: initialScore , users: initialUsers , ostId  } = props1;
+function StarCounter(props) {
+    const { score: initialScore , users: initialUsers , ostId  } = props;
     const initial = {
         avgRating: {
             score: initialScore,
@@ -308,15 +308,15 @@ async function /* getStaticProps */ getServerSideProps(context) {
     };
 }
 const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_11__/* .getImageUrl */ .Jn)(id)}`;
-const favoriteTemplate = (query1)=>_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
+const favoriteTemplate = (query)=>_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
   mutation ($ostId: String!) {
-    ${query1}Favorite(ostId: $ostId)
+    ${query}Favorite(ostId: $ostId)
   }
 `;
 const addFavorite = favoriteTemplate("add");
 const removeFavorite = favoriteTemplate("remove");
 function Page(props) {
-    const { id: id1 , album , imageUrl  } = props;
+    const { id , album , imageUrl  } = props;
     const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
@@ -331,10 +331,10 @@ function Page(props) {
 `;
     const { data: dataFavorite , refetch: refetchFavorite  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(getFavorite);
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetchFavorite({
-            ostId: id1
+            ostId: id
         }), [
         user,
-        id1,
+        id,
         refetchFavorite
     ]);
     function submitFavorite() {
@@ -342,7 +342,7 @@ function Page(props) {
         client.mutate({
             mutation: dataFavorite.album.isFavorite ? removeFavorite : addFavorite,
             variables: {
-                ostId: id1
+                ostId: id
             }
         }).then(()=>react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t(dataFavorite.album.isFavorite ? "Favorite_Added" : "Favorite_Removed"))).catch((err)=>{
             console.log(err);
@@ -676,7 +676,7 @@ function Page(props) {
                                                 className: "style-white w-100"
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DownloadList, {
-                                                id: id1,
+                                                id: id,
                                                 user: user,
                                                 t: t
                                             })
@@ -685,7 +685,7 @@ function Page(props) {
                                 ]
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
-                                ostId: id1,
+                                ostId: id,
                                 comments: album.comments
                             }),
                             album.related.length > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
@@ -804,8 +804,8 @@ function DownloadList(props) {
         }, di);
     });
 }
-function DirectButton(props2) {
-    const { directUrl  } = props2;
+function DirectButton(props) {
+    const { directUrl  } = props;
     const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
     const disabled = directUrl === "false";
     const renderTooltip = (props)=>disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Tooltip, {
@@ -1114,7 +1114,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 1292:
+/***/ 5874:
 /***/ ((module) => {
 
 "use strict";
@@ -1273,7 +1273,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [4686,1397,5675,9505,1664,599,2102,9738,2225,4155,7119,6112,9139], () => (__webpack_exec__(5541)));
+var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,2952,1664,1331,1454,5043,923,5841,3398,9578,3038], () => (__webpack_exec__(6080)));
 module.exports = __webpack_exports__;
 
 })();
