@@ -111,16 +111,16 @@ function AddAlbumPage() {
         ]
     });
 };
-const queryClasses = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
-      query {
-        categories {
-          name
-        }
-        classes {
-          name
-        }     
-      }
-    `;
+const queryCategories = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
+  query {
+    categories {
+      name
+    }
+    classifications {
+      name
+    }     
+  }
+`;
 const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
     mutation createAlbum(
       $title: String,
@@ -131,8 +131,8 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
       $description: String,
       $downloads: [DownloadInput],
       $artists: [String],
-      $classes: [String],
       $categories: [String],
+      $classifications: [String],
       $platforms: [ID],
       $games: [String],
       $animations: [ID],
@@ -152,8 +152,8 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
         description: $description,
         downloads: $downloads,
         artists: $artists,
-        classes: $classes,
         categories: $categories,
+        classifications: $classifications,
         platforms: $platforms,
         games: $games,
         animations: $animations
@@ -187,12 +187,12 @@ const vgmQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
   }
 `;
 function AddAlbum(props) {
-    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+    const { 0: currentCategories , 1: setCategories  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
     const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
     const { 0: vgmTracklist , 1: setVgmTracklist  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)();
-    const { data: classData = {}  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(queryClasses);
+    const { data: classData = {}  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(queryCategories);
     const [getVgmdb, { loading: loadingFetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(vgmQuery);
-    const { classes =[] , categories =[]  } = classData;
+    const { categories =[] , classifications =[]  } = classData;
     const titleRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const releaseRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const vgmdbRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
@@ -231,7 +231,7 @@ function AddAlbum(props) {
             titleRef.current.value = name;
             subTitleRef.current.value = subTitle;
             artistsRef.current.value = artists.join(",");
-            setClasses(categories);
+            setCategories(categories);
             setClassifications(classifications);
             setVgmTracklist(tracklist);
         }
@@ -440,21 +440,21 @@ function AddAlbum(props) {
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
-                                            htmlFor: "classes",
-                                            children: "Classification:"
+                                            htmlFor: "categories",
+                                            children: "Categories:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .SimpleSelector */ .d7, {
                                             required: true,
-                                            name: "classes",
-                                            defaultValue: currentClasses.map((c)=>({
+                                            name: "categories",
+                                            defaultValue: currentCategories.map((c)=>({
                                                     value: c,
                                                     label: c
                                                 })),
-                                            options: classes.map((c)=>({
+                                            options: categories.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
                                                 })),
-                                            onChange: (values)=>setClasses(values.map((v)=>v.value))
+                                            onChange: (values)=>setCategories(values.map((v)=>v.value))
                                         })
                                     ]
                                 })
@@ -464,17 +464,17 @@ function AddAlbum(props) {
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Group, {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
-                                            htmlFor: "categories",
-                                            children: "Categories:"
+                                            htmlFor: "classifications",
+                                            children: "Classifications:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .SimpleSelector */ .d7, {
                                             required: true,
-                                            name: "categories",
+                                            name: "classifications",
                                             defaultValue: currentClassifications.map((c)=>({
                                                     value: c,
                                                     label: c
                                                 })),
-                                            options: categories.map((c)=>({
+                                            options: classifications.map((c)=>({
                                                     value: c.name,
                                                     label: c.name
                                                 })),
@@ -516,7 +516,7 @@ function AddAlbum(props) {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .PlatformSelector */ .J3, {
-                                            classes: currentClasses,
+                                            categories: currentCategories,
                                             options: {
                                                 name: "platforms"
                                             }

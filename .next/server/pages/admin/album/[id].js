@@ -79,11 +79,11 @@ query Album ($id: ID!) {
       slug
       name
     }
-    classes {
+    categories {
       value: name
       label: name
     }
-    categories {
+    classifications {
       value: name
       label: name
     }
@@ -105,7 +105,7 @@ query Album ($id: ID!) {
     value: name
     label: name
   }
-  classes {
+  classifications {
     value: name
     label: name
   } 
@@ -139,7 +139,7 @@ const getServerSideProps = (0,_components_session__WEBPACK_IMPORTED_MODULE_5__/*
             id
         }
     });
-    const { album , categories , classes  } = data;
+    const { album , categories , classifications  } = data;
     if (album === null) return {
         redirect: {
             destination: "/404",
@@ -151,7 +151,7 @@ const getServerSideProps = (0,_components_session__WEBPACK_IMPORTED_MODULE_5__/*
             id,
             album,
             categories,
-            classes
+            classifications
         } /*, revalidate: 60 */ 
     };
 });
@@ -166,8 +166,8 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
       $description: String,
       $downloads: [DownloadInput],
       $artists: [String],
-      $classes: [String],
       $categories: [String],
+      $classifications: [String],
       $platforms: [ID],
       $games: [String],
       $animations: [ID],
@@ -188,8 +188,8 @@ const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
         description: $description,
         downloads: $downloads,
         artists: $artists,
-        classes: $classes,
         categories: $categories,
+        classifications: $classifications,
         platforms: $platforms,
         games: $games,
         animations: $animations
@@ -243,9 +243,9 @@ function EditOst(props) {
         })
     });
 };
-function EditOstForm({ id , album , classes , categories  }) {
-    const { 0: currentClasses , 1: setClasses  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.classes || []);
-    const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.categories || []);
+function EditOstForm({ id , album , categories , classifications  }) {
+    const { 0: currentCategories , 1: setCategories  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.categories || []);
+    const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.classifications || []);
     const { 0: vgmTracklist , 1: setVgmTracklist  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.discs || []);
     const [mutate, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(mutation);
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
@@ -298,7 +298,7 @@ function EditOstForm({ id , album , classes , categories  }) {
             titleRef.current.value = name;
             subTitleRef.current.value = subTitle;
             artistsRef.current.value = artists.join(",");
-            setClasses(categories);
+            setCategories(categories);
             setClassifications(classifications);
             setVgmTracklist(tracklist);
         }
@@ -520,15 +520,15 @@ function EditOstForm({ id , album , classes , categories  }) {
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
-                                            htmlFor: "classes",
-                                            children: "Classification:"
+                                            htmlFor: "categories",
+                                            children: "Categories:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
-                                            defaultValue: album.classes,
+                                            defaultValue: album.categories,
                                             required: true,
-                                            name: "classes",
-                                            options: classes,
-                                            onChange: (values)=>setClasses(values)
+                                            name: "categories",
+                                            options: categories,
+                                            onChange: (values)=>setCategories(values)
                                         })
                                     ]
                                 })
@@ -538,14 +538,14 @@ function EditOstForm({ id , album , classes , categories  }) {
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Group, {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Label, {
-                                            htmlFor: "categories",
-                                            children: "Categories:"
+                                            htmlFor: "classifications",
+                                            children: "Classifications:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .SimpleSelector */ .d7, {
                                             required: true,
-                                            name: "categories",
+                                            name: "classifications",
                                             defaultValue: currentClassifications,
-                                            options: categories,
+                                            options: classifications,
                                             onChange: (values)=>setClassifications(values)
                                         })
                                     ]
@@ -584,7 +584,7 @@ function EditOstForm({ id , album , classes , categories  }) {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_6__/* .PlatformSelector */ .J3, {
-                                            classes: currentClasses.map((c)=>c.value),
+                                            categories: currentCategories.map((c)=>c.value),
                                             options: {
                                                 defaultValue: album.platforms,
                                                 name: "platforms"

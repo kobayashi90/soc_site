@@ -235,7 +235,7 @@ function AlbumCount() {
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
     const query = _apollo_client__WEBPACK_IMPORTED_MODULE_4__.gql`query {
     albumCount
-    classes{
+    categories {
       name
       count
     }
@@ -261,7 +261,7 @@ function AlbumCount() {
                             data.albumCount
                         ]
                     }),
-                    data.classes.map(({ name , id , count  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
+                    data.categories.map(({ name , id , count  }, i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
                             className: "mt-2 text-center",
                             children: [
                                 t(`${name} Soundtracks`),

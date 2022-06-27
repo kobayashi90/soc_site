@@ -119,10 +119,10 @@ query ($id: ID!) {
       slug
       name
     }
-    classes {
+    categories {
       name
     }
-    categories {
+    classifications {
       name
     }
     stores {
@@ -464,8 +464,8 @@ function Page(props) {
                                                                             }),
                                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                                                                                 children: [
-                                                                                    album.classes.map(({ name  })=>t(`${name} Soundtrack`)).join(" & "),
-                                                                                    album.categories.map(({ name  })=>name).join(", ")
+                                                                                    album.categories.map(({ name  })=>t(`${name} Soundtrack`)).join(" & "),
+                                                                                    album.classifications.map(({ name  })=>name).join(", ")
                                                                                 ].filter((f)=>f !== "").join(" - ")
                                                                             })
                                                                         ]

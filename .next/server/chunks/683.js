@@ -491,7 +491,7 @@ function AddGame() {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* PlatformSelector */.J3, {
-                                            classes: [
+                                            categories: [
                                                 "Game"
                                             ],
                                             options: {
@@ -1059,9 +1059,9 @@ const query = client_.gql`
     }
   }
 `;
-const queryClasses = client_.gql`
+const queryCategories = client_.gql`
       query {
-        classes {
+        categories {
           name
         }     
       }
@@ -1086,8 +1086,8 @@ const EditPlatform_mutationDelete = client_.gql`
     
 `;
 function EditPlatform() {
-    const { data: classData = {}  } = (0,client_.useQuery)(queryClasses);
-    const { classes =[]  } = classData;
+    const { data: categoryData = {}  } = (0,client_.useQuery)(queryCategories);
+    const { categories =[]  } = categoryData;
     const formRef = (0,external_react_.useRef)(null);
     const [mutateUpdate, { loading: loadingUpdate  }] = (0,client_.useMutation)(EditPlatform_mutationUpdate);
     const [mutateDelete, { loading: loadingDelete  }] = (0,client_.useMutation)(EditPlatform_mutationDelete);
@@ -1133,7 +1133,7 @@ function EditPlatform() {
                                                 children: "Platform:"
                                             }),
                                             /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* PlatformSelector */.J3, {
-                                                classes: classes.map((c)=>c.name),
+                                                categories: categories.map((c)=>c.name),
                                                 options: {
                                                     isSingle: true,
                                                     required: true,
@@ -1177,7 +1177,7 @@ function EditPlatform() {
                                             /*#__PURE__*/ jsx_runtime_.jsx("select", {
                                                 className: "form-control",
                                                 name: "type",
-                                                children: classes.map((c)=>/*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                                children: categories.map((c)=>/*#__PURE__*/ jsx_runtime_.jsx("option", {
                                                         selected: data && data.platform.type === c.name,
                                                         value: c.name,
                                                         children: c.name
@@ -1582,7 +1582,7 @@ function EditGame() {
                                             children: "Platforms:"
                                         }),
                                         /*#__PURE__*/ jsx_runtime_.jsx(Selectors/* PlatformSelector */.J3, {
-                                            classes: [
+                                            categories: [
                                                 "Game"
                                             ],
                                             options: {

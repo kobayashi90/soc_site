@@ -62,7 +62,7 @@ async function /* getStaticProps */ getServerSideProps() {
           id
           title
           releaseDate
-          classes {
+          categories {
             name
           }
         }
@@ -120,7 +120,7 @@ function AlbumList({ albums , letters  }) {
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                         className: "my-4 d-flex flex-column",
-                                        children: albums[letter].sort((a, b)=>a.title > b.title).map(({ id , title , releaseDate , classes  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                        children: albums[letter].sort((a, b)=>a.title > b.title).map(({ id , title , releaseDate , categories  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
                                                     href: `/album/${id}`,
                                                     children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", {
@@ -130,7 +130,7 @@ function AlbumList({ albums , letters  }) {
                                                             " (",
                                                             luxon__WEBPACK_IMPORTED_MODULE_4__.DateTime.fromISO(releaseDate).year,
                                                             ") (",
-                                                            classes.map((c)=>c.name).join(" / "),
+                                                            categories.map((c)=>c.name).join(" / "),
                                                             ")"
                                                         ]
                                                     })

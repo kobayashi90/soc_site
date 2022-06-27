@@ -314,13 +314,13 @@ function PublisherSelector(props) {
     });
 }
 function PlatformSelector(props) {
-    const { classes =[]  } = props;
-    const mapClasses = `[${classes.map((c)=>`"${c}"`).join(",")}]`;
+    const { categories =[]  } = props;
+    const mapCategories = `[${categories.map((c)=>`"${c}"`).join(",")}]`;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(BaseSelector, {
         ...props,
         changeQuery: _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
         query {
-          searchPlatformsByClasses(classes: ${mapClasses}) {
+          searchPlatformsByCategories(categories: ${mapCategories}) {
             value: id
             label: name
           }
