@@ -85,28 +85,22 @@ export function SimpleSelector (props) {
   const { isSingle = false, defaultValue = isSingle ? undefined : [], required = false, name = '', onChange } = props
 
   const stubElement = useRef(null)
-  const [selected, setSelected] = useState(defaultValue)
+  const [value, setValue] = useState(defaultValue || [])
 
   useEffect(() => {
     const form = stubElement.current.closest('form')
-    form?.addEventListener('reset', () => setSelected(defaultValue))
+    form?.addEventListener('reset', () => setValue(defaultValue))
   }, [])
 
   const onChangeFn = (items = []) => {
-    const result = isSingle ? items[items.length - 1] : items
-    setSelected(result)
+    const result = isSingle ? items.slice(-1) : items
 
-    if (onChange) onChange(result)
+    if (onChange) onChange(isSingle ? result[0] : result)
+    setValue(result)
   }
 
-  const value = isSingle ? (selected ? [selected] : []) : selected
-
   useEffect(() => {
-    if (isSingle && defaultValue !== selected) {
-      setSelected(defaultValue)
-    } else if (!isSingle && defaultValue.length !== selected.length) {
-      setSelected(defaultValue)
-    }
+    if (defaultValue) setValue(isSingle ? [defaultValue] : defaultValue)
   }, [defaultValue, isSingle])
 
   return (
@@ -119,7 +113,7 @@ export function SimpleSelector (props) {
         onChange={onChangeFn}
         value={value}
       />
-      <HiddenInputs isSingle={isSingle} required={required} selected={selected} name={name} />
+      <HiddenInputs isSingle={isSingle} required={required} value={value} name={name} />
     </>
   )
 }
