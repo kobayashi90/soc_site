@@ -1,14 +1,15 @@
 import { Col, Row, Form, FormControl } from 'react-bootstrap'
-import { useRef, useState, useEffect } from 'react'
-import { gql, useQuery, useMutation, useLazyQuery, useApolloClient } from '@apollo/client'
+import { useRef, useState } from 'react'
+import { gql, useQuery, useMutation, useLazyQuery } from '@apollo/client'
 import { toast } from 'react-toastify'
 
-import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector, RequestSelector } from '@/components/Selectors'
+import { AlbumSelector, GameSelector, PlatformSelector, AnimSelector, SimpleSelector } from '@/components/Selectors'
 import { Navigation, SharedForms, Downloads, StoreDownloads, DiscList } from '@/components/SharedForms'
 import SubmitButton from '@/components/SubmitButton'
 import { hasRolePage } from '@/components/resolvers'
 import { prepareForm } from '@/components/utils'
 import { ButtonLoader } from '@/components/Loader'
+import RequestCheck from '@/components/RequestCheck'
 
 export const getServerSideProps = hasRolePage(['CREATE'])
 
@@ -56,7 +57,8 @@ const mutation = gql`
       $related: [ID],
       $stores: [StoreInput],
       $vgmdb: String,
-      $status: String!
+      $status: String!,
+      $request: ID
     ){
       createAlbum(
         title: $title,
@@ -76,7 +78,8 @@ const mutation = gql`
         related: $related,
         stores: $stores,
         vgmdb: $vgmdb,
-        status: $status
+        status: $status,
+        request: $request
       )
       {
         id
@@ -302,60 +305,6 @@ function AddAlbum (props) {
           </Col>
         </Row>
       </Form>
-    </>
-  )
-}
-
-const requestQuery = gql`
-  query ($link: String!) {
-    request(link: $link) {
-      value: id
-      label: title
-      state
-    }
-  }
-`
-
-function RequestCheck (props) {
-  const { element } = props
-
-  const client = useApolloClient()
-  const [defaultValue, setDefaultValue] = useState()
-  const [selected, setSelected] = useState()
-
-  useEffect(() => {
-    if (!element) return
-
-    element.addEventListener('input', () => {
-      client.query({ query: requestQuery, variables: { link: element.value } })
-        .then(({ data }) => {
-          if (data.request) {
-            setDefaultValue(data.request)
-            setSelected(data.request)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          toast.error(err.message, { autoclose: false })
-        })
-    })
-  }, [element])
-
-  return (
-    <>
-      <Row>
-        <Form.Group as={Col}>
-          <Form.Label htmlFor='request'>Request:</Form.Label>
-        </Form.Group>
-      </Row>
-      <Row>
-        <Col>
-          <RequestSelector isSingle name='request' defaultValue={defaultValue} onChange={setSelected} />
-        </Col>
-        <Col className='d-flex align-items-center ps-0'>
-          {selected && <span className="">{selected.state === 'complete' ? 'Request found!  Already complete tho ¯\\_(ツ)_/¯' : 'Request found!'}</span>}
-        </Col>
-      </Row>
     </>
   )
 }
