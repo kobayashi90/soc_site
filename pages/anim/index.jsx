@@ -15,7 +15,7 @@ export async function /* getStaticProps */ getServerSideProps (context) {
         result: searchAlbum(
             limit: 40,
             order: ["releaseDate", "createdAt"],
-            classes: ["Animation"]
+            categories: ["Animation"]
         ){
             rows { 
                 id

@@ -111,7 +111,7 @@ function AlbumCount () {
   const t = useTranslation()
   const query = gql`query {
     albumCount
-    classes{
+    categories {
       name
       count
     }
@@ -124,7 +124,7 @@ function AlbumCount () {
       {data && (
         <>
           <h5 className='text-center text-uppercase' style={{ fontWeight: 700 }}>{t('Soundtrack Count')}: {data.albumCount}</h5>
-          {data.classes.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{t(`${name} Soundtracks`)}: {count}</h6>)}
+          {data.categories.map(({ name, id, count }, i) => <h6 key={i} className='mt-2 text-center'>{t(`${name} Soundtracks`)}: {count}</h6>)}
         </>
       )}
     </div>

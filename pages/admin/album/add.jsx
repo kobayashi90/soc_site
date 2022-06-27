@@ -27,16 +27,16 @@ export default function AddAlbumPage () {
   )
 }
 
-const queryClasses = gql`
-      query {
-        categories {
-          name
-        }
-        classes {
-          name
-        }     
-      }
-    `
+const queryCategories = gql`
+  query {
+    categories {
+      name
+    }
+    classifications {
+      name
+    }     
+  }
+`
 
 const mutation = gql`
     mutation createAlbum(
@@ -48,8 +48,8 @@ const mutation = gql`
       $description: String,
       $downloads: [DownloadInput],
       $artists: [String],
-      $classes: [String],
       $categories: [String],
+      $classifications: [String],
       $platforms: [ID],
       $games: [String],
       $animations: [ID],
@@ -69,8 +69,8 @@ const mutation = gql`
         description: $description,
         downloads: $downloads,
         artists: $artists,
-        classes: $classes,
         categories: $categories,
+        classifications: $classifications,
         platforms: $platforms,
         games: $games,
         animations: $animations
@@ -106,14 +106,14 @@ const vgmQuery = gql`
 `
 
 function AddAlbum (props) {
-  const [currentClasses, setClasses] = useState([])
+  const [currentCategories, setCategories] = useState([])
   const [currentClassifications, setClassifications] = useState([])
   const [vgmTracklist, setVgmTracklist] = useState()
 
-  const { data: classData = {} } = useQuery(queryClasses)
+  const { data: classData = {} } = useQuery(queryCategories)
   const [getVgmdb, { loading: loadingFetch }] = useLazyQuery(vgmQuery)
 
-  const { classes = [], categories = [] } = classData
+  const { categories = [], classifications = [] } = classData
 
   const titleRef = useRef(null)
   const releaseRef = useRef(null)
@@ -151,7 +151,7 @@ function AddAlbum (props) {
       subTitleRef.current.value = subTitle
       artistsRef.current.value = artists.join(',')
 
-      setClasses(categories)
+      setCategories(categories)
       setClassifications(classifications)
       setVgmTracklist(tracklist)
     }
@@ -234,22 +234,22 @@ function AddAlbum (props) {
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label htmlFor='classes'>Classification:</Form.Label>
+              <Form.Label htmlFor='categories'>Categories:</Form.Label>
               <SimpleSelector
-                required name='classes'
-                defaultValue={currentClasses.map(c => ({ value: c, label: c }))}
-                options={classes.map(c => ({ value: c.name, label: c.name }))}
-                onChange={values => setClasses(values.map(v => v.value))}
+                required name='categories'
+                defaultValue={currentCategories.map(c => ({ value: c, label: c }))}
+                options={categories.map(c => ({ value: c.name, label: c.name }))}
+                onChange={values => setCategories(values.map(v => v.value))}
               />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label htmlFor='categories'>Categories:</Form.Label>
+              <Form.Label htmlFor='classifications'>Classifications:</Form.Label>
               <SimpleSelector
-                required name='categories'
+                required name='classifications'
                 defaultValue={currentClassifications.map(c => ({ value: c, label: c }))}
-                options={categories.map(c => ({ value: c.name, label: c.name }))}
+                options={classifications.map(c => ({ value: c.name, label: c.name }))}
                 onChange={values => setClassifications(values.map(v => v.value))}
               />
             </Form.Group>
@@ -268,7 +268,7 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector classes={currentClasses} options={{ name: 'platforms' }} />
+              <PlatformSelector categories={currentCategories} options={{ name: 'platforms' }} />
             </Form.Group>
           </Col>
           <Col md={4}>

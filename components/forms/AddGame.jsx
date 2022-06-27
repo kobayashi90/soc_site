@@ -89,7 +89,7 @@ export default function AddGame () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector classes={['Game']} options={{ name: 'platforms' }} />
+              <PlatformSelector categories={['Game']} options={{ name: 'platforms' }} />
             </Form.Group>
           </Col>
         </Row>

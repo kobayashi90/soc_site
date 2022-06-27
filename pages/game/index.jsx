@@ -13,7 +13,7 @@ export async function /* getStaticProps */ getServerSideProps () {
           result: searchAlbum(
             limit: 40,
             order: ["releaseDate", "createdAt"],
-            classes: ["Game"]
+            categories: ["Game"]
           ){
             rows{
                 id

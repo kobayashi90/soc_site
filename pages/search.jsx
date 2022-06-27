@@ -29,12 +29,12 @@ export default function Search () {
 
   const categories = {
     byTitle: {
-      query: 'searchAlbum(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
+      query: 'searchAlbum(title: $title, limit: $limit, page: $page){ count, items: rows { id, title, categories { name }, releaseDate, placeholder } }',
       title: t('Albums'),
       type: 'album'
     },
     byArtist: {
-      query: 'searchAlbumByArtist(name: $title, limit: $limit, page: $page){ count, items: rows { id, title, classes { name }, releaseDate, placeholder } }',
+      query: 'searchAlbumByArtist(name: $title, limit: $limit, page: $page){ count, items: rows { id, title, categories { name }, releaseDate, placeholder } }',
       title: `${t('Albums')} (${('by artists')})`,
       type: 'album'
     },

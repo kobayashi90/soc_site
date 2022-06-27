@@ -46,10 +46,10 @@ query ($id: ID!) {
       slug
       name
     }
-    classes {
+    categories {
       name
     }
-    categories {
+    classifications {
       name
     }
     stores {
@@ -308,8 +308,8 @@ export default function Page (props) {
                           <th>{t('Classification')}</th>
                           <td>
                             {[
-                              album.classes.map(({ name }) => t(`${name} Soundtrack`)).join(' & '),
-                              album.categories.map(({ name }) => name).join(', ')
+                              album.categories.map(({ name }) => t(`${name} Soundtrack`)).join(' & '),
+                              album.classifications.map(({ name }) => name).join(', ')
                             ].filter(f => f !== '').join(' - ')}
                           </td>
                         </tr>
