@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { useState, useEffect, useRef } from 'react'
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import { Col, Row, Form, FormControl, Container } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
@@ -10,6 +10,8 @@ import SubmitButton from '@/components/SubmitButton'
 import useUser from '@/components/useUser'
 import { initializeApollo } from '@/components/ApolloClient'
 import { prepareForm } from '@/components/utils'
+import RequestCheck from '@/components/RequestCheck'
+import { ButtonLoader } from '@/components/Loader'
 
 const capitalize = (s) => {
   if (typeof s !== 'string') return ''
@@ -129,7 +131,8 @@ const mutation = gql`
       $related: [ID],
       $stores: [StoreInput],
       $vgmdb: String,
-      $status: String!
+      $status: String!,
+      $request: ID
     ){
       updateAlbum(
         id: $id,
@@ -150,10 +153,29 @@ const mutation = gql`
         related: $related,
         stores: $stores,
         vgmdb: $vgmdb,
-        status: $status
+        status: $status,
+        request: $request
       ){ id }
     } 
   `
+
+const vgmQuery = gql`
+  query ($search: String!){
+    vgmdb(search: $search){
+      vgmdbUrl
+      name
+      subTitle
+      releaseDate
+      artists
+      categories
+      classifications
+      tracklist {
+        number
+        body
+      }
+    }
+  }
+`
 
 export default function EditOst (props) {
   return (
@@ -172,12 +194,22 @@ export default function EditOst (props) {
 }
 
 function EditOstForm ({ id, album, classes, categories }) {
+  const [currentClasses, setClasses] = useState(album.classes || [])
+  const [currentClassifications, setClassifications] = useState(album.categories || [])
+  const [vgmTracklist, setVgmTracklist] = useState(album.discs || [])
+
   const [mutate, { loading }] = useMutation(mutation)
-  const [currentClasses, setClasses] = useState([])
 
   const { user } = useUser()
   const { data, refetch } = useQuery(queryDownload, { variables: { id } })
   useEffect(() => refetch({ id }), [user, id, refetch])
+
+  const [getVgmdb, { loading: loadingFetch }] = useLazyQuery(vgmQuery)
+  const titleRef = useRef(null)
+  const releaseRef = useRef(null)
+  const vgmdbRef = useRef(null)
+  const subTitleRef = useRef(null)
+  const artistsRef = useRef(null)
 
   function handleSubmitForm (e) {
     e.persist()
@@ -193,6 +225,25 @@ function EditOstForm ({ id, album, classes, categories }) {
     })
   }
 
+  async function fetchInfo () {
+    const { data } = await getVgmdb({ variables: { search: vgmdbRef.current.value } })
+
+    if (data?.vgmdb) {
+      const { vgmdb } = data
+      const { vgmdbUrl, name, subTitle, releaseDate, artists, categories, classifications, tracklist } = vgmdb
+
+      releaseRef.current.value = releaseDate
+      vgmdbRef.current.value = vgmdbUrl
+      titleRef.current.value = name
+      subTitleRef.current.value = subTitle
+      artistsRef.current.value = artists.join(',')
+
+      setClasses(categories)
+      setClassifications(classifications)
+      setVgmTracklist(tracklist)
+    }
+  }
+
   return (
     <>
       <div id='addAlbum' className='mb-2 mt-3'>Editing {`"${album.title}"`} ({album.id})</div>
@@ -201,19 +252,19 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={3}>
             <Form.Group>
               <Form.Label htmlFor='title'>Title:</Form.Label>
-              <FormControl required type='text' name='title' defaultValue={album.title} />
+              <FormControl ref={titleRef} h required type='text' name='title' defaultValue={album.title} />
             </Form.Group>
           </Col>
           <Col md={3}>
             <Form.Group>
               <Form.Label htmlFor='subTitle'>Sub Title:</Form.Label>
-              <FormControl as='textarea' name='subTitle' defaultValue={album.subTitle} />
+              <FormControl ref={subTitleRef} as='textarea' name='subTitle' defaultValue={album.subTitle} />
             </Form.Group>
           </Col>
           <Col md={3}>
             <Form.Group>
               <Form.Label htmlFor='releaseDate'>Release Date:</Form.Label>
-              <FormControl required type='date' name='releaseDate' defaultValue={album.releaseDate} />
+              <FormControl ref={releaseRef} required type='date' name='releaseDate' defaultValue={album.releaseDate} />
             </Form.Group>
           </Col>
           <Col md={3}>
@@ -231,12 +282,32 @@ function EditOstForm ({ id, album, classes, categories }) {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
-          <Col md={12}>
+        <Row className='mb-3'>
+          <Col md={6}>
             <Form.Group>
               <Form.Label htmlFor='title'>Description:</Form.Label>
               <FormControl as='textarea' name='description' defaultValue={album.description} />
             </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group>
+              <Form.Label htmlFor='cover'>Cover:</Form.Label>
+              <FormControl name='cover' type='file' accept='image/*' />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row >
+          <Col md={6}>
+            <Form.Group>
+              <Form.Label htmlFor='vgmdb'>VGMdb:</Form.Label>
+              <FormControl ref={vgmdbRef} defaultValue={album.vgmdb} name='vgmdb' type='text' />
+            </Form.Group>
+          </Col>
+          <Col className='mt-auto'>
+            <ButtonLoader color='primary' loading={loadingFetch} onClick={fetchInfo}>Fetch info</ButtonLoader>
+          </Col>
+          <Col>
+
           </Col>
         </Row>
         <hr className='style2 style-white' />
@@ -244,17 +315,16 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='artists'>Artists:</Form.Label>
-              <FormControl name='artists' as='textarea' defaultValue={album.artists.map(a => a.name).join(',')} />
+              <FormControl ref={artistsRef} name='artists' as='textarea' defaultValue={album.artists.map(a => a.name).join(',')} />
             </Form.Group>
           </Col>
-
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='classes'>Classification:</Form.Label>
               <SimpleSelector
                 defaultValue={album.classes}
                 required name='classes' options={classes}
-                onChange={values => setClasses(values && values.length === 1 ? values[0].label : '')}
+                onChange={values => setClasses(values)}
               />
             </Form.Group>
           </Col>
@@ -262,25 +332,11 @@ function EditOstForm ({ id, album, classes, categories }) {
             <Form.Group>
               <Form.Label htmlFor='categories'>Categories:</Form.Label>
               <SimpleSelector
-                defaultValue={album.categories}
-                required name='categories' options={categories} />
-            </Form.Group>
-          </Col>
-
-        </Row>
-
-        <Row>
-
-          <Col md={6}>
-            <Form.Group>
-              <Form.Label htmlFor='vgmdb'>VGMdb:</Form.Label>
-              <FormControl defaultValue={album.vgmdb} name='vgmdb' type='text' />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group>
-              <Form.Label htmlFor='cover'>Cover:</Form.Label>
-              <FormControl name='cover' type='file' accept='image/*' />
+                required name='categories'
+                defaultValue={currentClassifications}
+                options={categories}
+                onChange={values => setClassifications(values)}
+              />
             </Form.Group>
           </Col>
         </Row>
@@ -291,20 +347,20 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='games'>Games:</Form.Label>
-              <GameSelector defaultValue={album.games} name='games' />
+              <GameSelector options={{ defaultValue: album.games, name: 'games' }} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector classes={currentClasses} defaultValue={album.platforms} name='platforms' onChange={values => setClasses(values.map(v => v.value))} />
+              <PlatformSelector classes={currentClasses.map(c => c.value)} options={{ defaultValue: album.platforms, name: 'platforms' }} />
             </Form.Group>
           </Col>
 
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='animations'>Animations:</Form.Label>
-              <AnimSelector defaultValue={album.animations} name='animations' />
+              <AnimSelector options={{ defaultValue: album.animations, name: 'animations' }} />
             </Form.Group>
           </Col>
         </Row>
@@ -313,17 +369,17 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={12}>
             <Form.Group>
               <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
-              <AlbumSelector defaultValue={album.related} name='related' />
+              <AlbumSelector options={{ defaultValue: album.related, name: 'related' }} />
             </Form.Group>
           </Col>
         </Row>
 
         <hr className='style2 style-white' />
-        <DiscList defaults={album.discs} />
+        <DiscList defaults={vgmTracklist} />
         <hr className='style2 style-white' />
-
         <StoreDownloads defaults={album.stores} />
-
+        <hr className='style2 style-white' />
+        <RequestCheck element={vgmdbRef.current} />
         <hr className='style2 style-white' />
 
         {data && <Downloads defaults={data.downloads} />}

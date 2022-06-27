@@ -67,7 +67,7 @@ export default function AddAnimation () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='studios'>Studios:</Form.Label>
-              <StudioSelector name='studios' />
+              <StudioSelector options={{ name: 'studios' }} />
             </Form.Group>
           </Col>
           <Col md={4}>

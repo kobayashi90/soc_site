@@ -49,7 +49,7 @@ export default function EditPublisher () {
             <Col md={6}>
               <Form.Group>
                 <Form.Label htmlFor='id'>Publisher:</Form.Label>
-                <PublisherSelector isSingle required name='id' />
+                <PublisherSelector options={{ isSingle: true, required: true, name: 'id' }} />
               </Form.Group>
             </Col>
             <Col md={6}>

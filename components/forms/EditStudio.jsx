@@ -47,8 +47,8 @@ export default function EditStudio () {
           <Row>
             <Col md={6}>
               <Form.Group>
-                <Form.Label htmlFor='id'>Studio:</Form.Label>
-                <StudioSelector isSingle required name='slug' onChange={row => setName(row.label)}/>
+                <Form.Label htmlFor='slug'>Studio:</Form.Label>
+                <StudioSelector options={{ isSingle: true, required: true, name: 'slug', onChange: row => setName(row.label) }}/>
               </Form.Group>
             </Col>
             <Col md={6}>

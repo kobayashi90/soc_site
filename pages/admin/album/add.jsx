@@ -9,6 +9,7 @@ import SubmitButton from '@/components/SubmitButton'
 import { hasRolePage } from '@/components/resolvers'
 import { prepareForm } from '@/components/utils'
 import { ButtonLoader } from '@/components/Loader'
+import RequestCheck from '@/components/RequestCheck'
 
 export const getServerSideProps = hasRolePage(['CREATE'])
 
@@ -56,7 +57,8 @@ const mutation = gql`
       $related: [ID],
       $stores: [StoreInput],
       $vgmdb: String,
-      $status: String!
+      $status: String!,
+      $request: ID
     ){
       createAlbum(
         title: $title,
@@ -76,7 +78,8 @@ const mutation = gql`
         related: $related,
         stores: $stores,
         vgmdb: $vgmdb,
-        status: $status
+        status: $status,
+        request: $request
       )
       {
         id
@@ -259,19 +262,19 @@ function AddAlbum (props) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='games'>Games:</Form.Label>
-              <GameSelector name='games' />
+              <GameSelector options={{ name: 'games' }} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector classes={currentClasses} name='platforms' />
+              <PlatformSelector classes={currentClasses} options={{ name: 'platforms' }} />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='animations'>Animations:</Form.Label>
-              <AnimSelector name='animations' />
+              <AnimSelector options={{ name: 'animations' }} />
             </Form.Group>
           </Col>
         </Row>
@@ -282,7 +285,7 @@ function AddAlbum (props) {
           <Col md={12}>
             <Form.Group>
               <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
-              <AlbumSelector name='related' />
+              <AlbumSelector options={{ name: 'related' }} />
             </Form.Group>
           </Col>
         </Row>
@@ -291,11 +294,13 @@ function AddAlbum (props) {
         <hr className='style2 style-white' />
         <StoreDownloads />
         <hr className='style2 style-white' />
-
         <Downloads />
+        <hr className='style2 style-white' />
+        <RequestCheck element={vgmdbRef.current} />
+        <hr className='style2 style-white' />
 
-        <Row>
-          <Col className='m-auto'>
+        <Row className='mb-2'>
+          <Col xs='auto' className='pe-0'>
             <SubmitButton loading={loading} type='submit' color='primary'>Add Album</SubmitButton>
           </Col>
         </Row>

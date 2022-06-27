@@ -274,7 +274,7 @@ function Highlight () {
   return (
     <Col md={12} className='mt-3 site-form blackblock p-3'>
       <Form.Label>Highlight OST:</Form.Label>
-      <AlbumSelector isSingle defaultValue={data && [data.highlight]} onChange={handleHighlight} loading={loading} />
+      <AlbumSelector options={{ isSingle: true, defaultValue: data?.highlight, onChange: handleHighlight, loading }} />
     </Col>
   )
 }

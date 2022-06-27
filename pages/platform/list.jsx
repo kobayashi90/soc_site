@@ -8,10 +8,11 @@ import style from '../../styles/letter.module.scss'
 
 export async function /* getStaticProps */ getServerSideProps () {
   const client = initializeApollo()
+
   const { data } = await client.query({
     query: gql`
         query {
-            platforms: searchPlatformsByName(name:"", type:"Game") {
+            platforms: searchPlatformsByName(name:"", type: ["Game"]) {
                 id
                 name
             }
@@ -27,7 +28,7 @@ export async function /* getStaticProps */ getServerSideProps () {
 
   const letters = Object.keys(platforms).sort()
 
-  return { props: { letters, platforms }/*, revalidate: 60 */ }
+  return { props: { letters, platforms } }
 }
 
 export default function PlatformList ({ letters, platforms }) {

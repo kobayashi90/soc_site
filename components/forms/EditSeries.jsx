@@ -65,7 +65,15 @@ export default function EditSeries () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='slug'>Series:</Form.Label>
-              <SeriesSelector isSingle required name='slug' onChange={row => getSeries({ variables: { slug: row.value } })} loading={loadingInfo} />
+              <SeriesSelector
+                options={{
+                  isSingle: true,
+                  required: true,
+                  name: 'slug',
+                  loading: loadingInfo,
+                  onChange: row => getSeries({ variables: { slug: row.value } })
+                }}
+              />
             </Form.Group>
           </Col>
           <Col md={4}>

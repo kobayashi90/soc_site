@@ -208,7 +208,7 @@ function DownloadList (props) {
         <Col>
           <Row className='mb-3'>
             <Col>
-              <Form.Group className='mt-3'>
+              <Form.Group className='mt-1'>
                 <Form.Label>Category {prefix + i + 1} title:</Form.Label>
                 <FormControl defaultValue={cat.title} required name={`downloads[${i + prefix}][title]`} type='text' />
               </Form.Group>
@@ -293,7 +293,7 @@ export function Downloads (props) {
     <>
       <DownloadList valueList={defaultValues} setValueList={setDefaultValues} length={length} />
       <DownloadList valueList={newValues} setValueList={setNewValues} length={length} prefix={defaultValues.length} />
-      <Row>
+      <Row className='mb-3'>
         <Col>
           <Button className='me-2' color='primary' onClick={() => setNewValues([...newValues, { id: `n${newValues.length}`, links: [] }])} >Add Download Section</Button>
         </Col>
