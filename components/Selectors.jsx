@@ -283,15 +283,15 @@ export function PublisherSelector (props) {
 }
 
 export function PlatformSelector (props) {
-  const { classes = [] } = props
-  const mapClasses = `[${classes.map(c => `"${c}"`).join(',')}]`
+  const { categories = [] } = props
+  const mapCategories = `[${categories.map(c => `"${c}"`).join(',')}]`
 
   return (
     <BaseSelector
       {...props}
       changeQuery={gql`
         query {
-          searchPlatformsByClasses(classes: ${mapClasses}) {
+          searchPlatformsByCategories(categories: ${mapCategories}) {
             value: id
             label: name
           }

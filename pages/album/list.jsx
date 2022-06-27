@@ -18,7 +18,7 @@ export async function /* getStaticProps */ getServerSideProps () {
           id
           title
           releaseDate
-          classes {
+          categories {
             name
           }
         }
@@ -53,10 +53,10 @@ export default function AlbumList ({ albums, letters }) {
               <Row className='my-4 d-flex flex-column'>
                 {albums[letter]
                   .sort((a, b) => a.title > b.title)
-                  .map(({ id, title, releaseDate, classes }) =>
+                  .map(({ id, title, releaseDate, categories }) =>
                     <Col key={id}>
                       <Link href={`/album/${id}`} >
-                        <a className='text-center mt-2 link'>{title} ({DateTime.fromISO(releaseDate).year}) ({classes.map(c => c.name).join(' / ')})</a>
+                        <a className='text-center mt-2 link'>{title} ({DateTime.fromISO(releaseDate).year}) ({categories.map(c => c.name).join(' / ')})</a>
                       </Link>
                     </Col>
                   )}

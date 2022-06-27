@@ -44,11 +44,11 @@ query Album ($id: ID!) {
       slug
       name
     }
-    classes {
+    categories {
       value: name
       label: name
     }
-    categories {
+    classifications {
       value: name
       label: name
     }
@@ -70,7 +70,7 @@ query Album ($id: ID!) {
     value: name
     label: name
   }
-  classes {
+  classifications {
     value: name
     label: name
   } 
@@ -104,11 +104,11 @@ export const getServerSideProps = withSessionSsr(async ({ params, req }) => {
 
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { id } })
-  const { album, categories, classes } = data
+  const { album, categories, classifications } = data
 
   if (album === null) return { redirect: { destination: '/404', permanent: false } }
 
-  return { props: { id, album, categories, classes }/*, revalidate: 60 */ }
+  return { props: { id, album, categories, classifications }/*, revalidate: 60 */ }
 })
 
 const mutation = gql`
@@ -122,8 +122,8 @@ const mutation = gql`
       $description: String,
       $downloads: [DownloadInput],
       $artists: [String],
-      $classes: [String],
       $categories: [String],
+      $classifications: [String],
       $platforms: [ID],
       $games: [String],
       $animations: [ID],
@@ -144,8 +144,8 @@ const mutation = gql`
         description: $description,
         downloads: $downloads,
         artists: $artists,
-        classes: $classes,
         categories: $categories,
+        classifications: $classifications,
         platforms: $platforms,
         games: $games,
         animations: $animations
@@ -193,9 +193,9 @@ export default function EditOst (props) {
   )
 }
 
-function EditOstForm ({ id, album, classes, categories }) {
-  const [currentClasses, setClasses] = useState(album.classes || [])
-  const [currentClassifications, setClassifications] = useState(album.categories || [])
+function EditOstForm ({ id, album, categories, classifications }) {
+  const [currentCategories, setCategories] = useState(album.categories || [])
+  const [currentClassifications, setClassifications] = useState(album.classifications || [])
   const [vgmTracklist, setVgmTracklist] = useState(album.discs || [])
 
   const [mutate, { loading }] = useMutation(mutation)
@@ -238,7 +238,7 @@ function EditOstForm ({ id, album, classes, categories }) {
       subTitleRef.current.value = subTitle
       artistsRef.current.value = artists.join(',')
 
-      setClasses(categories)
+      setCategories(categories)
       setClassifications(classifications)
       setVgmTracklist(tracklist)
     }
@@ -320,21 +320,21 @@ function EditOstForm ({ id, album, classes, categories }) {
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label htmlFor='classes'>Classification:</Form.Label>
+              <Form.Label htmlFor='categories'>Categories:</Form.Label>
               <SimpleSelector
-                defaultValue={album.classes}
-                required name='classes' options={classes}
-                onChange={values => setClasses(values)}
+                defaultValue={album.categories}
+                required name='categories' options={categories}
+                onChange={values => setCategories(values)}
               />
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group>
-              <Form.Label htmlFor='categories'>Categories:</Form.Label>
+              <Form.Label htmlFor='classifications'>Classifications:</Form.Label>
               <SimpleSelector
-                required name='categories'
+                required name='classifications'
                 defaultValue={currentClassifications}
-                options={categories}
+                options={classifications}
                 onChange={values => setClassifications(values)}
               />
             </Form.Group>
@@ -353,7 +353,7 @@ function EditOstForm ({ id, album, classes, categories }) {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='platforms'>Platforms:</Form.Label>
-              <PlatformSelector classes={currentClasses.map(c => c.value)} options={{ defaultValue: album.platforms, name: 'platforms' }} />
+              <PlatformSelector categories={currentCategories.map(c => c.value)} options={{ defaultValue: album.platforms, name: 'platforms' }} />
             </Form.Group>
           </Col>
 

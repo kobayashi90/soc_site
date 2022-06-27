@@ -15,9 +15,9 @@ const query = gql`
   }
 `
 
-const queryClasses = gql`
+const queryCategories = gql`
       query {
-        classes {
+        categories {
           name
         }     
       }
@@ -44,8 +44,8 @@ const mutationDelete = gql`
 `
 
 export default function EditPlatform () {
-  const { data: classData = {} } = useQuery(queryClasses)
-  const { classes = [] } = classData
+  const { data: categoryData = {} } = useQuery(queryCategories)
+  const { categories = [] } = categoryData
 
   const formRef = useRef(null)
   const [mutateUpdate, { loading: loadingUpdate }] = useMutation(mutationUpdate)
@@ -74,7 +74,7 @@ export default function EditPlatform () {
             <Col md={4}>
               <Form.Group>
                 <Form.Label htmlFor='key'>Platform:</Form.Label>
-                <PlatformSelector classes={classes.map(c => c.name)} options={{ isSingle: true, required: true, name: 'key', onChange: row => getPlatform({ variables: { key: row.value } }), loading: loadingInfo }} />
+                <PlatformSelector categories={categories.map(c => c.name)} options={{ isSingle: true, required: true, name: 'key', onChange: row => getPlatform({ variables: { key: row.value } }), loading: loadingInfo }} />
               </Form.Group>
             </Col>
             <Col md={4}>
@@ -87,7 +87,7 @@ export default function EditPlatform () {
               <Form.Group>
                 <Form.Label htmlFor='type'>Type:</Form.Label>
                 <select className='form-control' name='type'>
-                  {classes.map(c => <option selected={data && data.platform.type === c.name} key={c.name} value={c.name}>{c.name}</option>)}
+                  {categories.map(c => <option selected={data && data.platform.type === c.name} key={c.name} value={c.name}>{c.name}</option>)}
                 </select>
               </Form.Group>
             </Col>
