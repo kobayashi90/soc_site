@@ -40,7 +40,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Page),
-/* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
+/* harmony export */   "getStaticPaths": () => (/* binding */ getStaticPaths),
+/* harmony export */   "getStaticProps": () => (/* binding */ getStaticProps)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
@@ -165,12 +166,14 @@ query downloads ($id: ID!) {
   }
 }
 `;
-/* export async function getStaticPaths () {
-  if (isGithub) return { paths: [], fallback: 'blocking' }
-
-  const client = initializeApollo()
-  const { data } = await client.query({
-    query: gql`
+async function getStaticPaths() {
+    if (_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__/* .isGithub */ .wE) return {
+        paths: [],
+        fallback: "blocking"
+    };
+    const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__/* .initializeApollo */ ["in"])();
+    const { data  } = await client.query({
+        query: _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
       query searchAlbum($limit: Int, $page: Int ){
         searchAlbum(
           limit: $limit
@@ -180,15 +183,21 @@ query downloads ($id: ID!) {
         }
       }
     `,
-    variables: { limit: 40 }
-  })
-
-  const paths = data.searchAlbum.rows.map(({ id }) => ({
-    params: { id }
-  }))
-
-  return { paths, fallback: 'blocking' }
-} */ const mutationRating = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
+        variables: {
+            limit: 40
+        }
+    });
+    const paths = data.searchAlbum.rows.map(({ id  })=>({
+            params: {
+                id
+            }
+        }));
+    return {
+        paths,
+        fallback: "blocking"
+    };
+}
+const mutationRating = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
   mutation ($ostId: ID!, $score: Int!){
     rateAlbum(ostId: $ostId, score: $score)
   }
@@ -281,7 +290,7 @@ function StarCounter(props) {
         ]
     });
 }
-async function /* getStaticProps */ getServerSideProps(context) {
+async function getStaticProps(context) {
     const { params , locale  } = context;
     const { id  } = params;
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__/* .initializeApollo */ ["in"])();
