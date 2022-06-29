@@ -52,7 +52,7 @@ async function /* getStaticProps */ getServerSideProps() {
     const { data  } = await client.query({
         query: _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
         query {
-            platforms: searchPlatformsByName(name:"", type: ["Game"]) {
+            platforms: searchPlatformsByName(name:"", categories: ["Game"]) {
                 id
                 name
             }

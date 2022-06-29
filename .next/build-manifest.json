@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/NCAjx6cwVGKijxu1JRfFU/_buildManifest.js",
-    "static/NCAjx6cwVGKijxu1JRfFU/_ssgManifest.js"
+    "static/mWEbaHgU-XqaPJaZPe1NX/_buildManifest.js",
+    "static/mWEbaHgU-XqaPJaZPe1NX/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -47,14 +47,14 @@
       "static/chunks/framework-187d9d67315882f6.js",
       "static/chunks/main-40e6f3852c92ec5f.js",
       "static/chunks/75fc9c18-73bd9cd4b50bd5e2.js",
-      "static/chunks/45-19d82f56a16bba47.js",
+      "static/chunks/45-e2b32c53f41a75d2.js",
       "static/chunks/pages/admin/[page]-51b2218e06139f03.js"
     ],
     "/admin/album/[id]": [
       "static/chunks/webpack-b7ecfab3703b0aa4.js",
       "static/chunks/framework-187d9d67315882f6.js",
       "static/chunks/main-40e6f3852c92ec5f.js",
-      "static/chunks/45-19d82f56a16bba47.js",
+      "static/chunks/45-e2b32c53f41a75d2.js",
       "static/chunks/683-81334d570514abaa.js",
       "static/chunks/pages/admin/album/[id]-e58e06aba3e14ec6.js"
     ],
@@ -62,7 +62,7 @@
       "static/chunks/webpack-b7ecfab3703b0aa4.js",
       "static/chunks/framework-187d9d67315882f6.js",
       "static/chunks/main-40e6f3852c92ec5f.js",
-      "static/chunks/45-19d82f56a16bba47.js",
+      "static/chunks/45-e2b32c53f41a75d2.js",
       "static/chunks/683-81334d570514abaa.js",
       "static/chunks/pages/admin/album/add-a409d380abc5783e.js"
     ],
@@ -70,14 +70,14 @@
       "static/chunks/webpack-b7ecfab3703b0aa4.js",
       "static/chunks/framework-187d9d67315882f6.js",
       "static/chunks/main-40e6f3852c92ec5f.js",
-      "static/chunks/45-19d82f56a16bba47.js",
+      "static/chunks/45-e2b32c53f41a75d2.js",
       "static/chunks/pages/admin/request-2a143467062a6525.js"
     ],
     "/admin/user": [
       "static/chunks/webpack-b7ecfab3703b0aa4.js",
       "static/chunks/framework-187d9d67315882f6.js",
       "static/chunks/main-40e6f3852c92ec5f.js",
-      "static/chunks/45-19d82f56a16bba47.js",
+      "static/chunks/45-e2b32c53f41a75d2.js",
       "static/chunks/pages/admin/user-005c68e6ca1fbbd0.js"
     ],
     "/album/[id]": [

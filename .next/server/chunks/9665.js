@@ -319,8 +319,8 @@ function PlatformSelector(props) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(BaseSelector, {
         ...props,
         changeQuery: _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
-        query {
-          searchPlatformsByCategories(categories: ${mapCategories}) {
+        query ($filter: String) {
+          searchPlatformsByName(name: $filter, categories: ${mapCategories}) {
             value: id
             label: name
           }
