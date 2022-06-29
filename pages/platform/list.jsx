@@ -12,7 +12,7 @@ export async function /* getStaticProps */ getServerSideProps () {
   const { data } = await client.query({
     query: gql`
         query {
-            platforms: searchPlatformsByName(name:"", type: ["Game"]) {
+            platforms: searchPlatformsByName(name:"", categories: ["Game"]) {
                 id
                 name
             }

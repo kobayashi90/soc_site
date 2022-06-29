@@ -290,8 +290,8 @@ export function PlatformSelector (props) {
     <BaseSelector
       {...props}
       changeQuery={gql`
-        query {
-          searchPlatformsByCategories(categories: ${mapCategories}) {
+        query ($filter: String) {
+          searchPlatformsByName(name: $filter, categories: ${mapCategories}) {
             value: id
             label: name
           }
