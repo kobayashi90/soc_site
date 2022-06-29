@@ -109,6 +109,46 @@ function getPolyfillScripts(context, props) {
 function hasComponentProps(child) {
     return !!child && !!child.props;
 }
+function handleDocumentScriptLoaderItems(scriptLoader, __NEXT_DATA__, props) {
+    var ref, ref1, ref2, ref3;
+    if (!props.children) return;
+    const scriptLoaderItems = [];
+    const children = Array.isArray(props.children) ? props.children : [
+        props.children
+    ];
+    const headChildren = (ref = children.find((child)=>child.type === Head)) == null ? void 0 : (ref1 = ref.props) == null ? void 0 : ref1.children;
+    const bodyChildren = (ref2 = children.find((child)=>child.type === "body")) == null ? void 0 : (ref3 = ref2.props) == null ? void 0 : ref3.children;
+    // Scripts with beforeInteractive can be placed inside Head or <body> so children of both needs to be traversed
+    const combinedChildren = [
+        ...Array.isArray(headChildren) ? headChildren : [
+            headChildren
+        ],
+        ...Array.isArray(bodyChildren) ? bodyChildren : [
+            bodyChildren
+        ], 
+    ];
+    _react.default.Children.forEach(combinedChildren, (child)=>{
+        if (!child) return;
+        if (child.type === _script.default) {
+            if (child.props.strategy === "beforeInteractive") {
+                scriptLoader.beforeInteractive = (scriptLoader.beforeInteractive || []).concat([
+                    {
+                        ...child.props
+                    }, 
+                ]);
+                return;
+            } else if ([
+                "lazyOnload",
+                "afterInteractive",
+                "worker"
+            ].includes(child.props.strategy)) {
+                scriptLoaderItems.push(child.props);
+                return;
+            }
+        }
+    });
+    __NEXT_DATA__.scriptLoader = scriptLoaderItems;
+}
 function getPreNextWorkerScripts(context, props) {
     const { assetPrefix , scriptLoader , crossOrigin , nextScriptWorkers  } = context;
     // disable `nextScriptWorkers` in edge runtime
@@ -120,8 +160,8 @@ function getPreNextWorkerScripts(context, props) {
         ];
         // Check to see if the user has defined their own Partytown configuration
         const userDefinedConfig = children.find((child)=>{
-            var ref, ref1;
-            return hasComponentProps(child) && (child == null ? void 0 : (ref = child.props) == null ? void 0 : (ref1 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref1.__html.length) && "data-partytown-config" in child.props;
+            var ref, ref4;
+            return hasComponentProps(child) && (child == null ? void 0 : (ref = child.props) == null ? void 0 : (ref4 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref4.__html.length) && "data-partytown-config" in child.props;
         });
         return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !userDefinedConfig && /*#__PURE__*/ _react.default.createElement("script", {
             "data-partytown-config": "",
@@ -227,8 +267,9 @@ const InternalFunctionDocument = function InternalFunctionDocument() {
 };
 Document[_constants.NEXT_BUILTIN_DOCUMENT] = InternalFunctionDocument;
 function Html(props) {
-    const { inAmpMode , docComponentsRendered , locale  } = (0, _react).useContext(_htmlContext.HtmlContext);
+    const { inAmpMode , docComponentsRendered , locale , scriptLoader , __NEXT_DATA__ ,  } = (0, _react).useContext(_htmlContext.HtmlContext);
     docComponentsRendered.Html = true;
+    handleDocumentScriptLoaderItems(scriptLoader, __NEXT_DATA__, props);
     return /*#__PURE__*/ _react.default.createElement("html", Object.assign({}, props, {
         lang: props.lang || locale || undefined,
         amp: inAmpMode ? "" : undefined,
@@ -241,8 +282,8 @@ function AmpStyles({ styles  }) {
     const curStyles = Array.isArray(styles) ? styles : [];
     if (styles.props && Array.isArray(styles.props.children)) {
         const hasStyles = (el)=>{
-            var ref, ref2;
-            return el == null ? void 0 : (ref = el.props) == null ? void 0 : (ref2 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref2.__html;
+            var ref, ref5;
+            return el == null ? void 0 : (ref = el.props) == null ? void 0 : (ref5 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref5.__html;
         };
         // @ts-ignore Property 'props' does not exist on type ReactElement
         styles.props.children.forEach((child)=>{
@@ -380,39 +421,12 @@ class Head extends _react.Component {
     getPolyfillScripts() {
         return getPolyfillScripts(this.context, this.props);
     }
-    handleDocumentScriptLoaderItems(children) {
-        const { scriptLoader  } = this.context;
-        const scriptLoaderItems = [];
-        const filteredChildren = [];
-        _react.default.Children.forEach(children, (child)=>{
-            if (child.type === _script.default) {
-                if (child.props.strategy === "beforeInteractive") {
-                    scriptLoader.beforeInteractive = (scriptLoader.beforeInteractive || []).concat([
-                        {
-                            ...child.props
-                        }, 
-                    ]);
-                    return;
-                } else if ([
-                    "lazyOnload",
-                    "afterInteractive",
-                    "worker"
-                ].includes(child.props.strategy)) {
-                    scriptLoaderItems.push(child.props);
-                    return;
-                }
-            }
-            filteredChildren.push(child);
-        });
-        this.context.__NEXT_DATA__.scriptLoader = scriptLoaderItems;
-        return filteredChildren;
-    }
     makeStylesheetInert(node) {
         return _react.default.Children.map(node, (c)=>{
-            var ref5, ref3;
-            if ((c == null ? void 0 : c.type) === "link" && (c == null ? void 0 : (ref5 = c.props) == null ? void 0 : ref5.href) && _constants.OPTIMIZED_FONT_PROVIDERS.some(({ url  })=>{
-                var ref, ref4;
-                return c == null ? void 0 : (ref = c.props) == null ? void 0 : (ref4 = ref.href) == null ? void 0 : ref4.startsWith(url);
+            var ref8, ref6;
+            if ((c == null ? void 0 : c.type) === "link" && (c == null ? void 0 : (ref8 = c.props) == null ? void 0 : ref8.href) && _constants.OPTIMIZED_FONT_PROVIDERS.some(({ url  })=>{
+                var ref, ref7;
+                return c == null ? void 0 : (ref = c.props) == null ? void 0 : (ref7 = ref.href) == null ? void 0 : ref7.startsWith(url);
             })) {
                 const newProps = {
                     ...c.props || {},
@@ -420,7 +434,7 @@ class Head extends _react.Component {
                     href: undefined
                 };
                 return /*#__PURE__*/ _react.default.cloneElement(c, newProps);
-            } else if (c == null ? void 0 : (ref3 = c.props) == null ? void 0 : ref3.children) {
+            } else if (c == null ? void 0 : (ref6 = c.props) == null ? void 0 : ref6.children) {
                 const newProps1 = {
                     ...c.props || {},
                     children: this.makeStylesheetInert(c.props.children)
@@ -454,7 +468,6 @@ class Head extends _react.Component {
         if ( true && optimizeFonts && !inAmpMode) {
             children = this.makeStylesheetInert(children);
         }
-        children = this.handleDocumentScriptLoaderItems(children);
         let hasAmphtmlRel = false;
         let hasCanonicalRel = false;
         // show warning and remove conflicting amp head tags

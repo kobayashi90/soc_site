@@ -239,7 +239,7 @@ const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(prop
         "legacyBehavior"
     ]);
     children = childrenProp;
-    if (legacyBehavior && typeof children === "string") {
+    if (legacyBehavior && (typeof children === "string" || typeof children === "number")) {
         children = /*#__PURE__*/ _react.default.createElement("a", null, children);
     }
     const p = prefetchProp !== false;
@@ -914,7 +914,9 @@ class Router {
         }
         this.change("replaceState", url, as, Object.assign({}, options, {
             shallow: options.shallow && this._shallow,
-            locale: options.locale || this.defaultLocale
+            locale: options.locale || this.defaultLocale,
+            // @ts-ignore internal value not exposed on types
+            _h: 0
         }), forcedScroll);
     };
     reload() {
@@ -1111,14 +1113,16 @@ class Router {
             locale: nextState.locale,
             router: this
         });
-        if (!isMiddlewareMatch && shouldResolveHref && pathname !== "/_error") {
+        if (shouldResolveHref && pathname !== "/_error") {
             options._shouldResolveHref = true;
             if (false) {} else {
                 parsed.pathname = resolveDynamicRoute(pathname, pages);
                 if (parsed.pathname !== pathname) {
                     pathname = parsed.pathname;
                     parsed.pathname = (0, _addBasePath).addBasePath(pathname);
-                    url = (0, _formatUrl).formatWithValidation(parsed);
+                    if (!isMiddlewareMatch) {
+                        url = (0, _formatUrl).formatWithValidation(parsed);
+                    }
                 }
             }
         }
@@ -1132,16 +1136,17 @@ class Router {
         }
         resolvedAs = (0, _removeLocale).removeLocale((0, _removeBasePath).removeBasePath(resolvedAs), nextState.locale);
         let route = (0, _removeTrailingSlash).removeTrailingSlash(pathname);
-        if (!isMiddlewareMatch && (0, _isDynamic).isDynamicRoute(route)) {
+        let routeMatch = false;
+        if ((0, _isDynamic).isDynamicRoute(route)) {
             const parsedAs1 = (0, _parseRelativeUrl).parseRelativeUrl(resolvedAs);
             const asPathname = parsedAs1.pathname;
             const routeRegex = (0, _routeRegex).getRouteRegex(route);
-            const routeMatch = (0, _routeMatcher).getRouteMatcher(routeRegex)(asPathname);
+            routeMatch = (0, _routeMatcher).getRouteMatcher(routeRegex)(asPathname);
             const shouldInterpolate = route === asPathname;
             const interpolatedAs = shouldInterpolate ? interpolateAs(route, asPathname, query) : {};
             if (!routeMatch || shouldInterpolate && !interpolatedAs.result) {
                 const missingParams = Object.keys(routeRegex.groups).filter((param)=>!query[param]);
-                if (missingParams.length > 0) {
+                if (missingParams.length > 0 && !isMiddlewareMatch) {
                     if (false) {}
                     throw new Error((shouldInterpolate ? `The provided \`href\` (${url}) value is missing query values (${missingParams.join(", ")}) to be interpolated properly. ` : `The provided \`as\` value (${asPathname}) is incompatible with the \`href\` value (${route}). `) + `Read more: https://nextjs.org/docs/messages/${shouldInterpolate ? "href-interpolation-failed" : "incompatible-href-as"}`);
                 }
@@ -1175,6 +1180,13 @@ class Router {
                 pathname = routeInfo.route || route;
                 route = pathname;
                 query = Object.assign({}, routeInfo.query || {}, query);
+                if (routeMatch && pathname !== parsed.pathname) {
+                    Object.keys(routeMatch).forEach((key)=>{
+                        if (routeMatch && query[key] === routeMatch[key]) {
+                            delete query[key];
+                        }
+                    });
+                }
                 if ((0, _isDynamic).isDynamicRoute(pathname)) {
                     const prefixedAs = routeInfo.resolvedAs || (0, _addBasePath).addBasePath((0, _addLocale).addLocale(as, nextState.locale), true);
                     let rewriteAs = prefixedAs;
@@ -1187,9 +1199,9 @@ class Router {
                         rewriteAs = localeResult.pathname;
                     }
                     const routeRegex1 = (0, _routeRegex).getRouteRegex(pathname);
-                    const routeMatch1 = (0, _routeMatcher).getRouteMatcher(routeRegex1)(rewriteAs);
-                    if (routeMatch1) {
-                        Object.assign(query, routeMatch1);
+                    const curRouteMatch = (0, _routeMatcher).getRouteMatcher(routeRegex1)(rewriteAs);
+                    if (curRouteMatch) {
+                        Object.assign(query, curRouteMatch);
                     }
                 }
             }
@@ -1453,6 +1465,13 @@ class Router {
                 }
                 cachedRouteInfo = existingInfo && !("initial" in existingInfo) && "production" !== "development" ? existingInfo : undefined;
             }
+            if (route === "/api" || route.startsWith("/api/")) {
+                handleHardNavigation({
+                    url: resolvedAs,
+                    router: this
+                });
+                return new Promise(()=>{});
+            }
             const routeInfo = cachedRouteInfo || await this.fetchComponent(route).then((res)=>({
                     Component: res.page,
                     styleSheets: res.styleSheets,
@@ -1622,18 +1641,24 @@ class Router {
         }
         const pages = await this.pageLoader.getPageList();
         let resolvedAs = asPath;
-        if (false) {} else {
-            parsed.pathname = resolveDynamicRoute(parsed.pathname, pages);
-            if (parsed.pathname !== pathname) {
-                pathname = parsed.pathname;
-                parsed.pathname = pathname;
-                Object.assign(query, (0, _routeMatcher).getRouteMatcher((0, _routeRegex).getRouteRegex(parsed.pathname))(asPath) || {});
+        const locale = typeof options.locale !== "undefined" ? options.locale || undefined : this.locale;
+        const isMiddlewareMatch = await matchesMiddleware({
+            asPath: asPath,
+            locale: locale,
+            router: this
+        });
+        if (false) {}
+        parsed.pathname = resolveDynamicRoute(parsed.pathname, pages);
+        if ((0, _isDynamic).isDynamicRoute(parsed.pathname)) {
+            pathname = parsed.pathname;
+            parsed.pathname = pathname;
+            Object.assign(query, (0, _routeMatcher).getRouteMatcher((0, _routeRegex).getRouteRegex(parsed.pathname))((0, _parsePath).parsePath(asPath).pathname) || {});
+            if (!isMiddlewareMatch) {
                 url = (0, _formatUrl).formatWithValidation(parsed);
             }
         }
         // Prefetch is not supported in development mode because it would trigger on-demand-entries
         if (false) {}
-        const locale = typeof options.locale !== "undefined" ? options.locale || undefined : this.locale;
         // TODO: if the route middleware's data request
         // resolves to is not an SSG route we should bust the cache
         // but we shouldn't allow prefetch to keep triggering

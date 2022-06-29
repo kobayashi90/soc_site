@@ -114,7 +114,7 @@ function Image(_param) {
         rootMargin: lazyBoundary || "200px",
         disabled: !isLazy
     });
-    const isVisible = !isLazy || isIntersected || layout === "raw";
+    const isVisible = !isLazy || isIntersected;
     const wrapperStyle = {
         boxSizing: "border-box",
         display: "block",
@@ -161,18 +161,13 @@ function Image(_param) {
         objectPosition
     };
     if (false) {}
-    if (false) {}
-    const imgStyle = Object.assign({}, style, layout === "raw" ? {} : layoutStyle);
-    const svgBlurPlaceholder = `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http%3A//www.w3.org/2000/svg' xmlns%3Axlink='http%3A//www.w3.org/1999/xlink' viewBox='0 0 ${widthInt} ${heightInt}'%3E%3Cfilter id='b' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='50'%3E%3C/feGaussianBlur%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='1 1'%3E%3C/feFuncA%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Cimage filter='url(%23b)' x='0' y='0' height='100%25' width='100%25' href='${blurDataURL}'%3E%3C/image%3E%3C/svg%3E");`;
-    const blurStyle = placeholder === "blur" && !blurComplete ? _extends({
+    const imgStyle = Object.assign({}, style, layoutStyle);
+    const blurStyle = placeholder === "blur" && !blurComplete ? {
         backgroundSize: objectFit || "cover",
-        backgroundPosition: objectPosition || "0% 0%"
-    }, layout === "raw" && (blurDataURL == null ? void 0 : blurDataURL.startsWith("data:image")) ? {
-        backgroundImage: svgBlurPlaceholder
-    } : {
+        backgroundPosition: objectPosition || "0% 0%",
         filter: "blur(20px)",
         backgroundImage: `url("${blurDataURL}")`
-    }) : {};
+    } : {};
     if (layout === "fill") {
         // <Image src="i.png" layout="fill" />
         wrapperStyle.display = "block";
@@ -276,7 +271,7 @@ function Image(_param) {
         isVisible,
         noscriptSizes: sizes
     }, rest);
-    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, layout === "raw" ? /*#__PURE__*/ _react.default.createElement(ImageElement, Object.assign({}, imgElementArgs)) : /*#__PURE__*/ _react.default.createElement("span", {
+    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("span", {
         style: wrapperStyle
     }, hasSizer ? /*#__PURE__*/ _react.default.createElement("span", {
         style: sizerStyle
@@ -376,7 +371,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
     }
     return target;
 }
-const { experimentalLayoutRaw =false , experimentalRemotePatterns =[] , experimentalUnoptimized ,  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false} || {};
+const { experimentalRemotePatterns =[] , experimentalUnoptimized  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false} || {};
 const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false};
 const loadedImageURLs = new Set();
 const allImgs = new Map();
@@ -417,7 +412,6 @@ const VALID_LAYOUT_VALUES = (/* unused pure expression or super */ null && ([
     "fixed",
     "intrinsic",
     "responsive",
-    "raw",
     undefined, 
 ]));
 function isStaticRequire(src) {
@@ -430,7 +424,7 @@ function isStaticImport(src) {
     return typeof src === "object" && (isStaticRequire(src) || isStaticImageData(src));
 }
 function getWidths({ deviceSizes , allSizes  }, width, layout, sizes) {
-    if (sizes && (layout === "fill" || layout === "responsive" || layout === "raw")) {
+    if (sizes && (layout === "fill" || layout === "responsive")) {
         // Find all the "vw" percent sizes used in the sizes prop
         const viewportWidthRe = /(^|\s)(1?\d?\d)vw/g;
         const percentSizes = [];
@@ -582,15 +576,10 @@ const ImageElement = (_param)=>{
         "noscriptSizes"
     ]);
     loading = isLazy ? "lazy" : loading;
-    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("img", Object.assign({}, rest, imgAttributes, layout === "raw" ? {
-        height: heightInt,
-        width: widthInt
-    } : {}, {
+    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("img", Object.assign({}, rest, imgAttributes, {
         decoding: "async",
         "data-nimg": layout,
         className: className,
-        // @ts-ignore - TODO: upgrade to `@types/react@17`
-        loading: layout === "raw" ? loading : undefined,
         style: _extends({}, imgStyle, blurStyle),
         ref: (0, _react).useCallback((img)=>{
             setIntersection(img);
@@ -630,10 +619,7 @@ const ImageElement = (_param)=>{
         quality: qualityInt,
         sizes: noscriptSizes,
         loader
-    }), layout === "raw" ? {
-        height: heightInt,
-        width: widthInt
-    } : {}, {
+    }), {
         decoding: "async",
         "data-nimg": layout,
         style: imgStyle,

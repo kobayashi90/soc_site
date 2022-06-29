@@ -777,7 +777,8 @@ function AddAnimation() {
                                         /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.FormControl, {
                                             name: "cover",
                                             type: "file",
-                                            accept: "image/*"
+                                            accept: "image/*",
+                                            required: true
                                         })
                                     ]
                                 })
