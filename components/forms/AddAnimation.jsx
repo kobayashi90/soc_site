@@ -73,7 +73,7 @@ export default function AddAnimation () {
           <Col md={4}>
             <Form.Group>
               <Form.Label htmlFor='cover'>Cover:</Form.Label>
-              <FormControl name='cover' type='file' accept='image/*' />
+              <FormControl name='cover' type='file' accept='image/*' required />
             </Form.Group>
           </Col>
         </Row>
