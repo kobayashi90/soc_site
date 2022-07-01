@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Button, Col, Row, Form, FormControl } from 'react-bootstrap'
 import { SimpleSelector } from './Selectors'
 
@@ -88,43 +88,60 @@ export function SharedForms () {
 }
 
 export function DiscList (props) {
-  const { defaults = [0] } = props
+  const { defaults = [{ number: 0 }] } = props
   const [keys, setKeys] = useState(defaults)
 
-  useEffect(() => {
-    if (keys.length === 0) setKeys([0])
-  }, [keys])
+  function addEmptyDisc () {
+    const lastDisc = keys[keys.length - 1]
 
-  useEffect(() => {
-    setKeys(defaults.map((d, i) => i))
-  }, [defaults.length])
+    setKeys([...keys, { number: lastDisc ? lastDisc.number + 1 : 0 }])
+  }
+
+  function clearEmptyDiscs () {
+    const newKeys = []
+    keys.forEach(k => {
+      const body = document.getElementById(`discInput${k.number}`).value
+      if (!body || body.length === 0) return
+
+      newKeys.push({ number: newKeys.length, body })
+    })
+
+    setKeys(newKeys)
+  }
 
   return (
     <>
       <Row>
         <Col>
-          <Button className='me-2' color='primary' onClick={() => setKeys([...keys, keys[keys.length - 1] + 1])}>
-            Add Disc
-          </Button>
-          <Button color='primary' onClick={() => setKeys(clearKeys(keys, ['discInput']))}>Remove empty discs</Button>
+          <Button className='me-2' color='primary' onClick={addEmptyDisc}>Add Disc</Button>
+          <Button color='primary' onClick={clearEmptyDiscs}>Remove empty discs</Button>
         </Col>
       </Row>
 
       <Row className='mt-3'>
-        {keys.map((key, i) => (
-          <Col md={6} key={key} className='mb-3'>
-            <Row>
-              <Col md={12}>
-                <Form.Group>
-                  <Form.Label>Disc {i + 1}:</Form.Label>
-                  <FormControl required name='discs[][body]' as='textarea' id={`discInput${key}`} defaultValue={defaults[key] ? defaults[key].body : ''} />
-                </Form.Group>
-              </Col>
-            </Row>
-          </Col>
-        ))}
+        {keys.map(disc => <DiscField key={disc.number} {...disc} />)}
       </Row>
     </>
+  )
+}
+
+function DiscField (props) {
+  const { number, body = '' } = props
+  const formRef = useRef(null)
+
+  useEffect(() => { formRef.current.value = body }, [body])
+
+  return (
+    <Col md={6} className='mb-3'>
+      <Row>
+        <Col md={12}>
+          <Form.Group>
+            <Form.Label>Disc {number + 1}:</Form.Label>
+            <FormControl ref={formRef} required name='discs[][body]' as='textarea' id={`discInput${number}`} defaultValue={body} />
+          </Form.Group>
+        </Col>
+      </Row>
+    </Col>
   )
 }
 
