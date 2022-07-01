@@ -2187,21 +2187,32 @@ function SharedForms() {
 }
 function DiscList(props) {
     const { defaults =[
-        0
+        {
+            number: 0
+        }
     ]  } = props;
     const { 0: keys , 1: setKeys  } = (0,external_react_.useState)(defaults);
-    (0,external_react_.useEffect)(()=>{
-        if (keys.length === 0) setKeys([
-            0
+    function addEmptyDisc() {
+        const lastDisc = keys[keys.length - 1];
+        setKeys([
+            ...keys,
+            {
+                number: lastDisc ? lastDisc.number + 1 : 0
+            }
         ]);
-    }, [
-        keys
-    ]);
-    (0,external_react_.useEffect)(()=>{
-        setKeys(defaults.map((d, i)=>i));
-    }, [
-        defaults.length
-    ]);
+    }
+    function clearEmptyDiscs() {
+        const newKeys = [];
+        keys.forEach((k)=>{
+            const body = document.getElementById(`discInput${k.number}`).value;
+            if (!body || body.length === 0) return;
+            newKeys.push({
+                number: newKeys.length,
+                body
+            });
+        });
+        setKeys(newKeys);
+    }
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Row, {
@@ -2210,17 +2221,12 @@ function DiscList(props) {
                         /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
                             className: "me-2",
                             color: "primary",
-                            onClick: ()=>setKeys([
-                                    ...keys,
-                                    keys[keys.length - 1] + 1
-                                ]),
+                            onClick: addEmptyDisc,
                             children: "Add Disc"
                         }),
                         /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Button, {
                             color: "primary",
-                            onClick: ()=>setKeys((0,utils/* clearKeys */.z5)(keys, [
-                                    "discInput"
-                                ])),
+                            onClick: clearEmptyDiscs,
                             children: "Remove empty discs"
                         })
                     ]
@@ -2228,35 +2234,48 @@ function DiscList(props) {
             }),
             /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Row, {
                 className: "mt-3",
-                children: keys.map((key, i)=>/*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Col, {
-                        md: 6,
-                        className: "mb-3",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Row, {
-                            children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Col, {
-                                md: 12,
-                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_react_bootstrap_.Form.Group, {
-                                    children: [
-                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_react_bootstrap_.Form.Label, {
-                                            children: [
-                                                "Disc ",
-                                                i + 1,
-                                                ":"
-                                            ]
-                                        }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.FormControl, {
-                                            required: true,
-                                            name: "discs[][body]",
-                                            as: "textarea",
-                                            id: `discInput${key}`,
-                                            defaultValue: defaults[key] ? defaults[key].body : ""
-                                        })
-                                    ]
-                                })
-                            })
-                        })
-                    }, key))
+                children: keys.map((disc)=>/*#__PURE__*/ jsx_runtime_.jsx(DiscField, {
+                        ...disc
+                    }, disc.number))
             })
         ]
+    });
+}
+function DiscField(props) {
+    const { number , body =""  } = props;
+    const formRef = (0,external_react_.useRef)(null);
+    (0,external_react_.useEffect)(()=>{
+        formRef.current.value = body;
+    }, [
+        body
+    ]);
+    return /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Col, {
+        md: 6,
+        className: "mb-3",
+        children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Row, {
+            children: /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Col, {
+                md: 12,
+                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_react_bootstrap_.Form.Group, {
+                    children: [
+                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_react_bootstrap_.Form.Label, {
+                            children: [
+                                "Disc ",
+                                number + 1,
+                                ":"
+                            ]
+                        }),
+                        /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.FormControl, {
+                            ref: formRef,
+                            required: true,
+                            name: "discs[][body]",
+                            as: "textarea",
+                            id: `discInput${number}`,
+                            defaultValue: body
+                        })
+                    ]
+                })
+            })
+        })
     });
 }
 function StoreDownloads(props) {
