@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react'
 import { Col, Row, Form, Container, Table, InputGroup, FormControl, Modal } from 'react-bootstrap'
 import { gql, useMutation, useQuery } from '@apollo/client'
+import serialize from 'form-serialize'
+import { toast } from 'react-toastify'
+import classNames from 'classnames'
 
 import { SimpleSelector } from '@/components/Selectors'
 import Loader, { ButtonLoader } from '@/components/Loader'
 import { hasRolePage } from '@/components/resolvers'
-import serialize from 'form-serialize'
-import { toast } from 'react-toastify'
+
+import styles from '../../styles/Request.module.scss'
 
 export const getServerSideProps = hasRolePage(['REQUESTS'])
 const stateOptions = ['Complete', 'Pending', 'Hold'].map(label => ({ label, value: label.toLowerCase() }))
@@ -240,10 +243,10 @@ function RequestTable (props) {
       </Row>
       <Row>
         <Col style={{ height: '500px' }}>
-          <div className='overflow-auto h-100'>
+          <div className={classNames('overflow-auto h-100', styles.table)} >
             {loading && <Loader dev className='mx-auto' />}
             {data && (
-              <Table variant='dark' hover responsive>
+              <Table variant='dark' hover responsive style={{ overflowX: 'visible' }}>
                 <thead>
                   <tr>
                     <th>ID</th>
