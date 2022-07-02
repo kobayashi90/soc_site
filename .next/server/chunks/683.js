@@ -2213,6 +2213,9 @@ function DiscList(props) {
         });
         setKeys(newKeys);
     }
+    (0,external_react_.useEffect)(()=>setKeys(defaults), [
+        defaults
+    ]);
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx(external_react_bootstrap_.Row, {
