@@ -1,13 +1,24 @@
-"use strict";
 (() => {
 var exports = {};
 exports.id = 3476;
 exports.ids = [3476];
 exports.modules = {
 
+/***/ 9425:
+/***/ ((module) => {
+
+// Exports
+module.exports = {
+	"table": "Request_table__Sr4vK"
+};
+
+
+/***/ }),
+
 /***/ 8906:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -22,15 +33,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9114);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7352);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5043);
-/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9324);
-/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(684);
-/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1187);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_8__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_6__]);
-_components_resolvers__WEBPACK_IMPORTED_MODULE_6__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(684);
+/* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1187);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9003);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7352);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5043);
+/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9324);
+/* harmony import */ var _styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9425);
+/* harmony import */ var _styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_10__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_9__]);
+_components_resolvers__WEBPACK_IMPORTED_MODULE_9__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -40,7 +55,9 @@ _components_resolvers__WEBPACK_IMPORTED_MODULE_6__ = (__webpack_async_dependenci
 
 
 
-const getServerSideProps = (0,_components_resolvers__WEBPACK_IMPORTED_MODULE_6__/* .hasRolePage */ .yg)([
+
+
+const getServerSideProps = (0,_components_resolvers__WEBPACK_IMPORTED_MODULE_9__/* .hasRolePage */ .yg)([
     "REQUESTS"
 ]);
 const stateOptions = [
@@ -95,38 +112,38 @@ function RequestModal(props) {
     const formRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     function handleEdit() {
         const target = formRef.current;
-        const variables = form_serialize__WEBPACK_IMPORTED_MODULE_7___default()(target, {
+        const variables = form_serialize__WEBPACK_IMPORTED_MODULE_4___default()(target, {
             hash: true
         });
         variables.id = request.id;
         editRequest({
             variables
         }).then((results)=>{
-            react_toastify__WEBPACK_IMPORTED_MODULE_8__.toast.success("Updated request succesfully!");
+            react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.success("Updated request succesfully!");
             setRequest(results.data.editRequest);
             target.reset();
         }).catch((err)=>{
             console.log(err);
-            react_toastify__WEBPACK_IMPORTED_MODULE_8__.toast.error(err.message, {
+            react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error(err.message, {
                 autoclose: false
             });
         });
     }
     function handleReject() {
         const target = formRef.current;
-        const variables = form_serialize__WEBPACK_IMPORTED_MODULE_7___default()(target, {
+        const variables = form_serialize__WEBPACK_IMPORTED_MODULE_4___default()(target, {
             hash: true
         });
         variables.id = request.id;
         rejectRequest({
             variables
         }).then((results)=>{
-            react_toastify__WEBPACK_IMPORTED_MODULE_8__.toast.success("Request rejected succesfully!");
+            react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.success("Request rejected succesfully!");
             setRequest();
             target.reset();
         }).catch((err)=>{
             console.log(err);
-            react_toastify__WEBPACK_IMPORTED_MODULE_8__.toast.error(err.message, {
+            react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error(err.message, {
                 autoclose: false
             });
         });
@@ -251,14 +268,14 @@ function RequestModal(props) {
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Modal.Footer, {
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_5__/* .ButtonLoader */ .l, {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_8__/* .ButtonLoader */ .l, {
                         loading: loadingReject,
                         disabled: loadingEdit,
                         variant: "danger",
                         onClick: handleReject,
                         children: "Reject"
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_5__/* .ButtonLoader */ .l, {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_8__/* .ButtonLoader */ .l, {
                         loading: loadingEdit,
                         disabled: loadingReject,
                         variant: "primary",
@@ -323,7 +340,7 @@ function RequestBoard() {
                                 })
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_4__/* .SimpleSelector */ .d7, {
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_7__/* .SimpleSelector */ .d7, {
                                     onChange: (e)=>setState(e.map((v)=>v.value)),
                                     required: true,
                                     name: "status",
@@ -349,7 +366,7 @@ function RequestBoard() {
                                 })
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_4__/* .SimpleSelector */ .d7, {
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_7__/* .SimpleSelector */ .d7, {
                                     onChange: (e)=>setUsers(e.map((v)=>v.value)),
                                     required: true,
                                     name: "users",
@@ -388,7 +405,7 @@ function RequestTable(props) {
     });
     if (error) {
         console.log(error);
-        react_toastify__WEBPACK_IMPORTED_MODULE_8__.toast.error("Failed to fetch requests");
+        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error("Failed to fetch requests");
     }
     function Rows() {
         return data.requests.filter(({ title , link  })=>title?.toLowerCase().includes(search) || link?.toLowerCase() === search).map((request)=>{
@@ -444,9 +461,9 @@ function RequestTable(props) {
                         height: "500px"
                     },
                     children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: "overflow-auto h-100",
+                        className: classnames__WEBPACK_IMPORTED_MODULE_6___default()("overflow-auto h-100", (_styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_10___default().table)),
                         children: [
-                            loading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {
+                            loading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
                                 dev: true,
                                 className: "mx-auto"
                             }),
@@ -454,6 +471,9 @@ function RequestTable(props) {
                                 variant: "dark",
                                 hover: true,
                                 responsive: true,
+                                style: {
+                                    overflowX: "visible"
+                                },
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("thead", {
                                         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
@@ -504,6 +524,7 @@ __webpack_async_result__();
 /***/ 9114:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("@apollo/client");
 
 /***/ }),
@@ -511,6 +532,7 @@ module.exports = require("@apollo/client");
 /***/ 4292:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("apollo-server-errors");
 
 /***/ }),
@@ -518,6 +540,7 @@ module.exports = require("apollo-server-errors");
 /***/ 9003:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("classnames");
 
 /***/ }),
@@ -525,6 +548,7 @@ module.exports = require("classnames");
 /***/ 684:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("form-serialize");
 
 /***/ }),
@@ -532,6 +556,7 @@ module.exports = require("form-serialize");
 /***/ 4957:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("next/dist/shared/lib/head.js");
 
 /***/ }),
@@ -539,6 +564,7 @@ module.exports = require("next/dist/shared/lib/head.js");
 /***/ 744:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("next/dist/shared/lib/image-config-context.js");
 
 /***/ }),
@@ -546,6 +572,7 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ 5843:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
@@ -553,6 +580,7 @@ module.exports = require("next/dist/shared/lib/image-config.js");
 /***/ 8854:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
@@ -560,6 +588,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 /***/ 3297:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
@@ -567,6 +596,7 @@ module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slas
 /***/ 9232:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("next/dist/shared/lib/utils.js");
 
 /***/ }),
@@ -574,6 +604,7 @@ module.exports = require("next/dist/shared/lib/utils.js");
 /***/ 6689:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("react");
 
 /***/ }),
@@ -581,6 +612,7 @@ module.exports = require("react");
 /***/ 358:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("react-bootstrap");
 
 /***/ }),
@@ -588,6 +620,7 @@ module.exports = require("react-bootstrap");
 /***/ 2820:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("react-multi-select-component");
 
 /***/ }),
@@ -595,6 +628,7 @@ module.exports = require("react-multi-select-component");
 /***/ 1187:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("react-toastify");
 
 /***/ }),
@@ -602,6 +636,7 @@ module.exports = require("react-toastify");
 /***/ 997:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("react/jsx-runtime");
 
 /***/ }),
@@ -609,6 +644,7 @@ module.exports = require("react/jsx-runtime");
 /***/ 3673:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("slugify");
 
 /***/ }),
@@ -616,6 +652,7 @@ module.exports = require("slugify");
 /***/ 5822:
 /***/ ((module) => {
 
+"use strict";
 module.exports = import("iron-session");;
 
 /***/ }),
@@ -623,6 +660,7 @@ module.exports = import("iron-session");;
 /***/ 1017:
 /***/ ((module) => {
 
+"use strict";
 module.exports = require("path");
 
 /***/ })
