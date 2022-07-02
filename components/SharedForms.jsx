@@ -109,6 +109,8 @@ export function DiscList (props) {
     setKeys(newKeys)
   }
 
+  useEffect(() => setKeys(defaults), [defaults])
+
   return (
     <>
       <Row>
