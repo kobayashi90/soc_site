@@ -8,7 +8,7 @@ import { initializeApollo } from '@/components/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 import style from '../../styles/letter.module.scss'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
@@ -48,7 +48,7 @@ export default function SeriesList ({ series, letters, seriesList }) {
             {letters.map(letter => (
               <div id={letter} key={letter} className='mt-4 d-flex flex-column'>
                 <h2 className='text-center ost-title text-capitalize'>{letter.toUpperCase()}</h2>
-                {series[letter].map(({ slug, name }) => <Link href={`/series/${slug}`} key={slug}><a className='text-center mt-2 link' >{name}</a></Link>)}
+                {series[letter].map(({ slug, name }) => <Link href={`/series/${slug}`} key={slug} className='text-center mt-2 link'>{name}</Link>)}
               </div>
             ))}
           </Col>
@@ -57,9 +57,7 @@ export default function SeriesList ({ series, letters, seriesList }) {
               {seriesList.map(({ slug, placeholder }) => (
                 <Col key={slug} className='position-relative' xs={4} style={{ height: '150px' }}>
                   <Link href={`/series/${slug}`}>
-                    <a>
-                      <Image alt={slug} src={getImageUrl(slug, 'series')} layout='fill' objectFit='contain' width={300} height={100} placeholder='blur' blurDataURL={placeholder} />
-                    </a>
+                    <Image alt={slug} src={getImageUrl(slug, 'series')} layout='fill' objectFit='contain' width={300} height={100} placeholder='blur' blurDataURL={placeholder} />
                   </Link>
                 </Col>
               ))}

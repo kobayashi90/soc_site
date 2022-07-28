@@ -58,7 +58,7 @@ const { data } = await client.query({
   return { paths, fallback: 'blocking' }
 } */
 
-export async function /* getStaticProps */ getServerSideProps (context) {
+export async function getServerSideProps (context) {
   const { params, locale } = context
   const { id } = params
   const client = initializeApollo()

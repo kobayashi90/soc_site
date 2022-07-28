@@ -41,7 +41,7 @@ async function solvePlaceholder (parent, folder) {
   await parent.save()
 }
 
-export const headerColor = async (parent, folder) => parent.headerColor || await solveHeaderColor(parent, folder) || '#ffffff'
+export const headerColor = async (parent, folder) => parent.headerColor || (await solveHeaderColor(parent, folder)) || '#ffffff'
 
 async function solveHeaderColor (parent, folder) {
   const color = await getImgColor(`${folder}/${parent.slug || parent.id}`)

@@ -17,5 +17,8 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en', 'es', 'de', 'it', 'pt-br', 'pt-pt', 'fr', 'ca', 'id'],
     localeDetection: false
+  },
+  experimental: {
+    newNextLinkBehavior: true
   }
 }

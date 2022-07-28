@@ -45,8 +45,8 @@ export function BasicCommentCarrousel (props) {
               {current.text}
               <br />
               <div className='mt-2'>
-                {current.album && <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span>}
-                {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`}><a className={styles.albumSpan}>{current.username}</a></Link></span>}
+                {current.album && <span> - <Link href={`/album/${current.album.id}`} className={styles.albumSpan}>{current.album.title}</Link></span>}
+                {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`} className={styles.albumSpan}>{current.username}</Link></span>}
               </div>
             </Col>
             {comments.length > 1 && <SideButton side='right' onClick={plusIndex} />}
@@ -114,68 +114,66 @@ export default function CommentCarrousel (props) {
   const current = comments[currentIndex]
   const plusIndex = () => setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1)
 
-  return (
-    <>
-      <Modal show={show} centered onHide={() => setShow(false)}>
-        <Modal.Body className='m-3'>
-          <Form onSubmit={submit} style={{ color: 'black' }}>
-            <Row>
-              <Form.Group as={Col} >
-                <FormControl required as='textarea' name='text' maxLength={300} defaultValue={selfComment ? selfComment.text : ''} />
-              </Form.Group>
-            </Row>
-            <Row className='mt-2'>
-              <Form.Group as={Col}>
-                <Form.Check type="checkbox" label={t('Comment_Anon')} name='anon' defaultChecked={selfComment ? selfComment.anon : false} />
-              </Form.Group>
-            </Row>
-            <Row className='mt-2'>
-              <Col className='mx-auto'>
-                <ButtonLoader loading={loadingComment} type='submit' color='primary'>{t('Save comment')}</ButtonLoader>
-              </Col>
-            </Row>
-          </Form>
-        </Modal.Body>
-      </Modal>
+  return <>
+    <Modal show={show} centered onHide={() => setShow(false)}>
+      <Modal.Body className='m-3'>
+        <Form onSubmit={submit} style={{ color: 'black' }}>
+          <Row>
+            <Form.Group as={Col} >
+              <FormControl required as='textarea' name='text' maxLength={300} defaultValue={selfComment ? selfComment.text : ''} />
+            </Form.Group>
+          </Row>
+          <Row className='mt-2'>
+            <Form.Group as={Col}>
+              <Form.Check type="checkbox" label={t('Comment_Anon')} name='anon' defaultChecked={selfComment ? selfComment.anon : false} />
+            </Form.Group>
+          </Row>
+          <Row className='mt-2'>
+            <Col className='mx-auto'>
+              <ButtonLoader loading={loadingComment} type='submit' color='primary'>{t('Save comment')}</ButtonLoader>
+            </Col>
+          </Row>
+        </Form>
+      </Modal.Body>
+    </Modal>
 
-      <Row>
-        <Col className='blackblock m-2'>
-          {current && (
-            <Row>
-              {comments.length > 1 && <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />}
-              <Col className='py-3' style={{ fontSize: '18px' }}>
-                {current.text}
-                <br />
-                <div className='mt-2'>
-                  {current.album && <span> - <Link href={`/album/${current.album.id}`}><a className={styles.albumSpan}>{current.album.title}</a></Link></span>}
-                  {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`}><a className={styles.albumSpan}>{current.username}</a></Link></span>}
-                </div>
-              </Col>
-              {comments.length > 1 && <SideButton side='right' onClick={plusIndex} />}
-            </Row>
-          )}
+    <Row>
+      <Col className='blackblock m-2'>
+        {current && (
+          <Row>
+            {comments.length > 1 && <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />}
+            <Col className='py-3' style={{ fontSize: '18px' }}>
+              {current.text}
+              <br />
+              <div className='mt-2'>
+                {current.album && <span> - <Link href={`/album/${current.album.id}`} className={styles.albumSpan}>{current.album.title}</Link></span>}
+                {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`} className={styles.albumSpan}>{current.username}</Link></span>}
+              </div>
+            </Col>
+            {comments.length > 1 && <SideButton side='right' onClick={plusIndex} />}
+          </Row>
+        )}
 
-          {ostId && (
-            <Row className='mt-3 justify-content-center'>
-              {user
-                ? (
-                  <Col xs={3}>
-                    <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                      {t(selfComment ? 'Edit comment' : 'Add comment')}
-                    </Button>
-                  </Col>
-                )
-                : (
-                  <Col xs='4'>
-                    <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                      {t('Comment_Login')}
-                    </Button>
-                  </Col>
-                )}
-            </Row>
-          )}
-        </Col>
-      </Row>
-    </>
-  )
+        {ostId && (
+          <Row className='mt-3 justify-content-center'>
+            {user
+              ? (
+                <Col xs={3}>
+                  <Button onClick={() => user ? setShow(true) : null} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                    {t(selfComment ? 'Edit comment' : 'Add comment')}
+                  </Button>
+                </Col>
+              )
+              : (
+                <Col xs='4'>
+                  <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                    {t('Comment_Login')}
+                  </Button>
+                </Col>
+              )}
+          </Row>
+        )}
+      </Col>
+    </Row>
+  </>
 }

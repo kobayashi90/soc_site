@@ -25,7 +25,7 @@ const limitXS = 5
   return { paths, fallback: 'blocking' }
 } */
 
-export async function /* getStaticProps */ getServerSideProps (context) {
+export async function getServerSideProps (context) {
   const { params, locale } = context
   const paramList = params?.params || []
   const page = paramList[0] || '1'
@@ -76,34 +76,45 @@ export default function LastAdded (props) {
         {currentListIndex > 0 && (
           <>
             <li className='page-item my-auto'>
-              <Link href={'/last-added/1'} scroll>
-                <a className='fas fa-angle-double-left align-middle nav-link' />
+              <Link
+                href={'/last-added/1'}
+                scroll
+                className='fas fa-angle-double-left align-middle nav-link'>
               </Link>
             </li>
             <li className='page-item my-auto'>
-              <Link href={`/last-added/${currentList[0] - 1}`} scroll>
-                <a className='fas fa-angle-left align-middle nav-link' />
+              <Link
+                href={`/last-added/${currentList[0] - 1}`}
+                scroll
+                className='fas fa-angle-left align-middle nav-link'>
               </Link>
             </li>
           </>
         )}
         {currentList.map(e => (
           <li className='page-item' key={e}>
-            <Link href={`/last-added/${e}`} scroll>
-              <a className={classNames(styles.pageLink, { disabled: e === parseInt(page) }, 'nav-link')} >{e}</a>
+            <Link
+              href={`/last-added/${e}`}
+              scroll
+              className={classNames(styles.pageLink, { disabled: e === parseInt(page) }, 'nav-link')}>
+              {e}
             </Link>
           </li>
         ))}
         {currentListIndex !== pageList.length - 1 && (
           <>
             <li className='page-item my-auto'>
-              <Link href={`/last-added/${currentList[currentList.length - 1] + 1}`} scroll>
-                <a className='fas fa-angle-right align-middle nav-link' />
+              <Link
+                href={`/last-added/${currentList[currentList.length - 1] + 1}`}
+                scroll
+                className='fas fa-angle-right align-middle nav-link'>
               </Link>
             </li>
             <li className='page-item my-auto'>
-              <Link href={`/last-added/${fullPageList[fullPageList.length - 1]}`} scroll>
-                <a className='fas fa-angle-double-right align-middle nav-link' />
+              <Link
+                href={`/last-added/${fullPageList[fullPageList.length - 1]}`}
+                scroll
+                className='fas fa-angle-double-right align-middle nav-link'>
               </Link>
             </li>
           </>

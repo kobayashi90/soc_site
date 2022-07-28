@@ -8,7 +8,7 @@ import { initializeApollo } from '@/components/ApolloClient'
 
 import style from '../../styles/letter.module.scss'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function getServerSideProps () {
   const albums = {}
   const client = initializeApollo()
   const { data } = await client.query({
@@ -55,8 +55,8 @@ export default function AlbumList ({ albums, letters }) {
                   .sort((a, b) => a.title > b.title)
                   .map(({ id, title, releaseDate, categories }) =>
                     <Col key={id}>
-                      <Link href={`/album/${id}`} >
-                        <a className='text-center mt-2 link'>{title} ({DateTime.fromISO(releaseDate).year}) ({categories.map(c => c.name).join(' / ')})</a>
+                      <Link href={`/album/${id}`} className='text-center mt-2 link'>
+                        {title}({DateTime.fromISO(releaseDate).year}) ({categories.map(c => c.name).join(' / ')})
                       </Link>
                     </Col>
                   )}

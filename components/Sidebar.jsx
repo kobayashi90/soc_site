@@ -31,8 +31,10 @@ function GetLucky () {
 
   return (
     <h1 className='mx-auto text-center my-2'>
-      <Link href={data ? `/album/${data.getRandomAlbum[0].id}` : ''}>
-        <a className='text-uppercase'>{t('Get Lucky')}</a>
+      <Link
+        href={data ? `/album/${data.getRandomAlbum[0].id}` : ''}
+        className='text-uppercase'>
+        {t('Get Lucky')}
       </Link>
     </h1>
   )
@@ -56,8 +58,8 @@ export default function Sidebar (props) {
       </Row>
       <Row className='side-menu mb-3'>
         <h1 className='mx-auto text-center my-2'>
-          <Link href='/holy12'>
-            <a className='text-uppercase'>{t('Random Pull')}</a>
+          <Link href='/holy12' className='text-uppercase'>
+            {t('Random Pull')}
           </Link>
         </h1>
       </Row>

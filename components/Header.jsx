@@ -266,7 +266,7 @@ function RegisterProfileButton (props) {
       <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
         {user
           ? (
-            <Link href={`/profile/${user.username}`}><a><Button variant="primary">{t('Profile')}</Button></a></Link>
+            <Link href={`/profile/${user.username}`}><Button variant="primary">{t('Profile')}</Button></Link>
           )
           : (
             <Button onClick={() => setRegister(true)} className='me-0' variant="primary">{t('Register')}</Button>
@@ -323,57 +323,55 @@ export default function Header () {
 
   const { data: headerData } = useQuery(queryHeader)
 
-  return (
-    <>
-      <header>
-        <div id={styles.bannerBg} style={headerData ? { backgroundImage: `url('/_next/image?w=3840&q=100&url=${`https://cdn.sittingonclouds.net/live/${headerData.config.value}.png`}` } : {}}>
-          <Container>
-            <Row className='h-100'>
-              <Col className='my-auto'>
-                <Link href="/">
-                  <a><Image alt='SOC Logo' src={router.locale === 'es' ? logoES : logo} height={150} width={265} /></a>
-                </Link>
-              </Col>
+  return <>
+    <header>
+      <div id={styles.bannerBg} style={headerData ? { backgroundImage: `url('/_next/image?w=3840&q=100&url=${`https://cdn.sittingonclouds.net/live/${headerData.config.value}.png`}` } : {}}>
+        <Container>
+          <Row className='h-100'>
+            <Col className='my-auto'>
+              <Link href="/">
+                <Image alt='SOC Logo' src={router.locale === 'es' ? logoES : logo} height={150} width={265} />
+              </Link>
+            </Col>
 
-              <LangSelector />
-              <RegisterProfileButton />
-              <LoginButton />
-            </Row>
-          </Container>
-        </div>
+            <LangSelector />
+            <RegisterProfileButton />
+            <LoginButton />
+          </Row>
+        </Container>
+      </div>
 
-        <Navbar expand='sm' bg="dark" variant="dark" className='py-md-0'>
-          <Container>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="me-auto d-flex align-items-center">
-                <RegisterProfileButton navMobile />
-                <LoginButton navMobile />
-                <NavLink href='/' name='Home' />
-                <NavLink href='/last-added' name='Last Added_header' />
-                <NavLink href='/album/list' name='Album List' />
-                <Dropdown name='Games' items={[
-                  { name: 'Albums', href: '/game' },
-                  { name: 'Series', href: '/series/list' },
-                  { name: 'Publishers', href: '/publisher/list' },
-                  { name: 'Platforms', href: '/platform/list' },
-                  { name: 'Game List', href: '/game/list' }
-                ]} />
-                <Dropdown name='Animation' items={[
-                  { name: 'Albums', href: '/anim' },
-                  { name: 'Animation List', href: '/anim/list' },
-                  { name: 'Studios', href: '/studio/list' }
-                ]} />
-                <NavLink href='/contact' name='Contact' />
-                {user && user.pages.map(p => <NavLink key={p.url} href={p.url} name={p.name} />)}
-              </Nav>
-            </Navbar.Collapse>
-            <SearchBar />
-          </Container>
-        </Navbar>
-      </header>
-    </>
-  )
+      <Navbar expand='sm' bg="dark" variant="dark" className='py-md-0'>
+        <Container>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto d-flex align-items-center">
+              <RegisterProfileButton navMobile />
+              <LoginButton navMobile />
+              <NavLink href='/' name='Home' />
+              <NavLink href='/last-added' name='Last Added_header' />
+              <NavLink href='/album/list' name='Album List' />
+              <Dropdown name='Games' items={[
+                { name: 'Albums', href: '/game' },
+                { name: 'Series', href: '/series/list' },
+                { name: 'Publishers', href: '/publisher/list' },
+                { name: 'Platforms', href: '/platform/list' },
+                { name: 'Game List', href: '/game/list' }
+              ]} />
+              <Dropdown name='Animation' items={[
+                { name: 'Albums', href: '/anim' },
+                { name: 'Animation List', href: '/anim/list' },
+                { name: 'Studios', href: '/studio/list' }
+              ]} />
+              <NavLink href='/contact' name='Contact' />
+              {user && user.pages.map(p => <NavLink key={p.url} href={p.url} name={p.name} />)}
+            </Nav>
+          </Navbar.Collapse>
+          <SearchBar />
+        </Container>
+      </Navbar>
+    </header>
+  </>
 }
 
 function Dropdown (props) {
@@ -383,7 +381,7 @@ function Dropdown (props) {
   return (
     <NavDropdown title={t(name)} className={classNames(styles.navLink, styles.dropMenu)}>
       {items.map(({ href, name }, i) => (
-        <Link key={i} href={href} passHref>
+        <Link key={i} href={href} passHref legacyBehavior>
           <NavDropdown.Item>{t(name)}</NavDropdown.Item>
         </Link>
       ))}
@@ -399,7 +397,7 @@ function NavLink (props) {
   return onClick
     ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{title}</a>
     : (
-      <Link href={href} passHref>
+      <Link href={href} passHref legacyBehavior>
         <Nav.Link className={classNames(styles.navLink, className)}>{title}</Nav.Link>
       </Link>
     )

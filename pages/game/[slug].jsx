@@ -39,7 +39,7 @@ const query = gql`
       }
     }`
 
-export async function /* getStaticProps */ getServerSideProps ({ params }) {
+export async function getServerSideProps ({ params }) {
   const { slug } = params
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { slug } })

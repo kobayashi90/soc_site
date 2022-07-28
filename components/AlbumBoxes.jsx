@@ -29,7 +29,7 @@ export default function AlbumBox (props) {
         ? <BoxContent />
         : (
           <Link href={`/${type}/${id}`}>
-            <a><BoxContent /></a>
+            <BoxContent />
           </Link>
         )
       }

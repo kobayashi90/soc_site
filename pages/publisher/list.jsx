@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { initializeApollo } from '@/components/ApolloClient'
 import style from '../../styles/letter.module.scss'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
@@ -48,8 +48,8 @@ export default function PublisherList ({ letters, publishers }) {
             <Row className='pb-3 pl-2'>
               {publishers[letter].map(({ id, name }) =>
                 <Col key={id} xs={3} className='d-flex flex-column'>
-                  <Link href={`/publisher/${id}`} >
-                    <a className='listItem mt-2 link' >{name}</a>
+                  <Link href={`/publisher/${id}`} className='listItem mt-2 link'>
+                    {name}
                   </Link>
                 </Col>
               )}

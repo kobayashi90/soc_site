@@ -14,7 +14,7 @@ import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl, PLACEHOLDER } from '@/components/utils'
 import Loader, { ButtonLoader } from '@/components/Loader'
-import { initializeApollo, isGithub } from '@/components/ApolloClient'
+import { initializeApollo } from '@/components/ApolloClient'
 import CommentCarrousel from '@/components/CommentsCarrousel'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
 
@@ -94,31 +94,6 @@ query downloads ($id: ID!) {
 }
 `
 
-export async function getStaticPaths () {
-  if (isGithub) return { paths: [], fallback: 'blocking' }
-
-  const client = initializeApollo()
-  const { data } = await client.query({
-    query: gql`
-      query searchAlbum($limit: Int, $page: Int ){
-        searchAlbum(
-          limit: $limit
-          page: $page
-        ){
-          rows { id }
-        }
-      }
-    `,
-    variables: { limit: 40 }
-  })
-
-  const paths = data.searchAlbum.rows.map(({ id }) => ({
-    params: { id }
-  }))
-
-  return { paths, fallback: 'blocking' }
-}
-
 const mutationRating = gql`
   mutation ($ostId: ID!, $score: Int!){
     rateAlbum(ostId: $ostId, score: $score)
@@ -197,7 +172,7 @@ function StarCounter (props) {
   )
 }
 
-export async function getStaticProps (context) {
+export async function getServerSideProps (context) {
   const { params, locale } = context
   const { id } = params
   const client = initializeApollo()

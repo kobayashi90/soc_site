@@ -8,7 +8,7 @@ import classname from 'classnames'
 import Sidebar from '@/components/Sidebar'
 import style from '../../styles/letter.module.scss'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
