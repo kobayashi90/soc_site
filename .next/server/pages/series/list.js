@@ -52,7 +52,7 @@ _components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__ = (__webpack_async_depende
 
 
 
-async function /* getStaticProps */ getServerSideProps() {
+async function getServerSideProps() {
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
         query: _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
@@ -118,10 +118,8 @@ function SeriesList({ series , letters , seriesList  }) {
                                         }),
                                         series[letter].map(({ slug , name  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                 href: `/series/${slug}`,
-                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                    className: "text-center mt-2 link",
-                                                    children: name
-                                                })
+                                                className: "text-center mt-2 link",
+                                                children: name
                                             }, slug))
                                     ]
                                 }, letter))
@@ -137,17 +135,15 @@ function SeriesList({ series , letters , seriesList  }) {
                                         },
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                             href: `/series/${slug}`,
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
-                                                    alt: slug,
-                                                    src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_7__/* .getImageUrl */ .Jn)(slug, "series"),
-                                                    layout: "fill",
-                                                    objectFit: "contain",
-                                                    width: 300,
-                                                    height: 100,
-                                                    placeholder: "blur",
-                                                    blurDataURL: placeholder
-                                                })
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                                alt: slug,
+                                                src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_7__/* .getImageUrl */ .Jn)(slug, "series"),
+                                                layout: "fill",
+                                                objectFit: "contain",
+                                                width: 300,
+                                                height: 100,
+                                                placeholder: "blur",
+                                                blurDataURL: placeholder
                                             })
                                         })
                                     }, slug))

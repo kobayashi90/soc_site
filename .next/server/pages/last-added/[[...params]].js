@@ -69,7 +69,7 @@ const limitXS = 5;
     { params: { params: ['1'] } }
   ]
   return { paths, fallback: 'blocking' }
-} */ async function /* getStaticProps */ getServerSideProps(context) {
+} */ async function getServerSideProps(context) {
     const { params , locale  } = context;
     const paramList = params?.params || [];
     const page = paramList[0] || "1";
@@ -129,9 +129,7 @@ function LastAdded(props) {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
                                 href: "/last-added/1",
                                 scroll: true,
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-double-left align-middle nav-link"
-                                })
+                                className: "fas fa-angle-double-left align-middle nav-link"
                             })
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
@@ -139,9 +137,7 @@ function LastAdded(props) {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
                                 href: `/last-added/${currentList[0] - 1}`,
                                 scroll: true,
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-left align-middle nav-link"
-                                })
+                                className: "fas fa-angle-left align-middle nav-link"
                             })
                         })
                     ]
@@ -151,12 +147,10 @@ function LastAdded(props) {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
                             href: `/last-added/${e}`,
                             scroll: true,
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                className: classnames__WEBPACK_IMPORTED_MODULE_7___default()((_styles_LastAdded_module_scss__WEBPACK_IMPORTED_MODULE_11___default().pageLink), {
-                                    disabled: e === parseInt(page)
-                                }, "nav-link"),
-                                children: e
-                            })
+                            className: classnames__WEBPACK_IMPORTED_MODULE_7___default()((_styles_LastAdded_module_scss__WEBPACK_IMPORTED_MODULE_11___default().pageLink), {
+                                disabled: e === parseInt(page)
+                            }, "nav-link"),
+                            children: e
                         })
                     }, e)),
                 currentListIndex !== pageList.length - 1 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
@@ -166,9 +160,7 @@ function LastAdded(props) {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
                                 href: `/last-added/${currentList[currentList.length - 1] + 1}`,
                                 scroll: true,
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-right align-middle nav-link"
-                                })
+                                className: "fas fa-angle-right align-middle nav-link"
                             })
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
@@ -176,9 +168,7 @@ function LastAdded(props) {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
                                 href: `/last-added/${fullPageList[fullPageList.length - 1]}`,
                                 scroll: true,
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-double-right align-middle nav-link"
-                                })
+                                className: "fas fa-angle-double-right align-middle nav-link"
                             })
                         })
                     ]
@@ -269,14 +259,6 @@ module.exports = require("classnames");
 
 "use strict";
 module.exports = require("form-serialize");
-
-/***/ }),
-
-/***/ 2748:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("luxon");
 
 /***/ }),
 
@@ -581,6 +563,14 @@ module.exports = require("universal-cookie");
 
 "use strict";
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("luxon");;
 
 /***/ })
 

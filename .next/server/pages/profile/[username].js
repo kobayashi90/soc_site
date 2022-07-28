@@ -22,8 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(358);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2748);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2353);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5675);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9578);
@@ -37,8 +36,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1292);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(968);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_13__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__]);
-([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([luxon__WEBPACK_IMPORTED_MODULE_4__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__]);
+([luxon__WEBPACK_IMPORTED_MODULE_4__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -408,13 +407,6 @@ module.exports = require("form-serialize");
 
 /***/ }),
 
-/***/ 2748:
-/***/ ((module) => {
-
-module.exports = require("luxon");
-
-/***/ }),
-
 /***/ 3280:
 /***/ ((module) => {
 
@@ -678,6 +670,13 @@ module.exports = require("universal-cookie");
 /***/ ((module) => {
 
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+module.exports = import("luxon");;
 
 /***/ })
 

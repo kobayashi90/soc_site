@@ -66,7 +66,7 @@ query searchAlbum($limit: Int){
   }
 }
 `;
-async function /* getStaticProps */ getServerSideProps(context) {
+async function getServerSideProps(context) {
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
         query,
@@ -84,11 +84,9 @@ async function /* getStaticProps */ getServerSideProps(context) {
 }
 const BlackButton = ({ href , name  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
         href: href,
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
-                className: "text-center blackButton px-3 py-2",
-                children: name
-            })
+        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
+            className: "text-center blackButton px-3 py-2",
+            children: name
         })
     });
 function Home({ added , released  }) {
@@ -158,11 +156,9 @@ function Home({ added , released  }) {
                             md: 12,
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
                                 href: "/last-added",
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                        className: "text-center blackButton",
-                                        children: t("More last added")
-                                    })
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                    className: "text-center blackButton",
+                                    children: t("More last added")
                                 })
                             })
                         })
@@ -200,13 +196,6 @@ module.exports = require("classnames");
 /***/ ((module) => {
 
 module.exports = require("form-serialize");
-
-/***/ }),
-
-/***/ 2748:
-/***/ ((module) => {
-
-module.exports = require("luxon");
 
 /***/ }),
 
@@ -473,6 +462,13 @@ module.exports = require("universal-cookie");
 /***/ ((module) => {
 
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+module.exports = import("luxon");;
 
 /***/ })
 

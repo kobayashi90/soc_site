@@ -47,7 +47,7 @@ _components_ApolloClient__WEBPACK_IMPORTED_MODULE_5__ = (__webpack_async_depende
 
 
 
-async function /* getStaticProps */ getServerSideProps() {
+async function getServerSideProps() {
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_5__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
         query: _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
@@ -111,10 +111,8 @@ function GameList({ letters , studios  }) {
                                         className: "d-flex flex-column",
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
                                             href: `/studio/${slug}`,
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                className: "listItem mt-2 link",
-                                                children: name
-                                            })
+                                            className: "listItem mt-2 link",
+                                            children: name
                                         })
                                     }, slug))
                             })

@@ -95,8 +95,15 @@ function AdminOst() {
                 xs: 10,
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(OstTable, {}),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Highlight, {}),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Banner, {})
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Highlight, {}),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Banner, {})
+                        ]
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SelectBanner, {})
+                    })
                 ]
             })
         ]
@@ -233,6 +240,7 @@ function OstTable() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: `/admin/album/${id}`,
                                 passHref: true,
+                                legacyBehavior: true,
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                                     style: {
                                         cursor: "pointer"
@@ -243,6 +251,7 @@ function OstTable() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: `/admin/album/${id}`,
                                 passHref: true,
+                                legacyBehavior: true,
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                                     style: {
                                         cursor: "pointer"
@@ -253,6 +262,7 @@ function OstTable() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: `/admin/album/${id}`,
                                 passHref: true,
+                                legacyBehavior: true,
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                                     style: {
                                         cursor: "pointer"
@@ -290,40 +300,30 @@ function OstTable() {
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: "/admin/1",
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-double-left align-middle nav-link"
-                                })
+                                className: "fas fa-angle-double-left align-middle nav-link"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: `/admin/${currentList[0] - 1}`,
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-left align-middle nav-link"
-                                })
+                                className: "fas fa-angle-left align-middle nav-link"
                             })
                         ]
                     }),
                     currentList.map((e)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                             href: `/admin/${e}`,
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()({
-                                    disabled: e === parseInt(page)
-                                }, "nav-link"),
-                                children: e
-                            })
+                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()({
+                                disabled: e === parseInt(page)
+                            }, "nav-link"),
+                            children: e
                         }, e)),
                     currentListIndex !== pageList.length - 1 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: `/admin/${currentList[currentList.length - 1] + 1}`,
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-right align-middle nav-link"
-                                })
+                                className: "fas fa-angle-right align-middle nav-link"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: `/admin/${fullPageList[fullPageList.length - 1]}`,
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    className: "fas fa-angle-double-right align-middle nav-link"
-                                })
+                                className: "fas fa-angle-double-right align-middle nav-link"
                             })
                         ]
                     })
@@ -351,6 +351,7 @@ function OstTable() {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
                                 href: "/admin/album/add",
                                 passHref: true,
+                                legacyBehavior: true,
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
                                     variant: "primary",
                                     children: "Add Album"
@@ -475,7 +476,7 @@ function Highlight() {
         });
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-        md: 12,
+        md: 6,
         className: "mt-3 site-form blackblock p-3",
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
@@ -515,7 +516,7 @@ function Banner() {
         ev.preventDefault();
     }
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-        md: 12,
+        md: 6,
         className: "mt-3 site-form blackblock p-3",
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
             children: [
@@ -531,6 +532,77 @@ function Banner() {
                 })
             ]
         })
+    });
+}
+function SelectBanner() {
+    const queryConfig = _apollo_client__WEBPACK_IMPORTED_MODULE_6__.gql`
+      query {
+        banners
+      }
+    `;
+    const mutation = _apollo_client__WEBPACK_IMPORTED_MODULE_6__.gql`
+      mutation ($name: String!){
+        selectBanner(name: $name)
+      }
+    `;
+    const { loadingQuery , data , error , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_6__.useQuery)(queryConfig);
+    const [mutateConfig, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_6__.useMutation)(mutation);
+    if (error) {
+        console.log(error);
+        react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error("Hightlight: Failed to fetch server info");
+    }
+    function handleSelect(name) {
+        mutateConfig({
+            variables: {
+                name: name.replace(".png", "")
+            }
+        }).then((results)=>{
+            react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.success("Updated banner!");
+            refetch();
+        }).catch((err)=>{
+            console.log(err);
+            react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error("Failed to update banner");
+        });
+    }
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+        md: 12,
+        className: "p-0 my-3 site-form blackblock position-relative",
+        children: [
+            (loading || loadingQuery) && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "p-0 position-absolute h-100 w-100",
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "p-0 blackblock position-absolute h-100 w-100",
+                        style: {
+                            backgroundColor: "black",
+                            opacity: 0.65
+                        }
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
+                        className: "m-auto"
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "p-3",
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
+                        children: "Available banners:"
+                    }),
+                    data?.banners.map((b)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "my-2",
+                            onClick: ()=>handleSelect(b),
+                            style: {
+                                cursor: "pointer",
+                                height: "110px",
+                                width: "100%",
+                                backgroundSize: "cover",
+                                backgroundImage: `url('/_next/image?w=3840&q=25&url=${`https://cdn.sittingonclouds.net/live/${b}`}`
+                            }
+                        }, b))
+                ]
+            })
+        ]
     });
 }
 

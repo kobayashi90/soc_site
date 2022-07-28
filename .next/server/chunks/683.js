@@ -86,7 +86,7 @@ function RequestCheck(props) {
                         className: "d-flex align-items-center ps-0",
                         children: selected && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                             className: "",
-                            children: selected.state === "complete" ? "Request found!  Already complete tho \xaf\\_(\u30C4)_/\xaf" : "Request found!"
+                            children: selected.state === "complete" ? "Request found!  Already complete tho \xaf\\_(ツ)_/\xaf" : "Request found!"
                         })
                     })
                 ]

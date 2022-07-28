@@ -32,7 +32,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 
-async function /* getStaticProps */ getServerSideProps({ params  }) {
+async function getServerSideProps({ params  }) {
     const { id  } = params;
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_5__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
@@ -99,10 +99,8 @@ function AlbumList({ name , games  }) {
                                     children: gameList[letter].sort((a, b)=>a.title > b.title).map(({ slug , name  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
                                                 href: `/game/${slug}`,
-                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                    className: "text-center mt-2 link",
-                                                    children: name
-                                                })
+                                                className: "text-center mt-2 link",
+                                                children: name
                                             })
                                         }, slug))
                                 })
@@ -138,13 +136,6 @@ module.exports = require("classnames");
 /***/ ((module) => {
 
 module.exports = require("form-serialize");
-
-/***/ }),
-
-/***/ 2748:
-/***/ ((module) => {
-
-module.exports = require("luxon");
 
 /***/ }),
 
@@ -411,6 +402,13 @@ module.exports = require("universal-cookie");
 /***/ ((module) => {
 
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+module.exports = import("luxon");;
 
 /***/ })
 

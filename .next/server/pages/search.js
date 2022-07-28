@@ -247,38 +247,36 @@ function SearchSection(props) {
                         md: 6,
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
                             href: `/${type}/${item.id}`,
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                className: (_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default().a),
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
-                                    className: classnames__WEBPACK_IMPORTED_MODULE_4___default()((_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default().result), "mx-1 d-flex flex-row mb-3"),
-                                    children: [
-                                        type && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
-                                            md: "auto",
-                                            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()((_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default().cover), "px-0"),
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                                objectFit: "contain",
-                                                alt: item.title,
-                                                src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_8__/* .getImageUrl */ .Jn)(item.id, type),
-                                                width: 180,
-                                                height: 180,
-                                                placeholder: "blur",
-                                                blurDataURL: item.placeholder
-                                            })
-                                        }),
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
-                                            className: "p-2 px-4 my-auto",
-                                            children: [
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
-                                                    children: item.title
-                                                }),
-                                                item.releaseDate && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                    className: "card-text mt-2",
-                                                    children: item.releaseDate
-                                                })
-                                            ]
+                            className: (_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default().a),
+                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Row, {
+                                className: classnames__WEBPACK_IMPORTED_MODULE_4___default()((_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default().result), "mx-1 d-flex flex-row mb-3"),
+                                children: [
+                                    type && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
+                                        md: "auto",
+                                        className: classnames__WEBPACK_IMPORTED_MODULE_4___default()((_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default().cover), "px-0"),
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                            objectFit: "contain",
+                                            alt: item.title,
+                                            src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_8__/* .getImageUrl */ .Jn)(item.id, type),
+                                            width: 180,
+                                            height: 180,
+                                            placeholder: "blur",
+                                            blurDataURL: item.placeholder
                                         })
-                                    ]
-                                })
+                                    }),
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
+                                        className: "p-2 px-4 my-auto",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
+                                                children: item.title
+                                            }),
+                                            item.releaseDate && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                className: "card-text mt-2",
+                                                children: item.releaseDate
+                                            })
+                                        ]
+                                    })
+                                ]
                             })
                         })
                     }, item.id))
@@ -310,13 +308,6 @@ module.exports = require("classnames");
 /***/ ((module) => {
 
 module.exports = require("form-serialize");
-
-/***/ }),
-
-/***/ 2748:
-/***/ ((module) => {
-
-module.exports = require("luxon");
 
 /***/ }),
 
@@ -583,6 +574,13 @@ module.exports = require("universal-cookie");
 /***/ ((module) => {
 
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+module.exports = import("luxon");;
 
 /***/ })
 

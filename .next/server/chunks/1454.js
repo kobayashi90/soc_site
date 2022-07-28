@@ -9,9 +9,9 @@ exports.modules = {
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Uk": () => (/* binding */ useApollo),
-/* harmony export */   "in": () => (/* binding */ initializeApollo),
-/* harmony export */   "wE": () => (/* binding */ isGithub)
+/* harmony export */   "in": () => (/* binding */ initializeApollo)
 /* harmony export */ });
+/* unused harmony export isGithub */
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9114);

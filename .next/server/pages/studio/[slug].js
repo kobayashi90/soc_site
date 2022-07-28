@@ -47,7 +47,7 @@ query ($slug: String!) {
   }
 }`;
 const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_4__/* .getImageUrl */ .Jn)(id, "studio")}`;
-async function /* getStaticProps */ getServerSideProps({ params , req  }) {
+async function getServerSideProps({ params , req  }) {
     const { slug  } = params;
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_3__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
@@ -137,13 +137,6 @@ module.exports = require("classnames");
 /***/ ((module) => {
 
 module.exports = require("form-serialize");
-
-/***/ }),
-
-/***/ 2748:
-/***/ ((module) => {
-
-module.exports = require("luxon");
 
 /***/ }),
 
@@ -410,6 +403,13 @@ module.exports = require("universal-cookie");
 /***/ ((module) => {
 
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+module.exports = import("luxon");;
 
 /***/ })
 

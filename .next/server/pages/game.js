@@ -32,7 +32,7 @@ _components_ApolloClient__WEBPACK_IMPORTED_MODULE_4__ = (__webpack_async_depende
 
 
 
-async function /* getStaticProps */ getServerSideProps() {
+async function getServerSideProps() {
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_4__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
         query: _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
@@ -63,11 +63,9 @@ function Button({ name , href  }) {
         className: "mt-3 flex-grow-1",
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
             href: href,
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
-                    className: "text-center blackButton px-3 py-2",
-                    children: name
-                })
+            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
+                className: "text-center blackButton px-3 py-2",
+                children: name
             })
         })
     });

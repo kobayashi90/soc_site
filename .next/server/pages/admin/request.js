@@ -432,7 +432,7 @@ function RequestTable(props) {
                         style: {
                             textAlign: "center"
                         },
-                        children: donator ? "\u2B50" : ""
+                        children: donator ? "⭐" : ""
                     }),
                     isHold && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                         children: reason

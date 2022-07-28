@@ -524,11 +524,9 @@ function RegisterProfileButton(props) {
                 className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
                 children: user ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                     href: `/profile/${user.username}`,
-                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
-                            variant: "primary",
-                            children: t("Profile")
-                        })
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
+                        variant: "primary",
+                        children: t("Profile")
                     })
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
                     onClick: ()=>setRegister(true),
@@ -653,13 +651,11 @@ function Header() {
                                     className: "my-auto",
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                                         href: "/",
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_3___default()), {
-                                                alt: "SOC Logo",
-                                                src: router.locale === "es" ? _public_img_assets_logo_es_png__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z : _public_img_assets_logo_png__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z,
-                                                height: 150,
-                                                width: 265
-                                            })
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_3___default()), {
+                                            alt: "SOC Logo",
+                                            src: router.locale === "es" ? _public_img_assets_logo_es_png__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z : _public_img_assets_logo_png__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z,
+                                            height: 150,
+                                            width: 265
                                         })
                                     })
                                 }),
@@ -773,6 +769,7 @@ function Dropdown(props) {
         children: items.map(({ href , name  }, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                 href: href,
                 passHref: true,
+                legacyBehavior: true,
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.NavDropdown.Item, {
                     children: t(name)
                 })
@@ -790,6 +787,7 @@ function NavLink(props) {
     }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
         href: href,
         passHref: true,
+        legacyBehavior: true,
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Nav.Link, {
             className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), className),
             children: title
@@ -929,16 +927,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(3082);
 /* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_ga__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2748);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2353);
 /* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1454);
 /* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1292);
 /* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(1331);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1932);
 /* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6153);
 /* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(universal_cookie__WEBPACK_IMPORTED_MODULE_15__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__]);
-([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([luxon__WEBPACK_IMPORTED_MODULE_10__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__]);
+([luxon__WEBPACK_IMPORTED_MODULE_10__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -1041,11 +1038,11 @@ function MyApp(context) {
                     }, "url"),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:title",
-                        content: "Sitting on Clouds \u2014 High Quality soundtrack library"
+                        content: "Sitting on Clouds — High Quality soundtrack library"
                     }, "title"),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:description",
-                        content: "Largest Video Game & Animation Soundtrack \u30B5\u30A6\u30F3\u30C9\u30C8\u30E9\u30C3\u30AF Archive"
+                        content: "Largest Video Game & Animation Soundtrack サウンドトラック Archive"
                     }, "desc"),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         property: "og:image",

@@ -107,10 +107,8 @@ function BasicCommentCarrousel(props) {
                                                 " - ",
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                     href: `/album/${current.album.id}`,
-                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                        className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
-                                                        children: current.album.title
-                                                    })
+                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                    children: current.album.title
                                                 })
                                             ]
                                         }),
@@ -119,10 +117,8 @@ function BasicCommentCarrousel(props) {
                                                 " - ",
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                     href: `/profile/${current.username}`,
-                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                        className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
-                                                        children: current.username
-                                                    })
+                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                    children: current.username
                                                 })
                                             ]
                                         })
@@ -285,10 +281,8 @@ function CommentCarrousel(props) {
                                                         " - ",
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                             href: `/album/${current.album.id}`,
-                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                                className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
-                                                                children: current.album.title
-                                                            })
+                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                            children: current.album.title
                                                         })
                                                     ]
                                                 }),
@@ -297,10 +291,8 @@ function CommentCarrousel(props) {
                                                         " - ",
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                             href: `/profile/${current.username}`,
-                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                                                className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
-                                                                children: current.username
-                                                            })
+                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                            children: current.username
                                                         })
                                                     ]
                                                 })

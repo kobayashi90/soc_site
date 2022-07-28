@@ -95,9 +95,6 @@ function Image(_param) {
         }
     }
     src = typeof src === "string" ? src : staticSrc;
-    const widthInt = getInt(width);
-    const heightInt = getInt(height);
-    const qualityInt = getInt(quality);
     let isLazy = !priority && (loading === "lazy" || typeof loading === "undefined");
     if (src.startsWith("data:") || src.startsWith("blob:")) {
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
@@ -160,6 +157,9 @@ function Image(_param) {
         objectFit,
         objectPosition
     };
+    let widthInt = getInt(width);
+    let heightInt = getInt(height);
+    const qualityInt = getInt(quality);
     if (false) {}
     const imgStyle = Object.assign({}, style, layoutStyle);
     const blurStyle = placeholder === "blur" && !blurComplete ? {
@@ -371,8 +371,8 @@ function _objectWithoutPropertiesLoose(source, excluded) {
     }
     return target;
 }
-const { experimentalRemotePatterns =[] , experimentalUnoptimized  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false} || {};
-const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","experimentalLayoutRaw":false};
+const { experimentalRemotePatterns =[] , experimentalUnoptimized  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default"} || {};
+const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default"};
 const loadedImageURLs = new Set();
 const allImgs = new Map();
 let perfObserver;
@@ -582,6 +582,7 @@ const ImageElement = (_param)=>{
         className: className,
         style: _extends({}, imgStyle, blurStyle),
         ref: (0, _react).useCallback((img)=>{
+            if (false) {}
             setIntersection(img);
             if (img == null ? void 0 : img.complete) {
                 handleLoading(img, srcString, layout, placeholder, onLoadingCompleteRef, setBlurComplete);

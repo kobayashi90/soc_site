@@ -80,10 +80,8 @@ function GetLucky() {
         className: "mx-auto text-center my-2",
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
             href: data ? `/album/${data.getRandomAlbum[0].id}` : "",
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                className: "text-uppercase",
-                children: t("Get Lucky")
-            })
+            className: "text-uppercase",
+            children: t("Get Lucky")
         })
     });
 }
@@ -116,10 +114,8 @@ function Sidebar(props) {
                     className: "mx-auto text-center my-2",
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
                         href: "/holy12",
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                            className: "text-uppercase",
-                            children: t("Random Pull")
-                        })
+                        className: "text-uppercase",
+                        children: t("Random Pull")
                     })
                 })
             }),

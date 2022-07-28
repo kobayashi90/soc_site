@@ -34,7 +34,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 
-async function /* getStaticProps */ getServerSideProps(context) {
+async function getServerSideProps(context) {
     const { locale  } = context;
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_4__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
@@ -69,11 +69,9 @@ function Button(props) {
         className: "mt-3 flex-grow-1",
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
             href: href,
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
-                    className: "text-center blackButton d-flex align-items-center justify-content-center px-3 py-2",
-                    children: t(name)
-                })
+            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
+                className: "text-center blackButton d-flex align-items-center justify-content-center px-3 py-2",
+                children: t(name)
             })
         })
     });
@@ -150,13 +148,6 @@ module.exports = require("classnames");
 /***/ ((module) => {
 
 module.exports = require("form-serialize");
-
-/***/ }),
-
-/***/ 2748:
-/***/ ((module) => {
-
-module.exports = require("luxon");
 
 /***/ }),
 
@@ -423,6 +414,13 @@ module.exports = require("universal-cookie");
 /***/ ((module) => {
 
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+module.exports = import("luxon");;
 
 /***/ })
 

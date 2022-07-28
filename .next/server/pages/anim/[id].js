@@ -107,7 +107,7 @@ const { data } = await client.query({
   }))
 
   return { paths, fallback: 'blocking' }
-} */ async function /* getStaticProps */ getServerSideProps(context) {
+} */ async function getServerSideProps(context) {
     const { params , locale  } = context;
     const { id  } = params;
     const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_9__/* .initializeApollo */ ["in"])();
@@ -297,14 +297,6 @@ module.exports = require("classnames");
 
 "use strict";
 module.exports = require("form-serialize");
-
-/***/ }),
-
-/***/ 2748:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("luxon");
 
 /***/ }),
 
@@ -609,6 +601,14 @@ module.exports = require("universal-cookie");
 
 "use strict";
 module.exports = import("apollo-upload-client");;
+
+/***/ }),
+
+/***/ 2353:
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("luxon");;
 
 /***/ })
 
