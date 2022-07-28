@@ -59,25 +59,23 @@ function AlbumBox (props) {
         padding: '2px'
       }}>
         <Link href={coming ? '' : `/album/${id}`}>
-          <a>
-            <Row>
-              <Col xs={3}>
-                <div className='position-relative w-100 h-100'>
-                  <Image
-                    layout='responsive'
-                    height={150}
-                    width={150}
-                    placeholder='blur' blurDataURL={placeholder}
-                    alt={title} src={getImageUrl(id, 'album')} />
-                </div>
-              </Col>
-              <Col>
-                <div className='ost-list-text text-wrap my-auto px-1 py-2'>
-                  {coming ? 'Coming Soon' : title}
-                </div>
-              </Col>
-            </Row>
-          </a>
+          <Row>
+            <Col xs={3}>
+              <div className='position-relative w-100 h-100'>
+                <Image
+                  layout='responsive'
+                  height={150}
+                  width={150}
+                  placeholder='blur' blurDataURL={placeholder}
+                  alt={title} src={getImageUrl(id, 'album')} />
+              </div>
+            </Col>
+            <Col>
+              <div className='ost-list-text text-wrap my-auto px-1 py-2'>
+                {coming ? 'Coming Soon' : title}
+              </div>
+            </Col>
+          </Row>
         </Link>
       </div>
 

@@ -37,11 +37,11 @@ function Button (props) {
 
   return (
     <Col md={3} className='mt-3  flex-grow-1'>
-      <Link href={href}><a>
+      <Link href={href}>
         <h4 className='text-center blackButton d-flex align-items-center justify-content-center px-3 py-2'>
           {t(name)}
         </h4>
-      </a></Link>
+      </Link>
     </Col>
   )
 }

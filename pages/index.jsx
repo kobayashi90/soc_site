@@ -47,7 +47,7 @@ export async function /* getStaticProps */ getServerSideProps (context) {
 
 const BlackButton = ({ href, name }) => (
   <Link href={href}>
-    <a><h4 className='text-center blackButton px-3 py-2'>{name}</h4></a>
+    <h4 className='text-center blackButton px-3 py-2'>{name}</h4>
   </Link>
 )
 
@@ -86,7 +86,7 @@ export default function Home ({ added, released }) {
         <Row className='mt-3'>
           <Col md={12}>
             <Link href="/last-added">
-              <a><h1 className='text-center blackButton'>{t('More last added')}</h1></a>
+              <h1 className='text-center blackButton'>{t('More last added')}</h1>
             </Link>
           </Col>
         </Row>

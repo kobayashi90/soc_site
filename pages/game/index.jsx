@@ -33,11 +33,9 @@ function Button ({ name, href }) {
   return (
     <Col md={3} className='mt-3  flex-grow-1'>
       <Link href={href}>
-        <a>
-          <h4 className='text-center blackButton px-3 py-2'>
-            {name}
-          </h4>
-        </a>
+        <h4 className='text-center blackButton px-3 py-2'>
+          {name}
+        </h4>
       </Link>
     </Col>
   )

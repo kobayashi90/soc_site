@@ -47,8 +47,8 @@ export default function PlatformList ({ letters, platforms }) {
             <Row className='pb-3 pl-2'>
               {platforms[letter].sort((a, b) => a.name > b.name).map(({ id, name }) =>
                 <Col key={id} xs={3} className='d-flex flex-column'>
-                  <Link href={`/platform/${id}`}>
-                    <a className='listItem mt-2 link'>{name}</a>
+                  <Link href={`/platform/${id}`} className='listItem mt-2 link'>
+                    {name}
                   </Link>
                 </Col>
               )}

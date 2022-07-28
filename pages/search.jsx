@@ -165,20 +165,18 @@ function SearchSection (props) {
         <Row>
           {items.map(item =>
             <Col key={item.id} md={6}>
-              <Link href={`/${type}/${item.id}`}>
-                <a className={styles.a}>
-                  <Row className={classNames(styles.result, 'mx-1 d-flex flex-row mb-3')}>
-                    {type && (
-                      <Col md='auto' className={classNames(styles.cover, 'px-0')}>
-                        <Image objectFit='contain' alt={item.title} src={getImageUrl(item.id, type)} width={180} height={180} placeholder={'blur'} blurDataURL={item.placeholder} />
-                      </Col>
-                    )}
-                    <Col className='p-2 px-4 my-auto'>
-                      <h2>{item.title}</h2>
-                      {item.releaseDate && <p className='card-text mt-2'>{item.releaseDate}</p>}
+              <Link href={`/${type}/${item.id}`} className={styles.a}>
+                <Row className={classNames(styles.result, 'mx-1 d-flex flex-row mb-3')}>
+                  {type && (
+                    <Col md='auto' className={classNames(styles.cover, 'px-0')}>
+                      <Image objectFit='contain' alt={item.title} src={getImageUrl(item.id, type)} width={180} height={180} placeholder={'blur'} blurDataURL={item.placeholder} />
                     </Col>
-                  </Row>
-                </a>
+                  )}
+                  <Col className='p-2 px-4 my-auto'>
+                    <h2>{item.title}</h2>
+                    {item.releaseDate && <p className='card-text mt-2'>{item.releaseDate}</p>}
+                  </Col>
+                </Row>
               </Link>
             </Col>
           )}

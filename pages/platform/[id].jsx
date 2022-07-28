@@ -52,8 +52,8 @@ export default function AlbumList ({ name, games }) {
                   .sort((a, b) => a.title > b.title)
                   .map(({ slug, name }) =>
                     <Col key={slug}>
-                      <Link href={`/game/${slug}`} >
-                        <a className='text-center mt-2 link'>{name}</a>
+                      <Link href={`/game/${slug}`} className='text-center mt-2 link'>
+                        {name}
                       </Link>
                     </Col>
                   )}

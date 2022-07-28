@@ -47,8 +47,8 @@ export default function GameList ({ letters, games }) {
             <Row className='pb-3 pl-2'>
               {games[letter].map(({ slug, name }) =>
                 <Col key={slug} xs={4} className='d-flex flex-column'>
-                  <Link href={`/game/${slug}`} >
-                    <a className='listItem mt-2 link'>{name}</a>
+                  <Link href={`/game/${slug}`} className='listItem mt-2 link'>
+                    {name}
                   </Link>
                 </Col>
               )}

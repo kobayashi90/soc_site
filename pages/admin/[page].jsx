@@ -126,9 +126,9 @@ function OstTable () {
 
         {searchAlbum.rows && searchAlbum.rows.map(({ id, title, createdAt, updatedAt }) => (
           <tr key={id}>
-            <Link href={`/admin/album/${id}`} passHref><td style={{ cursor: 'pointer' }}>{title}</td></Link>
-            <Link href={`/admin/album/${id}`} passHref><td style={{ cursor: 'pointer' }}>{moment(createdAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
-            <Link href={`/admin/album/${id}`} passHref><td style={{ cursor: 'pointer' }}>{moment(updatedAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref legacyBehavior><td style={{ cursor: 'pointer' }}>{title}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref legacyBehavior><td style={{ cursor: 'pointer' }}>{moment(createdAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
+            <Link href={`/admin/album/${id}`} passHref legacyBehavior><td style={{ cursor: 'pointer' }}>{moment(updatedAt).format('DD/MM/YYYY HH:mm:ss')}</td></Link>
             <td>
               <Button onClick={() => { setModalData({ id, title }); setModal(true) }}>Remove</Button>
             </td>
@@ -149,27 +149,34 @@ function OstTable () {
           <>
             {currentListIndex > 0 && (
               <>
-                <Link href={'/admin/1'}>
-                  <a className='fas fa-angle-double-left align-middle nav-link' />
+                <Link
+                  href={'/admin/1'}
+                  className='fas fa-angle-double-left align-middle nav-link'>
                 </Link>
 
-                <Link href={`/admin/${currentList[0] - 1}`}>
-                  <a className='fas fa-angle-left align-middle nav-link' />
+                <Link
+                  href={`/admin/${currentList[0] - 1}`}
+                  className='fas fa-angle-left align-middle nav-link'>
                 </Link>
               </>
             )}
             {currentList.map(e => (
-              <Link key={e} href={`/admin/${e}`}>
-                <a className={classNames({ disabled: e === parseInt(page) }, 'nav-link')} >{e}</a>
+              <Link
+                key={e}
+                href={`/admin/${e}`}
+                className={classNames({ disabled: e === parseInt(page) }, 'nav-link')}>
+                {e}
               </Link>
             ))}
             {currentListIndex !== pageList.length - 1 && (
               <>
-                <Link href={`/admin/${currentList[currentList.length - 1] + 1}`}>
-                  <a className='fas fa-angle-right align-middle nav-link' />
+                <Link
+                  href={`/admin/${currentList[currentList.length - 1] + 1}`}
+                  className='fas fa-angle-right align-middle nav-link'>
                 </Link>
-                <Link href={`/admin/${fullPageList[fullPageList.length - 1]}`}>
-                  <a className='fas fa-angle-double-right align-middle nav-link' />
+                <Link
+                  href={`/admin/${fullPageList[fullPageList.length - 1]}`}
+                  className='fas fa-angle-double-right align-middle nav-link'>
                 </Link>
               </>
             ) }
@@ -186,7 +193,7 @@ function OstTable () {
       <Row className='my-3'>
         <Col xs='auto'>
           <Form.Group>
-            <Link href='/admin/album/add' passHref><Button variant='primary'>Add Album</Button></Link>
+            <Link href='/admin/album/add' passHref legacyBehavior><Button variant='primary'>Add Album</Button></Link>
           </Form.Group>
         </Col>
         <Col>
