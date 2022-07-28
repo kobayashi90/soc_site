@@ -1,4 +1,4 @@
-const tokenCompare = process.env.IRONCLAD
+/* const tokenCompare = process.env.IRONCLAD
 
 async function handler (req, res) {
   const { token, revalidate = [] } = req.body
@@ -11,4 +11,4 @@ async function handler (req, res) {
   return res.json({ success: true, revalidate })
 }
 
-export default handler
+export default handler */

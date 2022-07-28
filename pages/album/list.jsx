@@ -8,7 +8,7 @@ import { initializeApollo } from '@/components/ApolloClient'
 
 import style from '../../styles/letter.module.scss'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function getServerSideProps () {
   const albums = {}
   const client = initializeApollo()
   const { data } = await client.query({

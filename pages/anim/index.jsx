@@ -6,7 +6,7 @@ import { initializeApollo } from '@/components/ApolloClient'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
 
-export async function /* getStaticProps */ getServerSideProps (context) {
+export async function getServerSideProps (context) {
   const { locale } = context
   const client = initializeApollo()
   const { data } = await client.query({

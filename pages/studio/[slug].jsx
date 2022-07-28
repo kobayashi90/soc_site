@@ -22,7 +22,7 @@ query ($slug: String!) {
 
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id, 'studio')}`
 
-export async function /* getStaticProps */ getServerSideProps ({ params, req }) {
+export async function getServerSideProps ({ params, req }) {
   const { slug } = params
   const client = initializeApollo()
   const { data } = await client.query({ query, variables: { slug } })

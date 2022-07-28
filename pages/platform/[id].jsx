@@ -4,7 +4,7 @@ import Sidebar from '@/components/Sidebar'
 import Link from 'next/link'
 import { initializeApollo } from '@/components/ApolloClient'
 
-export async function /* getStaticProps */ getServerSideProps ({ params }) {
+export async function getServerSideProps ({ params }) {
   const { id } = params
   const client = initializeApollo()
   const { data } = await client.query({

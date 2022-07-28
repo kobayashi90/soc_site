@@ -25,7 +25,7 @@ const limitXS = 5
   return { paths, fallback: 'blocking' }
 } */
 
-export async function /* getStaticProps */ getServerSideProps (context) {
+export async function getServerSideProps (context) {
   const { params, locale } = context
   const paramList = params?.params || []
   const page = paramList[0] || '1'

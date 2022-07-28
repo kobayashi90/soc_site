@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { initializeApollo } from '@/components/ApolloClient'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`

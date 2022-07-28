@@ -8,7 +8,7 @@ import { initializeApollo } from '@/components/ApolloClient'
 import { getImageUrl } from '@/components/utils'
 import style from '../../styles/letter.module.scss'
 
-export async function /* getStaticProps */ getServerSideProps () {
+export async function getServerSideProps () {
   const client = initializeApollo()
   const { data } = await client.query({
     query: gql`
