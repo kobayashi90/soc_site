@@ -31,8 +31,13 @@ export default function AdminOst () {
       </Col>
       <Col xs={10}>
         <OstTable />
-        <Highlight />
-        <Banner />
+        <Row>
+          <Highlight />
+          <Banner />
+        </Row>
+        <Row>
+          <SelectBanner />
+        </Row>
       </Col>
     </Container>
   )
@@ -279,7 +284,7 @@ function Highlight () {
   }
 
   return (
-    <Col md={12} className='mt-3 site-form blackblock p-3'>
+    <Col md={6} className='mt-3 site-form blackblock p-3'>
       <Form.Label>Highlight OST:</Form.Label>
       <AlbumSelector options={{ isSingle: true, defaultValue: data?.highlight, onChange: handleHighlight, loading }} />
     </Col>
@@ -309,12 +314,69 @@ function Banner () {
   }
 
   return (
-    <Col md={12} className='mt-3 site-form blackblock p-3'>
+    <Col md={6} className='mt-3 site-form blackblock p-3'>
       <Form.Group>
         <Form.Label htmlFor='banner'>Upload Banner:</Form.Label>
         {loading ? <Loader dev /> : <FormControl type='file' onChange={handleUpload} />}
       </Form.Group>
     </Col>
 
+  )
+}
+
+function SelectBanner () {
+  const queryConfig = gql`
+      query {
+        banners
+      }
+    `
+  const mutation = gql`
+      mutation ($name: String!){
+        selectBanner(name: $name)
+      }
+    `
+
+  const { loadingQuery, data, error, refetch } = useQuery(queryConfig)
+  const [mutateConfig, { loading }] = useMutation(mutation)
+
+  if (error) {
+    console.log(error)
+    toast.error('Hightlight: Failed to fetch server info')
+  }
+
+  function handleSelect (name) {
+    mutateConfig({ variables: { name: name.replace('.png', '') } }).then(results => {
+      toast.success('Updated banner!')
+      refetch()
+    }).catch(err => {
+      console.log(err)
+      toast.error('Failed to update banner')
+    })
+  }
+
+  return (
+    <Col md={12} className='p-0 my-3 site-form blackblock position-relative'>
+      {(loading || loadingQuery) && (
+        <div className='p-0 position-absolute h-100 w-100'>
+          <div className='p-0 blackblock position-absolute h-100 w-100' style={{ backgroundColor: 'black', opacity: 0.65 }} />
+          <Loader className='m-auto' />
+        </div>
+      )}
+      <div className='p-3'>
+        <Form.Label>Available banners:</Form.Label>
+        {data?.banners.map(b => (
+          <div
+            key={b} className='my-2'
+            onClick={() => handleSelect(b)}
+            style={{
+              cursor: 'pointer',
+              height: '110px',
+              width: '100%',
+              backgroundSize: 'cover',
+              backgroundImage: `url('/_next/image?w=3840&q=25&url=${`https://cdn.sittingonclouds.net/live/${b}`}`
+            }} />
+        ))}
+      </div>
+    </Col>
   )
 }
