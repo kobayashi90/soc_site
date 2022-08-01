@@ -95,21 +95,21 @@ query downloads ($id: ID!) {
 `
 
 const mutationRating = gql`
-  mutation ($ostId: ID!, $score: Int!){
-    rateAlbum(ostId: $ostId, score: $score)
+  mutation ($albumId: ID!, $score: Int!){
+    rateAlbum(albumId: $albumId, score: $score)
   }
 `
 
 function StarCounter (props) {
-  const { score: initialScore, users: initialUsers, ostId } = props
+  const { score: initialScore, users: initialUsers, albumId } = props
   const initial = { avgRating: { score: initialScore, users: initialUsers } }
 
   const [scoreHover, setHover] = useState()
   const { user } = useUser()
 
   const getScore = gql`
-    query ($ostId: ID!) {
-      album(id: $ostId){
+    query ($albumId: ID!) {
+      album(id: $albumId){
         selfScore
         avgRating {
           score
@@ -119,7 +119,7 @@ function StarCounter (props) {
     }
   `
   const [fetchUserScore, { data, refetch }] = useLazyQuery(getScore)
-  useEffect(() => fetchUserScore({ variables: { ostId } }), [user])
+  useEffect(() => fetchUserScore({ variables: { albumId } }), [user])
 
   const { avgRating, selfScore } = data?.album || initial
   const { score, users } = avgRating
@@ -139,7 +139,7 @@ function StarCounter (props) {
     const className = classNames(starClass, starStyles.star, { [starStyles.gold]: goldClass, 'ps-1': value > 1 })
 
     function saveRating () {
-      client.mutate({ mutation: mutationRating, variables: { ostId, score: value } })
+      client.mutate({ mutation: mutationRating, variables: { albumId, score: value } })
         .then(() => {
           toast.success(t('Rating saved!'))
           refetch()
@@ -195,8 +195,8 @@ export async function getServerSideProps (context) {
 const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${getImageUrl(id)}`
 
 const favoriteTemplate = query => gql`
-  mutation ($ostId: String!) {
-    ${query}Favorite(ostId: $ostId)
+  mutation ($albumId: String!) {
+    ${query}Favorite(albumId: $albumId)
   }
 `
 const addFavorite = favoriteTemplate('add')
@@ -211,19 +211,19 @@ export default function Page (props) {
   const [loadingFavorite, setLoading] = useState(false)
   const client = useApolloClient()
   const getFavorite = gql`
-  query ($ostId: ID!) {
-    album(id: $ostId){
+  query ($albumId: ID!) {
+    album(id: $albumId){
       isFavorite
     }
   }
 `
   const { data: dataFavorite, refetch: refetchFavorite } = useQuery(getFavorite)
-  useEffect(() => refetchFavorite({ ostId: id }), [user, id, refetchFavorite])
+  useEffect(() => refetchFavorite({ albumId: id }), [user, id, refetchFavorite])
 
   function submitFavorite () {
     setLoading(true)
 
-    client.mutate({ mutation: dataFavorite.album.isFavorite ? removeFavorite : addFavorite, variables: { ostId: id } })
+    client.mutate({ mutation: dataFavorite.album.isFavorite ? removeFavorite : addFavorite, variables: { albumId: id } })
       .then(() => toast.success(t(dataFavorite.album.isFavorite ? 'Favorite_Added' : 'Favorite_Removed')))
       .catch(err => {
         console.log(err)
@@ -341,7 +341,7 @@ export default function Page (props) {
 
                         <tr>
                           <th>{t('Avg. Rating')}: </th>
-                          <td><StarCounter ostId={album.id} {...album.avgRating} /></td>
+                          <td><StarCounter albumId={album.id} {...album.avgRating} /></td>
                         </tr>
 
                       </tbody>
@@ -407,12 +407,12 @@ export default function Page (props) {
               </Col>
             </Row>
 
-            <CommentCarrousel ostId={id} comments={album.comments} />
+            <CommentCarrousel albumId={id} comments={album.comments} />
 
             {album.related.length > 0 && (
               <Row>
                 <Col>
-                  <div className='blackblock m-2'><h1 className='text-center text-uppercase ost-title'>{t('Related Soundtracks')}</h1></div>
+                  <div className='blackblock m-2'><h1 className='text-center text-uppercase album-title'>{t('Related Soundtracks')}</h1></div>
                 </Col>
                 <Row className='justify-content-center'>
                   <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={album.related} />

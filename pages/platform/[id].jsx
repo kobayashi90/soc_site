@@ -30,10 +30,10 @@ export async function getServerSideProps ({ params }) {
 
 export default function AlbumList ({ name, games }) {
   const gameList = {}
-  games.forEach(ost => {
-    const letter = ost.name[0].toUpperCase()
-    if (!gameList[letter]) gameList[letter] = [ost]
-    else gameList[letter].push(ost)
+  games.forEach(album => {
+    const letter = album.name[0].toUpperCase()
+    if (!gameList[letter]) gameList[letter] = [album]
+    else gameList[letter].push(album)
   })
 
   const letters = Object.keys(gameList).sort()

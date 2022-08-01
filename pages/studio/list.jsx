@@ -42,7 +42,7 @@ export default function GameList ({ letters, studios }) {
         {letters.map(letter => (
           <div ID={letter} key={letter}>
             <hr className='style2 style-white' />
-            <h2 className='text-center ost-title text-capitalize'>{letter.toUpperCase()}</h2>
+            <h2 className='text-center album-title text-capitalize'>{letter.toUpperCase()}</h2>
 
             <Row className='pb-3 pl-2'>
               {studios[letter].map(({ slug, name }) =>

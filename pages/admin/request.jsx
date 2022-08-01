@@ -27,7 +27,7 @@ const requestFields = `
   comments
 `
 
-export default function AdminOst () {
+export default function AlbumAdmin () {
   return (
     <Container>
       <Col>

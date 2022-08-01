@@ -85,7 +85,7 @@ export default function GameDetail (props) {
           <div className='blackblock'>
             <Row>
               <Col md={12}>
-                <h1 className='text-center ost-title'>{name}</h1>
+                <h1 className='text-center album-title'>{name}</h1>
               </Col>
             </Row>
             <Row className='my-1'>

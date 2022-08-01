@@ -47,7 +47,7 @@ export default function SeriesList ({ series, letters, seriesList }) {
           <Col xs='auto' className='px-4'>
             {letters.map(letter => (
               <div id={letter} key={letter} className='mt-4 d-flex flex-column'>
-                <h2 className='text-center ost-title text-capitalize'>{letter.toUpperCase()}</h2>
+                <h2 className='text-center album-title text-capitalize'>{letter.toUpperCase()}</h2>
                 {series[letter].map(({ slug, name }) => <Link href={`/series/${slug}`} key={slug} className='text-center mt-2 link'>{name}</Link>)}
               </div>
             ))}

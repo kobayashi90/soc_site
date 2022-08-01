@@ -58,8 +58,8 @@ export function BasicCommentCarrousel (props) {
 }
 
 const getComment = gql`
-  query ($ostId: ID!) {
-    album(id: $ostId){
+  query ($albumId: ID!) {
+    album(id: $albumId){
       comments {
         text
         username
@@ -73,13 +73,13 @@ const getComment = gql`
 `
 
 const mutateComment = gql`
-  mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
-    updateComment(text: $text, anon: $anon, ostId: $ostId)
+  mutation ($text: String!, $anon: Boolean!, $albumId: ID!) {
+    updateComment(text: $text, anon: $anon, albumId: $albumId)
   }
 `
 
 export default function CommentCarrousel (props) {
-  const { ostId, comments: initialComments = [] } = props
+  const { albumId, comments: initialComments = [] } = props
 
   const t = useTranslation()
   const [show, setShow] = useState(false)
@@ -92,7 +92,7 @@ export default function CommentCarrousel (props) {
 
   const { comments, selfComment } = data?.album || { comments: initialComments }
 
-  useEffect(() => fetchComment({ variables: { ostId } }), [user, fetchComment, ostId])
+  useEffect(() => fetchComment({ variables: { albumId } }), [user, fetchComment, albumId])
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     timeoutRef.current = setTimeout(plusIndex, 10 * 1000)
@@ -100,7 +100,7 @@ export default function CommentCarrousel (props) {
 
   function submit (ev) {
     let variables = serialize(ev.target, { hash: true })
-    variables = { ...variables, anon: variables.anon === 'on', ostId }
+    variables = { ...variables, anon: variables.anon === 'on', albumId }
 
     updateComment({ variables })
       .then(() => {
@@ -154,7 +154,7 @@ export default function CommentCarrousel (props) {
           </Row>
         )}
 
-        {ostId && (
+        {albumId && (
           <Row className='mt-3 justify-content-center'>
             {user
               ? (

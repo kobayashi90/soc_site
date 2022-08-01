@@ -71,7 +71,7 @@ function AlbumBox (props) {
               </div>
             </Col>
             <Col>
-              <div className='ost-list-text text-wrap my-auto px-1 py-2'>
+              <div className='text-wrap my-auto px-1 py-2'>
                 {coming ? 'Coming Soon' : title}
               </div>
             </Col>
@@ -92,21 +92,23 @@ export default function SeriesDetail (props) {
   const various = []
   const games = {}
 
-  gameList.map(game => game.albums).flat().filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i).forEach(ost => {
-    if (ost.games.length > 1) various.push(ost)
-    else {
-      const game = ost.games[0]
-      if (!games[game.slug]) {
-        games[game.slug] = {
-          name: game.name,
-          releaseDate: game.releaseDate,
-          albums: []
+  gameList.map(game => game.albums).flat()
+    .filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i)
+    .forEach(album => {
+      if (album.games.length > 1) various.push(album)
+      else {
+        const game = album.games[0]
+        if (!games[game.slug]) {
+          games[game.slug] = {
+            name: game.name,
+            releaseDate: game.releaseDate,
+            albums: []
+          }
         }
-      }
 
-      games[game.slug].albums.push(ost)
-    }
-  })
+        games[game.slug].albums.push(album)
+      }
+    })
 
   return (
     <Container>
@@ -133,7 +135,7 @@ export default function SeriesDetail (props) {
           <div className='blackblock'>
             <Row>
               <Col md={12}>
-                <h1 className='text-center ost-title'>{seriesOne.name}</h1>
+                <h1 className='text-center album-title'>{seriesOne.name}</h1>
               </Col>
             </Row>
             <Row className='my-1'>
@@ -146,23 +148,23 @@ export default function SeriesDetail (props) {
       </Row>
 
       <hr className='style2 style-white' />
-      {various && various.length > 0 ? <OstList albums={various} name='Various Games' /> : null}
+      {various && various.length > 0 ? <AlbumList albums={various} name='Various Games' /> : null}
       {games && Object.entries(games)
         .sort((a, b) => moment(a[1].releaseDate).year() < moment(b[1].releaseDate).year() ? 1 : -1)
-        .map(([slug, { name, albums, releaseDate }]) => <OstList key={slug} slug={slug} albums={albums} name={name} year={moment(releaseDate).year()} />)}
+        .map(([slug, { name, albums, releaseDate }]) => <AlbumList key={slug} slug={slug} albums={albums} name={name} year={moment(releaseDate).year()} />)}
     </Container>
   )
 }
 
-function OstList (props) {
+function AlbumList (props) {
   const { year, name, albums, slug } = props
   return (
     <>
       <div className='blackblock justify-content-center m-2'>
         <Row>
-          {year ? <Col md={2}><h3 className='text-center ost-title'>{year}</h3></Col> : null}
+          {year ? <Col md={2}><h3 className='text-center album-title'>{year}</h3></Col> : null}
           <Col md={year ? 9 : 12}>
-            <h3 className='ost-title'>
+            <h3 className='album-title'>
               {slug ? <a href={`/game/${slug}`}>{name}</a> : name}
             </h3>
           </Col>
