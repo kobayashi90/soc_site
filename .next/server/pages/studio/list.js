@@ -101,7 +101,7 @@ function GameList({ letters , studios  }) {
                                 className: "style2 style-white"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
-                                className: "text-center ost-title text-capitalize",
+                                className: "text-center album-title text-capitalize",
                                 children: letter.toUpperCase()
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {

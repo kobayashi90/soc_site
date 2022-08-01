@@ -161,7 +161,7 @@ function GameDetail(props) {
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                                         md: 12,
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                            className: "text-center ost-title",
+                                            className: "text-center album-title",
                                             children: name
                                         })
                                     })

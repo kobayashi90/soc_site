@@ -552,7 +552,7 @@ function AddAlbum(props) {
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Form.Label, {
                                         htmlFor: "related",
-                                        children: "Related OSTs:"
+                                        children: "Related albums:"
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Selectors__WEBPACK_IMPORTED_MODULE_5__/* .AlbumSelector */ .Q$, {
                                         options: {

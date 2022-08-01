@@ -66,12 +66,12 @@ async function getServerSideProps({ params  }) {
 }
 function AlbumList({ name , games  }) {
     const gameList = {};
-    games.forEach((ost)=>{
-        const letter = ost.name[0].toUpperCase();
+    games.forEach((album)=>{
+        const letter = album.name[0].toUpperCase();
         if (!gameList[letter]) gameList[letter] = [
-            ost
+            album
         ];
-        else gameList[letter].push(ost);
+        else gameList[letter].push(album);
     });
     const letters = Object.keys(gameList).sort();
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {

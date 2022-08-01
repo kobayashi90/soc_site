@@ -68,12 +68,12 @@ async function getServerSideProps() {
       }
     `
     });
-    data.albums.forEach((ost)=>{
-        const letter = ost.title[0].toUpperCase();
+    data.albums.forEach((album)=>{
+        const letter = album.title[0].toUpperCase();
         if (!albums[letter]) albums[letter] = [
-            ost
+            album
         ];
-        else albums[letter].push(ost);
+        else albums[letter].push(album);
     });
     return {
         props: {

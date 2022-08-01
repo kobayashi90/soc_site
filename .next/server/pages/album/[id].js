@@ -166,12 +166,12 @@ query downloads ($id: ID!) {
 }
 `;
 const mutationRating = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
-  mutation ($ostId: ID!, $score: Int!){
-    rateAlbum(ostId: $ostId, score: $score)
+  mutation ($albumId: ID!, $score: Int!){
+    rateAlbum(albumId: $albumId, score: $score)
   }
 `;
 function StarCounter(props) {
-    const { score: initialScore , users: initialUsers , ostId  } = props;
+    const { score: initialScore , users: initialUsers , albumId  } = props;
     const initial = {
         avgRating: {
             score: initialScore,
@@ -181,8 +181,8 @@ function StarCounter(props) {
     const { 0: scoreHover , 1: setHover  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const getScore = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
-    query ($ostId: ID!) {
-      album(id: $ostId){
+    query ($albumId: ID!) {
+      album(id: $albumId){
         selfScore
         avgRating {
           score
@@ -194,7 +194,7 @@ function StarCounter(props) {
     const [fetchUserScore, { data , refetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useLazyQuery)(getScore);
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>fetchUserScore({
             variables: {
-                ostId
+                albumId
             }
         }), [
         user
@@ -217,7 +217,7 @@ function StarCounter(props) {
             client.mutate({
                 mutation: mutationRating,
                 variables: {
-                    ostId,
+                    albumId,
                     score: value
                 }
             }).then(()=>{
@@ -286,8 +286,8 @@ async function getServerSideProps(context) {
 }
 const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_11__/* .getImageUrl */ .Jn)(id)}`;
 const favoriteTemplate = (query)=>_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
-  mutation ($ostId: String!) {
-    ${query}Favorite(ostId: $ostId)
+  mutation ($albumId: String!) {
+    ${query}Favorite(albumId: $albumId)
   }
 `;
 const addFavorite = favoriteTemplate("add");
@@ -300,15 +300,15 @@ function Page(props) {
     const { 0: loadingFavorite , 1: setLoading  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
     const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useApolloClient)();
     const getFavorite = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
-  query ($ostId: ID!) {
-    album(id: $ostId){
+  query ($albumId: ID!) {
+    album(id: $albumId){
       isFavorite
     }
   }
 `;
     const { data: dataFavorite , refetch: refetchFavorite  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(getFavorite);
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetchFavorite({
-            ostId: id
+            albumId: id
         }), [
         user,
         id,
@@ -319,7 +319,7 @@ function Page(props) {
         client.mutate({
             mutation: dataFavorite.album.isFavorite ? removeFavorite : addFavorite,
             variables: {
-                ostId: id
+                albumId: id
             }
         }).then(()=>react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t(dataFavorite.album.isFavorite ? "Favorite_Added" : "Favorite_Removed"))).catch((err)=>{
             console.log(err);
@@ -534,7 +534,7 @@ function Page(props) {
                                                                             }),
                                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                                                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(StarCounter, {
-                                                                                    ostId: album.id,
+                                                                                    albumId: album.id,
                                                                                     ...album.avgRating
                                                                                 })
                                                                             })
@@ -662,7 +662,7 @@ function Page(props) {
                                 ]
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
-                                ostId: id,
+                                albumId: id,
                                 comments: album.comments
                             }),
                             album.related.length > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
@@ -671,7 +671,7 @@ function Page(props) {
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: "blackblock m-2",
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                                className: "text-center text-uppercase ost-title",
+                                                className: "text-center text-uppercase album-title",
                                                 children: t("Related Soundtracks")
                                             })
                                         })

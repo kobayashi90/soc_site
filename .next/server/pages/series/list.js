@@ -113,7 +113,7 @@ function SeriesList({ series , letters , seriesList  }) {
                                     className: "mt-4 d-flex flex-column",
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
-                                            className: "text-center ost-title text-capitalize",
+                                            className: "text-center album-title text-capitalize",
                                             children: letter.toUpperCase()
                                         }),
                                         series[letter].map(({ slug , name  })=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {

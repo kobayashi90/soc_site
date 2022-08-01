@@ -131,7 +131,7 @@ function AlbumBox(props) {
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: "ost-list-text text-wrap my-auto px-1 py-2",
+                                className: "text-wrap my-auto px-1 py-2",
                                 children: coming ? "Coming Soon" : title
                             })
                         })
@@ -150,10 +150,10 @@ function SeriesDetail(props) {
     ];
     const various = [];
     const games = {};
-    gameList.map((game)=>game.albums).flat().filter((v, i, a)=>a.findIndex((t)=>t.id === v.id) === i).forEach((ost)=>{
-        if (ost.games.length > 1) various.push(ost);
+    gameList.map((game)=>game.albums).flat().filter((v, i, a)=>a.findIndex((t)=>t.id === v.id) === i).forEach((album)=>{
+        if (album.games.length > 1) various.push(album);
         else {
-            const game = ost.games[0];
+            const game = album.games[0];
             if (!games[game.slug]) {
                 games[game.slug] = {
                     name: game.name,
@@ -161,7 +161,7 @@ function SeriesDetail(props) {
                     albums: []
                 };
             }
-            games[game.slug].albums.push(ost);
+            games[game.slug].albums.push(album);
         }
     });
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Container, {
@@ -223,7 +223,7 @@ function SeriesDetail(props) {
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                                         md: 12,
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                            className: "text-center ost-title",
+                                            className: "text-center album-title",
                                             children: seriesOne.name
                                         })
                                     })
@@ -260,11 +260,11 @@ function SeriesDetail(props) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                 className: "style2 style-white"
             }),
-            various && various.length > 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(OstList, {
+            various && various.length > 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AlbumList, {
                 albums: various,
                 name: "Various Games"
             }) : null,
-            games && Object.entries(games).sort((a, b)=>moment__WEBPACK_IMPORTED_MODULE_3___default()(a[1].releaseDate).year() < moment__WEBPACK_IMPORTED_MODULE_3___default()(b[1].releaseDate).year() ? 1 : -1).map(([slug, { name , albums , releaseDate  }])=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(OstList, {
+            games && Object.entries(games).sort((a, b)=>moment__WEBPACK_IMPORTED_MODULE_3___default()(a[1].releaseDate).year() < moment__WEBPACK_IMPORTED_MODULE_3___default()(b[1].releaseDate).year() ? 1 : -1).map(([slug, { name , albums , releaseDate  }])=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AlbumList, {
                     slug: slug,
                     albums: albums,
                     name: name,
@@ -273,7 +273,7 @@ function SeriesDetail(props) {
         ]
     });
 };
-function OstList(props) {
+function AlbumList(props) {
     const { year , name , albums , slug  } = props;
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
@@ -284,14 +284,14 @@ function OstList(props) {
                         year ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                             md: 2,
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
-                                className: "text-center ost-title",
+                                className: "text-center album-title",
                                 children: year
                             })
                         }) : null,
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                             md: year ? 9 : 12,
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
-                                className: "ost-title",
+                                className: "album-title",
                                 children: slug ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
                                     href: `/game/${slug}`,
                                     children: name

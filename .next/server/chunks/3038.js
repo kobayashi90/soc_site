@@ -137,8 +137,8 @@ function BasicCommentCarrousel(props) {
     });
 }
 const getComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
-  query ($ostId: ID!) {
-    album(id: $ostId){
+  query ($albumId: ID!) {
+    album(id: $albumId){
       comments {
         text
         username
@@ -151,12 +151,12 @@ const getComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
   }
 `;
 const mutateComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
-  mutation ($text: String!, $anon: Boolean!, $ostId: ID!) {
-    updateComment(text: $text, anon: $anon, ostId: $ostId)
+  mutation ($text: String!, $anon: Boolean!, $albumId: ID!) {
+    updateComment(text: $text, anon: $anon, albumId: $albumId)
   }
 `;
 function CommentCarrousel(props) {
-    const { ostId , comments: initialComments = []  } = props;
+    const { albumId , comments: initialComments = []  } = props;
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)();
     const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
     const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
@@ -169,12 +169,12 @@ function CommentCarrousel(props) {
     };
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>fetchComment({
             variables: {
-                ostId
+                albumId
             }
         }), [
         user,
         fetchComment,
-        ostId
+        albumId
     ]);
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -189,7 +189,7 @@ function CommentCarrousel(props) {
         variables = {
             ...variables,
             anon: variables.anon === "on",
-            ostId
+            albumId
         };
         updateComment({
             variables
@@ -306,7 +306,7 @@ function CommentCarrousel(props) {
                                 })
                             ]
                         }),
-                        ostId && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                        albumId && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
                             className: "mt-3 justify-content-center",
                             children: user ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                                 xs: 3,
