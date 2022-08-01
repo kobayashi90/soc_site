@@ -16,21 +16,21 @@ export const getServerSideProps = hasRolePage(['CREATE', 'UPDATE'])
 
 const limit = 10
 
-export default function AdminOst () {
+export default function AlbumAdmin () {
   return (
     <Container fluid className='d-flex'>
       <Col xs={2} className='pe-3'>
         <div className='sticky-top'>
           <div className='mb-2 mt-3 text-center'>Navigation</div>
           <div className='py-2 site-form blackblock d-flex flex-column'>
-            <a href='#addAlbum'>OST List</a>
+            <a href='#addAlbum'>Album List</a>
             <a href='#addSeries'>Edit highlight</a>
             <a href='#addGame'>Edit banner</a>
           </div>
         </div>
       </Col>
       <Col xs={10}>
-        <OstTable />
+        <AlbumTable />
         <Row>
           <Highlight />
           <Banner />
@@ -43,7 +43,7 @@ export default function AdminOst () {
   )
 }
 
-function OstTable () {
+function AlbumTable () {
   const router = useRouter()
   const page = parseInt(router.query.page || '1')
 
@@ -83,7 +83,7 @@ function OstTable () {
     `
 
   const [status, setStatus] = useState(['show', 'hidden', 'coming'])
-  const [deleteOst, { loading: loadingMutation }] = useMutation(mutation)
+  const [deleteAlbum, { loading: loadingMutation }] = useMutation(mutation)
   const { data, loading, error, refetch } = useQuery(query, { variables: { title: '', page: page - 1, limit, name: 'highlight', status } })
 
   if (error) {
@@ -106,12 +106,12 @@ function OstTable () {
     const { id, title } = modalData
 
     function handleDelete () {
-      deleteOst({ variables: { id } }).then(results => {
-        toast.success(`Deleted OST "${title}" (${id}) succesfully`)
+      deleteAlbum({ variables: { id } }).then(results => {
+        toast.success(`Deleted album "${title}" (${id}) succesfully`)
         refetch()
       }).catch(err => {
         console.log(err)
-        toast.error(`Failed to delete OST "${title}" (${id})`)
+        toast.error(`Failed to delete album "${title}" (${id})`)
       }).finally(() => setModalData(!modal))
     }
 
@@ -119,7 +119,7 @@ function OstTable () {
       <>
         <Modal centered show={modal} onHide={() => setModal(false)}>
           <ModalBody className='m-3' style={{ color: 'black' }}>
-            <Row><Col>{`Delete the OST "${title}" (ID: ${id})?`}</Col></Row>
+            <Row><Col>{`Delete the album "${title}" (ID: ${id})?`}</Col></Row>
             <Row className='mt-2'>
               <Col>
                 <Button color='primary' className='mx-2' onClick={handleDelete}>{loadingMutation ? <Loader dev /> : 'Yes'}</Button>
@@ -275,17 +275,17 @@ function Highlight () {
     const { value } = result
 
     mutateConfig({ variables: { name: 'highlight', value } }).then(results => {
-      toast.success('Updated highlighted OST!')
+      toast.success('Updated highlighted album!')
       refetch()
     }).catch(err => {
       console.log(err)
-      toast.error('Failed to update highlighted OST')
+      toast.error('Failed to update highlighted album')
     })
   }
 
   return (
     <Col md={6} className='mt-3 site-form blackblock p-3'>
-      <Form.Label>Highlight OST:</Form.Label>
+      <Form.Label>Highlight album:</Form.Label>
       <AlbumSelector options={{ isSingle: true, defaultValue: data?.highlight, onChange: handleHighlight, loading }} />
     </Col>
   )

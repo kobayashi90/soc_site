@@ -177,7 +177,7 @@ const vgmQuery = gql`
   }
 `
 
-export default function EditOst (props) {
+export default function EditAlbum (props) {
   return (
     <Container fluid>
       <Row>
@@ -185,7 +185,7 @@ export default function EditOst (props) {
           <Navigation title='Edit' />
         </Col>
         <Col xs={10}>
-          <EditOstForm {...props} />
+          <EditAlbumForm {...props} />
           <SharedForms />
         </Col>
       </Row>
@@ -193,7 +193,7 @@ export default function EditOst (props) {
   )
 }
 
-function EditOstForm ({ id, album, categories, classifications }) {
+function EditAlbumForm ({ id, album, categories, classifications }) {
   const [currentCategories, setCategories] = useState(album.categories || [])
   const [currentClassifications, setClassifications] = useState(album.classifications || [])
   const [vgmTracklist, setVgmTracklist] = useState(album.discs || [])
@@ -368,7 +368,7 @@ function EditOstForm ({ id, album, categories, classifications }) {
         <Row>
           <Col md={12}>
             <Form.Group>
-              <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
+              <Form.Label htmlFor='related'>Related albums:</Form.Label>
               <AlbumSelector options={{ defaultValue: album.related, name: 'related' }} />
             </Form.Group>
           </Col>

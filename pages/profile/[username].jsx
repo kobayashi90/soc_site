@@ -95,7 +95,7 @@ export default function Profile (props) {
           <Col className='blackblock ms-3 my-0 d-flex justify-content-center flex-column'>
             <Row>
               <Col md={12}>
-                <h1 className='text-center ost-title'>{username}</h1>
+                <h1 className='text-center album-title'>{username}</h1>
               </Col>
             </Row>
             <Row className='my-1'>

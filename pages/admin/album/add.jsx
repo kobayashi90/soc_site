@@ -284,7 +284,7 @@ function AddAlbum (props) {
         <Row>
           <Col md={12}>
             <Form.Group>
-              <Form.Label htmlFor='related'>Related OSTs:</Form.Label>
+              <Form.Label htmlFor='related'>Related albums:</Form.Label>
               <AlbumSelector options={{ name: 'related' }} />
             </Form.Group>
           </Col>
