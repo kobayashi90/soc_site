@@ -95,14 +95,13 @@ function RequestModal (props) {
               <Form.Label htmlFor='title' style={{ color: 'black' }}>Title:</Form.Label>
               <Form.Control required type='text' name='title' defaultValue={request?.title} />
             </Form.Group>
+          </Row>
 
+          <Row className='mt-3'>
             <Form.Group as={Col} >
               <Form.Label htmlFor='link' style={{ color: 'black' }}>Link:</Form.Label>
               <Form.Control required type='text' name='link' defaultValue={request?.link} />
             </Form.Group>
-          </Row>
-
-          <Row className='mt-3'>
             <Form.Group as={Col}>
               <Form.Label htmlFor='state' style={{ color: 'black' }}>Status:</Form.Label>
               <select className='form-control' name='state' defaultValue={request?.state}>

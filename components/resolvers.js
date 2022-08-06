@@ -18,13 +18,23 @@ const hasPerm = perm => next => async (root, args, context, info) => {
 }
 
 export const hasRole = role => [isAuthed, hasPerm(role)]
-export const hasRolePage = allowedRoles => withSessionSsr(async (context) => {
-  const { req } = context
-  const { permissions } = req.session
+export const hasRolePage = allowedRoles => withSessionSsr(
+  async context => {
+    const { req } = context
+    const { permissions } = req.session
 
-  if (!permissions.some(p => allowedRoles.includes(p))) return { redirect: { destination: '/404', permanent: false } }
-  return { props: {} }
-})
+    if (!permissions.some(p => allowedRoles.includes(p))) return { redirect: { destination: '/404', permanent: false } }
+    return { props: {} }
+  }
+)
+export const isAuthedPage = withSessionSsr(
+  async context => {
+    const { req } = context
+
+    if (!req.session?.username) return { redirect: { destination: '/404', permanent: false } }
+    else return { props: {} }
+  }
+)
 
 export const placeholder = (parent, folder) => {
   if (!parent.placeholder) solvePlaceholder(parent, folder)

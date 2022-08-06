@@ -305,19 +305,24 @@ export function RequestSelector (props) {
   return (
     <BaseSelector
       {...props}
+      rowsFn={data => data.rows}
       startQuery={gql`
         query {
           searchRequests (state: ["pending"], donator: [false]) {
-            value: id
-            label: title
+            rows {
+              value: id
+              label: title
+            }
           }
         }`
       }
       changeQuery={gql`
         query ($filter: String) {
           searchRequests (state: ["pending", "hold"], filter: $filter) {
-            value: id
-            label: title
+            rows {
+              value: id
+              label: title
+            }
           }
         }`
       }
