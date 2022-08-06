@@ -145,86 +145,25 @@ Object.defineProperty(exports, "__esModule", ({
 exports.handleClientScriptLoad = handleClientScriptLoad;
 exports.initScriptLoader = initScriptLoader;
 exports["default"] = void 0;
-var _react = _interopRequireWildcard(__webpack_require__(6689));
+var _extends = (__webpack_require__(6495)/* ["default"] */ .Z);
+var _interop_require_wildcard = (__webpack_require__(1598)/* ["default"] */ .Z);
+var _object_without_properties_loose = (__webpack_require__(7273)/* ["default"] */ .Z);
+var _react = _interop_require_wildcard(__webpack_require__(6689));
 var _headManagerContext = __webpack_require__(2796);
 var _headManager = __webpack_require__(6007);
 var _requestIdleCallback = __webpack_require__(9311);
-function _extends() {
-    _extends = Object.assign || function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source){
-                if (Object.prototype.hasOwnProperty.call(source, key)) {
-                    target[key] = source[key];
-                }
-            }
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _getRequireWildcardCache() {
-    if (typeof WeakMap !== "function") return null;
-    var cache = new WeakMap();
-    _getRequireWildcardCache = function() {
-        return cache;
-    };
-    return cache;
-}
-function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-        return obj;
-    }
-    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
-        return {
-            default: obj
-        };
-    }
-    var cache = _getRequireWildcardCache();
-    if (cache && cache.has(obj)) {
-        return cache.get(obj);
-    }
-    var newObj = {};
-    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-    for(var key in obj){
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-            if (desc && (desc.get || desc.set)) {
-                Object.defineProperty(newObj, key, desc);
-            } else {
-                newObj[key] = obj[key];
-            }
-        }
-    }
-    newObj.default = obj;
-    if (cache) {
-        cache.set(obj, newObj);
-    }
-    return newObj;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
 const ScriptCache = new Map();
 const LoadCache = new Set();
 const ignoreProps = [
     "onLoad",
+    "onReady",
     "dangerouslySetInnerHTML",
     "children",
     "onError",
     "strategy", 
 ];
 const loadScript = (props)=>{
-    const { src , id , onLoad =()=>{} , dangerouslySetInnerHTML , children ="" , strategy ="afterInteractive" , onError ,  } = props;
+    const { src , id , onLoad =()=>{} , onReady =null , dangerouslySetInnerHTML , children ="" , strategy ="afterInteractive" , onError ,  } = props;
     const cacheKey = id || src;
     // Script has already loaded
     if (cacheKey && LoadCache.has(cacheKey)) {
@@ -243,6 +182,10 @@ const loadScript = (props)=>{
             resolve();
             if (onLoad) {
                 onLoad.call(this, e);
+            }
+            // Run onReady for the first time after load event
+            if (onReady) {
+                onReady();
             }
         });
         el.addEventListener("error", function(e) {
@@ -311,14 +254,27 @@ function initScriptLoader(scriptLoaderItems) {
     addBeforeInteractiveToCache();
 }
 function Script(props) {
-    const { src ="" , onLoad =()=>{} , strategy ="afterInteractive" , onError  } = props, restProps = _objectWithoutPropertiesLoose(props, [
+    const { id , src ="" , onLoad =()=>{} , onReady =null , strategy ="afterInteractive" , onError  } = props, restProps = _object_without_properties_loose(props, [
+        "id",
         "src",
         "onLoad",
+        "onReady",
         "strategy",
         "onError"
     ]);
     // Context is available only during SSR
     const { updateScripts , scripts , getIsSsr  } = (0, _react).useContext(_headManagerContext.HeadManagerContext);
+    (0, _react).useEffect(()=>{
+        const cacheKey = id || src;
+        // Run onReady if script has loaded before but component is re-mounted
+        if (onReady && cacheKey && LoadCache.has(cacheKey)) {
+            onReady();
+        }
+    }, [
+        onReady,
+        id,
+        src
+    ]);
     (0, _react).useEffect(()=>{
         if (strategy === "afterInteractive") {
             loadScript(props);
@@ -333,15 +289,17 @@ function Script(props) {
         if (updateScripts) {
             scripts[strategy] = (scripts[strategy] || []).concat([
                 _extends({
+                    id,
                     src,
                     onLoad,
+                    onReady,
                     onError
                 }, restProps), 
             ]);
             updateScripts(scripts);
         } else if (getIsSsr && getIsSsr()) {
             // Script has already loaded during SSR
-            LoadCache.add(restProps.id || src);
+            LoadCache.add(id || src);
         } else if (getIsSsr && !getIsSsr()) {
             loadScript(props);
         }

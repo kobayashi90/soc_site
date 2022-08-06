@@ -2,6 +2,49 @@ exports.id = 1664;
 exports.ids = [1664];
 exports.modules = {
 
+/***/ 932:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+var __webpack_unused_export__;
+
+__webpack_unused_export__ = ({
+    value: true
+});
+exports.Z = _asyncToGenerator;
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) {
+        resolve(value);
+    } else {
+        Promise.resolve(value).then(_next, _throw);
+    }
+}
+
+
+/***/ }),
+
 /***/ 8684:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -152,7 +195,9 @@ Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
 exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(6689));
+var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
+var _object_without_properties_loose = (__webpack_require__(7273)/* ["default"] */ .Z);
+var _react = _interop_require_default(__webpack_require__(6689));
 var _router = __webpack_require__(6273);
 var _addLocale = __webpack_require__(2725);
 var _routerContext = __webpack_require__(4964);
@@ -160,23 +205,6 @@ var _appRouterContext = __webpack_require__(3280);
 var _useIntersection = __webpack_require__(7190);
 var _getDomainLocale = __webpack_require__(1210);
 var _addBasePath = __webpack_require__(8684);
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
 // @ts-ignore useTransition exist
 const hasUseTransition = typeof _react.default.useTransition !== "undefined";
 const prefetched = {};
@@ -232,7 +260,7 @@ function linkClicked(e, router, href, as, replace, soft, shallow, scroll, locale
 const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(props, forwardedRef) {
     if (false) {}
     let children;
-    const { href: hrefProp , as: asProp , children: childrenProp , prefetch: prefetchProp , passHref , replace , soft , shallow , scroll , locale , onClick , onMouseEnter , legacyBehavior =Boolean(true) !== true  } = props, restProps = _objectWithoutPropertiesLoose(props, [
+    const { href: hrefProp , as: asProp , children: childrenProp , prefetch: prefetchProp , passHref , replace , soft , shallow , scroll , locale , onClick , onMouseEnter , onTouchStart , legacyBehavior =Boolean(true) !== true  } = props, restProps = _object_without_properties_loose(props, [
         "href",
         "as",
         "children",
@@ -245,6 +273,7 @@ const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(prop
         "locale",
         "onClick",
         "onMouseEnter",
+        "onTouchStart",
         "legacyBehavior"
     ]);
     children = childrenProp;
@@ -343,6 +372,19 @@ const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(prop
             }
             if (legacyBehavior && child.props && typeof child.props.onMouseEnter === "function") {
                 child.props.onMouseEnter(e);
+            }
+            if ((0, _router).isLocalURL(href)) {
+                prefetch(router, href, as, {
+                    priority: true
+                });
+            }
+        },
+        onTouchStart: (e)=>{
+            if (!legacyBehavior && typeof onTouchStart === "function") {
+                onTouchStart(e);
+            }
+            if (legacyBehavior && child.props && typeof child.props.onTouchStart === "function") {
+                child.props.onTouchStart(e);
             }
             if ((0, _router).isLocalURL(href)) {
                 prefetch(router, href, as, {
@@ -475,14 +517,10 @@ exports.markAssetError = markAssetError;
 exports.isAssetError = isAssetError;
 exports.getClientBuildManifest = getClientBuildManifest;
 exports.createRouteLoader = createRouteLoader;
-var _getAssetPathFromRoute = _interopRequireDefault(__webpack_require__(9565));
+var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
+var _getAssetPathFromRoute = _interop_require_default(__webpack_require__(9565));
 var _trustedTypes = __webpack_require__(4991);
 var _requestIdleCallback = __webpack_require__(9311);
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
 // 3.8s was arbitrarily chosen as it's what https://web.dev/interactive
 // considers as "Good" time-to-interactive. We must assume something went
 // wrong beyond this point, and then fall-back to a full page transition to
@@ -791,19 +829,23 @@ exports.interpolateAs = interpolateAs;
 exports.resolveHref = resolveHref;
 exports.createKey = createKey;
 exports["default"] = void 0;
+var _async_to_generator = (__webpack_require__(932)/* ["default"] */ .Z);
+var _extends = (__webpack_require__(6495)/* ["default"] */ .Z);
+var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
+var _interop_require_wildcard = (__webpack_require__(1598)/* ["default"] */ .Z);
 var _normalizeTrailingSlash = __webpack_require__(2392);
 var _removeTrailingSlash = __webpack_require__(3297);
 var _routeLoader = __webpack_require__(2669);
 var _script = __webpack_require__(699);
-var _isError = _interopRequireWildcard(__webpack_require__(676));
+var _isError = _interop_require_wildcard(__webpack_require__(676));
 var _denormalizePagePath = __webpack_require__(4406);
 var _normalizeLocalePath = __webpack_require__(4014);
-var _mitt = _interopRequireDefault(__webpack_require__(8020));
+var _mitt = _interop_require_default(__webpack_require__(8020));
 var _utils = __webpack_require__(9232);
 var _isDynamic = __webpack_require__(1428);
 var _parseRelativeUrl = __webpack_require__(5874);
 var _querystring = __webpack_require__(979);
-var _resolveRewrites = _interopRequireDefault(__webpack_require__(6052));
+var _resolveRewrites = _interop_require_default(__webpack_require__(6052));
 var _routeMatcher = __webpack_require__(4226);
 var _routeRegex = __webpack_require__(5052);
 var _formatUrl = __webpack_require__(3938);
@@ -816,93 +858,7 @@ var _addBasePath = __webpack_require__(8684);
 var _hasBasePath = __webpack_require__(4119);
 var _getNextPathnameInfo = __webpack_require__(5789);
 var _formatNextPathnameInfo = __webpack_require__(299);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-    try {
-        var info = gen[key](arg);
-        var value = info.value;
-    } catch (error) {
-        reject(error);
-        return;
-    }
-    if (info.done) {
-        resolve(value);
-    } else {
-        Promise.resolve(value).then(_next, _throw);
-    }
-}
-function _asyncToGenerator(fn) {
-    return function() {
-        var self1 = this, args = arguments;
-        return new Promise(function(resolve, reject) {
-            var gen = fn.apply(self1, args);
-            function _next(value) {
-                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-            }
-            function _throw(err) {
-                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-            }
-            _next(undefined);
-        });
-    };
-}
-function _extends() {
-    _extends = Object.assign || function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source){
-                if (Object.prototype.hasOwnProperty.call(source, key)) {
-                    target[key] = source[key];
-                }
-            }
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
-function _getRequireWildcardCache() {
-    if (typeof WeakMap !== "function") return null;
-    var cache = new WeakMap();
-    _getRequireWildcardCache = function() {
-        return cache;
-    };
-    return cache;
-}
-function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-        return obj;
-    }
-    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
-        return {
-            default: obj
-        };
-    }
-    var cache = _getRequireWildcardCache();
-    if (cache && cache.has(obj)) {
-        return cache.get(obj);
-    }
-    var newObj = {};
-    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-    for(var key in obj){
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-            if (desc && (desc.get || desc.set)) {
-                Object.defineProperty(newObj, key, desc);
-            } else {
-                newObj[key] = obj[key];
-            }
-        }
-    }
-    newObj.default = obj;
-    if (cache) {
-        cache.set(obj, newObj);
-    }
-    return newObj;
-}
+var _compareStates = __webpack_require__(6220);
 function buildCancellationError() {
     return Object.assign(new Error("Route Cancelled"), {
         cancelled: true
@@ -1117,7 +1073,7 @@ function fetchNextData({ dataHref , inflightCache , isPrefetch , hasMiddleware ,
                             json: {}
                         };
                     }
-                    if (response.status === 404) {
+                    if (!hasMiddleware && response.status === 404) {
                         var ref;
                         if ((ref = tryToParseAsJSON(text)) == null ? void 0 : ref.notFound) {
                             return {
@@ -1127,19 +1083,6 @@ function fetchNextData({ dataHref , inflightCache , isPrefetch , hasMiddleware ,
                                 },
                                 response,
                                 text
-                            };
-                        }
-                        /**
-               * If there is a 404 that is not for SSG we used to fail but if
-               * there is a middleware we must respond with an empty object.
-               * For now we will return the data when there is a middleware.
-               * TODO: Update the server to success on these requests.
-               */ if (hasMiddleware) {
-                            return {
-                                dataHref,
-                                response,
-                                text,
-                                json: {}
                             };
                         }
                     }
@@ -1155,7 +1098,7 @@ function fetchNextData({ dataHref , inflightCache , isPrefetch , hasMiddleware ,
                 }
                 return {
                     dataHref,
-                    json: parseJSON ? tryToParseAsJSON(text) : {},
+                    json: parseJSON ? tryToParseAsJSON(text) : null,
                     response,
                     text
                 };
@@ -1191,7 +1134,7 @@ function tryToParseAsJSON(text) {
     try {
         return JSON.parse(text);
     } catch (error) {
-        return {};
+        return null;
     }
 }
 function createKey() {
@@ -1252,7 +1195,7 @@ class Router {
     }
     change(method, url, as, options, forcedScroll) {
         var _this = this;
-        return _asyncToGenerator(function*() {
+        return _async_to_generator(function*() {
             if (!isLocalURL(url)) {
                 handleHardNavigation({
                     url,
@@ -1269,6 +1212,7 @@ class Router {
             // for static pages with query params in the URL we delay
             // marking the router ready until after the query is updated
             // or a navigation has occurred
+            const readyStateChange = _this.isReady !== true;
             _this.isReady = true;
             const isSsr = _this.isSsr;
             if (!isQueryUpdating) {
@@ -1349,7 +1293,7 @@ class Router {
             as = (0, _addBasePath).addBasePath((0, _addLocale).addLocale((0, _hasBasePath).hasBasePath(as) ? (0, _removeBasePath).removeBasePath(as) : as, options.locale, _this.defaultLocale));
             const cleanedAs = (0, _removeLocale).removeLocale((0, _hasBasePath).hasBasePath(as) ? (0, _removeBasePath).removeBasePath(as) : as, nextState.locale);
             _this._inFlightRoute = as;
-            let localeChange = prevLocale !== nextState.locale;
+            const localeChange = prevLocale !== nextState.locale;
             // If the url change is only related to a hash change
             // We should not proceed. We should only change the state.
             if (!isQueryUpdating && _this.onlyAHashChange(cleanedAs) && !localeChange) {
@@ -1383,7 +1327,7 @@ class Router {
                 [pages, { __rewrites: rewrites  }] = yield Promise.all([
                     _this.pageLoader.getPageList(),
                     (0, _routeLoader).getClientBuildManifest(),
-                    _this.pageLoader.getMiddlewareList(), 
+                    _this.pageLoader.getMiddleware(), 
                 ]);
             } catch (err1) {
                 // If we fail to resolve the page list or client-build manifest, we must
@@ -1485,7 +1429,9 @@ class Router {
                 if ("route" in routeInfo && isMiddlewareMatch) {
                     pathname = routeInfo.route || route;
                     route = pathname;
-                    query = Object.assign({}, routeInfo.query || {}, query);
+                    if (!routeProps.shallow) {
+                        query = Object.assign({}, routeInfo.query || {}, query);
+                    }
                     if (routeMatch && pathname !== parsed.pathname) {
                         Object.keys(routeMatch).forEach((key)=>{
                             if (routeMatch && query[key] === routeMatch[key]) {
@@ -1494,7 +1440,7 @@ class Router {
                         });
                     }
                     if ((0, _isDynamic).isDynamicRoute(pathname)) {
-                        const prefixedAs = routeInfo.resolvedAs || (0, _addBasePath).addBasePath((0, _addLocale).addLocale(as, nextState.locale), true);
+                        const prefixedAs = !routeProps.shallow && routeInfo.resolvedAs ? routeInfo.resolvedAs : (0, _addBasePath).addBasePath((0, _addLocale).addLocale(new URL(as, location.href).pathname, nextState.locale), true);
                         let rewriteAs = prefixedAs;
                         if ((0, _hasBasePath).hasBasePath(rewriteAs)) {
                             rewriteAs = (0, _removeBasePath).removeBasePath(rewriteAs);
@@ -1590,39 +1536,48 @@ class Router {
                 // shallow routing is only allowed for same page URL changes.
                 const isValidShallowRoute = options.shallow && nextState.route === ((_route = routeInfo.route) != null ? _route : route);
                 var _scroll;
-                const shouldScroll = (_scroll = options.scroll) != null ? _scroll : !isValidShallowRoute;
+                const shouldScroll = (_scroll = options.scroll) != null ? _scroll : !options._h && !isValidShallowRoute;
                 const resetScroll = shouldScroll ? {
                     x: 0,
                     y: 0
                 } : null;
-                yield _this.set(_extends({}, nextState, {
+                // the new state that the router gonna set
+                const upcomingRouterState = _extends({}, nextState, {
                     route,
                     pathname,
                     query,
                     asPath: cleanedAs,
                     isFallback: false
-                }), routeInfo, forcedScroll != null ? forcedScroll : resetScroll).catch((e)=>{
-                    if (e.cancelled) error = error || e;
-                    else throw e;
                 });
-                if (error) {
+                const upcomingScrollState = forcedScroll != null ? forcedScroll : resetScroll;
+                // for query updates we can skip it if the state is unchanged and we don't
+                // need to scroll
+                // https://github.com/vercel/next.js/issues/37139
+                const canSkipUpdating = options._h && !upcomingScrollState && !readyStateChange && !localeChange && (0, _compareStates).compareRouterStates(upcomingRouterState, _this.state);
+                if (!canSkipUpdating) {
+                    yield _this.set(upcomingRouterState, routeInfo, upcomingScrollState).catch((e)=>{
+                        if (e.cancelled) error = error || e;
+                        else throw e;
+                    });
+                    if (error) {
+                        if (!isQueryUpdating) {
+                            Router.events.emit("routeChangeError", error, cleanedAs, routeProps);
+                        }
+                        throw error;
+                    }
+                    if (true) {
+                        if (nextState.locale) {
+                            document.documentElement.lang = nextState.locale;
+                        }
+                    }
                     if (!isQueryUpdating) {
-                        Router.events.emit("routeChangeError", error, cleanedAs, routeProps);
+                        Router.events.emit("routeChangeComplete", as, routeProps);
                     }
-                    throw error;
-                }
-                if (true) {
-                    if (nextState.locale) {
-                        document.documentElement.lang = nextState.locale;
+                    // A hash mark # is the optional last part of a URL
+                    const hashRegex = /#.+$/;
+                    if (shouldScroll && hashRegex.test(as)) {
+                        _this.scrollToHash(as);
                     }
-                }
-                if (!isQueryUpdating) {
-                    Router.events.emit("routeChangeComplete", as, routeProps);
-                }
-                // A hash mark # is the optional last part of a URL
-                const hashRegex = /#.+$/;
-                if (shouldScroll && hashRegex.test(as)) {
-                    _this.scrollToHash(as);
                 }
                 return true;
             } catch (err11) {
@@ -1650,7 +1605,7 @@ class Router {
     }
     handleRouteInfoError(err, pathname, query, as, routeProps, loadErrorFail) {
         var _this = this;
-        return _asyncToGenerator(function*() {
+        return _async_to_generator(function*() {
             console.error(err);
             if (err.cancelled) {
                 // bubble up cancellation errors
@@ -1672,12 +1627,8 @@ class Router {
                 throw buildCancellationError();
             }
             try {
-                let Component;
-                let styleSheets;
                 let props;
-                if (typeof Component === "undefined" || typeof styleSheets === "undefined") {
-                    ({ page: Component , styleSheets  } = yield _this.fetchComponent("/_error"));
-                }
+                const { page: Component , styleSheets  } = yield _this.fetchComponent("/_error");
                 const routeInfo = {
                     props,
                     Component,
@@ -1705,7 +1656,7 @@ class Router {
     }
     getRouteInfo({ route: requestedRoute , pathname , query , as , resolvedAs , routeProps , locale , hasMiddleware , isPreview , unstable_skipClientCache  }) {
         var _this = this;
-        return _asyncToGenerator(function*() {
+        return _async_to_generator(function*() {
             /**
      * This `route` binding can change if there's a rewrite
      * so we keep a reference to the original requested route
@@ -1721,6 +1672,9 @@ class Router {
                 let existingInfo = _this.components[route];
                 if (routeProps.shallow && existingInfo && _this.route === route) {
                     return existingInfo;
+                }
+                if (hasMiddleware) {
+                    existingInfo = undefined;
                 }
                 let cachedRouteInfo = existingInfo && !("initial" in existingInfo) && "production" !== "development" ? existingInfo : undefined;
                 const fetchNextDataParams = {
@@ -1755,21 +1709,17 @@ class Router {
                     route = (0, _removeTrailingSlash).removeTrailingSlash(data.effect.resolvedHref);
                     pathname = data.effect.resolvedHref;
                     query = _extends({}, query, data.effect.parsedAs.query);
-                    resolvedAs = data.effect.parsedAs.pathname;
+                    resolvedAs = (0, _removeBasePath).removeBasePath((0, _normalizeLocalePath).normalizeLocalePath(data.effect.parsedAs.pathname, _this.locales).pathname);
                     // Check again the cache with the new destination.
                     existingInfo = _this.components[route];
                     if (routeProps.shallow && existingInfo && _this.route === route && !hasMiddleware) {
                         // If we have a match with the current route due to rewrite,
                         // we can copy the existing information to the rewritten one.
                         // Then, we return the information along with the matched route.
-                        _this.components[requestedRoute] = _extends({}, existingInfo, {
-                            route
-                        });
                         return _extends({}, existingInfo, {
                             route
                         });
                     }
-                    cachedRouteInfo = existingInfo && !("initial" in existingInfo) && "production" !== "development" ? existingInfo : undefined;
                 }
                 if (route === "/api" || route.startsWith("/api/")) {
                     handleHardNavigation({
@@ -1792,9 +1742,9 @@ class Router {
        * will always have the real-time generated and streamed flight data.
        */ const useStreamedFlightData = routeInfo.__N_RSC && ( false || routeInfo.__N_SSP);
                 const shouldFetchData = routeInfo.__N_SSG || routeInfo.__N_SSP || routeInfo.__N_RSC;
-                const { props  } = yield _this._getData(_asyncToGenerator(function*() {
+                const { props  } = yield _this._getData(_async_to_generator(function*() {
                     if (shouldFetchData && !useStreamedFlightData) {
-                        const { json  } = data || (yield fetchNextData({
+                        const { json  } = (data == null ? void 0 : data.json) ? data : yield fetchNextData({
                             dataHref: _this.pageLoader.getDataHref({
                                 href: (0, _formatUrl).formatWithValidation({
                                     pathname,
@@ -1809,9 +1759,9 @@ class Router {
                             persistCache: !isPreview,
                             isPrefetch: false,
                             unstable_skipClientCache
-                        }));
+                        });
                         return {
-                            props: json
+                            props: json || {}
                         };
                     }
                     return {
@@ -1859,13 +1809,6 @@ class Router {
                 routeInfo.query = query;
                 routeInfo.resolvedAs = resolvedAs;
                 _this.components[route] = routeInfo;
-                // If the route was rewritten in the process of fetching data,
-                // we update the cache to allow hitting the same data for shallow requests.
-                if (route !== requestedRoute) {
-                    _this.components[requestedRoute] = _extends({}, routeInfo, {
-                        route
-                    });
-                }
                 return routeInfo;
             } catch (err) {
                 return _this.handleRouteInfoError((0, _isError).getProperError(err), pathname, query, as, routeProps);
@@ -1933,7 +1876,7 @@ class Router {
    * @param asPath the as path of the prefetched page
    */ prefetch(url, asPath = url, options = {}) {
         var _this = this;
-        return _asyncToGenerator(function*() {
+        return _async_to_generator(function*() {
             let parsed = (0, _parseRelativeUrl).parseRelativeUrl(url);
             let { pathname , query  } = parsed;
             if (true) {
@@ -2024,7 +1967,7 @@ class Router {
                         inflightCache: _this.sdc,
                         persistCache: !_this.isPreview,
                         isPrefetch: true,
-                        unstable_skipClientCache: options.unstable_skipClientCache || options.priority
+                        unstable_skipClientCache: options.unstable_skipClientCache || options.priority && !!true
                     }).then(()=>false) : false;
                 }),
                 _this.pageLoader[options.priority ? "loadPage" : "prefetch"](route), 
@@ -2033,7 +1976,7 @@ class Router {
     }
     fetchComponent(route) {
         var _this = this;
-        return _asyncToGenerator(function*() {
+        return _async_to_generator(function*() {
             const handleCancelled = getCancelledHandler({
                 route,
                 router: _this
@@ -2230,12 +2173,11 @@ class Router {
 }
 Router.events = (0, _mitt).default();
 function matchesMiddleware(options) {
-    return Promise.resolve(options.router.pageLoader.getMiddlewareList()).then((items)=>{
+    return Promise.resolve(options.router.pageLoader.getMiddleware()).then((middleware)=>{
         const { pathname: asPathname  } = (0, _parsePath).parsePath(options.asPath);
         const cleanedAs = (0, _hasBasePath).hasBasePath(asPathname) ? (0, _removeBasePath).removeBasePath(asPathname) : asPathname;
-        return !!(items == null ? void 0 : items.some(([regex, ssr])=>{
-            return !ssr && new RegExp(regex).test((0, _addLocale).addLocale(cleanedAs, options.locale));
-        }));
+        const regex = middleware == null ? void 0 : middleware.location;
+        return !!regex && new RegExp(regex).test((0, _addLocale).addLocale(cleanedAs, options.locale));
     });
 }
 function withMiddlewareEffects(options) {
@@ -2269,7 +2211,8 @@ function getMiddlewareData(source, response, options) {
     const rewriteHeader = response.headers.get("x-nextjs-rewrite");
     let rewriteTarget = rewriteHeader || response.headers.get("x-nextjs-matched-path");
     const matchedPath = response.headers.get("x-matched-path");
-    if (!rewriteTarget && !(matchedPath == null ? void 0 : matchedPath.includes("__next_data_catchall"))) {
+    if (matchedPath && !rewriteTarget && !matchedPath.includes("__next_data_catchall") && !matchedPath.includes("/_error") && !matchedPath.includes("/404")) {
+        // leverage x-matched-path to detect next.config.js rewrites
         rewriteTarget = matchedPath;
     }
     if (rewriteTarget) {
@@ -2279,7 +2222,7 @@ function getMiddlewareData(source, response, options) {
                 nextConfig,
                 parseData: true
             });
-            const fsPathname = (0, _removeTrailingSlash).removeTrailingSlash(pathnameInfo.pathname);
+            let fsPathname = (0, _removeTrailingSlash).removeTrailingSlash(pathnameInfo.pathname);
             return Promise.all([
                 options.router.pageLoader.getPageList(),
                 (0, _routeLoader).getClientBuildManifest(), 
@@ -2292,7 +2235,12 @@ function getMiddlewareData(source, response, options) {
                     as = (0, _addBasePath).addBasePath(parsedSource.pathname);
                     parsedRewriteTarget.pathname = as;
                 }
-                if (false) {}
+                if (false) {} else if (!pages.includes(fsPathname)) {
+                    const resolvedPathname = resolveDynamicRoute(fsPathname, pages);
+                    if (resolvedPathname !== fsPathname) {
+                        fsPathname = resolvedPathname;
+                    }
+                }
                 const resolvedHref = !pages.includes(fsPathname) ? resolveDynamicRoute((0, _normalizeLocalePath).normalizeLocalePath((0, _removeBasePath).removeBasePath(parsedRewriteTarget.pathname), options.router.locales).pathname, pages) : fsPathname;
                 if ((0, _isDynamic).isDynamicRoute(resolvedHref)) {
                     const matches = (0, _routeMatcher).getRouteMatcher((0, _routeRegex).getRouteRegex(resolvedHref))(as);

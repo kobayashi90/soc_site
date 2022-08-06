@@ -592,7 +592,7 @@ class NextScript extends _react.Component {
             const bytes =  false ? 0 : Buffer.from(data).byteLength;
             const prettyBytes = (__webpack_require__(5955)/* ["default"] */ .Z);
             if (largePageDataBytes && bytes > largePageDataBytes) {
-                console.warn(`Warning: data for page "${__NEXT_DATA__.page}" is ${prettyBytes(bytes)} which exceeds the threshold of ${prettyBytes(largePageDataBytes)}, this amount of data can reduce performance.\nSee more info here: https://nextjs.org/docs/messages/large-page-data`);
+                console.warn(`Warning: data for page "${__NEXT_DATA__.page}"${__NEXT_DATA__.page === context.dangerousAsPath ? "" : ` (path "${context.dangerousAsPath}")`} is ${prettyBytes(bytes)} which exceeds the threshold of ${prettyBytes(largePageDataBytes)}, this amount of data can reduce performance.\nSee more info here: https://nextjs.org/docs/messages/large-page-data`);
             }
             return (0, _htmlescape).htmlEscapeJsonString(data);
         } catch (err) {
@@ -799,7 +799,7 @@ module.exports = require("react");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [9311,2952], () => (__webpack_exec__(3105)));
+var __webpack_exports__ = __webpack_require__.X(0, [6377,2952], () => (__webpack_exec__(3105)));
 module.exports = __webpack_exports__;
 
 })();

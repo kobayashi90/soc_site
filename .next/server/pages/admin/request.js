@@ -9,7 +9,8 @@ exports.modules = {
 
 // Exports
 module.exports = {
-	"table": "Request_table__Sr4vK"
+	"table": "Request_table__Sr4vK",
+	"pagination": "Request_pagination__bcal1"
 };
 
 
@@ -157,26 +158,29 @@ function RequestModal(props) {
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form, {
                     ref: formRef,
                     children: [
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
+                                as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
+                                children: [
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
+                                        htmlFor: "title",
+                                        style: {
+                                            color: "black"
+                                        },
+                                        children: "Title:"
+                                    }),
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Control, {
+                                        required: true,
+                                        type: "text",
+                                        name: "title",
+                                        defaultValue: request?.title
+                                    })
+                                ]
+                            })
+                        }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                            className: "mt-3",
                             children: [
-                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
-                                    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
-                                            htmlFor: "title",
-                                            style: {
-                                                color: "black"
-                                            },
-                                            children: "Title:"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Control, {
-                                            required: true,
-                                            type: "text",
-                                            name: "title",
-                                            defaultValue: request?.title
-                                        })
-                                    ]
-                                }),
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
                                     as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
                                     children: [
@@ -194,32 +198,29 @@ function RequestModal(props) {
                                             defaultValue: request?.link
                                         })
                                     ]
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
+                                    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
+                                            htmlFor: "state",
+                                            style: {
+                                                color: "black"
+                                            },
+                                            children: "Status:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("select", {
+                                            className: "form-control",
+                                            name: "state",
+                                            defaultValue: request?.state,
+                                            children: stateOptions.map((o)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                    value: o.value,
+                                                    children: o.label
+                                                }, o.value))
+                                        })
+                                    ]
                                 })
                             ]
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-                            className: "mt-3",
-                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
-                                as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
-                                        htmlFor: "state",
-                                        style: {
-                                            color: "black"
-                                        },
-                                        children: "Status:"
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("select", {
-                                        className: "form-control",
-                                        name: "state",
-                                        defaultValue: request?.state,
-                                        children: stateOptions.map((o)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
-                                                value: o.value,
-                                                children: o.label
-                                            }, o.value))
-                                    })
-                                ]
-                            })
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                             className: "mt-3",
@@ -672,7 +673,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [9311,910,5675,9463,1331,5043,9665,9324], () => (__webpack_exec__(8906)));
+var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,9463,1331,5043,9665,9324], () => (__webpack_exec__(8906)));
 module.exports = __webpack_exports__;
 
 })();

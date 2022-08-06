@@ -331,18 +331,23 @@ function PlatformSelector(props) {
 function RequestSelector(props) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(BaseSelector, {
         ...props,
+        rowsFn: (data)=>data.rows,
         startQuery: _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
         query {
           searchRequests (state: ["pending"], donator: [false]) {
-            value: id
-            label: title
+            rows {
+              value: id
+              label: title
+            }
           }
         }`,
         changeQuery: _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
         query ($filter: String) {
           searchRequests (state: ["pending", "hold"], filter: $filter) {
-            value: id
-            label: title
+            rows {
+              value: id
+              label: title
+            }
           }
         }`
     });

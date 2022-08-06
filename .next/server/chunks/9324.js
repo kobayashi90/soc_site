@@ -8,6 +8,7 @@ exports.modules = {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "c5": () => (/* binding */ isAuthedPage),
 /* harmony export */   "yg": () => (/* binding */ hasRolePage)
 /* harmony export */ });
 /* unused harmony exports isAuthed, hasRole, placeholder, headerColor */
@@ -50,6 +51,18 @@ const hasRolePage = (allowedRoles)=>(0,_session__WEBPACK_IMPORTED_MODULE_2__/* .
             props: {}
         };
     });
+const isAuthedPage = (0,_session__WEBPACK_IMPORTED_MODULE_2__/* .withSessionSsr */ .f)(async (context)=>{
+    const { req  } = context;
+    if (!req.session?.username) return {
+        redirect: {
+            destination: "/404",
+            permanent: false
+        }
+    };
+    else return {
+        props: {}
+    };
+});
 const placeholder = (parent, folder)=>{
     if (!parent.placeholder) solvePlaceholder(parent, folder);
     return parent.placeholder;

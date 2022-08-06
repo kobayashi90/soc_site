@@ -11,15 +11,19 @@ Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
 exports["default"] = Image;
-var _react = _interopRequireWildcard(__webpack_require__(6689));
-var _head = _interopRequireDefault(__webpack_require__(4957));
+var _extends = (__webpack_require__(6495)/* ["default"] */ .Z);
+var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
+var _interop_require_wildcard = (__webpack_require__(1598)/* ["default"] */ .Z);
+var _object_without_properties_loose = (__webpack_require__(7273)/* ["default"] */ .Z);
+var _react = _interop_require_wildcard(__webpack_require__(6689));
+var _head = _interop_require_default(__webpack_require__(4957));
 var _imageConfig = __webpack_require__(5843);
 var _useIntersection = __webpack_require__(7190);
 var _imageConfigContext = __webpack_require__(744);
 var _utils = __webpack_require__(9232);
 var _normalizeTrailingSlash = __webpack_require__(2392);
 function Image(_param) {
-    var { src , sizes , unoptimized =false , priority =false , loading , lazyRoot =null , lazyBoundary , className , quality , width , height , style , objectFit , objectPosition , onLoadingComplete , placeholder ="empty" , blurDataURL  } = _param, all = _objectWithoutPropertiesLoose(_param, [
+    var { src , sizes , unoptimized =false , priority =false , loading , lazyRoot =null , lazyBoundary , className , quality , width , height , style , objectFit , objectPosition , onLoadingComplete , placeholder ="empty" , blurDataURL  } = _param, all = _object_without_properties_loose(_param, [
         "src",
         "sizes",
         "unoptimized",
@@ -67,7 +71,7 @@ function Image(_param) {
             const customImageLoader = rest.loader;
             var _tmp;
             _tmp = (obj)=>{
-                const { config: _  } = obj, opts = _objectWithoutPropertiesLoose(obj, [
+                const { config: _  } = obj, opts = _object_without_properties_loose(obj, [
                     "config"
                 ]);
                 // The config object is internal only so we must
@@ -301,78 +305,8 @@ function Image(_param) {
         href: imgAttributes.srcSet ? undefined : imgAttributes.src
     }, linkProps))) : null);
 }
-function _extends() {
-    _extends = Object.assign || function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source){
-                if (Object.prototype.hasOwnProperty.call(source, key)) {
-                    target[key] = source[key];
-                }
-            }
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
-function _getRequireWildcardCache() {
-    if (typeof WeakMap !== "function") return null;
-    var cache = new WeakMap();
-    _getRequireWildcardCache = function() {
-        return cache;
-    };
-    return cache;
-}
-function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-        return obj;
-    }
-    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
-        return {
-            default: obj
-        };
-    }
-    var cache = _getRequireWildcardCache();
-    if (cache && cache.has(obj)) {
-        return cache.get(obj);
-    }
-    var newObj = {};
-    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-    for(var key in obj){
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-            if (desc && (desc.get || desc.set)) {
-                Object.defineProperty(newObj, key, desc);
-            } else {
-                newObj[key] = obj[key];
-            }
-        }
-    }
-    newObj.default = obj;
-    if (cache) {
-        cache.set(obj, newObj);
-    }
-    return newObj;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-const { experimentalRemotePatterns =[] , experimentalUnoptimized  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default"} || {};
-const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default"};
+const { experimentalRemotePatterns =[] , experimentalUnoptimized  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","dangerouslyAllowSVG":false} || {};
+const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","dangerouslyAllowSVG":false};
 const loadedImageURLs = new Set();
 const allImgs = new Map();
 let perfObserver;
@@ -551,7 +485,7 @@ function handleLoading(img, src, layout, placeholder, onLoadingCompleteRef, setB
     });
 }
 const ImageElement = (_param)=>{
-    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible , noscriptSizes  } = _param, rest = _objectWithoutPropertiesLoose(_param, [
+    var { imgAttributes , heightInt , widthInt , qualityInt , layout , className , imgStyle , blurStyle , isLazy , placeholder , loading , srcString , config , unoptimized , loader , onLoadingCompleteRef , setBlurComplete , setIntersection , onLoad , onError , isVisible , noscriptSizes  } = _param, rest = _object_without_properties_loose(_param, [
         "imgAttributes",
         "heightInt",
         "widthInt",
