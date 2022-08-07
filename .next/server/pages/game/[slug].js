@@ -68,6 +68,9 @@ const query = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
           releaseDate
           createdAt
           placeholder
+          games {
+            slug
+          }
         }
       }
     }`;
@@ -97,7 +100,17 @@ async function getServerSideProps({ params  }) {
 const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_9__/* .getImageUrl */ .Jn)(id, "game")}`;
 function GameDetail(props) {
     const { game , imageUrl  } = props;
-    const { slug , name , releaseDate , publishers , platforms , series , albums , placeholder , headerColor  } = game;
+    const { slug , name , releaseDate , publishers , platforms , series , placeholder , headerColor  } = game;
+    const albums = [
+        [],
+        [],
+        []
+    ];
+    game.albums.forEach((album)=>{
+        const { length  } = album.games;
+        const index = length === 1 ? 0 : length === 2 ? 1 : 2;
+        albums[index].push(album);
+    });
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Container, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
@@ -265,16 +278,16 @@ function GameDetail(props) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("hr", {
                 className: "style2 style-white"
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
-                className: "justify-content-center",
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__/* .AlbumBoxList */ .X, {
-                    colProps: {
-                        md: 3,
-                        xs: 6
-                    },
-                    items: albums
-                })
-            })
+            albums.map((items, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                    className: "justify-content-center",
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__/* .AlbumBoxList */ .X, {
+                        colProps: {
+                            md: 3,
+                            xs: 6
+                        },
+                        items: items
+                    })
+                }, i))
         ]
     });
 };
