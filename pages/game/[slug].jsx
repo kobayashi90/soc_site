@@ -35,6 +35,9 @@ const query = gql`
           releaseDate
           createdAt
           placeholder
+          games {
+            slug
+          }
         }
       }
     }`
@@ -54,7 +57,17 @@ const fullImage = (id, quality = 75) => `/_next/image?w=3840&q=${quality}&url=${
 
 export default function GameDetail (props) {
   const { game, imageUrl } = props
-  const { slug, name, releaseDate, publishers, platforms, series, albums, placeholder, headerColor } = game
+  const { slug, name, releaseDate, publishers, platforms, series, placeholder, headerColor } = game
+  const albums = [[], [], []]
+
+  game.albums.forEach(album => {
+    const { length } = album.games
+    const index = length === 1
+      ? 0
+      : (length === 2 ? 1 : 2)
+
+    albums[index].push(album)
+  })
 
   return (
     <Container>
@@ -138,9 +151,11 @@ export default function GameDetail (props) {
       </Row>
 
       <hr className='style2 style-white' />
-      <Row className='justify-content-center'>
-        <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={albums} />
-      </Row>
+      {albums.map((items, i) => (
+        <Row key={i} className='justify-content-center'>
+          <AlbumBoxList colProps={{ md: 3, xs: 6 }} items={items} />
+        </Row>
+      ))}
 
     </Container>
   )
