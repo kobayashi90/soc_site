@@ -558,13 +558,13 @@ function Page(props) {
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_12__/* .ButtonLoader */ .l, {
                                                         loading: loadingFavorite,
-                                                        onClick: dataFavorite ? submitFavorite : null,
+                                                        onClick: user ? submitFavorite : ()=>router.replace(`${router.asPath}?login`),
                                                         className: "w-100 rounded-3",
                                                         variant: "outline-light",
                                                         style: {
                                                             fontSize: "18px"
                                                         },
-                                                        children: t(dataFavorite ? dataFavorite.album.isFavorite ? "Favorite_Remove" : "Favorite_Add" : "Favorite_Login")
+                                                        children: t(user ? dataFavorite?.album?.isFavorite ? "Favorite_Remove" : "Favorite_Add" : "Favorite_Login")
                                                     })
                                                 })
                                             })

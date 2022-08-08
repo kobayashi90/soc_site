@@ -314,16 +314,29 @@ function LoginButton(props) {
       logout
     }
   `;
+    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
     const { user , refetch  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.useApolloClient)();
     const [queryLogin, { loading: loadingLogin  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.useLazyQuery)(loginQuery);
     const { 0: showForgor , 1: setForgor  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
+    function setUrl(value) {
+        const url = value ? `${router.asPath}?login` : router.asPath.replace("?login", "");
+        router.replace(url, url, {
+            scroll: false
+        });
+    }
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         if (!show) setForgor(false);
     }, [
         show
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        const flag = router.query.login !== undefined;
+        if (flag !== show) setShow(flag);
+    }, [
+        router.query.login
     ]);
     const handleLogin = ()=>{
         if (user) {
@@ -331,9 +344,9 @@ function LoginButton(props) {
                 query: logoutQuery
             }).then(()=>{
                 refetch();
-                setShow(false);
+                setUrl(false);
             }).catch((error)=>console.error("An unexpected error happened:", error));
-        } else setShow(true);
+        } else setUrl(true);
     };
     const submit = (e)=>{
         e.persist();
@@ -356,7 +369,7 @@ function LoginButton(props) {
                 react_toastify__WEBPACK_IMPORTED_MODULE_9__.toast.error(message);
             } else {
                 refetch();
-                setShow(false);
+                setUrl(false);
             }
         }).catch((error)=>console.error("An unexpected error happened:", error));
     };
@@ -381,7 +394,7 @@ function LoginButton(props) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal, {
                 show: show,
                 centered: true,
-                onHide: ()=>setShow(false),
+                onHide: ()=>setUrl(false),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal.Body, {
                     className: "m-3",
                     children: showForgor ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(ForgorForm, {}) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form, {

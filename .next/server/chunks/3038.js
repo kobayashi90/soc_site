@@ -36,11 +36,14 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _useUser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1292);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5043);
-/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(8824);
-/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(8824);
+/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _useTranslation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2729);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1853);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_8__]);
 _useTranslation__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -107,7 +110,7 @@ function BasicCommentCarrousel(props) {
                                                 " - ",
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                     href: `/album/${current.album.id}`,
-                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
                                                     children: current.album.title
                                                 })
                                             ]
@@ -117,7 +120,7 @@ function BasicCommentCarrousel(props) {
                                                 " - ",
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                     href: `/profile/${current.username}`,
-                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
                                                     children: current.username
                                                 })
                                             ]
@@ -157,6 +160,7 @@ const mutateComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
 `;
 function CommentCarrousel(props) {
     const { albumId , comments: initialComments = []  } = props;
+    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_9__.useRouter)();
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)();
     const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
     const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
@@ -281,7 +285,7 @@ function CommentCarrousel(props) {
                                                         " - ",
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                             href: `/album/${current.album.id}`,
-                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
                                                             children: current.album.title
                                                         })
                                                     ]
@@ -291,7 +295,7 @@ function CommentCarrousel(props) {
                                                         " - ",
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                             href: `/profile/${current.username}`,
-                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_9___default().albumSpan),
+                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
                                                             children: current.username
                                                         })
                                                     ]
@@ -322,6 +326,7 @@ function CommentCarrousel(props) {
                             }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                                 xs: "4",
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Button, {
+                                    onClick: ()=>router.replace(`${router.asPath}?login`),
                                     className: "w-100 rounded-3",
                                     variant: "outline-light",
                                     style: {
