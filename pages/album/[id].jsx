@@ -358,9 +358,9 @@ export default function Page (props) {
                 <Row>
                   <Col>
                     <ButtonLoader
-                      loading={loadingFavorite} onClick={dataFavorite ? submitFavorite : null}
+                      loading={loadingFavorite} onClick={user ? submitFavorite : () => router.replace(`${router.asPath}?login`)}
                       className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
-                      {t(dataFavorite ? (dataFavorite.album.isFavorite ? 'Favorite_Remove' : 'Favorite_Add') : 'Favorite_Login')}
+                      {t(user ? (dataFavorite?.album?.isFavorite ? 'Favorite_Remove' : 'Favorite_Add') : 'Favorite_Login')}
                     </ButtonLoader>
                   </Col>
                 </Row>

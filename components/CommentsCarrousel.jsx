@@ -8,6 +8,7 @@ import useUser from './useUser'
 import { ButtonLoader } from './Loader'
 import styles from '../styles/Profile.module.scss'
 import useTranslation from './useTranslation'
+import { useRouter } from 'next/router'
 
 function SideButton (props) {
   const { side, onClick } = props
@@ -81,6 +82,7 @@ const mutateComment = gql`
 export default function CommentCarrousel (props) {
   const { albumId, comments: initialComments = [] } = props
 
+  const router = useRouter()
   const t = useTranslation()
   const [show, setShow] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -166,7 +168,7 @@ export default function CommentCarrousel (props) {
               )
               : (
                 <Col xs='4'>
-                  <Button className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                  <Button onClick={() => router.replace(`${router.asPath}?login`)} className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
                     {t('Comment_Login')}
                   </Button>
                 </Col>

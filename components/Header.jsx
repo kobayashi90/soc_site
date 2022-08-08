@@ -108,7 +108,7 @@ function LoginButton (props) {
       logout
     }
   `
-
+  const router = useRouter()
   const { user, refetch } = useUser()
   const client = useApolloClient()
   const [queryLogin, { loading: loadingLogin }] = useLazyQuery(loginQuery)
@@ -117,19 +117,29 @@ function LoginButton (props) {
   const [show, setShow] = useState(false)
   const t = useTranslation()
 
+  function setUrl (value) {
+    const url = value ? `${router.asPath}?login` : router.asPath.replace('?login', '')
+    router.replace(url, url, { scroll: false })
+  }
+
   useEffect(() => {
     if (!show) setForgor(false)
   }, [show])
+
+  useEffect(() => {
+    const flag = router.query.login !== undefined
+    if (flag !== show) setShow(flag)
+  }, [router.query.login])
 
   const handleLogin = () => {
     if (user) {
       client.query({ query: logoutQuery })
         .then(() => {
           refetch()
-          setShow(false)
+          setUrl(false)
         })
         .catch(error => console.error('An unexpected error happened:', error))
-    } else setShow(true)
+    } else setUrl(true)
   }
 
   const submit = e => {
@@ -153,7 +163,7 @@ function LoginButton (props) {
           toast.error(message)
         } else {
           refetch()
-          setShow(false)
+          setUrl(false)
         }
       })
       .catch(error => console.error('An unexpected error happened:', error))
@@ -168,7 +178,7 @@ function LoginButton (props) {
       <Col xs='auto' className={classNames(styles.login, 'd-none d-sm-block ms-sm-auto mb-sm-5')}>
         <Button onClick={handleLogin} variant="primary">{t(user ? 'Logout' : 'Login')}</Button>
       </Col>
-      <Modal show={show} centered onHide={() => setShow(false)}>
+      <Modal show={show} centered onHide={() => setUrl(false)}>
         <Modal.Body className='m-3'>
           {showForgor
             ? <ForgorForm />
