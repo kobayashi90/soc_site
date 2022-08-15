@@ -164,13 +164,13 @@ function CommentCarrousel(props) {
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)();
     const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
     const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
+    const { 0: defaultValue , 1: setDefaultValue  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)();
     const timeoutRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
     const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)();
     const [fetchComment, { data , refetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(getComment);
     const [updateComment, { loading: loadingComment  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(mutateComment);
-    const { comments , selfComment  } = data?.album || {
-        comments: initialComments
-    };
+    const comments = data?.album.comments || initialComments;
+    const selfComment = data?.album?.selfComment;
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>fetchComment({
             variables: {
                 albumId
@@ -185,6 +185,15 @@ function CommentCarrousel(props) {
         timeoutRef.current = setTimeout(plusIndex, 10 * 1000);
     }, [
         currentIndex
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        const selfComment = data?.album?.selfComment;
+        if (selfComment) setDefaultValue(selfComment.text);
+    }, [
+        data
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>setDefaultValue(), [
+        albumId
     ]);
     function submit(ev) {
         let variables = form_serialize__WEBPACK_IMPORTED_MODULE_4___default()(ev.target, {
@@ -227,7 +236,8 @@ function CommentCarrousel(props) {
                                         as: "textarea",
                                         name: "text",
                                         maxLength: 300,
-                                        defaultValue: selfComment ? selfComment.text : ""
+                                        onChange: (ev)=>setDefaultValue(ev.target.value),
+                                        defaultValue: defaultValue
                                     })
                                 })
                             }),
