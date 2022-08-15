@@ -84,21 +84,31 @@ export default function CommentCarrousel (props) {
 
   const router = useRouter()
   const t = useTranslation()
+
   const [show, setShow] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [defaultValue, setDefaultValue] = useState()
+
   const timeoutRef = useRef(null)
   const { user } = useUser()
 
   const [fetchComment, { data, refetch }] = useLazyQuery(getComment)
   const [updateComment, { loading: loadingComment }] = useMutation(mutateComment)
 
-  const { comments, selfComment } = data?.album || { comments: initialComments }
+  const comments = data?.album.comments || initialComments
+  const selfComment = data?.album?.selfComment
 
   useEffect(() => fetchComment({ variables: { albumId } }), [user, fetchComment, albumId])
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     timeoutRef.current = setTimeout(plusIndex, 10 * 1000)
   }, [currentIndex])
+
+  useEffect(() => {
+    const selfComment = data?.album?.selfComment
+    if (selfComment) setDefaultValue(selfComment.text)
+  }, [data])
+  useEffect(() => setDefaultValue(), [albumId])
 
   function submit (ev) {
     let variables = serialize(ev.target, { hash: true })
@@ -122,7 +132,7 @@ export default function CommentCarrousel (props) {
         <Form onSubmit={submit} style={{ color: 'black' }}>
           <Row>
             <Form.Group as={Col} >
-              <FormControl required as='textarea' name='text' maxLength={300} defaultValue={selfComment ? selfComment.text : ''} />
+              <FormControl required as='textarea' name='text' maxLength={300} onChange={ev => setDefaultValue(ev.target.value)} defaultValue={defaultValue} />
             </Form.Group>
           </Row>
           <Row className='mt-2'>
