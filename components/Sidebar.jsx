@@ -56,14 +56,14 @@ export default function Sidebar (props) {
       <Row className='side-menu'>
         <GetLucky />
       </Row>
-      <Row className='side-menu mb-3'>
+      <Row className='side-menu'>
         <h1 className='mx-auto text-center my-2'>
           <Link href='/holy12' className='text-uppercase'>
             {t('Random Pull')}
           </Link>
         </h1>
       </Row>
-      <Row className='px-3'>
+      <Row className='px-3 mt-3'>
         <Col md={12} className={styles.socials}>
           <Row>
             <Col className='d-flex pe-1'>
@@ -99,7 +99,7 @@ export default function Sidebar (props) {
       <Highlight/>
 
       {radio && (
-        <div className={classNames(styles.socials, 'mt-3 p-2 mb-4')}>
+        <div className={classNames(styles.socials, 'mt-3 p-2')}>
           <iframe title='radio' frameBorder='0' style={{ height: '335px', width: '100%' }} src='https://radio.sittingonclouds.net/widget' />
         </div>
       )}
@@ -146,7 +146,7 @@ function Highlight () {
   const { id, title, placeholder } = data.highlight
 
   return (
-    <div className={classNames(styles.socials, 'mt-3 p-1 mb-4')}>
+    <div className={classNames(styles.socials, 'mt-3 p-1')}>
       {loading && <Loader className='mx-auto' size={100} />}
       {id && (
         <>
