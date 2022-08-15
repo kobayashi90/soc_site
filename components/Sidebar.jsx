@@ -96,9 +96,9 @@ export default function Sidebar (props) {
         </Col>
       </Row>
 
-      <AlbumCount />
       <Highlight/>
       <CommentCarrouselSidebar />
+      <AlbumCount />
 
       {radio && (
         <div className={classNames(styles.socials, 'mt-3 p-2')}>

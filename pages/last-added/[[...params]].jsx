@@ -96,7 +96,7 @@ export default function LastAdded (props) {
             <Link
               href={`/last-added/${e}`}
               scroll
-              className={classNames(styles.pageLink, { disabled: e === parseInt(page) }, 'nav-link')}>
+              className={classNames(styles.pageLink, { disabled: e === parseInt(page), [styles.disabled]: e === parseInt(page) }, 'nav-link')}>
               {e}
             </Link>
           </li>
