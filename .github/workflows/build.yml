@@ -44,7 +44,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install --omit=dev
+          npm install --omit=dev --force
 
       - name: Build server and website
         run: |
