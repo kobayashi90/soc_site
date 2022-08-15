@@ -940,15 +940,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(3082);
 /* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_ga__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2353);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2748);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1454);
 /* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1292);
 /* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(1331);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1932);
 /* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6153);
 /* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(universal_cookie__WEBPACK_IMPORTED_MODULE_15__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([luxon__WEBPACK_IMPORTED_MODULE_10__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__]);
-([luxon__WEBPACK_IMPORTED_MODULE_10__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__]);
+([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_11__, _components_Header__WEBPACK_IMPORTED_MODULE_14__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 

@@ -52,26 +52,14 @@ function getPropertyDescriptorForReqSession(session) {
 // next/index.ts
 function withIronSessionApiRoute(handler, options) {
   return async function nextApiHandlerWrappedWithIronSession(req, res) {
-    let sessionOptions;
-    if (options instanceof Function) {
-      sessionOptions = await options(req, res);
-    } else {
-      sessionOptions = options;
-    }
-    const session = await getIronSession(req, res, sessionOptions);
+    const session = await getIronSession(req, res, options);
     Object.defineProperty(req, "session", getPropertyDescriptorForReqSession(session));
     return handler(req, res);
   };
 }
 function withIronSessionSsr(handler, options) {
   return async function nextGetServerSidePropsHandlerWrappedWithIronSession(context) {
-    let sessionOptions;
-    if (options instanceof Function) {
-      sessionOptions = await options(context.req, context.res);
-    } else {
-      sessionOptions = options;
-    }
-    const session = await (0,iron_session__WEBPACK_IMPORTED_MODULE_0__.getIronSession)(context.req, context.res, sessionOptions);
+    const session = await (0,iron_session__WEBPACK_IMPORTED_MODULE_0__.getIronSession)(context.req, context.res, options);
     Object.defineProperty(context.req, "session", getPropertyDescriptorForReqSession(session));
     return handler(context);
   };

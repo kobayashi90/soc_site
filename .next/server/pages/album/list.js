@@ -32,7 +32,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(358);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5483);
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2353);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2748);
+/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1664);
@@ -40,8 +41,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1454);
 /* harmony import */ var _styles_letter_module_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5376);
 /* harmony import */ var _styles_letter_module_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_letter_module_scss__WEBPACK_IMPORTED_MODULE_8__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__, luxon__WEBPACK_IMPORTED_MODULE_4__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__]);
-([_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__, luxon__WEBPACK_IMPORTED_MODULE_4__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__]);
+([_components_Sidebar__WEBPACK_IMPORTED_MODULE_3__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -170,6 +171,14 @@ module.exports = require("classnames");
 
 "use strict";
 module.exports = require("form-serialize");
+
+/***/ }),
+
+/***/ 2748:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("luxon");
 
 /***/ }),
 
@@ -482,14 +491,6 @@ module.exports = require("universal-cookie");
 
 "use strict";
 module.exports = import("apollo-upload-client");;
-
-/***/ }),
-
-/***/ 2353:
-/***/ ((module) => {
-
-"use strict";
-module.exports = import("luxon");;
 
 /***/ })
 

@@ -262,6 +262,14 @@ module.exports = require("form-serialize");
 
 /***/ }),
 
+/***/ 2748:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("luxon");
+
+/***/ }),
+
 /***/ 3280:
 /***/ ((module) => {
 
@@ -571,14 +579,6 @@ module.exports = require("universal-cookie");
 
 "use strict";
 module.exports = import("apollo-upload-client");;
-
-/***/ }),
-
-/***/ 2353:
-/***/ ((module) => {
-
-"use strict";
-module.exports = import("luxon");;
 
 /***/ })
 
