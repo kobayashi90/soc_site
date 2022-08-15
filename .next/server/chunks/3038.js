@@ -448,6 +448,16 @@ function CommentCarrouselSidebar(props) {
                                     side: "left",
                                     onClick: ()=>setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)
                                 }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                    className: "d-flex align-items-center justify-content-center",
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        children: [
+                                            currentIndex + 1,
+                                            " / ",
+                                            comments.length
+                                        ]
+                                    })
+                                }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
                                     side: "right",
                                     onClick: plusIndex

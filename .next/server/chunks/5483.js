@@ -199,9 +199,9 @@ function Sidebar(props) {
                     ]
                 })
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AlbumCount, {}),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Highlight, {}),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_13__/* .CommentCarrouselSidebar */ .Sf, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AlbumCount, {}),
             radio && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14___default().socials), "mt-3 p-2"),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("iframe", {

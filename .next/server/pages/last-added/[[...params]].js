@@ -9,7 +9,8 @@ exports.modules = {
 
 // Exports
 module.exports = {
-	"pageLink": "LastAdded_pageLink__igXmr"
+	"pageLink": "LastAdded_pageLink__igXmr",
+	"disabled": "LastAdded_disabled__ONzD6"
 };
 
 
@@ -148,7 +149,8 @@ function LastAdded(props) {
                             href: `/last-added/${e}`,
                             scroll: true,
                             className: classnames__WEBPACK_IMPORTED_MODULE_7___default()((_styles_LastAdded_module_scss__WEBPACK_IMPORTED_MODULE_11___default().pageLink), {
-                                disabled: e === parseInt(page)
+                                disabled: e === parseInt(page),
+                                [(_styles_LastAdded_module_scss__WEBPACK_IMPORTED_MODULE_11___default().disabled)]: e === parseInt(page)
                             }, "nav-link"),
                             children: e
                         })
