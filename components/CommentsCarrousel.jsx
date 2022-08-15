@@ -1,14 +1,17 @@
 import { Col, Button, Modal, Form, Row, FormControl } from 'react-bootstrap'
 import { useEffect, useRef, useState } from 'react'
-import { gql, useLazyQuery, useMutation } from '@apollo/client'
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import serialize from 'form-serialize'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import useUser from './useUser'
 import { ButtonLoader } from './Loader'
-import styles from '../styles/Profile.module.scss'
 import useTranslation from './useTranslation'
-import { useRouter } from 'next/router'
+
+import styles from '../styles/Profile.module.scss'
+import stylesSidebar from '../styles/Sidebar.module.scss'
+import classNames from 'classnames'
 
 function SideButton (props) {
   const { side, onClick } = props
@@ -185,6 +188,63 @@ export default function CommentCarrousel (props) {
               )}
           </Row>
         )}
+      </Col>
+    </Row>
+  </>
+}
+
+const getRecentComments = gql`
+  query {
+    recentComments {
+      text
+      anon
+      username
+      album {
+        id
+        title
+      }
+    }
+  }
+`
+
+export function CommentCarrouselSidebar (props) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const timeoutRef = useRef(null)
+  const { data } = useQuery(getRecentComments)
+
+  const comments = data?.recentComments || []
+
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    timeoutRef.current = setTimeout(plusIndex, 10 * 1000)
+  }, [currentIndex])
+
+  const current = comments[currentIndex]
+  const plusIndex = () => setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1)
+
+  return <>
+    <Row className='mt-3 px-3'>
+      <Col className={classNames(stylesSidebar.socials, '')}>
+        {current && (
+          <>
+            <Row>
+              <Col className='pb-3' style={{ fontSize: '18px' }}>
+                {current.text}
+                <br />
+                <div className='mt-2'>
+                  {current.album && <span> - <Link href={`/album/${current.album.id}`} className={styles.albumSpan}>{current.album.title}</Link></span>}
+                  {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`} className={styles.albumSpan}>{current.username}</Link></span>}
+                </div>
+              </Col>
+            </Row>
+            <Row className='d-flex justify-content-between'>
+              <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />
+              <SideButton side='right' onClick={plusIndex} />
+            </Row>
+          </>
+        )}
+
       </Col>
     </Row>
   </>
