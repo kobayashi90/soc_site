@@ -240,6 +240,7 @@ export function CommentCarrouselSidebar (props) {
             </Row>
             <Row className='d-flex justify-content-between'>
               <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />
+              <Col className='d-flex align-items-center justify-content-center'><div>{currentIndex + 1} / {comments.length}</div></Col>
               <SideButton side='right' onClick={plusIndex} />
             </Row>
           </>
