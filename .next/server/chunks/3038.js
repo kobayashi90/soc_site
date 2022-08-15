@@ -387,7 +387,7 @@ const getRecentComments = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
 function CommentCarrouselSidebar(props) {
     const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
     const timeoutRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
-    const { data  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(getRecentComments);
+    const { data , loading  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(getRecentComments);
     const comments = data?.recentComments || [];
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -402,7 +402,10 @@ function CommentCarrouselSidebar(props) {
             className: "mt-3 px-3",
             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                 className: classnames__WEBPACK_IMPORTED_MODULE_10___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_12___default().socials), ""),
-                children: current && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                children: loading ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
+                    className: "mx-auto",
+                    size: 100
+                }) : current ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                     children: [
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
@@ -465,7 +468,7 @@ function CommentCarrouselSidebar(props) {
                             ]
                         })
                     ]
-                })
+                }) : null
             })
         })
     });
