@@ -1,23 +1,11 @@
+"use strict";
 exports.id = 5483;
 exports.ids = [5483];
 exports.modules = {
 
-/***/ 4074:
-/***/ ((module) => {
-
-// Exports
-module.exports = {
-	"root": "Sidebar_root__WlHvb",
-	"socials": "Sidebar_socials__kDIkg"
-};
-
-
-/***/ }),
-
 /***/ 5483:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ Sidebar)
@@ -38,15 +26,17 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(4074);
-/* harmony import */ var _styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(4074);
+/* harmony import */ var _styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1331);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5043);
 /* harmony import */ var _AlbumBoxes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9578);
 /* harmony import */ var _useUser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1292);
 /* harmony import */ var _useTranslation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2729);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_12__]);
-_useTranslation__WEBPACK_IMPORTED_MODULE_12__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var _CommentsCarrousel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6658);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_12__, _CommentsCarrousel__WEBPACK_IMPORTED_MODULE_13__]);
+([_useTranslation__WEBPACK_IMPORTED_MODULE_12__, _CommentsCarrousel__WEBPACK_IMPORTED_MODULE_13__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -90,7 +80,7 @@ function Sidebar(props) {
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z)();
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
         md: 3,
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default().root), "p-3 ms-md-auto d-flex flex-column col-md-3"),
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14___default().root), "p-3 ms-md-auto d-flex flex-column col-md-3"),
         children: [
             index && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
@@ -109,7 +99,7 @@ function Sidebar(props) {
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(GetLucky, {})
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                className: "side-menu mb-3",
+                className: "side-menu",
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                     className: "mx-auto text-center my-2",
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_6___default()), {
@@ -120,10 +110,10 @@ function Sidebar(props) {
                 })
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
-                className: "px-3",
+                className: "px-3 mt-3",
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                     md: 12,
-                    className: (_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default().socials),
+                    className: (_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14___default().socials),
                     children: [
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
                             children: [
@@ -211,8 +201,9 @@ function Sidebar(props) {
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AlbumCount, {}),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Highlight, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_13__/* .CommentCarrouselSidebar */ .Sf, {}),
             radio && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default().socials), "mt-3 p-2 mb-4"),
+                className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14___default().socials), "mt-3 p-2"),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("iframe", {
                     title: "radio",
                     frameBorder: "0",
@@ -238,7 +229,7 @@ function AlbumCount() {
   }`;
     const { data , loading  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery)(query);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default().socials), "mt-3"),
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14___default().socials), "mt-3"),
         children: [
             loading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
                 className: "mx-auto",
@@ -284,7 +275,7 @@ function Highlight() {
     } , loading  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery)(query);
     const { id , title , placeholder  } = data.highlight;
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_13___default().socials), "mt-3 p-1 mb-4"),
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_14___default().socials), "mt-3 p-1"),
         children: [
             loading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
                 className: "mx-auto",

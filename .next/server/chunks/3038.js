@@ -13,14 +13,27 @@ module.exports = {
 
 /***/ }),
 
+/***/ 4074:
+/***/ ((module) => {
+
+// Exports
+module.exports = {
+	"root": "Sidebar_root__WlHvb",
+	"socials": "Sidebar_socials__kDIkg"
+};
+
+
+/***/ }),
+
 /***/ 6658:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "T": () => (/* binding */ BasicCommentCarrousel),
-/* harmony export */   "Z": () => (/* binding */ CommentCarrousel)
+/* harmony export */   "Sf": () => (/* binding */ CommentCarrouselSidebar),
+/* harmony export */   "Tv": () => (/* binding */ BasicCommentCarrousel),
+/* harmony export */   "ZP": () => (/* binding */ CommentCarrousel)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
@@ -34,15 +47,21 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1664);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _useUser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1292);
-/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5043);
-/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(8824);
-/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _useTranslation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2729);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1853);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_8__]);
-_useTranslation__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1853);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _useUser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1292);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5043);
+/* harmony import */ var _useTranslation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(2729);
+/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(8824);
+/* harmony import */ var _styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(4074);
+/* harmony import */ var _styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9003);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_10__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_9__]);
+_useTranslation__WEBPACK_IMPORTED_MODULE_9__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+
 
 
 
@@ -110,7 +129,7 @@ function BasicCommentCarrousel(props) {
                                                 " - ",
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                     href: `/album/${current.album.id}`,
-                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
+                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11___default().albumSpan),
                                                     children: current.album.title
                                                 })
                                             ]
@@ -120,7 +139,7 @@ function BasicCommentCarrousel(props) {
                                                 " - ",
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                     href: `/profile/${current.username}`,
-                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
+                                                    className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11___default().albumSpan),
                                                     children: current.username
                                                 })
                                             ]
@@ -160,13 +179,13 @@ const mutateComment = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
 `;
 function CommentCarrousel(props) {
     const { albumId , comments: initialComments = []  } = props;
-    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_9__.useRouter)();
-    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)();
+    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
+    const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
     const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
     const { 0: defaultValue , 1: setDefaultValue  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)();
     const timeoutRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
-    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)();
+    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)();
     const [fetchComment, { data , refetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(getComment);
     const [updateComment, { loading: loadingComment  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(mutateComment);
     const comments = data?.album.comments || initialComments;
@@ -257,7 +276,7 @@ function CommentCarrousel(props) {
                                 className: "mt-2",
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
                                     className: "mx-auto",
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_7__/* .ButtonLoader */ .l, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_8__/* .ButtonLoader */ .l, {
                                         loading: loadingComment,
                                         type: "submit",
                                         color: "primary",
@@ -295,7 +314,7 @@ function CommentCarrousel(props) {
                                                         " - ",
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                             href: `/album/${current.album.id}`,
-                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
+                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11___default().albumSpan),
                                                             children: current.album.title
                                                         })
                                                     ]
@@ -305,7 +324,7 @@ function CommentCarrousel(props) {
                                                         " - ",
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                                             href: `/profile/${current.username}`,
-                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_10___default().albumSpan),
+                                                            className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11___default().albumSpan),
                                                             children: current.username
                                                         })
                                                     ]
@@ -352,6 +371,95 @@ function CommentCarrousel(props) {
         ]
     });
 };
+const getRecentComments = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
+  query {
+    recentComments {
+      text
+      anon
+      username
+      album {
+        id
+        title
+      }
+    }
+  }
+`;
+function CommentCarrouselSidebar(props) {
+    const { 0: currentIndex , 1: setCurrentIndex  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);
+    const timeoutRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
+    const { data  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(getRecentComments);
+    const comments = data?.recentComments || [];
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(plusIndex, 10 * 1000);
+    }, [
+        currentIndex
+    ]);
+    const current = comments[currentIndex];
+    const plusIndex = ()=>setCurrentIndex(currentIndex === comments.length - 1 ? 0 : currentIndex + 1);
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+            className: "mt-3 px-3",
+            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                className: classnames__WEBPACK_IMPORTED_MODULE_10___default()((_styles_Sidebar_module_scss__WEBPACK_IMPORTED_MODULE_12___default().socials), ""),
+                children: current && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                    children: [
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Col, {
+                                className: "pb-3",
+                                style: {
+                                    fontSize: "18px"
+                                },
+                                children: [
+                                    current.text,
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("br", {}),
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        className: "mt-2",
+                                        children: [
+                                            current.album && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                                children: [
+                                                    " - ",
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                        href: `/album/${current.album.id}`,
+                                                        className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11___default().albumSpan),
+                                                        children: current.album.title
+                                                    })
+                                                ]
+                                            }),
+                                            !current.album && current.username && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                                children: [
+                                                    " - ",
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                        href: `/profile/${current.username}`,
+                                                        className: (_styles_Profile_module_scss__WEBPACK_IMPORTED_MODULE_11___default().albumSpan),
+                                                        children: current.username
+                                                    })
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                ]
+                            })
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Row, {
+                            className: "d-flex justify-content-between",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
+                                    side: "left",
+                                    onClick: ()=>setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SideButton, {
+                                    side: "right",
+                                    onClick: plusIndex
+                                })
+                            ]
+                        })
+                    ]
+                })
+            })
+        })
+    });
+}
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
