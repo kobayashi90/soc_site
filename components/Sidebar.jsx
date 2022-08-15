@@ -14,6 +14,7 @@ import Loader from './Loader'
 import AlbumBox from './AlbumBoxes'
 import useUser from './useUser'
 import useTranslation from './useTranslation'
+import { CommentCarrouselSidebar } from './CommentsCarrousel'
 
 function GetLucky () {
   const t = useTranslation()
@@ -97,6 +98,7 @@ export default function Sidebar (props) {
 
       <AlbumCount />
       <Highlight/>
+      <CommentCarrouselSidebar />
 
       {radio && (
         <div className={classNames(styles.socials, 'mt-3 p-2')}>
