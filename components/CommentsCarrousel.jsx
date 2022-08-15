@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import useUser from './useUser'
-import { ButtonLoader } from './Loader'
+import Loader, { ButtonLoader } from './Loader'
 import useTranslation from './useTranslation'
 
 import styles from '../styles/Profile.module.scss'
@@ -211,7 +211,7 @@ export function CommentCarrouselSidebar (props) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const timeoutRef = useRef(null)
-  const { data } = useQuery(getRecentComments)
+  const { data, loading } = useQuery(getRecentComments)
 
   const comments = data?.recentComments || []
 
@@ -226,26 +226,31 @@ export function CommentCarrouselSidebar (props) {
   return <>
     <Row className='mt-3 px-3'>
       <Col className={classNames(stylesSidebar.socials, '')}>
-        {current && (
-          <>
-            <Row>
-              <Col className='pb-3' style={{ fontSize: '18px' }}>
-                {current.text}
-                <br />
-                <div className='mt-2'>
-                  {current.album && <span> - <Link href={`/album/${current.album.id}`} className={styles.albumSpan}>{current.album.title}</Link></span>}
-                  {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`} className={styles.albumSpan}>{current.username}</Link></span>}
-                </div>
-              </Col>
-            </Row>
-            <Row className='d-flex justify-content-between'>
-              <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />
-              <Col className='d-flex align-items-center justify-content-center'><div>{currentIndex + 1} / {comments.length}</div></Col>
-              <SideButton side='right' onClick={plusIndex} />
-            </Row>
-          </>
-        )}
-
+        {loading
+          ? <Loader className='mx-auto' size={100} />
+          : (
+            current
+              ? (
+                <>
+                  <Row>
+                    <Col className='pb-3' style={{ fontSize: '18px' }}>
+                      {current.text}
+                      <br />
+                      <div className='mt-2'>
+                        {current.album && <span> - <Link href={`/album/${current.album.id}`} className={styles.albumSpan}>{current.album.title}</Link></span>}
+                        {!current.album && current.username && <span> - <Link href={`/profile/${current.username}`} className={styles.albumSpan}>{current.username}</Link></span>}
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row className='d-flex justify-content-between'>
+                    <SideButton side='left' onClick={() => setCurrentIndex(currentIndex === 0 ? comments.length - 1 : currentIndex - 1)} />
+                    <Col className='d-flex align-items-center justify-content-center'><div>{currentIndex + 1} / {comments.length}</div></Col>
+                    <SideButton side='right' onClick={plusIndex} />
+                  </Row>
+                </>
+              )
+              : null
+          )}
       </Col>
     </Row>
   </>
