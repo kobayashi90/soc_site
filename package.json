@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -H 127.0.0.1",
-    "lint": "next lint",
+    "lint": "eslint --fix",
     "sequelize": "sequelize-cli"
   },
   "dependencies": {
@@ -44,6 +44,10 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-promise": "^6.0.1",
-    "eslint-plugin-react": "^7.31.0"
-  }
+    "eslint-plugin-react": "^7.31.0",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
