@@ -321,7 +321,6 @@ function RegisterProfileButton (props) {
 
 export default function Header () {
   const router = useRouter()
-  const { user } = useUser()
 
   const queryHeader = gql`
     query {
@@ -373,8 +372,15 @@ export default function Header () {
                 { name: 'Animation List', href: '/anim/list' },
                 { name: 'Studios', href: '/studio/list' }
               ]} />
+
+              <NavLink href='/request' name='Requests' privileged />
+              <Dropdown name='Admin Grounds' privileged items={[
+                { name: 'Manage Albums', href: '/admin/1' },
+                { name: 'Manage Users', href: '/admin/user' },
+                { name: 'Manage Requests', href: '/admin/request' }
+              ]} />
+
               <NavLink href='/contact' name='Contact' />
-              {user && user.pages.map(p => <NavLink key={p.url} href={p.url} name={p.name} />)}
             </Nav>
           </Navbar.Collapse>
           <SearchBar />
@@ -385,12 +391,19 @@ export default function Header () {
 }
 
 function Dropdown (props) {
-  const { name, items = [] } = props
+  const { name, items = [], privileged = false } = props
+
+  const { user } = useUser()
   const t = useTranslation()
+
+  const pages = user?.pages.map(p => p.url) || []
+  const links = items.filter(i => !privileged || pages.includes(i.href))
+
+  if (links.length === 0) return null
 
   return (
     <NavDropdown title={t(name)} className={classNames(styles.navLink, styles.dropMenu)}>
-      {items.map(({ href, name }, i) => (
+      {links.map(({ href, name }, i) => (
         <Link key={i} href={href} passHref legacyBehavior>
           <NavDropdown.Item>{t(name)}</NavDropdown.Item>
         </Link>
@@ -400,9 +413,17 @@ function Dropdown (props) {
 }
 
 function NavLink (props) {
-  const { href, name, onClick, className } = props
+  const { href, name, onClick, className, privileged } = props
+
+  const { user } = useUser()
   const t = useTranslation()
+
   const title = t(name)
+  const pages = user?.pages.map(p => p.url) || []
+
+  if (privileged) {
+    if (!user || !pages.includes(href)) return null
+  }
 
   return onClick
     ? <a onClick={onClick} className={classNames(styles.navLink, 'nav-link', className)}>{title}</a>
