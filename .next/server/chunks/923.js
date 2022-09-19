@@ -67,7 +67,6 @@ const query = _apollo_client__WEBPACK_IMPORTED_MODULE_0__.gql`
       permissions
       pages {
         url
-        name
       }
     }
   }

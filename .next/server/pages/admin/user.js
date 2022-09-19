@@ -45,8 +45,8 @@ const getServerSideProps = (0,_components_resolvers__WEBPACK_IMPORTED_MODULE_8__
 ]);
 function AdminUser() {
     const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useQuery)(_apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
-    query users($username: String!){
-      users(username: $username){
+    query users($search: String!){
+      users(search: $search){
         username
         roles {
           name
@@ -62,16 +62,16 @@ function AdminUser() {
     }
   `, {
         variables: {
-            username: ""
+            search: ""
         }
     });
     function handleSearch(e) {
         e.persist();
         e.preventDefault();
-        const username = e.target.value;
-        if (username.length < 3) return;
+        const search = e.target.value;
+        if (search.length < 3) return;
         refetch({
-            username
+            search
         });
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Container, {

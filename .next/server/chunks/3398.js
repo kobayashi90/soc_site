@@ -639,7 +639,6 @@ function RegisterProfileButton(props) {
 }
 function Header() {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
-    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const queryHeader = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
     query {
       config(name: "banner"){
@@ -755,13 +754,28 @@ function Header() {
                                             ]
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NavLink, {
-                                            href: "/contact",
-                                            name: "Contact"
+                                            href: "/request",
+                                            name: "Requests",
+                                            privileged: true
                                         }),
-                                        user && user.pages.map((p)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NavLink, {
-                                                href: p.url,
-                                                name: p.name
-                                            }, p.url))
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Dropdown, {
+                                            name: "Admin Grounds",
+                                            privileged: true,
+                                            items: [
+                                                {
+                                                    name: "Manage Albums",
+                                                    href: "/admin/1"
+                                                },
+                                                {
+                                                    name: "Manage Users",
+                                                    href: "/admin/user"
+                                                },
+                                                {
+                                                    name: "Manage Requests",
+                                                    href: "/admin/request"
+                                                }
+                                            ]
+                                        })
                                     ]
                                 })
                             }),
@@ -774,12 +788,16 @@ function Header() {
     });
 };
 function Dropdown(props) {
-    const { name , items =[]  } = props;
+    const { name , items =[] , privileged =false  } = props;
+    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
+    const pages = user?.pages.map((p)=>p.url) || [];
+    const links = items.filter((i)=>!privileged || pages.includes(i.href));
+    if (links.length === 0) return null;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.NavDropdown, {
         title: t(name),
         className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().dropMenu)),
-        children: items.map(({ href , name  }, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+        children: links.map(({ href , name  }, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                 href: href,
                 passHref: true,
                 legacyBehavior: true,
@@ -790,9 +808,14 @@ function Dropdown(props) {
     });
 }
 function NavLink(props) {
-    const { href , name , onClick , className  } = props;
+    const { href , name , onClick , className , privileged  } = props;
+    const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const t = (0,_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     const title = t(name);
+    const pages = user?.pages.map((p)=>p.url) || [];
+    if (privileged) {
+        if (!user || !pages.includes(href)) return null;
+    }
     return onClick ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
         onClick: onClick,
         className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), "nav-link", className),
