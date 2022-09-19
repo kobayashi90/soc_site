@@ -379,8 +379,6 @@ export default function Header () {
                 { name: 'Manage Users', href: '/admin/user' },
                 { name: 'Manage Requests', href: '/admin/request' }
               ]} />
-
-              <NavLink href='/contact' name='Contact' />
             </Nav>
           </Navbar.Collapse>
           <SearchBar />
