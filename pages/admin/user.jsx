@@ -12,8 +12,8 @@ export const getServerSideProps = hasRolePage(['MANAGE_USER'])
 
 export default function AdminUser () {
   const { data, refetch } = useQuery(gql`
-    query users($username: String!){
-      users(username: $username){
+    query users($search: String!){
+      users(search: $search){
         username
         roles {
           name
@@ -27,15 +27,15 @@ export default function AdminUser () {
 
       permissions
     }
-  `, { variables: { username: '' } })
+  `, { variables: { search: '' } })
 
   function handleSearch (e) {
     e.persist()
     e.preventDefault()
-    const username = e.target.value
+    const search = e.target.value
 
-    if (username.length < 3) return
-    refetch({ username })
+    if (search.length < 3) return
+    refetch({ search })
   }
 
   return (

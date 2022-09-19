@@ -11,7 +11,6 @@ const query = gql`
       permissions
       pages {
         url
-        name
       }
     }
   }
