@@ -271,6 +271,13 @@ module.exports = require("react-ga");
 
 /***/ }),
 
+/***/ 2820:
+/***/ ((module) => {
+
+module.exports = require("react-multi-select-component");
+
+/***/ }),
+
 /***/ 1187:
 /***/ ((module) => {
 
@@ -313,7 +320,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,2952,1664,1331,1454,5043,923,3398], () => (__webpack_exec__(8510)));
+var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,2952,1664,1331,1454,367,6710,3398], () => (__webpack_exec__(8510)));
 module.exports = __webpack_exports__;
 
 })();

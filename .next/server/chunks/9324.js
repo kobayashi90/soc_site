@@ -85,6 +85,30 @@ async function solveHeaderColor(parent, folder) {
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
+/***/ }),
+
+/***/ 1873:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "f": () => (/* binding */ withSessionSsr)
+/* harmony export */ });
+/* unused harmony export withSessionApi */
+/* harmony import */ var iron_session_next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9531);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([iron_session_next__WEBPACK_IMPORTED_MODULE_0__]);
+iron_session_next__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+const options = {
+    password: process.env.IRONCLAD,
+    cookieName: "socuser"
+};
+const withSessionApi = (handler)=>withIronSessionApiRoute(handler, options);
+const withSessionSsr = (handler)=>(0,iron_session_next__WEBPACK_IMPORTED_MODULE_0__/* .withIronSessionSsr */ .c)(handler, options);
+
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
+
 /***/ })
 
 };

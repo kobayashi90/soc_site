@@ -99,7 +99,7 @@ module.exports = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo.95bde540.png","height":1536,"width":2691,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAMAAACEE47CAAAAP1BMVEXBwsK8vb21t7fNzs6SkZG4urrW1tempqbExMWhoaF6e3uUlJWIiIjGyMju8fKcm5vExcWenZ2WlZWoqKewsLDhBbBuAAAAD3RSTlPttYKG16bg82Xgm2n7NhIRLCQvAAAACXBIWXMAADXUAAA11AFeZeUIAAAAK0lEQVQImQXBhwEAIAgDsKog4ALH/7eaIAO8eptQRNQ3CvTu4y6KZCZEwh8UOwEirxVlrgAAAABJRU5ErkJggg=="});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo.95bde540.png","height":1536,"width":2691,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAMAAACEE47CAAAAP1BMVEXBwsK1t7e8vb3Nzs6SkZG4urrW1tempqbExMWhoaGUlJV6e3vGyMju8fKIiIicm5vExcWenZ2WlZWoqKewsLCLROIDAAAAD3RSTlPtgrWG16bg82XgaZs2EvsK70JUAAAACXBIWXMAADXUAAA11AFeZeUIAAAAK0lEQVQImQXBhwEAIAgDsKog4ALH/7eaIAE8Wx9QRNS3CvTu4y6KbCZEwh8UDAEi5mFGQgAAAABJRU5ErkJggg=="});
 
 /***/ }),
 
@@ -110,7 +110,7 @@ module.exports = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo_es.033876d7.png","height":1444,"width":2595,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAMAAACEE47CAAAAPFBMVEWgn5++v7/U1NS7vLympqaLi4rBw8PBwsKampqfn5+6urrIyMmlpaWFhYW+v7/d4OG4ubmVlZTDxMS4ublCp4G/AAAAEXRSTlP+p+i4/Nd19uDs1YKG91gc0RwALwsAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAqSURBVAiZBcGHAQAgCAOwoiy34P+/moDM6pmyoZZZ3iIMRgSg6N7Ypd0PE14BEUrLexQAAAAASUVORK5CYII="});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logo_es.033876d7.png","height":1444,"width":2595,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAMAAACEE47CAAAAPFBMVEWgn5/Bw8PU1NS7vLympqaLi4q+v7/BwsKampqfn5+6urrIyMm+v7+FhYWlpaXd4OG4ubmVlZTDxMS4ublBK/+5AAAAEXRSTlP+dei4/Nen9uDs1YJY94Yc0enlp4AAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAqSURBVAiZBcGHAQAgCAOwoiy34P+/mkDN6tkyQZZZ3lIMRgRA6N7Ypd0PE7wBEV9frGsAAAAASUVORK5CYII="});
 
 /***/ }),
 
@@ -124,8 +124,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(7151);
-/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(7151);
+/* harmony import */ var _styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1664);
@@ -152,8 +152,10 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var _public_img_assets_logo_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(6027);
 /* harmony import */ var _public_img_assets_logo_es_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(7501);
 /* harmony import */ var _useTranslation__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(2729);
+/* harmony import */ var _RequestCheck__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(5994);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_useTranslation__WEBPACK_IMPORTED_MODULE_16__]);
 _useTranslation__WEBPACK_IMPORTED_MODULE_16__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -184,7 +186,7 @@ function LangSelector() {
     };
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
         xs: "auto",
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().login), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().blueBullet), "ms-sm-auto mb-sm-5 py-2"),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().login), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().blueBullet), "ms-sm-auto mb-sm-5 py-2"),
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
             onChange: handleLocaleChange,
             value: router.locale,
@@ -384,7 +386,7 @@ function LoginButton(props) {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                 xs: "auto",
-                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
+                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
                     onClick: handleLogin,
                     variant: "primary",
@@ -534,7 +536,7 @@ function RegisterProfileButton(props) {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
                 xs: "auto",
-                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
+                className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().login), "d-none d-sm-block ms-sm-auto mb-sm-5"),
                 children: user ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                     href: `/profile/${user.username}`,
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
@@ -651,7 +653,7 @@ function Header() {
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("header", {
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().bannerBg),
+                    id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().bannerBg),
                     style: headerData ? {
                         backgroundImage: `url('/_next/image?w=3840&q=100&url=${`https://cdn.sittingonclouds.net/live/${headerData.config.value}.png`}`
                     } : {},
@@ -758,6 +760,7 @@ function Header() {
                                             name: "Requests",
                                             privileged: true
                                         }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(SubmitAlbum, {}),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Dropdown, {
                                             name: "Admin Grounds",
                                             privileged: true,
@@ -787,6 +790,179 @@ function Header() {
         })
     });
 };
+const vgmQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
+  query ($search: String!){
+    vgmdb(search: $search){
+      vgmdbUrl
+      name
+      subTitle
+      releaseDate
+      artists
+      categories
+      classifications
+      tracklist {
+        number
+        body
+      }
+    }
+  }
+`;
+const submitQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_8__.gql`
+  mutation ($title: String!, $vgmdb: String, $request: ID, $links: String!) {
+    submitAlbum (title: $title, vgmdb: $vgmdb, request: $request, links: $links) {
+      id
+    }
+  }
+`;
+function SubmitAlbum() {
+    const { 0: show , 1: setShow  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const vgmdbRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const titleRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const [getVgmdb, { loading: loadingFetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.useLazyQuery)(vgmQuery);
+    const [submitMutation, { loading: loadingSubmit  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.useMutation)(submitQuery);
+    async function fetchInfo() {
+        const { data  } = await getVgmdb({
+            variables: {
+                search: vgmdbRef.current.value
+            }
+        });
+        if (data?.vgmdb) {
+            const { vgmdb  } = data;
+            const { vgmdbUrl , name  } = vgmdb;
+            vgmdbRef.current.value = vgmdbUrl;
+            titleRef.current.value = name;
+        }
+    }
+    function submit(ev) {
+        ev.persist();
+        ev.preventDefault();
+        const variables = form_serialize__WEBPACK_IMPORTED_MODULE_7___default()(ev.target, {
+            hash: true
+        });
+        submitMutation({
+            variables
+        }).then(()=>{
+            react_toastify__WEBPACK_IMPORTED_MODULE_9__.toast.success("Album submitted for review!");
+            ev.target.reset();
+            setShow(false);
+        });
+    }
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NavLink, {
+                href: "/submit",
+                name: "Submit Album",
+                privileged: true,
+                onClick: ()=>setShow(true)
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal, {
+                show: show,
+                centered: true,
+                onHide: ()=>setShow(false),
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Modal.Body, {
+                    className: "m-3",
+                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form, {
+                        onSubmit: submit,
+                        style: {
+                            color: "black"
+                        },
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Group, {
+                                    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col,
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Label, {
+                                            htmlFor: "title",
+                                            children: "Title:"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Control, {
+                                            required: true,
+                                            type: "text",
+                                            name: "title",
+                                            ref: titleRef
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                className: "mt-3",
+                                children: [
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Group, {
+                                        as: react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col,
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Label, {
+                                                htmlFor: "vgmdb",
+                                                children: "VGMdb:"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Control, {
+                                                ref: vgmdbRef,
+                                                name: "vgmdb",
+                                                type: "text"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Group, {
+                                        as: react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col,
+                                        className: "col-auto mt-auto",
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Loader__WEBPACK_IMPORTED_MODULE_12__/* .ButtonLoader */ .l, {
+                                            color: "primary",
+                                            loading: loadingFetch,
+                                            onClick: fetchInfo,
+                                            children: "Fetch info"
+                                        })
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_RequestCheck__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {
+                                hideTag: true,
+                                element: vgmdbRef.current,
+                                className: "mt-3"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                className: "mt-3",
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Group, {
+                                    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col,
+                                    children: [
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Label, {
+                                            htmlFor: "links",
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                                    style: {
+                                                        color: "#0d6efd",
+                                                        textDecoration: "underline"
+                                                    },
+                                                    href: "https://www.squid-board.org/",
+                                                    children: "Forum Links"
+                                                }),
+                                                " / Download Links:"
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Form.Control, {
+                                            required: true,
+                                            as: "textarea",
+                                            name: "links"
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Row, {
+                                className: "mt-3",
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Col, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_SubmitButton__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
+                                        loading: loadingSubmit,
+                                        type: "submit",
+                                        color: "primary",
+                                        children: "Submit"
+                                    })
+                                })
+                            })
+                        ]
+                    })
+                })
+            })
+        ]
+    });
+}
 function Dropdown(props) {
     const { name , items =[] , privileged =false  } = props;
     const { user  } = (0,_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
@@ -796,7 +972,7 @@ function Dropdown(props) {
     if (links.length === 0) return null;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.NavDropdown, {
         title: t(name),
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().dropMenu)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().navLink), (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().dropMenu)),
         children: links.map(({ href , name  }, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                 href: href,
                 passHref: true,
@@ -818,14 +994,14 @@ function NavLink(props) {
     }
     return onClick ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
         onClick: onClick,
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), "nav-link", className),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().navLink), "nav-link", className),
         children: title
     }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
         href: href,
         passHref: true,
         legacyBehavior: true,
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.Nav.Link, {
-            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().navLink), className),
+            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().navLink), className),
             children: title
         })
     });
@@ -852,7 +1028,7 @@ function SearchBar() {
         open
     ]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_17___default().search),
+        id: (_styles_Header_module_scss__WEBPACK_IMPORTED_MODULE_18___default().search),
         className: classnames__WEBPACK_IMPORTED_MODULE_5___default()({
             "w-100": open
         }),
@@ -930,6 +1106,42 @@ async function getTranslation(locale = "en", ns = []) {
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
+
+/***/ }),
+
+/***/ 1292:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ useUser)
+/* harmony export */ });
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9114);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_0__);
+
+const query = _apollo_client__WEBPACK_IMPORTED_MODULE_0__.gql`
+  query {
+    me {
+      username
+      roles {
+        name
+      }
+      email
+      permissions
+      pages {
+        url
+      }
+    }
+  }
+`;
+function useUser() {
+    const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_0__.useQuery)(query);
+    return {
+        user: data?.me,
+        refetch
+    };
+};
+
 
 /***/ }),
 

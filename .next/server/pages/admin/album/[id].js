@@ -5,6 +5,65 @@ exports.id = 2216;
 exports.ids = [2216];
 exports.modules = {
 
+/***/ 1873:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "f": () => (/* binding */ withSessionSsr)
+/* harmony export */ });
+/* unused harmony export withSessionApi */
+/* harmony import */ var iron_session_next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9531);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([iron_session_next__WEBPACK_IMPORTED_MODULE_0__]);
+iron_session_next__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+const options = {
+    password: process.env.IRONCLAD,
+    cookieName: "socuser"
+};
+const withSessionApi = (handler)=>withIronSessionApiRoute(handler, options);
+const withSessionSsr = (handler)=>(0,iron_session_next__WEBPACK_IMPORTED_MODULE_0__/* .withIronSessionSsr */ .c)(handler, options);
+
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
+
+/***/ }),
+
+/***/ 1292:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ useUser)
+/* harmony export */ });
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9114);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_0__);
+
+const query = _apollo_client__WEBPACK_IMPORTED_MODULE_0__.gql`
+  query {
+    me {
+      username
+      roles {
+        name
+      }
+      email
+      permissions
+      pages {
+        url
+      }
+    }
+  }
+`;
+function useUser() {
+    const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_0__.useQuery)(query);
+    return {
+        user: data?.me,
+        refetch
+    };
+};
+
+
+/***/ }),
+
 /***/ 6947:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -806,7 +865,7 @@ module.exports = import("iron-session");;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,9463,1331,1454,5043,923,9665,683], () => (__webpack_exec__(6947)));
+var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,9463,1331,1454,367,6710,4978], () => (__webpack_exec__(6947)));
 module.exports = __webpack_exports__;
 
 })();
