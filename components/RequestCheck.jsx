@@ -16,7 +16,7 @@ const requestQuery = gql`
 `
 
 export default function RequestCheck (props) {
-  const { element } = props
+  const { element, className, hideTag = false } = props
 
   const client = useApolloClient()
   const [selected, setSelected] = useState()
@@ -38,7 +38,7 @@ export default function RequestCheck (props) {
 
   return (
     <>
-      <Row>
+      <Row className={className}>
         <Form.Group as={Col}>
           <Form.Label htmlFor='request'>Request:</Form.Label>
         </Form.Group>
@@ -47,9 +47,13 @@ export default function RequestCheck (props) {
         <Col>
           <RequestSelector options={{ isSingle: true, name: 'request', defaultValue: selected }} onChange={setSelected} />
         </Col>
-        <Col className='d-flex align-items-center ps-0'>
-          {selected && <span className="">{selected.state === 'complete' ? 'Request found!  Already complete tho ¯\\_(ツ)_/¯' : 'Request found!'}</span>}
-        </Col>
+        {!hideTag
+          ? (
+            <Col className='d-flex align-items-center ps-0'>
+              {selected && <span className="">{selected.state === 'complete' ? 'Request found!  Already complete tho ¯\\_(ツ)_/¯' : 'Request found!'}</span>}
+            </Col>
+          )
+          : null}
       </Row>
     </>
   )

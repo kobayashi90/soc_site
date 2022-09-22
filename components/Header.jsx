@@ -17,6 +17,7 @@ import SubmitButton from './SubmitButton'
 import logo from '../public/img/assets/logo.png'
 import logoES from '../public/img/assets/logo_es.png'
 import useTranslation from './useTranslation'
+import RequestCheck from './RequestCheck'
 
 const cookies = new Cookies()
 
@@ -374,6 +375,7 @@ export default function Header () {
               ]} />
 
               <NavLink href='/request' name='Requests' privileged />
+              <SubmitAlbum />
               <Dropdown name='Admin Grounds' privileged items={[
                 { name: 'Manage Albums', href: '/admin/1' },
                 { name: 'Manage Users', href: '/admin/user' },
@@ -386,6 +388,109 @@ export default function Header () {
       </Navbar>
     </header>
   </>
+}
+
+const vgmQuery = gql`
+  query ($search: String!){
+    vgmdb(search: $search){
+      vgmdbUrl
+      name
+      subTitle
+      releaseDate
+      artists
+      categories
+      classifications
+      tracklist {
+        number
+        body
+      }
+    }
+  }
+`
+
+const submitQuery = gql`
+  mutation ($title: String!, $vgmdb: String, $request: ID, $links: String!) {
+    submitAlbum (title: $title, vgmdb: $vgmdb, request: $request, links: $links) {
+      id
+    }
+  }
+`
+
+function SubmitAlbum () {
+  const [show, setShow] = useState(false)
+  const vgmdbRef = useRef(null)
+  const titleRef = useRef(null)
+
+  const [getVgmdb, { loading: loadingFetch }] = useLazyQuery(vgmQuery)
+  const [submitMutation, { loading: loadingSubmit }] = useMutation(submitQuery)
+
+  async function fetchInfo () {
+    const { data } = await getVgmdb({ variables: { search: vgmdbRef.current.value } })
+
+    if (data?.vgmdb) {
+      const { vgmdb } = data
+      const { vgmdbUrl, name } = vgmdb
+
+      vgmdbRef.current.value = vgmdbUrl
+      titleRef.current.value = name
+    }
+  }
+
+  function submit (ev) {
+    ev.persist()
+    ev.preventDefault()
+
+    const variables = serialize(ev.target, { hash: true })
+    submitMutation({ variables })
+      .then(() => {
+        toast.success('Album submitted for review!')
+        ev.target.reset()
+        setShow(false)
+      })
+  }
+
+  return (
+    <>
+      <NavLink href='/submit' name='Submit Album' privileged onClick={() => setShow(true)} />
+      <Modal show={show} centered onHide={() => setShow(false)}>
+        <Modal.Body className='m-3'>
+          <Form onSubmit={submit} style={{ color: 'black' }}>
+            <Row>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='title' >Title:</Form.Label>
+                <Form.Control required type='text' name='title' ref={titleRef} />
+              </Form.Group>
+            </Row>
+            <Row className='mt-3'>
+              <Form.Group as={Col}>
+                <Form.Label htmlFor='vgmdb'>VGMdb:</Form.Label>
+                <Form.Control ref={vgmdbRef} name='vgmdb' type='text' />
+              </Form.Group>
+
+              <Form.Group as={Col} className='col-auto mt-auto'>
+                <ButtonLoader color='primary' loading={loadingFetch} onClick={fetchInfo}>Fetch info</ButtonLoader>
+              </Form.Group>
+            </Row>
+
+            <RequestCheck hideTag element={vgmdbRef.current} className='mt-3' />
+
+            <Row className='mt-3'>
+              <Form.Group as={Col} >
+                <Form.Label htmlFor='links'><Link style={{ color: '#0d6efd', textDecoration: 'underline' }} href="https://www.squid-board.org/">Forum Links</Link> / Download Links:</Form.Label>
+                <Form.Control required as='textarea' name='links' />
+              </Form.Group>
+            </Row>
+
+            <Row className='mt-3'>
+              <Col>
+                <SubmitButton loading={loadingSubmit} type='submit' color='primary'>Submit</SubmitButton>
+              </Col>
+            </Row>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </>
+  )
 }
 
 function Dropdown (props) {
