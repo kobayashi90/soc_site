@@ -9,6 +9,7 @@
 /coverage
 
 # next.js
+/.next/
 /out/
 
 # production
@@ -31,3 +32,9 @@ sequelize.json
 
 # vercel
 .vercel
+sequelize-config.json
+
+# Nextcloud
+.owncloudsync.log
+Desktop.ini
+.sync*
