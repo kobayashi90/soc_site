@@ -379,7 +379,8 @@ export default function Header () {
               <Dropdown name='Admin Grounds' privileged items={[
                 { name: 'Manage Albums', href: '/admin/1' },
                 { name: 'Manage Users', href: '/admin/user' },
-                { name: 'Manage Requests', href: '/admin/request' }
+                { name: 'Manage Requests', href: '/admin/request' },
+                { name: 'Manage Submissions', href: '/admin/submission' }
               ]} />
             </Nav>
           </Navbar.Collapse>
