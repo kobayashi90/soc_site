@@ -776,6 +776,10 @@ function Header() {
                                                 {
                                                     name: "Manage Requests",
                                                     href: "/admin/request"
+                                                },
+                                                {
+                                                    name: "Manage Submissions",
+                                                    href: "/admin/submission"
                                                 }
                                             ]
                                         })
