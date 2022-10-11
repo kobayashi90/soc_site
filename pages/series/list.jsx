@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { Row, Col, Button } from 'react-bootstrap'
 import classname from 'classnames'
-import Image from 'next/image'
+import Image from 'next/future/image'
 import Link from 'next/link'
 
 import { initializeApollo } from '@/components/ApolloClient'
@@ -56,8 +56,8 @@ export default function SeriesList ({ series, letters, seriesList }) {
             <Row>
               {seriesList.map(({ slug, placeholder }) => (
                 <Col key={slug} className='position-relative' xs={4} style={{ height: '150px' }}>
-                  <Link href={`/series/${slug}`}>
-                    <Image alt={slug} src={getImageUrl(slug, 'series')} layout='fill' objectFit='contain' width={300} height={100} placeholder='blur' blurDataURL={placeholder} />
+                  <Link href={`/series/${slug}`} className="d-block w-100 h-100">
+                    <Image className="w-100 h-100" alt={slug} src={getImageUrl(slug, 'series')} style={{ objectFit: 'contain', objectPosition: 'center' }} width={300} height={100} placeholder='blur' blurDataURL={placeholder} />
                   </Link>
                 </Col>
               ))}

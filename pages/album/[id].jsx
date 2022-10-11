@@ -1,14 +1,16 @@
 import { gql, useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
-import Image from 'next/image'
+import Image from 'next/future/image'
 import classNames from 'classnames'
 import Head from 'next/head'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
-import styles from '../../styles/Album.module.scss'
-import starStyles from '../../styles/Stars.module.scss'
+import styles from '@/styles/Album.module.scss'
+import starStyles from '@/styles/Stars.module.scss'
+
+import vgmdbLogo from '@/img/assets/vgmdblogo.png'
 
 import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
@@ -257,8 +259,10 @@ export default function Page (props) {
         <Col className={'p-0 px-md-5 pt-3'} >
           <Container className='px-0 px-md-5'>
             <Row>
-              <Col lg={5}><Image layout='responsive' width={300} height={300} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder || PLACEHOLDER} /></Col>
-              <Col lg={7} className='blackblock'>
+              <Col lg={5} className="d-flex align-items-center px-0 px-lg-2 mb-3 mb-lg-0">
+                <Image className='rounded' width={300} height={300} style={{ height: 'auto', width: '100%' }} alt={album.title} src={getImageUrl(album.id)} placeholder='blur' blurDataURL={album.placeholder || PLACEHOLDER} />
+              </Col>
+              <Col lg={7} className='d-flex flex-column justify-content-center blackblock'>
                 <Row>
                   <Col>
                     <h1 className={classNames('text-center', styles.title)}>{album.title}</h1>
@@ -369,14 +373,18 @@ export default function Page (props) {
             <hr></hr>
             <Row>
               <TrackList discs={album.discs} />
-              <Col lg={6} className='blackblock px-10px'>
+              <Col lg={6} className='blackblock'>
                 {album.vgmdb && (
-                  <Row>
-                    <Col className='mb-2 ms-2'>
-                      <span>{'Check album at'}:</span>
+                  <Row className='mb-2 ms-2'>
+                    <Col xs='auto' className='px-0'>
+                      <span style={{ fontSize: '21px' }}>{'Check album at'}:</span>
+                    </Col>
+                    <Col xs='auto' className='d-flex align-items-center ps-0'>
+
                       <a className='ms-2' target='_blank' rel='noopener noreferrer' href={album.vgmdb}>
-                        <Image width={100} height={30} alt={'VGMdb'} src='/img/assets/vgmdblogo.png' />
+                        <Image width={100} height={30} alt={'VGMdb'} src={vgmdbLogo} />
                       </a>
+
                     </Col>
                   </Row>
                 )}
@@ -391,9 +399,9 @@ export default function Page (props) {
                           provider === 'SOON'
                             ? null
                             : (
-                              <Col md={6} key={i} className='d-flex justify-content-center'>
+                              <Col md={6} key={i} className='d-flex justify-content-center py-1'>
                                 <a target='_blank' rel='noopener noreferrer' href={url}>
-                                  <Image className="rounded" width={190} height={65} alt={provider} src={`/img/provider/${provider}.jpg`} />
+                                  <Image className="rounded" width={250} height={70} style={{ height: 'auto', width: '100%' }} alt={provider} src={`/img/provider/${provider}.jpg`} />
                                 </a>
                               </Col>
                             )

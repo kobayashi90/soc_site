@@ -1,13 +1,17 @@
 import { Col, Row } from 'react-bootstrap'
 import classNames from 'classnames'
-import Image from 'next/image'
 import { gql, useQuery } from '@apollo/client'
 import { useEffect, useRef } from 'react'
-
+import Image from 'next/future/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import styles from '../styles/Sidebar.module.scss'
+import styles from '@/styles/Sidebar.module.scss'
+
+import discord from '@/img/assets/discord.png'
+import kofi from '@/img/assets/ko-fi-donate-button.png'
+import yt from '@/img/assets/yt.png'
+import twitter from '@/img/assets/twitter.png'
 
 import { skipAds } from './utils'
 import Loader from './Loader'
@@ -70,27 +74,31 @@ export default function Sidebar (props) {
             <Col className='d-flex pe-1'>
               <div className='ms-auto' >
                 <a href='https://www.youtube.com/channel/UCb1Q0GuOa8p_7fY-pYnWCmQ' target='_blank' rel='noopener noreferrer'>
-                  <Image className="rounded" src='/img/assets/yt.png' alt='youtube' height={50} width={50} />
+                  <Image className="rounded" src={yt} alt='youtube' height={50} width={50} />
                 </a>
               </div>
             </Col>
             <Col className='d-flex ps-1'>
               <div className='me-auto' >
                 <a href='https://twitter.com/SittingOnCloud' target='_blank' rel='noopener noreferrer'>
-                  <Image className="rounded" src='/img/assets/twitter.png' alt='twitter' height={50} width={50} />
+                  <Image className="rounded" src={twitter} alt='twitter' height={50} width={50} />
                 </a>
               </div>
             </Col>
           </Row>
           <Row className='mt-2'>
             <Col md={12}>
-              <a className='d-flex justify-content-center px-1' href='https://discord.gg/x23SFbE'><img alt='' style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%', borderRadius: '10px' }} src='/img/assets/discord.png' /></a>
+              <a className='d-flex justify-content-center px-1' href='https://discord.gg/x23SFbE'>
+                <Image alt='Join our Discord!' style={{ height: 'auto', width: 'auto', maxHeight: '100px', maxWidth: '100%', borderRadius: '10px' }} src={discord} />
+              </a>
             </Col>
           </Row>
           <Row className='mt-1'>
             <Col md={12} className='d-flex justify-content-center'>
               {/* <a target='_blank' rel='noopener noreferrer' href='https://www.paypal.com/donate/?hosted_button_id=BBGTBGSDAXA8N'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='paypal' src='/img/assets/paypal-donate-button.png' /></a> */}
-              <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/sittingonclouds'><img style={{ height: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='ko-fi' src='/img/assets/ko-fi-donate-button.png' /></a>
+              <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/sittingonclouds'>
+                <Image style={{ height: 'auto', width: 'auto', maxHeight: '100px', maxWidth: '100%' }} alt='Support me on Ko-fi' src={kofi} />
+              </a>
             </Col>
           </Row>
         </Col>
