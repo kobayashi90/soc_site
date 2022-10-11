@@ -1,11 +1,26 @@
-"use strict";
 exports.id = 9578;
 exports.ids = [9578];
 exports.modules = {
 
+/***/ 5841:
+/***/ ((module) => {
+
+// Exports
+module.exports = {
+	"albumBoxContainer": "AlbumBoxes_albumBoxContainer___5OUW",
+	"anim": "AlbumBoxes_anim__Xn34t",
+	"albumBox": "AlbumBoxes_albumBox__qjbi0",
+	"img": "AlbumBoxes_img__gFWAG",
+	"coming": "AlbumBoxes_coming__jiMAE"
+};
+
+
+/***/ }),
+
 /***/ 9578:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "X": () => (/* binding */ AlbumBoxList),
 /* harmony export */   "Z": () => (/* binding */ AlbumBox)
@@ -67,7 +82,7 @@ function AlbumBox(props) {
             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(BoxContent, {})
         })
     });
-};
+}
 function AlbumBoxList(props) {
     const { items , type , width , height , style , colProps ={}  } = props;
     return items.map((albumProps)=>/*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {

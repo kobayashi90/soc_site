@@ -163,7 +163,7 @@ function AdminUser() {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AddRole, {})
         ]
     });
-};
+}
 function UserRow(props) {
     const { username , roles , roleList , refetch  } = props;
     const [update, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(_apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
@@ -565,7 +565,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,9463,1331,367,9324], () => (__webpack_exec__(7426)));
+var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,9463,1331,367,9324], () => (__webpack_exec__(7426)));
 module.exports = __webpack_exports__;
 
 })();

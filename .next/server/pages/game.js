@@ -123,7 +123,7 @@ function GameHome({ rows  }) {
             })
         ]
     });
-};
+}
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
@@ -277,6 +277,13 @@ module.exports = require("next/dist/shared/lib/router/utils/get-next-pathname-in
 
 /***/ }),
 
+/***/ 1897:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/is-bot.js");
+
+/***/ }),
+
 /***/ 1428:
 /***/ ((module) => {
 
@@ -389,7 +396,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,2952,1664,1331,1454,5841,9578], () => (__webpack_exec__(5668)));
+var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,676,1664,1331,1454,9578], () => (__webpack_exec__(5668)));
 module.exports = __webpack_exports__;
 
 })();

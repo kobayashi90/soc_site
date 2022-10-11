@@ -370,7 +370,7 @@ function CommentCarrousel(props) {
             })
         ]
     });
-};
+}
 const getRecentComments = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
   query {
     recentComments {

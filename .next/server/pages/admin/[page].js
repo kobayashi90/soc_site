@@ -108,7 +108,7 @@ function AlbumAdmin() {
             })
         ]
     });
-};
+}
 function AlbumTable() {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_7__.useRouter)();
     const page = parseInt(router.query.page || "1");
@@ -772,6 +772,13 @@ module.exports = require("next/dist/shared/lib/router/utils/get-next-pathname-in
 
 /***/ }),
 
+/***/ 1897:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/is-bot.js");
+
+/***/ }),
+
 /***/ 1428:
 /***/ ((module) => {
 
@@ -912,7 +919,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,2952,1664,9463,1331,367,9324], () => (__webpack_exec__(9042)));
+var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,676,1664,9463,1331,367,9324], () => (__webpack_exec__(9042)));
 module.exports = __webpack_exports__;
 
 })();

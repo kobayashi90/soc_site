@@ -32,6 +32,17 @@ module.exports = {
 
 /***/ }),
 
+/***/ 748:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/vgmdblogo.6b1f5637.png","height":80,"width":250,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAMAAACZFr56AAAANlBMVEWjAQGSkHdublJoYT9USytUSxxUUzCQh1idc1eYmXyGe0qYmWqWlXpeXTloY0xnRkmwAACnn3CQP5YnAAAAEnRSTlOZq1J4jtJ/4KW1ksd9nHc8sP5VAF6wAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVQImWNg4OBk5OThZWMQ4OBmF2RnZWVg4Gfi4mNmYQEACi8Au04fR3MAAAAASUVORK5CYII=","blurWidth":8,"blurHeight":3});
+
+/***/ }),
+
 /***/ 6080:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -50,8 +61,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1608);
+/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_future_image__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(968);
@@ -60,19 +71,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(4979);
-/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(8275);
-/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1292);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9578);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1331);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(5043);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(1454);
-/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(6658);
-/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(2729);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_15__]);
-([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_15__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(4979);
+/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(8275);
+/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _img_assets_vgmdblogo_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(748);
+/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(1292);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(9578);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1331);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(5043);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1454);
+/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6658);
+/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(2729);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_16__]);
+([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_16__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -179,7 +192,7 @@ function StarCounter(props) {
         }
     };
     const { 0: scoreHover , 1: setHover  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
-    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
+    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)();
     const getScore = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
     query ($albumId: ID!) {
       album(id: $albumId){
@@ -205,12 +218,12 @@ function StarCounter(props) {
     const stars = [];
     function Star(props) {
         const { value  } = props;
-        const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
+        const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
         const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useApolloClient)();
         const starClass = score >= value || (scoreHover || selfScore) >= value ? "fas fa-star" : score >= value - 0.5 ? "fas fa-star-half" : "far fa-star";
         const goldClass = scoreHover ? scoreHover >= value : selfScore >= value;
-        const className = classnames__WEBPACK_IMPORTED_MODULE_5___default()(starClass, (_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16___default().star), {
-            [(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_16___default().gold)]: goldClass,
+        const className = classnames__WEBPACK_IMPORTED_MODULE_5___default()(starClass, (_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17___default().star), {
+            [(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17___default().gold)]: goldClass,
             "ps-1": value > 1
         });
         function saveRating() {
@@ -261,7 +274,7 @@ function StarCounter(props) {
 async function getServerSideProps(context) {
     const { params , locale  } = context;
     const { id  } = params;
-    const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_13__/* .initializeApollo */ ["in"])();
+    const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
         query,
         variables: {
@@ -274,7 +287,7 @@ async function getServerSideProps(context) {
             permanent: false
         }
     };
-    const localeStrings = await (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* .getTranslation */ .i)(locale);
+    const localeStrings = await (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* .getTranslation */ .i)(locale);
     return {
         props: {
             id,
@@ -284,7 +297,7 @@ async function getServerSideProps(context) {
         }
     };
 }
-const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_11__/* .getImageUrl */ .Jn)(id)}`;
+const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_12__/* .getImageUrl */ .Jn)(id)}`;
 const favoriteTemplate = (query)=>_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
   mutation ($albumId: String!) {
     ${query}Favorite(albumId: $albumId)
@@ -294,9 +307,9 @@ const addFavorite = favoriteTemplate("add");
 const removeFavorite = favoriteTemplate("remove");
 function Page(props) {
     const { id , album , imageUrl  } = props;
-    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
+    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
-    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
+    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)();
     const { 0: loadingFavorite , 1: setLoading  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
     const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useApolloClient)();
     const getFavorite = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
@@ -377,25 +390,30 @@ function Page(props) {
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                         lg: 5,
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
-                                            layout: "responsive",
+                                        className: "d-flex align-items-center px-0 px-lg-2 mb-3 mb-lg-0",
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                            className: "rounded",
                                             width: 300,
                                             height: 300,
+                                            style: {
+                                                height: "auto",
+                                                width: "100%"
+                                            },
                                             alt: album.title,
-                                            src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_11__/* .getImageUrl */ .Jn)(album.id),
+                                            src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_12__/* .getImageUrl */ .Jn)(album.id),
                                             placeholder: "blur",
-                                            blurDataURL: album.placeholder || _components_utils__WEBPACK_IMPORTED_MODULE_11__/* .PLACEHOLDER */ .l7
+                                            blurDataURL: album.placeholder || _components_utils__WEBPACK_IMPORTED_MODULE_12__/* .PLACEHOLDER */ .l7
                                         })
                                     }),
                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                         lg: 7,
-                                        className: "blackblock",
+                                        className: "d-flex flex-column justify-content-center blackblock",
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                                     children: [
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()("text-center", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().title)),
+                                                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()("text-center", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().title)),
                                                             children: album.title
                                                         }),
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h6", {
@@ -406,7 +424,7 @@ function Page(props) {
                                                             children: album.subTitle
                                                         }),
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("table", {
-                                                            className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().table),
+                                                            className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().table),
                                                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", {
                                                                 children: [
                                                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
@@ -556,7 +574,7 @@ function Page(props) {
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_12__/* .ButtonLoader */ .l, {
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_13__/* .ButtonLoader */ .l, {
                                                         loading: loadingFavorite,
                                                         onClick: user ? submitFavorite : ()=>router.replace(`${router.asPath}?login`),
                                                         className: "w-100 rounded-3",
@@ -580,37 +598,46 @@ function Page(props) {
                                     }),
                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                         lg: 6,
-                                        className: "blackblock px-10px",
+                                        className: "blackblock",
                                         children: [
-                                            album.vgmdb && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-                                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                    className: "mb-2 ms-2",
-                                                    children: [
-                                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                            album.vgmdb && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                                                className: "mb-2 ms-2",
+                                                children: [
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                                        xs: "auto",
+                                                        className: "px-0",
+                                                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                                            style: {
+                                                                fontSize: "21px"
+                                                            },
                                                             children: [
                                                                 "Check album at",
                                                                 ":"
                                                             ]
-                                                        }),
-                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                        })
+                                                    }),
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                                        xs: "auto",
+                                                        className: "d-flex align-items-center ps-0",
+                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
                                                             className: "ms-2",
                                                             target: "_blank",
                                                             rel: "noopener noreferrer",
                                                             href: album.vgmdb,
-                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_4___default()), {
                                                                 width: 100,
                                                                 height: 30,
                                                                 alt: "VGMdb",
-                                                                src: "/img/assets/vgmdblogo.png"
+                                                                src: _img_assets_vgmdblogo_png__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z
                                                             })
                                                         })
-                                                    ]
-                                                })
+                                                    })
+                                                ]
                                             }),
                                             album.stores.length > 0 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                                 className: "mt-2 px-3",
                                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                    className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().stores),
+                                                    className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().stores),
                                                     style: {
                                                         paddingLeft: "15px",
                                                         paddingTop: "10px",
@@ -631,15 +658,19 @@ function Page(props) {
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                                             children: album.stores.map(({ url , provider  }, i)=>provider === "SOON" ? null : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                                                     md: 6,
-                                                                    className: "d-flex justify-content-center",
+                                                                    className: "d-flex justify-content-center py-1",
                                                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
                                                                         target: "_blank",
                                                                         rel: "noopener noreferrer",
                                                                         href: url,
-                                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_4___default()), {
                                                                             className: "rounded",
-                                                                            width: 190,
-                                                                            height: 65,
+                                                                            width: 250,
+                                                                            height: 70,
+                                                                            style: {
+                                                                                height: "auto",
+                                                                                width: "100%"
+                                                                            },
                                                                             alt: provider,
                                                                             src: `/img/provider/${provider}.jpg`
                                                                         })
@@ -661,7 +692,7 @@ function Page(props) {
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .ZP, {
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .ZP, {
                                 albumId: id,
                                 comments: album.comments
                             }),
@@ -678,7 +709,7 @@ function Page(props) {
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                         className: "justify-content-center",
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_10__/* .AlbumBoxList */ .X, {
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_11__/* .AlbumBoxList */ .X, {
                                             colProps: {
                                                 md: 3,
                                                 xs: 6
@@ -694,7 +725,7 @@ function Page(props) {
             ]
         })
     });
-};
+}
 function DownloadList(props) {
     const { id , user , t  } = props;
     const { data , loading , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(queryDownload, {
@@ -712,7 +743,7 @@ function DownloadList(props) {
     if (loading) {
         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
                     className: "mx-auto"
                 })
             })
@@ -756,7 +787,7 @@ function DownloadList(props) {
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
                                                 target: "_blank",
                                                 variant: "secondary",
-                                                className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().download),
+                                                className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().download),
                                                 href: url,
                                                 children: t("Download")
                                             })
@@ -783,22 +814,22 @@ function DownloadList(props) {
 }
 function DirectButton(props) {
     const { directUrl  } = props;
-    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
+    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     const disabled = directUrl === "false";
     const renderTooltip = (props)=>disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Tooltip, {
             ...props,
-            id: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().tooltip),
+            id: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().tooltip),
             children: t("Become_Donator")
         }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {});
     const ButtonRender = disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         variant: "secondary",
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().direct)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().direct)),
         disabled: disabled,
         children: t("Direct")
     }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         target: "_blank",
         variant: "secondary",
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().direct)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().direct)),
         href: directUrl,
         children: t("Direct")
     });
@@ -811,7 +842,7 @@ function DirectButton(props) {
 function TrackList(props) {
     const { discs  } = props;
     const { 0: current , 1: setCurrent  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(0);
-    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .Z)();
+    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
         lg: 6,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -820,7 +851,7 @@ function TrackList(props) {
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()("text-center text-uppercase", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_17___default().title)),
+                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()("text-center text-uppercase", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().title)),
                             children: t("Tracklist")
                         })
                     })
@@ -979,6 +1010,14 @@ module.exports = require("next/dist/shared/lib/i18n/normalize-locale-path.js");
 
 /***/ }),
 
+/***/ 4486:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
 /***/ 744:
 /***/ ((module) => {
 
@@ -1080,6 +1119,14 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/get-next-pathname-info.js");
+
+/***/ }),
+
+/***/ 1897:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/is-bot.js");
 
 /***/ }),
 
@@ -1266,7 +1313,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,2952,1664,1331,1454,367,6710,5841,3398,9578,3038], () => (__webpack_exec__(6080)));
+var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,676,1664,1608,1331,1454,367,6710,3398,9578,3038], () => (__webpack_exec__(6080)));
 module.exports = __webpack_exports__;
 
 })();

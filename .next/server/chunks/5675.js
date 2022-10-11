@@ -7,6 +7,7 @@ exports.modules = {
 
 "use strict";
 
+"client";
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
@@ -106,7 +107,7 @@ function Image(_param) {
         isLazy = false;
     }
     if (false) {}
-    if (experimentalUnoptimized) {
+    if (config.unoptimized) {
         unoptimized = true;
     }
     const [blurComplete, setBlurComplete] = (0, _react).useState(false);
@@ -234,7 +235,8 @@ function Image(_param) {
     const linkProps = {
         // Note: imagesrcset and imagesizes are not in the link element type with react 17.
         [imageSrcSetPropName]: imgAttributes.srcSet,
-        [imageSizesPropName]: imgAttributes.sizes
+        [imageSizesPropName]: imgAttributes.sizes,
+        crossOrigin: rest.crossOrigin
     };
     const useLayoutEffect =  true ? _react.default.useEffect : 0;
     const onLoadingCompleteRef = (0, _react).useRef(onLoadingComplete);
@@ -305,8 +307,11 @@ function Image(_param) {
         href: imgAttributes.srcSet ? undefined : imgAttributes.src
     }, linkProps))) : null);
 }
-const { experimentalRemotePatterns =[] , experimentalUnoptimized  } = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","dangerouslyAllowSVG":false} || {};
-const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","dangerouslyAllowSVG":false};
+"client";
+function normalizeSrc(src) {
+    return src[0] === "/" ? src.slice(1) : src;
+}
+const configEnv = {"deviceSizes":[640,750,828,1080,1200,1920,2048,3840],"imageSizes":[16,32,48,64,96,128,256,384],"path":"/_next/image","loader":"default","dangerouslyAllowSVG":false,"unoptimized":false};
 const loadedImageURLs = new Set();
 const allImgs = new Map();
 let perfObserver;
@@ -319,6 +324,45 @@ const VALID_LOADING_VALUES = (/* unused pure expression or super */ null && ([
     "eager",
     undefined
 ]));
+function imgixLoader({ config , src , width , quality  }) {
+    // Demo: https://static.imgix.net/daisy.png?auto=format&fit=max&w=300
+    const url = new URL(`${config.path}${normalizeSrc(src)}`);
+    const params = url.searchParams;
+    // auto params can be combined with comma separation, or reiteration
+    params.set("auto", params.getAll("auto").join(",") || "format");
+    params.set("fit", params.get("fit") || "max");
+    params.set("w", params.get("w") || width.toString());
+    if (quality) {
+        params.set("q", quality.toString());
+    }
+    return url.href;
+}
+function akamaiLoader({ config , src , width  }) {
+    return `${config.path}${normalizeSrc(src)}?imwidth=${width}`;
+}
+function cloudinaryLoader({ config , src , width , quality  }) {
+    // Demo: https://res.cloudinary.com/demo/image/upload/w_300,c_limit,q_auto/turtles.jpg
+    const params = [
+        "f_auto",
+        "c_limit",
+        "w_" + width,
+        "q_" + (quality || "auto")
+    ];
+    const paramsString = params.join(",") + "/";
+    return `${config.path}${paramsString}${normalizeSrc(src)}`;
+}
+function customLoader({ src  }) {
+    throw new Error(`Image with src "${src}" is missing "loader" prop.` + `\nRead more: https://nextjs.org/docs/messages/next-image-missing-loader`);
+}
+function defaultLoader({ config , src , width , quality  }) {
+    if (false) {}
+    if (src.endsWith(".svg") && !config.dangerouslyAllowSVG) {
+        // Special case to make svg serve as-is to avoid proxying
+        // through the built-in Image Optimization API.
+        return src;
+    }
+    return `${(0, _normalizeTrailingSlash).normalizePathTrailingSlash(config.path)}?url=${encodeURIComponent(src)}&w=${width}&q=${quality || 75}`;
+}
 const loaders = new Map([
     [
         "default",
@@ -563,48 +607,6 @@ const ImageElement = (_param)=>{
         loading: loading
     }))));
 };
-function normalizeSrc(src) {
-    return src[0] === "/" ? src.slice(1) : src;
-}
-function imgixLoader({ config , src , width , quality  }) {
-    // Demo: https://static.imgix.net/daisy.png?auto=format&fit=max&w=300
-    const url = new URL(`${config.path}${normalizeSrc(src)}`);
-    const params = url.searchParams;
-    // auto params can be combined with comma separation, or reiteration
-    params.set("auto", params.getAll("auto").join(",") || "format");
-    params.set("fit", params.get("fit") || "max");
-    params.set("w", params.get("w") || width.toString());
-    if (quality) {
-        params.set("q", quality.toString());
-    }
-    return url.href;
-}
-function akamaiLoader({ config , src , width  }) {
-    return `${config.path}${normalizeSrc(src)}?imwidth=${width}`;
-}
-function cloudinaryLoader({ config , src , width , quality  }) {
-    // Demo: https://res.cloudinary.com/demo/image/upload/w_300,c_limit,q_auto/turtles.jpg
-    const params = [
-        "f_auto",
-        "c_limit",
-        "w_" + width,
-        "q_" + (quality || "auto")
-    ];
-    const paramsString = params.join(",") + "/";
-    return `${config.path}${paramsString}${normalizeSrc(src)}`;
-}
-function customLoader({ src  }) {
-    throw new Error(`Image with src "${src}" is missing "loader" prop.` + `\nRead more: https://nextjs.org/docs/messages/next-image-missing-loader`);
-}
-function defaultLoader({ config , src , width , quality  }) {
-    if (false) {}
-    if (src.endsWith(".svg") && !config.dangerouslyAllowSVG) {
-        // Special case to make svg serve as-is to avoid proxying
-        // through the built-in Image Optimization API.
-        return src;
-    }
-    return `${(0, _normalizeTrailingSlash).normalizePathTrailingSlash(config.path)}?url=${encodeURIComponent(src)}&w=${width}&q=${quality || 75}`;
-}
 if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
     Object.defineProperty(exports.default, "__esModule", {
         value: true

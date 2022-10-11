@@ -108,7 +108,7 @@ function AddPublisher() {
             })
         ]
     });
-};
+}
 
 // EXTERNAL MODULE: external "form-serialize"
 var external_form_serialize_ = __webpack_require__(684);
@@ -236,7 +236,7 @@ function AddSeries() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/AddGame.jsx
 
@@ -441,7 +441,7 @@ function AddGame() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/AddStudio.jsx
 
@@ -547,7 +547,7 @@ function AddStudio() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/AddAnimation.jsx
 
@@ -705,7 +705,7 @@ function AddAnimation() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/AddPlatform.jsx
 
@@ -819,7 +819,7 @@ function AddPlatform() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/EditPublisher.jsx
 
@@ -946,7 +946,7 @@ function EditPublisher() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/EditPlatform.jsx
 
@@ -1123,7 +1123,7 @@ function EditPlatform() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/EditSeries.jsx
 
@@ -1289,7 +1289,7 @@ function EditSeries() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/EditGame.jsx
 
@@ -1547,7 +1547,7 @@ function EditGame() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/EditStudio.jsx
 
@@ -1676,7 +1676,7 @@ function EditStudio() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/forms/EditAnimation.jsx
 
@@ -1900,7 +1900,7 @@ function EditAnimation_AddAnimation() {
             })
         ]
     });
-};
+}
 
 ;// CONCATENATED MODULE: ./components/SharedForms.jsx
 

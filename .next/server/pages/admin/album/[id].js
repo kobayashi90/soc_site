@@ -59,7 +59,7 @@ function useUser() {
         user: data?.me,
         refetch
     };
-};
+}
 
 
 /***/ }),
@@ -301,7 +301,7 @@ function EditAlbum(props) {
             ]
         })
     });
-};
+}
 function EditAlbumForm({ id , album , categories , classifications  }) {
     const { 0: currentCategories , 1: setCategories  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.categories || []);
     const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.classifications || []);
@@ -865,7 +865,7 @@ module.exports = import("iron-session");;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,9463,1331,1454,367,6710,4978], () => (__webpack_exec__(6947)));
+var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,9463,1331,1454,367,6710,4978], () => (__webpack_exec__(6947)));
 module.exports = __webpack_exports__;
 
 })();

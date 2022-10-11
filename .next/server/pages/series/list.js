@@ -33,8 +33,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1608);
+/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_future_image__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1664);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1454);
@@ -135,11 +135,15 @@ function SeriesList({ series , letters , seriesList  }) {
                                         },
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_5___default()), {
                                             href: `/series/${slug}`,
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                            className: "d-block w-100 h-100",
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                                className: "w-100 h-100",
                                                 alt: slug,
                                                 src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_7__/* .getImageUrl */ .Jn)(slug, "series"),
-                                                layout: "fill",
-                                                objectFit: "contain",
+                                                style: {
+                                                    objectFit: "contain",
+                                                    objectPosition: "center"
+                                                },
                                                 width: 300,
                                                 height: 100,
                                                 placeholder: "blur",
@@ -154,7 +158,7 @@ function SeriesList({ series , letters , seriesList  }) {
             ]
         })
     });
-};
+}
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
@@ -222,6 +226,14 @@ module.exports = require("next/dist/shared/lib/i18n/detect-domain-locale.js");
 
 "use strict";
 module.exports = require("next/dist/shared/lib/i18n/normalize-locale-path.js");
+
+/***/ }),
+
+/***/ 4486:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
 
 /***/ }),
 
@@ -326,6 +338,14 @@ module.exports = require("next/dist/shared/lib/router/utils/get-asset-path-from-
 
 "use strict";
 module.exports = require("next/dist/shared/lib/router/utils/get-next-pathname-info.js");
+
+/***/ }),
+
+/***/ 1897:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/is-bot.js");
 
 /***/ }),
 
@@ -456,7 +476,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,2952,1664,1331,1454], () => (__webpack_exec__(7130)));
+var __webpack_exports__ = __webpack_require__.X(0, [3598,676,1664,1608,1331,1454], () => (__webpack_exec__(7130)));
 module.exports = __webpack_exports__;
 
 })();

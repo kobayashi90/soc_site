@@ -66,7 +66,7 @@ function AddAlbumPage() {
             })
         ]
     });
-};
+}
 const queryCategories = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
   query {
     categories {
@@ -699,7 +699,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6377,6964,5675,9463,1331,367,6710,9324,4978], () => (__webpack_exec__(7777)));
+var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,9463,1331,367,6710,9324,4978], () => (__webpack_exec__(7777)));
 module.exports = __webpack_exports__;
 
 })();

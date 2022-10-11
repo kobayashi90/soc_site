@@ -94,7 +94,7 @@ function RequestCheck(props) {
             })
         ]
     });
-};
+}
 
 
 /***/ }),
@@ -138,7 +138,7 @@ function SubmitButton(props) {
         onClick: props.onClick,
         children: props.children
     });
-};
+}
 
 
 /***/ })
