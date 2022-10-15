@@ -61,30 +61,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1608);
-/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_future_image__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9003);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9003);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1187);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(968);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1187);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1608);
+/* harmony import */ var next_future_image__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_future_image__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(4979);
-/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(8275);
-/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _img_assets_vgmdblogo_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(748);
-/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(1292);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(9578);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1331);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(5043);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1454);
-/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6658);
-/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(2729);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_16__]);
-([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_16__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1664);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(4979);
+/* harmony import */ var _styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(8275);
+/* harmony import */ var _styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _img_assets_vgmdblogo_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(748);
+/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1292);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(9578);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(1331);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(5043);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(1454);
+/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(6658);
+/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(2729);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_15__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_16__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_17__]);
+([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_15__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_16__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_17__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -146,6 +149,16 @@ query ($id: ID!) {
       number
       body
     }
+    downloads {
+      title
+      small
+      links {
+        id
+        url
+        provider
+        directUrl
+      }
+    }
     related {
       id
       title
@@ -168,11 +181,10 @@ query downloads ($id: ID!) {
   downloads(id: $id){
     title
     small
-    links{
+    links {
       id
       url
       provider
-      custom
       directUrl
     }
   }
@@ -192,7 +204,7 @@ function StarCounter(props) {
         }
     };
     const { 0: scoreHover , 1: setHover  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
-    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)();
+    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const getScore = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
     query ($albumId: ID!) {
       album(id: $albumId){
@@ -218,12 +230,12 @@ function StarCounter(props) {
     const stars = [];
     function Star(props) {
         const { value  } = props;
-        const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
+        const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
         const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useApolloClient)();
         const starClass = score >= value || (scoreHover || selfScore) >= value ? "fas fa-star" : score >= value - 0.5 ? "fas fa-star-half" : "far fa-star";
         const goldClass = scoreHover ? scoreHover >= value : selfScore >= value;
-        const className = classnames__WEBPACK_IMPORTED_MODULE_5___default()(starClass, (_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17___default().star), {
-            [(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_17___default().gold)]: goldClass,
+        const className = classnames__WEBPACK_IMPORTED_MODULE_4___default()(starClass, (_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_18___default().star), {
+            [(_styles_Stars_module_scss__WEBPACK_IMPORTED_MODULE_18___default().gold)]: goldClass,
             "ps-1": value > 1
         });
         function saveRating() {
@@ -234,11 +246,11 @@ function StarCounter(props) {
                     score: value
                 }
             }).then(()=>{
-                react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t("Rating saved!"));
+                react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.success(t("Rating saved!"));
                 refetch();
             }).catch((err)=>{
                 console.log(err);
-                react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.error(t("Failed to save rating"));
+                react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error(t("Failed to save rating"));
             });
         }
         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
@@ -274,7 +286,7 @@ function StarCounter(props) {
 async function getServerSideProps(context) {
     const { params , locale  } = context;
     const { id  } = params;
-    const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_14__/* .initializeApollo */ ["in"])();
+    const client = (0,_components_ApolloClient__WEBPACK_IMPORTED_MODULE_15__/* .initializeApollo */ ["in"])();
     const { data  } = await client.query({
         query,
         variables: {
@@ -287,7 +299,7 @@ async function getServerSideProps(context) {
             permanent: false
         }
     };
-    const localeStrings = await (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* .getTranslation */ .i)(locale);
+    const localeStrings = await (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* .getTranslation */ .i)(locale);
     return {
         props: {
             id,
@@ -297,7 +309,7 @@ async function getServerSideProps(context) {
         }
     };
 }
-const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_12__/* .getImageUrl */ .Jn)(id)}`;
+const fullImage = (id, quality = 75)=>`/_next/image?w=3840&q=${quality}&url=${(0,_components_utils__WEBPACK_IMPORTED_MODULE_13__/* .getImageUrl */ .Jn)(id)}`;
 const favoriteTemplate = (query)=>_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
   mutation ($albumId: String!) {
     ${query}Favorite(albumId: $albumId)
@@ -307,9 +319,9 @@ const addFavorite = favoriteTemplate("add");
 const removeFavorite = favoriteTemplate("remove");
 function Page(props) {
     const { id , album , imageUrl  } = props;
-    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
+    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
-    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)();
+    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     const { 0: loadingFavorite , 1: setLoading  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
     const client = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useApolloClient)();
     const getFavorite = _apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql`
@@ -334,9 +346,9 @@ function Page(props) {
             variables: {
                 albumId: id
             }
-        }).then(()=>react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.success(t(dataFavorite.album.isFavorite ? "Favorite_Added" : "Favorite_Removed"))).catch((err)=>{
+        }).then(()=>react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.success(t(dataFavorite.album.isFavorite ? "Favorite_Added" : "Favorite_Removed"))).catch((err)=>{
             console.log(err);
-            react_toastify__WEBPACK_IMPORTED_MODULE_7__.toast.error("Query failed");
+            react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error("Query failed");
         }).finally(()=>{
             setLoading(false);
             refetchFavorite();
@@ -391,7 +403,7 @@ function Page(props) {
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                         lg: 5,
                                         className: "d-flex align-items-center px-0 px-lg-2 mb-3 mb-lg-0",
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_7___default()), {
                                             className: "rounded",
                                             width: 300,
                                             height: 300,
@@ -400,9 +412,9 @@ function Page(props) {
                                                 width: "100%"
                                             },
                                             alt: album.title,
-                                            src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_12__/* .getImageUrl */ .Jn)(album.id),
+                                            src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_13__/* .getImageUrl */ .Jn)(album.id),
                                             placeholder: "blur",
-                                            blurDataURL: album.placeholder || _components_utils__WEBPACK_IMPORTED_MODULE_12__/* .PLACEHOLDER */ .l7
+                                            blurDataURL: album.placeholder || _components_utils__WEBPACK_IMPORTED_MODULE_13__/* .PLACEHOLDER */ .l7
                                         })
                                     }),
                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
@@ -413,7 +425,7 @@ function Page(props) {
                                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                                     children: [
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()("text-center", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().title)),
+                                                            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()("text-center", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().title)),
                                                             children: album.title
                                                         }),
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h6", {
@@ -424,7 +436,7 @@ function Page(props) {
                                                             children: album.subTitle
                                                         }),
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("table", {
-                                                            className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().table),
+                                                            className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().table),
                                                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", {
                                                                 children: [
                                                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
@@ -574,7 +586,7 @@ function Page(props) {
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_13__/* .ButtonLoader */ .l, {
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_14__/* .ButtonLoader */ .l, {
                                                         loading: loadingFavorite,
                                                         onClick: user ? submitFavorite : ()=>router.replace(`${router.asPath}?login`),
                                                         className: "w-100 rounded-3",
@@ -585,7 +597,23 @@ function Page(props) {
                                                         children: t(user ? dataFavorite?.album?.isFavorite ? "Favorite_Remove" : "Favorite_Add" : "Favorite_Login")
                                                     })
                                                 })
-                                            })
+                                            }),
+                                            user && user.permissions.includes("UPDATE") ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                                                className: "mt-3",
+                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_9___default()), {
+                                                        href: `/admin/album/${album.id}`,
+                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+                                                            className: "w-100 rounded-3",
+                                                            variant: "outline-light",
+                                                            style: {
+                                                                fontSize: "18px"
+                                                            },
+                                                            children: t("Edit this album")
+                                                        })
+                                                    })
+                                                })
+                                            }) : null
                                         ]
                                     })
                                 ]
@@ -624,11 +652,11 @@ function Page(props) {
                                                             target: "_blank",
                                                             rel: "noopener noreferrer",
                                                             href: album.vgmdb,
-                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_7___default()), {
                                                                 width: 100,
                                                                 height: 30,
                                                                 alt: "VGMdb",
-                                                                src: _img_assets_vgmdblogo_png__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z
+                                                                src: _img_assets_vgmdblogo_png__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z
                                                             })
                                                         })
                                                     })
@@ -637,7 +665,7 @@ function Page(props) {
                                             album.stores.length > 0 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                                 className: "mt-2 px-3",
                                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                                                    className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().stores),
+                                                    className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().stores),
                                                     style: {
                                                         paddingLeft: "15px",
                                                         paddingTop: "10px",
@@ -663,7 +691,7 @@ function Page(props) {
                                                                         target: "_blank",
                                                                         rel: "noopener noreferrer",
                                                                         href: url,
-                                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_future_image__WEBPACK_IMPORTED_MODULE_7___default()), {
                                                                             className: "rounded",
                                                                             width: 250,
                                                                             height: 70,
@@ -685,14 +713,13 @@ function Page(props) {
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DownloadList, {
                                                 id: id,
-                                                user: user,
-                                                t: t
+                                                initialDownloads: album.downloads
                                             })
                                         ]
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_15__/* ["default"] */ .ZP, {
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .ZP, {
                                 albumId: id,
                                 comments: album.comments
                             }),
@@ -709,7 +736,7 @@ function Page(props) {
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                                         className: "justify-content-center",
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_11__/* .AlbumBoxList */ .X, {
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_12__/* .AlbumBoxList */ .X, {
                                             colProps: {
                                                 md: 3,
                                                 xs: 6
@@ -727,29 +754,24 @@ function Page(props) {
     });
 }
 function DownloadList(props) {
-    const { id , user , t  } = props;
-    const { data , loading , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(queryDownload, {
+    const { id , initialDownloads  } = props;
+    const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(queryDownload, {
         variables: {
             id
         }
     });
+    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
+    const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetch({
-            id
+            variables: {
+                id
+            }
         }), [
         user,
         id,
         refetch
     ]);
-    if (loading) {
-        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
-                    className: "mx-auto"
-                })
-            })
-        });
-    }
-    const { downloads =[]  } = data;
+    const downloads = data?.downloads || initialDownloads;
     return downloads.map((download, di)=>{
         const { links , title  } = download;
         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
@@ -787,12 +809,12 @@ function DownloadList(props) {
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
                                                 target: "_blank",
                                                 variant: "secondary",
-                                                className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().download),
+                                                className: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().download),
                                                 href: url,
                                                 children: t("Download")
                                             })
                                         }),
-                                        directUrl && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                                             className: "py-2",
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DirectButton, {
                                                 target: "_blank",
@@ -814,22 +836,21 @@ function DownloadList(props) {
 }
 function DirectButton(props) {
     const { directUrl  } = props;
-    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
-    const disabled = directUrl === "false";
-    const renderTooltip = (props)=>disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Tooltip, {
+    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
+    const renderTooltip = (props)=>!directUrl ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Tooltip, {
             ...props,
-            id: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().tooltip),
+            id: (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().tooltip),
             children: t("Become_Donator")
         }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {});
-    const ButtonRender = disabled ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    const ButtonRender = !directUrl ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         variant: "secondary",
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().direct)),
-        disabled: disabled,
+        className: classnames__WEBPACK_IMPORTED_MODULE_4___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().direct)),
+        disabled: !directUrl,
         children: t("Direct")
     }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         target: "_blank",
         variant: "secondary",
-        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().direct)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_4___default()((_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().download), (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().direct)),
         href: directUrl,
         children: t("Direct")
     });
@@ -842,7 +863,7 @@ function DirectButton(props) {
 function TrackList(props) {
     const { discs  } = props;
     const { 0: current , 1: setCurrent  } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(0);
-    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z)();
+    const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
         lg: 6,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -851,7 +872,7 @@ function TrackList(props) {
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()("text-center text-uppercase", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_18___default().title)),
+                            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()("text-center text-uppercase", (_styles_Album_module_scss__WEBPACK_IMPORTED_MODULE_19___default().title)),
                             children: t("Tracklist")
                         })
                     })
@@ -861,7 +882,7 @@ function TrackList(props) {
                         transform: "translateY(2px)"
                     },
                     children: discs.map(({ number  }, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col, {
-                            className: classnames__WEBPACK_IMPORTED_MODULE_5___default()("text-center", {
+                            className: classnames__WEBPACK_IMPORTED_MODULE_4___default()("text-center", {
                                 "ps-0": i > 0,
                                 "pe-0": i < discs.length - 1
                             }),
