@@ -1,11 +1,13 @@
 import { gql, useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
-import Image from 'next/future/image'
 import classNames from 'classnames'
-import Head from 'next/head'
 import { toast } from 'react-toastify'
+
+import Head from 'next/head'
+import Image from 'next/future/image'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import styles from '@/styles/Album.module.scss'
 import starStyles from '@/styles/Stars.module.scss'
@@ -15,7 +17,7 @@ import vgmdbLogo from '@/img/assets/vgmdblogo.png'
 import useUser from '@/components/useUser'
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { getImageUrl, PLACEHOLDER } from '@/components/utils'
-import Loader, { ButtonLoader } from '@/components/Loader'
+import { ButtonLoader } from '@/components/Loader'
 import { initializeApollo } from '@/components/ApolloClient'
 import CommentCarrousel from '@/components/CommentsCarrousel'
 import useTranslation, { getTranslation } from '@/components/useTranslation'
@@ -62,6 +64,16 @@ query ($id: ID!) {
       number
       body
     }
+    downloads {
+      title
+      small
+      links {
+        id
+        url
+        provider
+        directUrl
+      }
+    }
     related {
       id
       title
@@ -85,11 +97,10 @@ query downloads ($id: ID!) {
   downloads(id: $id){
     title
     small
-    links{
+    links {
       id
       url
       provider
-      custom
       directUrl
     }
   }
@@ -368,6 +379,21 @@ export default function Page (props) {
                     </ButtonLoader>
                   </Col>
                 </Row>
+
+                {user && user.permissions.includes('UPDATE')
+                  ? (
+                    <Row className='mt-3'>
+                      <Col>
+                        <Link href={`/admin/album/${album.id}`}>
+                          <Button
+                            className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                            {t('Edit this album')}
+                          </Button>
+                        </Link>
+                      </Col>
+                    </Row>
+                  )
+                  : null}
               </Col>
             </Row>
             <hr></hr>
@@ -411,7 +437,7 @@ export default function Page (props) {
                   </Row>)}
                 <hr className='style-white w-100' />
 
-                <DownloadList id={id} user={user} t={t} />
+                <DownloadList id={id} initialDownloads={album.downloads} />
               </Col>
             </Row>
 
@@ -435,22 +461,15 @@ export default function Page (props) {
 }
 
 function DownloadList (props) {
-  const { id, user, t } = props
-  const { data, loading, refetch } = useQuery(queryDownload, { variables: { id } })
+  const { id, initialDownloads } = props
+  const { data, refetch } = useQuery(queryDownload, { variables: { id } })
 
-  useEffect(() => refetch({ id }), [user, id, refetch])
+  const t = useTranslation()
+  const { user } = useUser()
 
-  if (loading) {
-    return (
-      <Row>
-        <Col>
-          <Loader className='mx-auto'/>
-        </Col>
-      </Row>
-    )
-  }
+  useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
 
-  const { downloads = [] } = data
+  const downloads = data?.downloads || initialDownloads
 
   return (
     downloads.map((download, di) => {
@@ -476,11 +495,9 @@ function DownloadList (props) {
                     <Col xs={6} className=' mx-auto py-2'>
                       <Button target="_blank" variant="secondary" className={styles.download} href={url}>{t('Download')}</Button>
                     </Col>
-                    {directUrl && (
-                      <Col className='py-2'>
-                        <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
-                      </Col>
-                    )}
+                    <Col className='py-2'>
+                      <DirectButton target='_blank' directUrl={directUrl}></DirectButton>
+                    </Col>
                   </Row>
                 </Fragment>
               )
@@ -497,15 +514,14 @@ function DirectButton (props) {
   const { directUrl } = props
   const t = useTranslation()
 
-  const disabled = directUrl === 'false'
-  const renderTooltip = (props) => (
-    disabled
+  const renderTooltip = props => (
+    !directUrl
       ? <Tooltip {...props} id={styles.tooltip}>{t('Become_Donator')}</Tooltip>
       : <div />
   )
 
-  const ButtonRender = disabled
-    ? <Button variant="secondary" className={classNames(styles.download, styles.direct)} disabled={disabled}>{t('Direct')}</Button>
+  const ButtonRender = !directUrl
+    ? <Button variant="secondary" className={classNames(styles.download, styles.direct)} disabled={!directUrl}>{t('Direct')}</Button>
     : <Button target="_blank" variant="secondary" className={classNames(styles.download, styles.direct)} href={directUrl}>{t('Direct')}</Button>
 
   return (
