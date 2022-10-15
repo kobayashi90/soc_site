@@ -1,11 +1,13 @@
 import { gql, useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
 import { Col, Row, Button, OverlayTrigger, Tooltip, Container } from 'react-bootstrap'
 import { Fragment, useEffect, useState } from 'react'
-import Image from 'next/future/image'
 import classNames from 'classnames'
-import Head from 'next/head'
 import { toast } from 'react-toastify'
+
+import Head from 'next/head'
+import Image from 'next/future/image'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import styles from '@/styles/Album.module.scss'
 import starStyles from '@/styles/Stars.module.scss'
@@ -368,6 +370,21 @@ export default function Page (props) {
                     </ButtonLoader>
                   </Col>
                 </Row>
+
+                {user && user.permissions.includes('UPDATE')
+                  ? (
+                    <Row className='mt-3'>
+                      <Col>
+                        <Link href={`/admin/album/${album.id}`}>
+                          <Button
+                            className='w-100 rounded-3' variant="outline-light" style={{ fontSize: '18px' }}>
+                            {t('Edit this album')}
+                          </Button>
+                        </Link>
+                      </Col>
+                    </Row>
+                  )
+                  : null}
               </Col>
             </Row>
             <hr></hr>
