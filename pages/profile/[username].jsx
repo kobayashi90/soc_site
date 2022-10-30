@@ -167,7 +167,7 @@ function EditProfile (props) {
             <Row>
               <Form.Group as={Col} >
                 <Form.Label htmlFor='username' style={{ color: 'black' }}>Username:</Form.Label>
-                <Form.Control type='text' name='username' defaultValue={user?.username} />
+                <Form.Control type='text' name='username' value={user?.username} readOnly/>
               </Form.Group>
 
               <Form.Group as={Col} >
