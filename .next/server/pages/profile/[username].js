@@ -300,7 +300,8 @@ function EditProfile(props) {
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Form.Control, {
                                             type: "text",
                                             name: "username",
-                                            defaultValue: user?.username
+                                            value: user?.username,
+                                            readOnly: true
                                         })
                                     ]
                                 }),
