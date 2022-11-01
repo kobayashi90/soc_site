@@ -45,7 +45,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
 
 /***/ }),
 
-/***/ 8684:
+/***/ 3468:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -55,7 +55,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.addBasePath = addBasePath;
 var _addPathPrefix = __webpack_require__(1751);
-var _normalizeTrailingSlash = __webpack_require__(2392);
+var _normalizeTrailingSlash = __webpack_require__(2700);
 const basePath =  false || "";
 function addBasePath(path, required) {
     if (false) {}
@@ -72,7 +72,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 2725:
+/***/ 4465:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -81,7 +81,7 @@ Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
 exports.addLocale = void 0;
-var _normalizeTrailingSlash = __webpack_require__(2392);
+var _normalizeTrailingSlash = __webpack_require__(2700);
 const addLocale = (path, ...args)=>{
     if (true) {
         return (0, _normalizeTrailingSlash).normalizePathTrailingSlash((__webpack_require__(3431).addLocale)(path, ...args));
@@ -100,7 +100,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 8748:
+/***/ 4643:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -126,7 +126,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 1210:
+/***/ 227:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -138,8 +138,8 @@ exports.getDomainLocale = getDomainLocale;
 const basePath =  false || "";
 function getDomainLocale(path, locale, locales, domainLocales) {
     if (true) {
-        const normalizeLocalePath = (__webpack_require__(8875).normalizeLocalePath);
-        const detectDomainLocale = (__webpack_require__(8748).detectDomainLocale);
+        const normalizeLocalePath = (__webpack_require__(2554).normalizeLocalePath);
+        const detectDomainLocale = (__webpack_require__(4643).detectDomainLocale);
         const target = locale || normalizeLocalePath(path, locales).detectedLocale;
         const domain = detectDomainLocale(domainLocales, undefined, target);
         if (domain) {
@@ -161,7 +161,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 4119:
+/***/ 928:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -186,7 +186,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 6007:
+/***/ 1831:
 /***/ ((module, exports) => {
 
 "use strict";
@@ -319,12 +319,12 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 8418:
+/***/ 1551:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
 
-"client";
+"use client";
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
@@ -332,14 +332,14 @@ exports["default"] = void 0;
 var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
 var _object_without_properties_loose = (__webpack_require__(7273)/* ["default"] */ .Z);
 var _react = _interop_require_default(__webpack_require__(6689));
-var _router = __webpack_require__(6273);
-var _addLocale = __webpack_require__(2725);
+var _router = __webpack_require__(1003);
+var _addLocale = __webpack_require__(4465);
 var _routerContext = __webpack_require__(4964);
 var _appRouterContext = __webpack_require__(3280);
-var _useIntersection = __webpack_require__(7190);
-var _getDomainLocale = __webpack_require__(1210);
-var _addBasePath = __webpack_require__(8684);
-"client";
+var _useIntersection = __webpack_require__(9246);
+var _getDomainLocale = __webpack_require__(227);
+var _addBasePath = __webpack_require__(3468);
+"use client";
 const prefetched = {};
 function prefetch(router, href, as, options) {
     if (true) return;
@@ -379,7 +379,8 @@ function linkClicked(e, router, href, as, replace, shallow, scroll, locale, isAp
         } else {
             // If `beforePopState` doesn't exist on the router it's the AppRouter.
             const method = replace ? "replace" : "push";
-            router[method](href, {
+            // Apply `as` if it's provided.
+            router[method](as || href, {
                 forceOptimisticNavigation: !prefetchEnabled
             });
         }
@@ -391,7 +392,9 @@ function linkClicked(e, router, href, as, replace, shallow, scroll, locale, isAp
         navigate();
     }
 }
-const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(props, forwardedRef) {
+/**
+ * React Component that enables client-side transitions between routes.
+ */ const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(props, forwardedRef) {
     if (false) {}
     let children;
     const { href: hrefProp , as: asProp , children: childrenProp , prefetch: prefetchProp , passHref , replace , shallow , scroll , locale , onClick , onMouseEnter , onTouchStart , legacyBehavior =Boolean(true) !== true  } = props, restProps = _object_without_properties_loose(props, [
@@ -439,6 +442,8 @@ const Link = /*#__PURE__*/ _react.default.forwardRef(function LinkComponent(prop
         if (false) {} else {
             child = _react.default.Children.only(children);
         }
+    } else {
+        if (false) { var ref; }
     }
     const childRef = legacyBehavior ? child && typeof child === "object" && child.ref : forwardedRef;
     const [setIntersectionRef, isVisible, resetVisible] = (0, _useIntersection).useIntersection({
@@ -553,7 +558,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 8875:
+/***/ 2554:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -583,7 +588,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 9320:
+/***/ 2813:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -592,7 +597,7 @@ Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
 exports.removeBasePath = removeBasePath;
-var _hasBasePath = __webpack_require__(4119);
+var _hasBasePath = __webpack_require__(928);
 const basePath =  false || "";
 function removeBasePath(path) {
     if (false) {}
@@ -611,7 +616,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 5776:
+/***/ 6876:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -641,7 +646,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 2669:
+/***/ 2497:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -655,8 +660,8 @@ exports.getClientBuildManifest = getClientBuildManifest;
 exports.createRouteLoader = createRouteLoader;
 var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
 var _getAssetPathFromRoute = _interop_require_default(__webpack_require__(9565));
-var _trustedTypes = __webpack_require__(4991);
-var _requestIdleCallback = __webpack_require__(9311);
+var _trustedTypes = __webpack_require__(5407);
+var _requestIdleCallback = __webpack_require__(4686);
 // 3.8s was arbitrarily chosen as it's what https://web.dev/interactive
 // considers as "Good" time-to-interactive. We must assume something went
 // wrong beyond this point, and then fall-back to a full page transition to
@@ -867,7 +872,7 @@ function createRouteLoader(assetPrefix) {
                 return resolvePromiseWithTimeout(getFilesForRoute(assetPrefix, route).then(({ scripts , css  })=>{
                     return Promise.all([
                         entrypoints.has(route) ? [] : Promise.all(scripts.map(maybeExecuteScript)),
-                        Promise.all(css.map(fetchStyleSheet)), 
+                        Promise.all(css.map(fetchStyleSheet))
                     ]);
                 }).then((res)=>{
                     return this.whenEntrypoint(route).then((entrypoint)=>({
@@ -917,12 +922,12 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 699:
+/***/ 3573:
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
 
-"client";
+"use client";
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
@@ -930,13 +935,15 @@ exports.handleClientScriptLoad = handleClientScriptLoad;
 exports.initScriptLoader = initScriptLoader;
 exports["default"] = void 0;
 var _extends = (__webpack_require__(6495)/* ["default"] */ .Z);
+var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
 var _interop_require_wildcard = (__webpack_require__(1598)/* ["default"] */ .Z);
 var _object_without_properties_loose = (__webpack_require__(7273)/* ["default"] */ .Z);
+var _reactDom = _interop_require_default(__webpack_require__(6405));
 var _react = _interop_require_wildcard(__webpack_require__(6689));
 var _headManagerContext = __webpack_require__(2796);
-var _headManager = __webpack_require__(6007);
-var _requestIdleCallback = __webpack_require__(9311);
-"client";
+var _headManager = __webpack_require__(1831);
+var _requestIdleCallback = __webpack_require__(4686);
+"use client";
 const ScriptCache = new Map();
 const LoadCache = new Set();
 const ignoreProps = [
@@ -945,10 +952,10 @@ const ignoreProps = [
     "dangerouslySetInnerHTML",
     "children",
     "onError",
-    "strategy", 
+    "strategy"
 ];
 const loadScript = (props)=>{
-    const { src , id , onLoad =()=>{} , onReady =null , dangerouslySetInnerHTML , children ="" , strategy ="afterInteractive" , onError ,  } = props;
+    const { src , id , onLoad =()=>{} , onReady =null , dangerouslySetInnerHTML , children ="" , strategy ="afterInteractive" , onError  } = props;
     const cacheKey = id || src;
     // Script has already loaded
     if (cacheKey && LoadCache.has(cacheKey)) {
@@ -1034,7 +1041,7 @@ function loadLazyScript(props) {
 function addBeforeInteractiveToCache() {
     const scripts = [
         ...document.querySelectorAll('[data-nscript="beforeInteractive"]'),
-        ...document.querySelectorAll('[data-nscript="beforePageRender"]'), 
+        ...document.querySelectorAll('[data-nscript="beforePageRender"]')
     ];
     scripts.forEach((script)=>{
         const cacheKey = script.id || script.getAttribute("src");
@@ -1055,7 +1062,7 @@ function Script(props) {
         "onError"
     ]);
     // Context is available only during SSR
-    const { updateScripts , scripts , getIsSsr  } = (0, _react).useContext(_headManagerContext.HeadManagerContext);
+    const { updateScripts , scripts , getIsSsr , appDir , nonce  } = (0, _react).useContext(_headManagerContext.HeadManagerContext);
     /**
    * - First mount:
    *   1. The useEffect for onReady executes
@@ -1119,7 +1126,7 @@ function Script(props) {
                     onLoad,
                     onReady,
                     onError
-                }, restProps), 
+                }, restProps)
             ]);
             updateScripts(scripts);
         } else if (getIsSsr && getIsSsr()) {
@@ -1127,6 +1134,54 @@ function Script(props) {
             LoadCache.add(id || src);
         } else if (getIsSsr && !getIsSsr()) {
             loadScript(props);
+        }
+    }
+    // For the app directory, we need React Float to preload these scripts.
+    if (appDir) {
+        // Before interactive scripts need to be loaded by Next.js' runtime instead
+        // of native <script> tags, because they no longer have `defer`.
+        if (strategy === "beforeInteractive") {
+            if (!src) {
+                // For inlined scripts, we put the content in `children`.
+                if (restProps.dangerouslySetInnerHTML) {
+                    restProps.children = restProps.dangerouslySetInnerHTML.__html;
+                    delete restProps.dangerouslySetInnerHTML;
+                }
+                return /*#__PURE__*/ _react.default.createElement("script", {
+                    nonce: nonce,
+                    dangerouslySetInnerHTML: {
+                        __html: `(self.__next_s=self.__next_s||[]).push(${JSON.stringify([
+                            0,
+                            _extends({}, restProps)
+                        ])})`
+                    }
+                });
+            }
+            // @ts-ignore
+            _reactDom.default.preload(src, restProps.integrity ? {
+                as: "script",
+                integrity: restProps.integrity
+            } : {
+                as: "script"
+            });
+            return /*#__PURE__*/ _react.default.createElement("script", {
+                nonce: nonce,
+                dangerouslySetInnerHTML: {
+                    __html: `(self.__next_s=self.__next_s||[]).push(${JSON.stringify([
+                        src
+                    ])})`
+                }
+            });
+        } else if (strategy === "afterInteractive") {
+            if (src) {
+                // @ts-ignore
+                _reactDom.default.preload(src, restProps.integrity ? {
+                    as: "script",
+                    integrity: restProps.integrity
+                } : {
+                    as: "script"
+                });
+            }
         }
     }
     return null;
@@ -1147,7 +1202,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 4991:
+/***/ 5407:
 /***/ ((module, exports) => {
 
 "use strict";
@@ -1182,7 +1237,7 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 
 /***/ }),
 
-/***/ 6273:
+/***/ 1003:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -1200,29 +1255,29 @@ var _async_to_generator = (__webpack_require__(932)/* ["default"] */ .Z);
 var _extends = (__webpack_require__(6495)/* ["default"] */ .Z);
 var _interop_require_default = (__webpack_require__(2648)/* ["default"] */ .Z);
 var _interop_require_wildcard = (__webpack_require__(1598)/* ["default"] */ .Z);
-var _normalizeTrailingSlash = __webpack_require__(2392);
+var _normalizeTrailingSlash = __webpack_require__(2700);
 var _removeTrailingSlash = __webpack_require__(3297);
-var _routeLoader = __webpack_require__(2669);
-var _script = __webpack_require__(699);
+var _routeLoader = __webpack_require__(2497);
+var _script = __webpack_require__(3573);
 var _isError = _interop_require_wildcard(__webpack_require__(676));
 var _denormalizePagePath = __webpack_require__(4406);
 var _normalizeLocalePath = __webpack_require__(4014);
 var _mitt = _interop_require_default(__webpack_require__(8020));
 var _utils = __webpack_require__(9232);
 var _isDynamic = __webpack_require__(1428);
-var _parseRelativeUrl = __webpack_require__(5874);
+var _parseRelativeUrl = __webpack_require__(1292);
 var _querystring = __webpack_require__(979);
 var _resolveRewrites = _interop_require_default(__webpack_require__(6052));
 var _routeMatcher = __webpack_require__(4226);
 var _routeRegex = __webpack_require__(5052);
 var _formatUrl = __webpack_require__(3938);
-var _detectDomainLocale = __webpack_require__(8748);
+var _detectDomainLocale = __webpack_require__(4643);
 var _parsePath = __webpack_require__(8854);
-var _addLocale = __webpack_require__(2725);
-var _removeLocale = __webpack_require__(5776);
-var _removeBasePath = __webpack_require__(9320);
-var _addBasePath = __webpack_require__(8684);
-var _hasBasePath = __webpack_require__(4119);
+var _addLocale = __webpack_require__(4465);
+var _removeLocale = __webpack_require__(6876);
+var _removeBasePath = __webpack_require__(2813);
+var _addBasePath = __webpack_require__(3468);
+var _hasBasePath = __webpack_require__(928);
 var _getNextPathnameInfo = __webpack_require__(5789);
 var _formatNextPathnameInfo = __webpack_require__(299);
 var _compareStates = __webpack_require__(6220);
@@ -1422,7 +1477,7 @@ function getMiddlewareData(source, response, options) {
             let fsPathname = (0, _removeTrailingSlash).removeTrailingSlash(pathnameInfo.pathname);
             return Promise.all([
                 options.router.pageLoader.getPageList(),
-                (0, _routeLoader).getClientBuildManifest(), 
+                (0, _routeLoader).getClientBuildManifest()
             ]).then(([pages, { __rewrites: rewrites  }])=>{
                 let as = (0, _addLocale).addLocale(pathnameInfo.pathname, pathnameInfo.locale);
                 if ((0, _isDynamic).isDynamicRoute(as) || !rewriteHeader && pages.includes((0, _normalizeLocalePath).normalizeLocalePath((0, _removeBasePath).removeBasePath(as), options.router.locales).pathname)) {
@@ -1718,7 +1773,7 @@ class Router {
             // hydration. Your app should _never_ use this property. It may change at
             // any time without notice.
             const isQueryUpdating = options._h;
-            const shouldResolveHref = isQueryUpdating || options._shouldResolveHref || (0, _parsePath).parsePath(url).pathname === (0, _parsePath).parsePath(as).pathname;
+            let shouldResolveHref = isQueryUpdating || options._shouldResolveHref || (0, _parsePath).parsePath(url).pathname === (0, _parsePath).parsePath(as).pathname;
             const nextState = _extends({}, _this.state);
             // for static pages with query params in the URL we delay
             // marking the router ready until after the query is updated
@@ -1838,7 +1893,7 @@ class Router {
                 [pages, { __rewrites: rewrites  }] = yield Promise.all([
                     _this.pageLoader.getPageList(),
                     (0, _routeLoader).getClientBuildManifest(),
-                    _this.pageLoader.getMiddleware(), 
+                    _this.pageLoader.getMiddleware()
                 ]);
             } catch (err1) {
                 // If we fail to resolve the page list or client-build manifest, we must
@@ -1873,6 +1928,9 @@ class Router {
             });
             if (options.shallow && isMiddlewareMatch) {
                 pathname = _this.pathname;
+            }
+            if (isQueryUpdating && isMiddlewareMatch) {
+                shouldResolveHref = false;
             }
             if (shouldResolveHref && pathname !== "/_error") {
                 options._shouldResolveHref = true;
@@ -1935,7 +1993,9 @@ class Router {
                     routeProps,
                     locale: nextState.locale,
                     isPreview: nextState.isPreview,
-                    hasMiddleware: isMiddlewareMatch
+                    hasMiddleware: isMiddlewareMatch,
+                    unstable_skipClientCache: options.unstable_skipClientCache,
+                    isQueryUpdating: isQueryUpdating && !_this.isFallback
                 });
                 if ("route" in routeInfo && isMiddlewareMatch) {
                     pathname = routeInfo.route || route;
@@ -1963,7 +2023,7 @@ class Router {
                             rewriteAs = localeResult.pathname;
                         }
                         const routeRegex1 = (0, _routeRegex).getRouteRegex(pathname);
-                        const curRouteMatch = (0, _routeMatcher).getRouteMatcher(routeRegex1)(rewriteAs);
+                        const curRouteMatch = (0, _routeMatcher).getRouteMatcher(routeRegex1)(new URL(rewriteAs, location.href).pathname);
                         if (curRouteMatch) {
                             Object.assign(query, curRouteMatch);
                         }
@@ -2166,7 +2226,7 @@ class Router {
             }
         })();
     }
-    getRouteInfo({ route: requestedRoute , pathname , query , as , resolvedAs , routeProps , locale , hasMiddleware , isPreview , unstable_skipClientCache  }) {
+    getRouteInfo({ route: requestedRoute , pathname , query , as , resolvedAs , routeProps , locale , hasMiddleware , isPreview , unstable_skipClientCache , isQueryUpdating  }) {
         var _this = this;
         return _async_to_generator(function*() {
             /**
@@ -2205,14 +2265,18 @@ class Router {
                     inflightCache: _this.sdc,
                     persistCache: !isPreview,
                     isPrefetch: false,
-                    unstable_skipClientCache
+                    unstable_skipClientCache,
+                    isBackground: isQueryUpdating
                 };
-                const data = yield withMiddlewareEffects({
+                const data = isQueryUpdating ? {} : yield withMiddlewareEffects({
                     fetchData: ()=>fetchNextData(fetchNextDataParams),
                     asPath: resolvedAs,
                     locale: locale,
                     router: _this
                 });
+                if (isQueryUpdating && data) {
+                    data.json = self.__NEXT_DATA__.props;
+                }
                 handleCancelled();
                 if ((data == null ? void 0 : (ref = data.effect) == null ? void 0 : ref.type) === "redirect-internal" || (data == null ? void 0 : (ref4 = data.effect) == null ? void 0 : ref4.type) === "redirect-external") {
                     return data.effect;
@@ -2292,7 +2356,7 @@ class Router {
                 }
                 // we kick off a HEAD request in the background
                 // when a non-prefetch request is made to signal revalidation
-                if (!_this.isPreview && routeInfo.__N_SSG && "production" !== "development") {
+                if (!_this.isPreview && routeInfo.__N_SSG && "production" !== "development" && !isQueryUpdating) {
                     fetchNextData(Object.assign({}, fetchNextDataParams, {
                         isBackground: true,
                         persistCache: false,
@@ -2418,7 +2482,7 @@ class Router {
                         unstable_skipClientCache: options.unstable_skipClientCache || options.priority && !!true
                     }).then(()=>false) : false;
                 }),
-                _this.pageLoader[options.priority ? "loadPage" : "prefetch"](route), 
+                _this.pageLoader[options.priority ? "loadPage" : "prefetch"](route)
             ]);
         })();
     }
@@ -2627,7 +2691,7 @@ exports["default"] = Router; //# sourceMappingURL=router.js.map
 /***/ 1664:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__(8418)
+module.exports = __webpack_require__(1551)
 
 
 /***/ })

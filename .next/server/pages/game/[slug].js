@@ -5,7 +5,7 @@ exports.id = 2532;
 exports.ids = [2532];
 exports.modules = {
 
-/***/ 1764:
+/***/ 5542:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -26,11 +26,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2748);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9578);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1454);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1331);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9755);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_legacy_image__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6112);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2102);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(599);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__]);
 _components_ApolloClient__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -154,7 +154,7 @@ function GameDetail(props) {
                             },
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 className: "position-relative w-100 h-100",
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_6___default()), {
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_legacy_image__WEBPACK_IMPORTED_MODULE_6___default()), {
                                     layout: "fill",
                                     objectFit: "contain",
                                     placeholder: "blur",
@@ -361,6 +361,13 @@ module.exports = require("next/dist/shared/lib/i18n/normalize-locale-path.js");
 
 /***/ }),
 
+/***/ 4486:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
 /***/ 744:
 /***/ ((module) => {
 
@@ -372,6 +379,13 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 9552:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-loader");
 
 /***/ }),
 
@@ -473,7 +487,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 5874:
+/***/ 1292:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -529,6 +543,13 @@ module.exports = require("next/dist/shared/lib/utils.js");
 
 /***/ }),
 
+/***/ 618:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
+
+/***/ }),
+
 /***/ 968:
 /***/ ((module) => {
 
@@ -547,6 +568,13 @@ module.exports = require("react");
 /***/ ((module) => {
 
 module.exports = require("react-bootstrap");
+
+/***/ }),
+
+/***/ 6405:
+/***/ ((module) => {
+
+module.exports = require("react-dom");
 
 /***/ }),
 
@@ -578,7 +606,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,676,1664,1331,1454,9578], () => (__webpack_exec__(1764)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,1397,676,1664,9755,599,2102,6112], () => (__webpack_exec__(5542)));
 module.exports = __webpack_exports__;
 
 })();

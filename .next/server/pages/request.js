@@ -4,7 +4,7 @@ exports.id = 5800;
 exports.ids = [5800];
 exports.modules = {
 
-/***/ 9425:
+/***/ 5351:
 /***/ ((module) => {
 
 // Exports
@@ -16,7 +16,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 2437:
+/***/ 502:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38,11 +38,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7352);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5043);
-/* harmony import */ var _styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9425);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9675);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9738);
+/* harmony import */ var _styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5351);
 /* harmony import */ var _styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_styles_Request_module_scss__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9324);
+/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3551);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_8__]);
 _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -183,14 +183,14 @@ function RequestModal(props) {
     });
 }
 function RequestBoard() {
-    const { 0: state , 1: setState  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([
+    const [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([
         "pending"
     ]);
-    const { 0: users , 1: setUsers  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([
+    const [users, setUsers] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([
         false
     ]);
-    const { 0: filter , 1: setFilter  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
-    const { 0: request , 1: setRequest  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
+    const [filter, setFilter] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const [request, setRequest] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
     const handleSearch = (e)=>{
         e.persist();
         e.preventDefault();
@@ -300,7 +300,7 @@ function RequestTable(props) {
     }
   }
 `;
-    const { 0: page , 1: setPage  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+    const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
     const { data , loading , error  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(query, {
         variables: {
             state,
@@ -539,6 +539,14 @@ module.exports = require("next/dist/shared/lib/head.js");
 
 /***/ }),
 
+/***/ 4486:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
 /***/ 744:
 /***/ ((module) => {
 
@@ -555,27 +563,19 @@ module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
-/***/ 8854:
+/***/ 9552:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+module.exports = require("next/dist/shared/lib/image-loader");
 
 /***/ }),
 
-/***/ 3297:
+/***/ 618:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
-
-/***/ }),
-
-/***/ 9232:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("next/dist/shared/lib/utils.js");
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
 
 /***/ }),
 
@@ -627,7 +627,7 @@ module.exports = require("slugify");
 
 /***/ }),
 
-/***/ 5822:
+/***/ 1454:
 /***/ ((module) => {
 
 "use strict";
@@ -650,7 +650,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,9463,1331,367,9324], () => (__webpack_exec__(2437)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,7014,599,3498,3551], () => (__webpack_exec__(502)));
 module.exports = __webpack_exports__;
 
 })();

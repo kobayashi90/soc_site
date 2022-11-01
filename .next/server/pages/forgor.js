@@ -5,7 +5,7 @@ exports.id = 7893;
 exports.ids = [7893];
 exports.modules = {
 
-/***/ 9437:
+/***/ 5630:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -15,7 +15,7 @@ exports.modules = {
 
 /***/ }),
 
-/***/ 2996:
+/***/ 7466:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -29,9 +29,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(358);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var svg_loaders_svg_smil_loaders_oval_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9437);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var svg_loaders_svg_smil_loaders_oval_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5630);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9755);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_legacy_image__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2748);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9114);
@@ -80,7 +80,7 @@ function Forgor({ qKey  }) {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const p1 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const p2 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-    const { 0: isInvalid , 1: setInvalid  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [isInvalid, setInvalid] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const checkInvalid = ()=>setInvalid(p1?.current?.value !== p2?.current?.value);
     const submit = (ev)=>{
         ev.preventDefault();
@@ -161,7 +161,7 @@ function Forgor({ qKey  }) {
                             type: "submit",
                             className: "w-100",
                             color: "primary",
-                            children: loading ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
+                            children: loading ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_legacy_image__WEBPACK_IMPORTED_MODULE_4___default()), {
                                 ...svg_loaders_svg_smil_loaders_oval_svg__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z,
                                 alt: "loading"
                             }) : "Change password"
@@ -225,10 +225,10 @@ module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slas
 
 /***/ }),
 
-/***/ 9232:
+/***/ 618:
 /***/ ((module) => {
 
-module.exports = require("next/dist/shared/lib/utils.js");
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
 
 /***/ }),
 
@@ -274,7 +274,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675], () => (__webpack_exec__(2996)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,1397,9755], () => (__webpack_exec__(7466)));
 module.exports = __webpack_exports__;
 
 })();

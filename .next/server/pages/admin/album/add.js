@@ -5,7 +5,7 @@ exports.id = 2490;
 exports.ids = [2490];
 exports.modules = {
 
-/***/ 7777:
+/***/ 7287:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -24,13 +24,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1187);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7352);
-/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4978);
-/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7065);
-/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9324);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1331);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5043);
-/* harmony import */ var _components_RequestCheck__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(5994);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9675);
+/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8046);
+/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2628);
+/* harmony import */ var _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3551);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(599);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9738);
+/* harmony import */ var _components_RequestCheck__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2392);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_resolvers__WEBPACK_IMPORTED_MODULE_8__]);
 _components_resolvers__WEBPACK_IMPORTED_MODULE_8__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -143,9 +143,9 @@ const vgmQuery = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
   }
 `;
 function AddAlbum(props) {
-    const { 0: currentCategories , 1: setCategories  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
-    const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
-    const { 0: vgmTracklist , 1: setVgmTracklist  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)();
+    const [currentCategories, setCategories] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+    const [currentClassifications, setClassifications] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+    const [vgmTracklist, setVgmTracklist] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)();
     const { data: classData = {}  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(queryCategories);
     const [getVgmdb, { loading: loadingFetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useLazyQuery)(vgmQuery);
     const { categories =[] , classifications =[]  } = classData;
@@ -601,6 +601,13 @@ module.exports = require("next/dist/shared/lib/head.js");
 
 /***/ }),
 
+/***/ 4486:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
 /***/ 744:
 /***/ ((module) => {
 
@@ -615,24 +622,17 @@ module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
-/***/ 8854:
+/***/ 9552:
 /***/ ((module) => {
 
-module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+module.exports = require("next/dist/shared/lib/image-loader");
 
 /***/ }),
 
-/***/ 3297:
+/***/ 618:
 /***/ ((module) => {
 
-module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
-
-/***/ }),
-
-/***/ 9232:
-/***/ ((module) => {
-
-module.exports = require("next/dist/shared/lib/utils.js");
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
 
 /***/ }),
 
@@ -678,7 +678,7 @@ module.exports = require("slugify");
 
 /***/ }),
 
-/***/ 5822:
+/***/ 1454:
 /***/ ((module) => {
 
 module.exports = import("iron-session");;
@@ -699,7 +699,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,9463,1331,367,6710,9324,4978], () => (__webpack_exec__(7777)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,7014,599,3498,6344,3551,8046], () => (__webpack_exec__(7287)));
 module.exports = __webpack_exports__;
 
 })();

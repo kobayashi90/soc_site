@@ -5,7 +5,7 @@ exports.id = 9603;
 exports.ids = [9603,2888];
 exports.modules = {
 
-/***/ 1025:
+/***/ 5935:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -24,19 +24,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9003);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9755);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_legacy_image__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1664);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1187);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(3985);
+/* harmony import */ var _styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(7801);
 /* harmony import */ var _styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1331);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5043);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(599);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9738);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2729);
+/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(6974);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_useTranslation__WEBPACK_IMPORTED_MODULE_11__]);
 _components_useTranslation__WEBPACK_IMPORTED_MODULE_11__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -119,7 +119,7 @@ function Search() {
             page: 0
         }
     });
-    const { 0: loadingState , 1: setLoadingState  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(initialState);
+    const [loadingState, setLoadingState] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(initialState);
     const setLoading = (name, value)=>setLoadingState({
             ...loadingState,
             [name]: value
@@ -175,10 +175,10 @@ function Search() {
 }
 function SearchSection(props) {
     const { count: initialCount , title , items: initialItems , type , search , category , query , setLoading  } = props;
-    const { 0: initialized , 1: setInit  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(false);
-    const { 0: items , 1: setItems  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(initialItems);
-    const { 0: page , 1: setPage  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(0);
-    const { 0: count , 1: setCount  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(initialCount);
+    const [initialized, setInit] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(false);
+    const [items, setItems] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(initialItems);
+    const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(0);
+    const [count, setCount] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(initialCount);
     const [getInfo] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useLazyQuery)(_apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
       ${queryHeader}{
         result: ${query}
@@ -254,7 +254,7 @@ function SearchSection(props) {
                                     type && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.Col, {
                                         md: "auto",
                                         className: classnames__WEBPACK_IMPORTED_MODULE_4___default()((_styles_Search_module_scss__WEBPACK_IMPORTED_MODULE_12___default().cover), "px-0"),
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_legacy_image__WEBPACK_IMPORTED_MODULE_5___default()), {
                                             objectFit: "contain",
                                             alt: item.title,
                                             src: (0,_components_utils__WEBPACK_IMPORTED_MODULE_8__/* .getImageUrl */ .Jn)(item.id, type),
@@ -353,6 +353,13 @@ module.exports = require("next/dist/shared/lib/i18n/normalize-locale-path.js");
 
 /***/ }),
 
+/***/ 4486:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
 /***/ 744:
 /***/ ((module) => {
 
@@ -364,6 +371,13 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 9552:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-loader");
 
 /***/ }),
 
@@ -465,7 +479,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 5874:
+/***/ 1292:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -521,6 +535,13 @@ module.exports = require("next/dist/shared/lib/utils.js");
 
 /***/ }),
 
+/***/ 618:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
+
+/***/ }),
+
 /***/ 968:
 /***/ ((module) => {
 
@@ -553,6 +574,13 @@ module.exports = require("react-bootstrap");
 /***/ ((module) => {
 
 module.exports = require("react-bootstrap/SSRProvider");
+
+/***/ }),
+
+/***/ 6405:
+/***/ ((module) => {
+
+module.exports = require("react-dom");
 
 /***/ }),
 
@@ -612,7 +640,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,676,1664,1331,1454,367,6710,3398], () => (__webpack_exec__(1025)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,1397,676,1664,9755,599,2102,3498,6344,7119], () => (__webpack_exec__(5935)));
 module.exports = __webpack_exports__;
 
 })();

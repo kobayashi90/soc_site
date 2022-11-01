@@ -5,7 +5,7 @@ exports.id = 6240;
 exports.ids = [6240,2888];
 exports.modules = {
 
-/***/ 9846:
+/***/ 8389:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -24,17 +24,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2748);
 /* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9578);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1454);
-/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(6658);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5043);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9755);
+/* harmony import */ var next_legacy_image__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_legacy_image__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6112);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2102);
+/* harmony import */ var _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(9139);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9738);
 /* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(684);
 /* harmony import */ var form_serialize__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(form_serialize__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1187);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(1292);
+/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2446);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(968);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_13__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_ApolloClient__WEBPACK_IMPORTED_MODULE_7__, _components_CommentsCarrousel__WEBPACK_IMPORTED_MODULE_8__]);
@@ -116,7 +116,7 @@ async function getServerSideProps(context) {
     const albumList = [
         ...favorites
     ];
-    const { 0: showProfile , 1: setProfile  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [showProfile, setProfile] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     let floatDuration = luxon__WEBPACK_IMPORTED_MODULE_4__.DateTime.now().diff(luxon__WEBPACK_IMPORTED_MODULE_4__.DateTime.fromMillis(userProfile.createdAt), [
         "years",
         "months"
@@ -162,7 +162,7 @@ async function getServerSideProps(context) {
                                         height: "200px",
                                         width: "200px"
                                     },
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_legacy_image__WEBPACK_IMPORTED_MODULE_5___default()), {
                                         style: {
                                             borderRadius: "25px"
                                         },
@@ -451,6 +451,13 @@ module.exports = require("next/dist/shared/lib/i18n/normalize-locale-path.js");
 
 /***/ }),
 
+/***/ 4486:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
 /***/ 744:
 /***/ ((module) => {
 
@@ -462,6 +469,13 @@ module.exports = require("next/dist/shared/lib/image-config-context.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 9552:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-loader");
 
 /***/ }),
 
@@ -563,7 +577,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 5874:
+/***/ 1292:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -619,6 +633,13 @@ module.exports = require("next/dist/shared/lib/utils.js");
 
 /***/ }),
 
+/***/ 618:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
+
+/***/ }),
+
 /***/ 968:
 /***/ ((module) => {
 
@@ -651,6 +672,13 @@ module.exports = require("react-bootstrap");
 /***/ ((module) => {
 
 module.exports = require("react-bootstrap/SSRProvider");
+
+/***/ }),
+
+/***/ 6405:
+/***/ ((module) => {
+
+module.exports = require("react-dom");
 
 /***/ }),
 
@@ -710,7 +738,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,676,1664,1331,1454,367,6710,3398,9578,3038], () => (__webpack_exec__(9846)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,1397,676,1664,9755,599,2102,3498,6344,7119,6112,9139], () => (__webpack_exec__(8389)));
 module.exports = __webpack_exports__;
 
 })();

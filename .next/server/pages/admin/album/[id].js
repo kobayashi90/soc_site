@@ -5,7 +5,7 @@ exports.id = 2216;
 exports.ids = [2216];
 exports.modules = {
 
-/***/ 1873:
+/***/ 9503:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -29,7 +29,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 1292:
+/***/ 2446:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -64,7 +64,7 @@ function useUser() {
 
 /***/ }),
 
-/***/ 6947:
+/***/ 9884:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -83,15 +83,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1187);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_session__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1873);
-/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7352);
-/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4978);
-/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(7065);
-/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(1292);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(1454);
-/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1331);
-/* harmony import */ var _components_RequestCheck__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(5994);
-/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(5043);
+/* harmony import */ var _components_session__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9503);
+/* harmony import */ var _components_Selectors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9675);
+/* harmony import */ var _components_SharedForms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8046);
+/* harmony import */ var _components_SubmitButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2628);
+/* harmony import */ var _components_useUser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(2446);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2102);
+/* harmony import */ var _components_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(599);
+/* harmony import */ var _components_RequestCheck__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2392);
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(9738);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_session__WEBPACK_IMPORTED_MODULE_5__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__]);
 ([_components_session__WEBPACK_IMPORTED_MODULE_5__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_10__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
@@ -303,9 +303,9 @@ function EditAlbum(props) {
     });
 }
 function EditAlbumForm({ id , album , categories , classifications  }) {
-    const { 0: currentCategories , 1: setCategories  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.categories || []);
-    const { 0: currentClassifications , 1: setClassifications  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.classifications || []);
-    const { 0: vgmTracklist , 1: setVgmTracklist  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.discs || []);
+    const [currentCategories, setCategories] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.categories || []);
+    const [currentClassifications, setClassifications] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.classifications || []);
+    const [vgmTracklist, setVgmTracklist] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(album.discs || []);
     const [mutate, { loading  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useMutation)(mutation);
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)();
     const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useQuery)(queryDownload, {
@@ -767,6 +767,13 @@ module.exports = require("next/dist/shared/lib/head.js");
 
 /***/ }),
 
+/***/ 4486:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
 /***/ 744:
 /***/ ((module) => {
 
@@ -781,24 +788,17 @@ module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
-/***/ 8854:
+/***/ 9552:
 /***/ ((module) => {
 
-module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+module.exports = require("next/dist/shared/lib/image-loader");
 
 /***/ }),
 
-/***/ 3297:
+/***/ 618:
 /***/ ((module) => {
 
-module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
-
-/***/ }),
-
-/***/ 9232:
-/***/ ((module) => {
-
-module.exports = require("next/dist/shared/lib/utils.js");
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
 
 /***/ }),
 
@@ -851,7 +851,7 @@ module.exports = import("apollo-upload-client");;
 
 /***/ }),
 
-/***/ 5822:
+/***/ 1454:
 /***/ ((module) => {
 
 module.exports = import("iron-session");;
@@ -865,7 +865,7 @@ module.exports = import("iron-session");;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,9463,1331,1454,367,6710,4978], () => (__webpack_exec__(6947)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,7014,599,2102,3498,6344,8046], () => (__webpack_exec__(9884)));
 module.exports = __webpack_exports__;
 
 })();

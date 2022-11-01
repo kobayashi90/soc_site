@@ -5,7 +5,7 @@ exports.id = 5405;
 exports.ids = [5405,2888];
 exports.modules = {
 
-/***/ 1878:
+/***/ 8618:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -22,10 +22,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1664);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5483);
-/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9578);
-/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1454);
-/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2729);
+/* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8111);
+/* harmony import */ var _components_AlbumBoxes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6112);
+/* harmony import */ var _components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2102);
+/* harmony import */ var _components_useTranslation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6974);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Sidebar__WEBPACK_IMPORTED_MODULE_4__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_7__]);
 ([_components_Sidebar__WEBPACK_IMPORTED_MODULE_4__, _components_ApolloClient__WEBPACK_IMPORTED_MODULE_6__, _components_useTranslation__WEBPACK_IMPORTED_MODULE_7__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
@@ -262,6 +262,13 @@ module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
+/***/ 9552:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-loader");
+
+/***/ }),
+
 /***/ 8524:
 /***/ ((module) => {
 
@@ -360,7 +367,7 @@ module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
 
 /***/ }),
 
-/***/ 5874:
+/***/ 1292:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/router/utils/parse-relative-url.js");
@@ -416,6 +423,13 @@ module.exports = require("next/dist/shared/lib/utils.js");
 
 /***/ }),
 
+/***/ 618:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
+
+/***/ }),
+
 /***/ 968:
 /***/ ((module) => {
 
@@ -448,6 +462,13 @@ module.exports = require("react-bootstrap");
 /***/ ((module) => {
 
 module.exports = require("react-bootstrap/SSRProvider");
+
+/***/ }),
+
+/***/ 6405:
+/***/ ((module) => {
+
+module.exports = require("react-dom");
 
 /***/ }),
 
@@ -507,7 +528,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [3598,5675,676,1664,1608,1331,1454,367,6710,3398,9578,3038,5483], () => (__webpack_exec__(1878)));
+var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,1397,676,1664,599,2102,3498,6344,7119,6112,9139,8111], () => (__webpack_exec__(8618)));
 module.exports = __webpack_exports__;
 
 })();
