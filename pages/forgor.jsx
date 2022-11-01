@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Col, Form, Row, Button } from 'react-bootstrap'
 import loader from 'svg-loaders/svg-smil-loaders/oval.svg'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { DateTime } from 'luxon'
 import { gql, useMutation } from '@apollo/client'
 import { toast } from 'react-toastify'
