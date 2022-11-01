@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { gql, useLazyQuery } from '@apollo/client'
 import { Row, Col, Nav, Container } from 'react-bootstrap'
 import classNames from 'classnames'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 

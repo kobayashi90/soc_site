@@ -2,7 +2,7 @@ import { Col, Row } from 'react-bootstrap'
 import classNames from 'classnames'
 import { gql, useQuery } from '@apollo/client'
 import { useEffect, useRef } from 'react'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

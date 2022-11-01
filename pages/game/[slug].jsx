@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { gql } from '@apollo/client'
 import { Container, Col, Row } from 'react-bootstrap'
 import { DateTime } from 'luxon'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'
 import { initializeApollo } from '@/components/ApolloClient'

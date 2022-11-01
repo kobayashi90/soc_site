@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Container, Col, Row, Modal, Form, Button } from 'react-bootstrap'
 import { DateTime } from 'luxon'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 // import ConfettiExplosion from 'react-confetti-explosion'
 
 import { AlbumBoxList } from '@/components/AlbumBoxes'

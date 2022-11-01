@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { toast } from 'react-toastify'
 
 import Head from 'next/head'
-import Image from 'next/future/image'
+import Image from "next/image";
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 

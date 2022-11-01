@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { Col, Row, Container } from 'react-bootstrap'
 import { Fragment } from 'react'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import classNames from 'classnames'
 import Head from 'next/head'
 
