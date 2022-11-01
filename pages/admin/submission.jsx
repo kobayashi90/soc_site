@@ -89,29 +89,54 @@ function RequestModal (props) {
   return (
     <Modal show={submission} onHide={() => setRequest()} centered>
       <Modal.Body>
-        <Form ref={formRef}>
+        <Form ref={formRef} style={{ color: 'black' }}>
           <Row>
             <Form.Group as={Col} >
-              <Form.Label htmlFor='title' style={{ color: 'black' }}>Title:</Form.Label>
+              <Form.Label htmlFor='title' >Title:</Form.Label>
               <Form.Control required type='text' name='title' defaultValue={submission?.title} />
             </Form.Group>
           </Row>
 
           <Row className='mt-3'>
             <Form.Group as={Col} >
-              <Form.Label htmlFor='link' style={{ color: 'black' }}>VGMDB:</Form.Label>
+              <Form.Label htmlFor='link'>VGMDB:</Form.Label>
               <Form.Control required type='text' name='link' defaultValue={submission?.vgmdb} />
             </Form.Group>
+          </Row>
+
+          <Row className='mt-3'>
+            <Form.Group as={Col} >
+              <Form.Label htmlFor='link'>State:</Form.Label>
+              <select className='form-control' name='state' defaultValue={submission?.state}>
+                {stateOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </select>
+            </Form.Group>
             <Form.Group as={Col}>
-              <Form.Label htmlFor='state' style={{ color: 'black' }}>Submitter:</Form.Label>
-              <Form.Control required type='text' name='link' defaultValue={submission?.submitter.username} />
+              <Form.Label htmlFor='state'>Submitter:</Form.Label>
+              <Form.Control required type='text' name='link' defaultValue={submission?.submitter.username} readOnly />
             </Form.Group>
           </Row>
 
           <Row className='mt-3'>
             <Form.Group as={Col}>
-              <Form.Label htmlFor='comment' style={{ color: 'black' }}>Links:</Form.Label>
+              <Form.Label htmlFor='comment'>Links:</Form.Label>
               <FormControl required as='textarea' name='comment' value={submission?.links} readOnly />
+            </Form.Group>
+          </Row>
+
+          <Row className='mt-3'>
+            <Form.Group as={Col}>
+              <Form.Label htmlFor='observations'>Observations:</Form.Label>
+              <FormControl required as='textarea' name='observations' defaultValue={submission?.observations} />
+            </Form.Group>
+          </Row>
+
+          <Row className='mt-4'>
+            <Form.Group as={Col}>
+              <Form.Check type="checkbox" name="lossy" label="Lossy / MP3 Only" defaultChecked={submission?.lossy} />
+            </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Check type="checkbox" name="hold" label='"Hold" request bonus' defaultChecked={submission?.hold} />
             </Form.Group>
           </Row>
         </Form>

@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { toast } from 'react-toastify'
 
 import Head from 'next/head'
-import Image from "next/image";
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -132,7 +132,7 @@ function StarCounter (props) {
     }
   `
   const [fetchUserScore, { data, refetch }] = useLazyQuery(getScore)
-  useEffect(() => fetchUserScore({ variables: { albumId } }), [user])
+  useEffect(() => { fetchUserScore({ variables: { albumId } }) }, [user])
 
   const { avgRating, selfScore } = data?.album || initial
   const { score, users } = avgRating
@@ -231,7 +231,7 @@ export default function Page (props) {
   }
 `
   const { data: dataFavorite, refetch: refetchFavorite } = useQuery(getFavorite)
-  useEffect(() => refetchFavorite({ albumId: id }), [user, id, refetchFavorite])
+  useEffect(() => { refetchFavorite({ albumId: id }) }, [user, id, refetchFavorite])
 
   function submitFavorite () {
     setLoading(true)
@@ -467,7 +467,7 @@ function DownloadList (props) {
   const t = useTranslation()
   const { user } = useUser()
 
-  useEffect(() => refetch({ variables: { id } }), [user, id, refetch])
+  useEffect(() => { refetch({ variables: { id } }) }, [user, id, refetch])
 
   const downloads = data?.downloads || initialDownloads
 

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { Row, Col, Button } from 'react-bootstrap'
 import classname from 'classnames'
-import Image from "next/image";
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { initializeApollo } from '@/components/ApolloClient'

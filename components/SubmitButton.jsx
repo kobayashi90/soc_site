@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap'
 import classnames from 'classnames'
 import loader from 'svg-loaders/svg-smil-loaders/oval.svg'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 
 export default function SubmitButton (props) {
   return props.loading
