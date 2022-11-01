@@ -202,7 +202,7 @@ function EditAlbumForm ({ id, album, categories, classifications }) {
 
   const { user } = useUser()
   const { data, refetch } = useQuery(queryDownload, { variables: { id } })
-  useEffect(() => refetch({ id }), [user, id, refetch])
+  useEffect(() => { refetch({ id }) }, [user, id, refetch])
 
   const [getVgmdb, { loading: loadingFetch }] = useLazyQuery(vgmQuery)
   const titleRef = useRef(null)

@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import classNames from 'classnames'
 import { Button } from 'react-bootstrap'
 
@@ -18,8 +18,11 @@ export default function Loader (props) {
 export const ButtonLoader = props => {
   const { loading, children } = props
 
+  const buttonProps = { ...props }
+  delete buttonProps.loading
+
   return (
-    <Button style={{ position: 'relative' }} {...props}>
+    <Button style={{ position: 'relative' }} {...buttonProps}>
       {loading && (
         <div className='h-100 w-100' style={{ position: 'absolute', top: 0, left: 0 }}>
           <div className='h-100 w-100' style={{ position: 'relative' }}>

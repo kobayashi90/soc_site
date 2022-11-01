@@ -2,7 +2,7 @@ import styles from '../styles/Header.module.scss'
 
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { Row, Col, Container, Button, Navbar, Nav, NavDropdown, Modal, Form } from 'react-bootstrap'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'

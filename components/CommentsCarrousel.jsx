@@ -101,7 +101,7 @@ export default function CommentCarrousel (props) {
   const comments = data?.album.comments || initialComments
   const selfComment = data?.album?.selfComment
 
-  useEffect(() => fetchComment({ variables: { albumId } }), [user, fetchComment, albumId])
+  useEffect(() => { fetchComment({ variables: { albumId } }) }, [user, fetchComment, albumId])
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     timeoutRef.current = setTimeout(plusIndex, 10 * 1000)
@@ -111,7 +111,7 @@ export default function CommentCarrousel (props) {
     const selfComment = data?.album?.selfComment
     if (selfComment) setDefaultValue(selfComment.text)
   }, [data])
-  useEffect(() => setDefaultValue(), [albumId])
+  useEffect(() => { setDefaultValue() }, [albumId])
 
   function submit (ev) {
     let variables = serialize(ev.target, { hash: true })

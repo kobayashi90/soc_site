@@ -32,7 +32,7 @@ function GetLucky () {
   const { data, refetch } = useQuery(query)
   const router = useRouter()
 
-  useEffect(refetch, [router.pathname, refetch])
+  useEffect(() => { refetch() }, [router.pathname, refetch])
 
   return (
     <h1 className='mx-auto text-center my-2'>
