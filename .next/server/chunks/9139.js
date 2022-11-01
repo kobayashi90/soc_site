@@ -190,11 +190,13 @@ function CommentCarrousel(props) {
     const [updateComment, { loading: loadingComment  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(mutateComment);
     const comments = data?.album.comments || initialComments;
     const selfComment = data?.album?.selfComment;
-    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>fetchComment({
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        fetchComment({
             variables: {
                 albumId
             }
-        }), [
+        });
+    }, [
         user,
         fetchComment,
         albumId
@@ -211,7 +213,9 @@ function CommentCarrousel(props) {
     }, [
         data
     ]);
-    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>setDefaultValue(), [
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        setDefaultValue();
+    }, [
         albumId
     ]);
     function submit(ev) {

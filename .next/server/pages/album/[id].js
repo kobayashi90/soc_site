@@ -217,11 +217,13 @@ function StarCounter(props) {
     }
   `;
     const [fetchUserScore, { data , refetch  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useLazyQuery)(getScore);
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>fetchUserScore({
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
+        fetchUserScore({
             variables: {
                 albumId
             }
-        }), [
+        });
+    }, [
         user
     ]);
     const { avgRating , selfScore  } = data?.album || initial;
@@ -332,9 +334,11 @@ function Page(props) {
   }
 `;
     const { data: dataFavorite , refetch: refetchFavorite  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.useQuery)(getFavorite);
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetchFavorite({
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
+        refetchFavorite({
             albumId: id
-        }), [
+        });
+    }, [
         user,
         id,
         refetchFavorite
@@ -762,11 +766,13 @@ function DownloadList(props) {
     });
     const t = (0,_components_useTranslation__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z)();
     const { user  } = (0,_components_useUser__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z)();
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>refetch({
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
+        refetch({
             variables: {
                 id
             }
-        }), [
+        });
+    }, [
         user,
         id,
         refetch
@@ -1358,7 +1364,7 @@ module.exports = import("apollo-upload-client");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,1397,676,1664,599,2102,3498,6344,7119,6112,9139], () => (__webpack_exec__(5541)));
+var __webpack_exports__ = __webpack_require__.X(0, [1678,9755,676,1664,5675,599,2102,3498,6344,7119,6112,9139], () => (__webpack_exec__(5541)));
 module.exports = __webpack_exports__;
 
 })();

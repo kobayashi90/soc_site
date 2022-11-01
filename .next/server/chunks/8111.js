@@ -110,7 +110,9 @@ function GetLucky() {
 `;
     const { data , refetch  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(query);
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_7__.useRouter)();
-    (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(refetch, [
+    (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(()=>{
+        refetch();
+    }, [
         router.pathname,
         refetch
     ]);

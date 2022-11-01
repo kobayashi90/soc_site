@@ -313,9 +313,11 @@ function EditAlbumForm({ id , album , categories , classifications  }) {
             id
         }
     });
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>refetch({
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        refetch({
             id
-        }), [
+        });
+    }, [
         user,
         id,
         refetch
@@ -767,13 +769,6 @@ module.exports = require("next/dist/shared/lib/head.js");
 
 /***/ }),
 
-/***/ 4486:
-/***/ ((module) => {
-
-module.exports = require("next/dist/shared/lib/image-blur-svg.js");
-
-/***/ }),
-
 /***/ 744:
 /***/ ((module) => {
 
@@ -788,10 +783,17 @@ module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
-/***/ 9552:
+/***/ 8854:
 /***/ ((module) => {
 
-module.exports = require("next/dist/shared/lib/image-loader");
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 
@@ -865,7 +867,7 @@ module.exports = import("iron-session");;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,7014,599,2102,3498,6344,8046], () => (__webpack_exec__(9884)));
+var __webpack_exports__ = __webpack_require__.X(0, [1678,9755,7014,599,2102,3498,6344,8046], () => (__webpack_exec__(9884)));
 module.exports = __webpack_exports__;
 
 })();

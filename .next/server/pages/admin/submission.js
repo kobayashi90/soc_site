@@ -140,6 +140,9 @@ function RequestModal(props) {
         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Modal.Body, {
             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form, {
                 ref: formRef,
+                style: {
+                    color: "black"
+                },
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
                         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
@@ -147,9 +150,6 @@ function RequestModal(props) {
                             children: [
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
                                     htmlFor: "title",
-                                    style: {
-                                        color: "black"
-                                    },
                                     children: "Title:"
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Control, {
@@ -157,6 +157,24 @@ function RequestModal(props) {
                                     type: "text",
                                     name: "title",
                                     defaultValue: submission?.title
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                        className: "mt-3",
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
+                            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
+                                    htmlFor: "link",
+                                    children: "VGMDB:"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Control, {
+                                    required: true,
+                                    type: "text",
+                                    name: "link",
+                                    defaultValue: submission?.vgmdb
                                 })
                             ]
                         })
@@ -169,16 +187,16 @@ function RequestModal(props) {
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
                                         htmlFor: "link",
-                                        style: {
-                                            color: "black"
-                                        },
-                                        children: "VGMDB:"
+                                        children: "State:"
                                     }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Control, {
-                                        required: true,
-                                        type: "text",
-                                        name: "link",
-                                        defaultValue: submission?.vgmdb
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("select", {
+                                        className: "form-control",
+                                        name: "state",
+                                        defaultValue: submission?.state,
+                                        children: stateOptions.map((o)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                value: o.value,
+                                                children: o.label
+                                            }, o.value))
                                     })
                                 ]
                             }),
@@ -187,16 +205,14 @@ function RequestModal(props) {
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
                                         htmlFor: "state",
-                                        style: {
-                                            color: "black"
-                                        },
                                         children: "Submitter:"
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Control, {
                                         required: true,
                                         type: "text",
                                         name: "link",
-                                        defaultValue: submission?.submitter.username
+                                        defaultValue: submission?.submitter.username,
+                                        readOnly: true
                                     })
                                 ]
                             })
@@ -209,9 +225,6 @@ function RequestModal(props) {
                             children: [
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
                                     htmlFor: "comment",
-                                    style: {
-                                        color: "black"
-                                    },
                                     children: "Links:"
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.FormControl, {
@@ -223,6 +236,47 @@ function RequestModal(props) {
                                 })
                             ]
                         })
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                        className: "mt-3",
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
+                            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Label, {
+                                    htmlFor: "observations",
+                                    children: "Observations:"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.FormControl, {
+                                    required: true,
+                                    as: "textarea",
+                                    name: "observations",
+                                    defaultValue: submission?.observations
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Row, {
+                        className: "mt-4",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
+                                as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Check, {
+                                    type: "checkbox",
+                                    name: "lossy",
+                                    label: "Lossy / MP3 Only",
+                                    defaultChecked: submission?.lossy
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Group, {
+                                as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Col,
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Form.Check, {
+                                    type: "checkbox",
+                                    name: "hold",
+                                    label: '"Hold" request bonus',
+                                    defaultChecked: submission?.hold
+                                })
+                            })
+                        ]
                     })
                 ]
             })
@@ -462,14 +516,6 @@ module.exports = require("next/dist/shared/lib/head.js");
 
 /***/ }),
 
-/***/ 4486:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("next/dist/shared/lib/image-blur-svg.js");
-
-/***/ }),
-
 /***/ 744:
 /***/ ((module) => {
 
@@ -486,11 +532,19 @@ module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
-/***/ 9552:
+/***/ 8854:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/shared/lib/image-loader");
+module.exports = require("next/dist/shared/lib/router/utils/parse-path.js");
+
+/***/ }),
+
+/***/ 3297:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash.js");
 
 /***/ }),
 
@@ -573,7 +627,7 @@ module.exports = require("path");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [9943,5675,7014,599,3498,3551], () => (__webpack_exec__(6280)));
+var __webpack_exports__ = __webpack_require__.X(0, [1678,9755,7014,599,3498,3551], () => (__webpack_exec__(6280)));
 module.exports = __webpack_exports__;
 
 })();

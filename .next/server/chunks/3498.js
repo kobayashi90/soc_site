@@ -29,9 +29,9 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: external "react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(997);
-// EXTERNAL MODULE: ./node_modules/next/image.js
-var next_image = __webpack_require__(5675);
-var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
+// EXTERNAL MODULE: ./node_modules/next/legacy/image.js
+var legacy_image = __webpack_require__(9755);
+var image_default = /*#__PURE__*/__webpack_require__.n(legacy_image);
 // EXTERNAL MODULE: external "classnames"
 var external_classnames_ = __webpack_require__(9003);
 var external_classnames_default = /*#__PURE__*/__webpack_require__.n(external_classnames_);
@@ -72,11 +72,15 @@ function Loader(props) {
 }
 const ButtonLoader = (props)=>{
     const { loading , children  } = props;
+    const buttonProps = {
+        ...props
+    };
+    delete buttonProps.loading;
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(external_react_bootstrap_.Button, {
         style: {
             position: "relative"
         },
-        ...props,
+        ...buttonProps,
         children: [
             loading && /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 className: "h-100 w-100",
